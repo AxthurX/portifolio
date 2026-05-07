@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter), sans-serif;
+  --font-serif: var(--font-playfair), serif;
+  
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-input: var(--border);
+  --color-ring: var(--ring);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-cream: var(--cream);
+  --color-surface: var(--surface);
+}
+
+/* ── LIGHT (default) — cream palette ── */
+:root {
+  --background: #f4f4f0;
+  --foreground: #1a1a1a;
+  --primary: #965EC7;
+  --primary-foreground: #ffffff;
+  --border: rgba(26, 26, 26, 0.12);
+  --ring: #965EC7;
+  --accent: rgba(26, 26, 26, 0.06);
+  --accent-foreground: #1a1a1a;
+  --cream: #f4f4f0;
+  --surface: #eeede9;          /* slightly deeper cream for cards */
+  --header-bg: rgba(244, 244, 240, 0.82);
+}
+
+/* ── DARK — black/charcoal inverse ── */
+.dark {
+  --background: #0e0e0c;
+  --foreground: #f4f4f0;
+  --primary: #965EC7;
+  --primary-foreground: #ffffff;
+  --border: rgba(244, 244, 240, 0.15);
+  --ring: #965EC7;
+  --accent: rgba(244, 244, 240, 0.06);
+  --accent-foreground: #f4f4f0;
+  --cream: #1c1c1a;            /* cream in dark = dark card */
+  --surface: #161614;
+  --header-bg: rgba(14, 14, 12, 0.82);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* Glass border adapts to theme */
+.border-glass {
+  border: 1px solid var(--border);
+}
+
+/* ── Floating panel base — used by Drawer, Menus, Cards ── */
+.panel-cream {
+  background: var(--cream);
+  color: var(--foreground);
+}
+
+@keyframes wave {
+  0% { transform: translateX(-150%) skewX(-20deg); }
+  100% { transform: translateX(250%) skewX(-20deg); }
+}
+
+.animate-wave-hover {
+  animation: wave 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* Lenis */
+html.lenis, html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Selection adapts to theme */
+::selection {
+  background: var(--foreground);
+  color: var(--background);
+}
