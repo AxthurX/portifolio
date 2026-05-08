@@ -6,8 +6,17 @@ import { useEffect, useState } from 'react';
 import { cn } from '@/src/lib/utils';
 import { Button } from './button';
 
-export const AnimatedThemeToggle = ({ className }) => {
+interface AnimatedThemeToggleProps {
+	className?: string;
+}
+
+interface SolarSwitchProps {
+	isDark: boolean;
+}
+
+export function AnimatedThemeToggle({ className }: AnimatedThemeToggleProps) {
 	const { theme, setTheme, resolvedTheme } = useTheme();
+
 	const [mounted, setMounted] = useState(false);
 
 	useEffect(() => {
@@ -31,34 +40,45 @@ export const AnimatedThemeToggle = ({ className }) => {
 
 	return (
 		<Button
+			variant='outline'
 			onClick={() => setTheme(isDark ? 'light' : 'dark')}
 			className={cn(
 				'h-10 w-10 rounded-full border-white/20 bg-transparent p-0 px-2.5 text-foreground transition-colors hover:bg-white hover:text-black dark:text-white dark:hover:bg-white dark:hover:text-black',
 				className,
 			)}
-			variant='outline'
 		>
 			<SolarSwitch isDark={isDark} />
 		</Button>
 	);
-};
+}
 
-const SolarSwitch = ({ isDark }) => {
+function SolarSwitch({ isDark }: SolarSwitchProps) {
 	const duration = 0.7;
 
 	const moonVariants = {
-		checked: { scale: 1 },
-		unchecked: { scale: 0 },
+		checked: {
+			scale: 1,
+		},
+		unchecked: {
+			scale: 0,
+		},
 	};
 
 	const sunVariants = {
-		checked: { scale: 0 },
-		unchecked: { scale: 1 },
+		checked: {
+			scale: 0,
+		},
+		unchecked: {
+			scale: 1,
+		},
 	};
 
 	const scaleMoon = useMotionValue(isDark ? 1 : 0);
+
 	const scaleSun = useMotionValue(isDark ? 0 : 1);
+
 	const pathLengthMoon = useTransform(scaleMoon, [0.6, 1], [0, 1]);
+
 	const pathLengthSun = useTransform(scaleSun, [0.6, 1], [0, 1]);
 
 	return (
@@ -186,4 +206,4 @@ const SolarSwitch = ({ isDark }) => {
 			</motion.svg>
 		</motion.div>
 	);
-};
+}

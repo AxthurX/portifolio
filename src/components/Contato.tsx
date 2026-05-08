@@ -1,57 +1,84 @@
 'use client';
 
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, type Variants } from 'framer-motion';
 import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
-import { useState } from 'react';
+import {
+	type CSSProperties,
+	type FormEvent,
+	type JSX,
+	type ReactNode,
+	useState,
+} from 'react';
 
-// ─── Config ────────────────────────────────────────────────
 const WA_NUMBER = '5569981162676';
 
-const sendToWhatsApp = (payload) => {
+const CREAM = '#f4f4f0';
+const INK = '#1a1a1a';
+const INK_GHOST = 'rgba(26,26,26,0.12)';
+
+function sendToWhatsApp(payload: Record<string, string>) {
 	const text = Object.entries(payload)
-		.filter(([, v]) => v)
-		.map(([k, v]) => `*${k}:* ${v}`)
+		.filter(([, value]) => value)
+		.map(([key, value]) => `*${key}:* ${value}`)
 		.join('\n');
+
 	window.open(
 		`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`,
 		'_blank',
 	);
+}
+
+const iClass =
+	'w-full border-b bg-transparent py-3 text-base font-light placeholder:opacity-30 transition-all duration-300 focus:outline-none';
+
+const iStyle: CSSProperties = {
+	borderColor: INK_GHOST,
+	color: INK,
 };
 
-// ─── Design tokens (cream palette) ─────────────────────────
-const CREAM = '#f4f4f0';
-const INK = '#1a1a1a';
-const INK_GHOST = 'rgba(26,26,26,0.12)';
-const PURPLE = '#965EC7';
+const iFocusStyle: CSSProperties = {
+	borderColor: INK,
+};
 
-// ─── Shared form primitives ─────────────────────────────────
-const iClass =
-	'w-full bg-transparent border-b py-3 text-base font-light focus:outline-none transition-all duration-300 placeholder:opacity-30';
-const iStyle = { borderColor: INK_GHOST, color: INK };
-const iFocusStyle = { borderColor: INK };
+interface FieldProps {
+	label: string;
+	id: string;
+	children: ReactNode;
+}
 
-function Field({ label, id, children }) {
+function Field({ label, id, children }: FieldProps) {
 	return (
 		<div className='flex flex-col gap-1.5'>
 			<label
 				htmlFor={id}
 				className='font-black text-[10px] uppercase tracking-[0.25em]'
-				style={{ color: `${INK}55` }}
+				style={{
+					color: `${INK}55`,
+				}}
 			>
 				{label}
 			</label>
+
 			{children}
 		</div>
 	);
 }
 
-function FInput({ id, ...rest }) {
+interface FInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+	id: string;
+}
+
+function FInput({ id, ...rest }: FInputProps) {
 	const [focused, setFocused] = useState(false);
+
 	return (
 		<input
 			id={id}
 			className={iClass}
-			style={{ ...iStyle, ...(focused ? iFocusStyle : {}) }}
+			style={{
+				...iStyle,
+				...(focused ? iFocusStyle : {}),
+			}}
 			onFocus={() => setFocused(true)}
 			onBlur={() => setFocused(false)}
 			{...rest}
@@ -59,14 +86,24 @@ function FInput({ id, ...rest }) {
 	);
 }
 
-function FTextarea({ id, rows = 4, ...rest }) {
+interface FTextareaProps
+	extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+	id: string;
+	rows?: number;
+}
+
+function FTextarea({ id, rows = 4, ...rest }: FTextareaProps) {
 	const [focused, setFocused] = useState(false);
+
 	return (
 		<textarea
 			id={id}
 			rows={rows}
 			className={`${iClass} resize-none leading-relaxed`}
-			style={{ ...iStyle, ...(focused ? iFocusStyle : {}) }}
+			style={{
+				...iStyle,
+				...(focused ? iFocusStyle : {}),
+			}}
 			onFocus={() => setFocused(true)}
 			onBlur={() => setFocused(false)}
 			{...rest}
@@ -74,9 +111,14 @@ function FTextarea({ id, rows = 4, ...rest }) {
 	);
 }
 
-// Budget chips
 const BUDGETS = ['< R$ 5k', 'R$ 5–15k', 'R$ 15–50k', 'R$ 50k+'];
-function BudgetChips({ value, onChange }) {
+
+interface BudgetChipsProps {
+	value: string;
+	onChange: (value: string) => void;
+}
+
+function BudgetChips({ value, onChange }: BudgetChipsProps) {
 	return (
 		<div className='flex flex-wrap gap-2 pt-2'>
 			{BUDGETS.map((b) => (
@@ -102,8 +144,12 @@ function BudgetChips({ value, onChange }) {
 	);
 }
 
-// Submit button
-function SubmitBtn({ sending, label = 'Enviar via WhatsApp' }) {
+interface SubmitBtnProps {
+	sending: boolean;
+	label?: string;
+}
+
+function SubmitBtn({ sending, label = 'Enviar via WhatsApp' }: SubmitBtnProps) {
 	return (
 		<motion.button
 			type='submit'
@@ -119,23 +165,49 @@ function SubmitBtn({ sending, label = 'Enviar via WhatsApp' }) {
 	);
 }
 
-// ─── Form: 01 Start a project ───────────────────────────────
+interface ProjectFormData {
+	Nome: string;
+	Empresa: string;
+	Email: string;
+	Budget: string;
+	Detalhes: string;
+}
+
 function ProjectForm() {
-	const [d, setD] = useState({
+	const [data, setData] = useState<ProjectFormData>({
 		Nome: '',
 		Empresa: '',
 		Email: '',
 		Budget: '',
 		Detalhes: '',
 	});
+
 	const [sending, setSending] = useState(false);
-	const handle = (k) => (e) => setD((p) => ({ ...p, [k]: e.target.value }));
-	const submit = (e) => {
-		e.preventDefault();
+
+	const handleChange =
+		(key: keyof ProjectFormData) =>
+		(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+			setData((prev) => ({
+				...prev,
+				[key]: event.target.value,
+			}));
+		};
+
+	const submit = (event: FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+
 		setSending(true);
-		sendToWhatsApp({ Tipo: 'Novo Projeto', ...d });
-		setTimeout(() => setSending(false), 1400);
+
+		sendToWhatsApp({
+			Tipo: 'Novo Projeto',
+			...data,
+		});
+
+		setTimeout(() => {
+			setSending(false);
+		}, 1400);
 	};
+
 	return (
 		<form onSubmit={submit} className='flex w-full max-w-lg flex-col gap-7'>
 			<Field label='Nome' id='p-nome'>
@@ -143,8 +215,8 @@ function ProjectForm() {
 					id='p-nome'
 					type='text'
 					placeholder='Seu nome completo'
-					value={d.Nome}
-					onChange={handle('Nome')}
+					value={data.Nome}
+					onChange={handleChange('Nome')}
 					required
 					autoComplete='name'
 				/>
@@ -154,8 +226,8 @@ function ProjectForm() {
 					id='p-empresa'
 					type='text'
 					placeholder='Nome da empresa (opcional)'
-					value={d.Empresa}
-					onChange={handle('Empresa')}
+					value={data.Empresa}
+					onChange={handleChange('Empresa')}
 				/>
 			</Field>
 			<Field label='E-mail' id='p-email'>
@@ -163,16 +235,16 @@ function ProjectForm() {
 					id='p-email'
 					type='email'
 					placeholder='seu@email.com'
-					value={d.Email}
-					onChange={handle('Email')}
+					value={data.Email}
+					onChange={handleChange('Email')}
 					required
 					autoComplete='email'
 				/>
 			</Field>
 			<Field label='Budget estimado' id='p-budget'>
 				<BudgetChips
-					value={d.Budget}
-					onChange={(v) => setD((p) => ({ ...p, Budget: v }))}
+					value={data.Budget}
+					onChange={(v) => setData((p) => ({ ...p, Budget: v }))}
 				/>
 			</Field>
 			<Field label='Detalhes do Projeto' id='p-detalhes'>
@@ -180,8 +252,8 @@ function ProjectForm() {
 					id='p-detalhes'
 					rows={5}
 					placeholder='Descreva o projeto, objetivos e prazo…'
-					value={d.Detalhes}
-					onChange={handle('Detalhes')}
+					value={data.Detalhes}
+					onChange={handleChange('Detalhes')}
 					required
 				/>
 			</Field>
@@ -190,120 +262,16 @@ function ProjectForm() {
 	);
 }
 
-// ─── Form: 02 Application ───────────────────────────────────
-function ApplicationForm() {
-	const [d, setD] = useState({
-		Nome: '',
-		Vaga: '',
-		Portfolio: '',
-		LinkedIn: '',
-	});
-	const [sending, setSending] = useState(false);
-	const handle = (k) => (e) => setD((p) => ({ ...p, [k]: e.target.value }));
-	const submit = (e) => {
-		e.preventDefault();
-		setSending(true);
-		sendToWhatsApp({ Tipo: 'Candidatura', ...d });
-		setTimeout(() => setSending(false), 1400);
-	};
-	return (
-		<form onSubmit={submit} className='flex w-full max-w-lg flex-col gap-7'>
-			<Field label='Nome' id='a-nome'>
-				<FInput
-					id='a-nome'
-					type='text'
-					placeholder='Seu nome completo'
-					value={d.Nome}
-					onChange={handle('Nome')}
-					required
-					autoComplete='name'
-				/>
-			</Field>
-			<Field label='Vaga desejada' id='a-vaga'>
-				<FInput
-					id='a-vaga'
-					type='text'
-					placeholder='Ex: Designer UI/UX, Dev Front-end…'
-					value={d.Vaga}
-					onChange={handle('Vaga')}
-					required
-				/>
-			</Field>
-			<Field label='Portfolio URL' id='a-portfolio'>
-				<FInput
-					id='a-portfolio'
-					type='url'
-					placeholder='https://seuportfolio.com'
-					value={d.Portfolio}
-					onChange={handle('Portfolio')}
-				/>
-			</Field>
-			<Field label='LinkedIn' id='a-linkedin'>
-				<FInput
-					id='a-linkedin'
-					type='url'
-					placeholder='https://linkedin.com/in/perfil'
-					value={d.LinkedIn}
-					onChange={handle('LinkedIn')}
-				/>
-			</Field>
-			<SubmitBtn sending={sending} label='Enviar candidatura' />
-		</form>
-	);
+interface Funnel {
+	id: string;
+	n: string;
+	title: string;
+	sub: string;
+	headline: string;
+	Form: () => JSX.Element;
 }
 
-// ─── Form: 03 General Inquiry ───────────────────────────────
-function InquiryForm() {
-	const [d, setD] = useState({ Nome: '', Email: '', Mensagem: '' });
-	const [sending, setSending] = useState(false);
-	const handle = (k) => (e) => setD((p) => ({ ...p, [k]: e.target.value }));
-	const submit = (e) => {
-		e.preventDefault();
-		setSending(true);
-		sendToWhatsApp({ Tipo: 'Dúvida Geral', ...d });
-		setTimeout(() => setSending(false), 1400);
-	};
-	return (
-		<form onSubmit={submit} className='flex w-full max-w-lg flex-col gap-7'>
-			<Field label='Nome' id='i-nome'>
-				<FInput
-					id='i-nome'
-					type='text'
-					placeholder='Seu nome'
-					value={d.Nome}
-					onChange={handle('Nome')}
-					required
-					autoComplete='name'
-				/>
-			</Field>
-			<Field label='E-mail' id='i-email'>
-				<FInput
-					id='i-email'
-					type='email'
-					placeholder='seu@email.com'
-					value={d.Email}
-					onChange={handle('Email')}
-					required
-					autoComplete='email'
-				/>
-			</Field>
-			<Field label='Mensagem' id='i-mensagem'>
-				<FTextarea
-					id='i-mensagem'
-					rows={5}
-					placeholder='Sua mensagem…'
-					value={d.Mensagem}
-					onChange={handle('Mensagem')}
-					required
-				/>
-			</Field>
-			<SubmitBtn sending={sending} label='Enviar mensagem' />
-		</form>
-	);
-}
-
-// ─── Funnel routes ───────────────────────────────────────────
-const FUNNELS = [
+const FUNNELS: Funnel[] = [
 	{
 		id: 'project',
 		n: '01',
@@ -312,43 +280,53 @@ const FUNNELS = [
 		headline: 'Vamos construir algo extraordinário.',
 		Form: ProjectForm,
 	},
-	{
-		id: 'application',
-		n: '02',
-		title: 'Application',
-		sub: 'Talent funnel',
-		headline: 'Faça parte do nosso time.',
-		Form: ApplicationForm,
-	},
-	{
-		id: 'inquiry',
-		n: '03',
-		title: 'General Inquiry',
-		sub: 'Dúvidas gerais',
-		headline: 'Fale o que quiser.',
-		Form: InquiryForm,
-	},
 ];
 
-// ─── Animation variants ──────────────────────────────────────
-const ease = [0.16, 1, 0.3, 1];
+const ease: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
-const sectionAnim = {
-	hidden: { opacity: 0, y: 28 },
-	visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease } },
-	exit: { opacity: 0, y: -16, transition: { duration: 0.3, ease } },
+const sectionAnim: Variants = {
+	hidden: {
+		opacity: 0,
+		y: 28,
+	},
+	visible: {
+		opacity: 1,
+		y: 0,
+		transition: {
+			duration: 0.65,
+			ease,
+		},
+	},
+	exit: {
+		opacity: 0,
+		y: -16,
+		transition: {
+			duration: 0.3,
+			ease,
+		},
+	},
 };
 
 const slideUp = (delay = 0) => ({
-	initial: { opacity: 0, y: 20 },
-	animate: { opacity: 1, y: 0 },
-	transition: { duration: 0.55, ease, delay },
+	initial: {
+		opacity: 0,
+		y: 20,
+	},
+	animate: {
+		opacity: 1,
+		y: 0,
+	},
+	transition: {
+		duration: 0.55,
+		ease,
+		delay,
+	},
 });
 
-// ─── Main component ──────────────────────────────────────────
 export default function Contato() {
-	const [selected, setSelected] = useState(null);
-	const funnel = FUNNELS.find((f) => f.id === selected);
+	const [selected, setSelected] = useState<string | null>(null);
+
+	const funnel = FUNNELS.find((f) => f.id === selected) ?? null;
 
 	return (
 		<section
@@ -361,40 +339,56 @@ export default function Contato() {
 				marginTop: '3rem',
 			}}
 		>
-			{/* ── Top label ────────────────────────────────────────── */}
 			<div className='px-8 pt-8 md:px-12'>
 				<span
 					className='font-black text-[9px] uppercase tracking-[0.35em]'
-					style={{ color: `${INK}44` }}
+					style={{
+						color: `${INK}44`,
+					}}
 				>
-					{selected ? `Contact / ${funnel.title}` : 'Contact'}
+					{selected && funnel ? `Contact / ${funnel.title}` : 'Contact'}
 				</span>
 			</div>
 
 			<div className='px-8 pt-10 pb-16 md:px-12 md:pb-24'>
-				{/* ── Giant heading — animated on change ────────────── */}
 				<AnimatePresence mode='wait'>
 					<motion.div
 						key={selected ?? 'root'}
-						initial={{ opacity: 0, y: 24 }}
-						animate={{ opacity: 1, y: 0 }}
-						exit={{ opacity: 0, y: -16 }}
-						transition={{ duration: 0.55, ease }}
+						initial={{
+							opacity: 0,
+							y: 24,
+						}}
+						animate={{
+							opacity: 1,
+							y: 0,
+						}}
+						exit={{
+							opacity: 0,
+							y: -16,
+						}}
+						transition={{
+							duration: 0.55,
+							ease,
+						}}
 						className='mb-10 md:mb-16'
 					>
 						<h2
-							className='font-black leading-[0.88] tracking-[-0.04em]'
+							className='leading-[0.88] tracking-[-0.04em]'
 							style={{
 								fontSize: 'clamp(2.8rem, 9.5vw, 8.5rem)',
 								color: INK,
+								fontWeight: 900,
 							}}
 						>
-							{selected ? funnel.title : "Let's\u00A0talk."}
+							{selected && funnel ? funnel.title : "Let's talk."}
 						</h2>
-						{selected && (
+
+						{selected && funnel && (
 							<p
 								className='mt-4 font-light text-base md:text-lg'
-								style={{ color: `${INK}66` }}
+								style={{
+									color: `${INK}66`,
+								}}
 							>
 								{funnel.headline}
 							</p>
@@ -402,10 +396,8 @@ export default function Contato() {
 					</motion.div>
 				</AnimatePresence>
 
-				{/* ── Main body ──────────────────────────────────────── */}
 				<AnimatePresence mode='wait'>
 					{!selected ? (
-						/* ───── MENU ───── */
 						<motion.div
 							key='menu'
 							variants={sectionAnim}
@@ -416,133 +408,84 @@ export default function Contato() {
 							<motion.p
 								{...slideUp(0.05)}
 								className='mb-12 max-w-xs font-light text-sm md:mb-16 md:text-base'
-								style={{ color: `${INK}66` }}
+								style={{
+									color: `${INK}66`,
+								}}
 							>
 								Escolha como podemos te ajudar.
 							</motion.p>
 
-							{/* Numbered list */}
 							<nav
 								className='flex flex-col'
-								style={{ borderTop: `1px solid ${INK_GHOST}` }}
+								style={{
+									borderTop: `1px solid ${INK_GHOST}`,
+								}}
 							>
-								{FUNNELS.map((f, i) => (
+								{FUNNELS.map((funnelItem, index) => (
 									<motion.button
-										key={f.id}
-										{...slideUp(0.1 + i * 0.07)}
-										onClick={() => setSelected(f.id)}
+										key={funnelItem.id}
+										{...slideUp(0.1 + index * 0.07)}
+										type='button'
+										onClick={() => setSelected(funnelItem.id)}
 										className='group flex items-center justify-between text-left transition-all duration-500 hover:pl-3 md:hover:pl-6'
 										style={{
 											padding: '1.5rem 0',
 											borderBottom: `1px solid ${INK_GHOST}`,
 										}}
 									>
-										{/* Left: number + title */}
 										<div className='flex items-baseline gap-4 md:gap-8'>
 											<span
 												className='shrink-0 font-black font-mono text-xs tabular-nums'
-												style={{ color: `${INK}33` }}
+												style={{
+													color: `${INK}33`,
+												}}
 											>
-												{f.n}
+												{funnelItem.n}
 											</span>
+
 											<div className='flex flex-col sm:flex-row sm:items-baseline sm:gap-5'>
 												<span
-													className='font-black leading-none tracking-tight transition-colors duration-300 group-hover:text-[#965EC7]'
+													className='leading-none tracking-tight transition-colors duration-300 group-hover:text-[#965EC7]'
 													style={{
 														fontSize: 'clamp(1.5rem, 4.5vw, 3.25rem)',
 														color: INK,
+														fontWeight: 900,
 													}}
 												>
-													{f.title}
+													{funnelItem.title}
 												</span>
+
 												<span
 													className='hidden font-black text-[10px] uppercase tracking-[0.25em] sm:inline'
-													style={{ color: `${INK}33` }}
+													style={{
+														color: `${INK}33`,
+													}}
 												>
-													{f.sub}
+													{funnelItem.sub}
 												</span>
 											</div>
 										</div>
 
-										{/* Arrow circle */}
 										<div
 											className='flex h-10 w-10 shrink-0 items-center justify-center rounded-full border transition-all duration-300 group-hover:scale-110'
 											style={{
 												borderColor: INK_GHOST,
 												background: 'transparent',
 											}}
-											onMouseEnter={(e) => {
-												e.currentTarget.style.background = INK;
-												e.currentTarget.style.borderColor = INK;
-												e.currentTarget.querySelector('svg').style.color =
-													CREAM;
-											}}
-											onMouseLeave={(e) => {
-												e.currentTarget.style.background = 'transparent';
-												e.currentTarget.style.borderColor = INK_GHOST;
-												e.currentTarget.querySelector('svg').style.color = INK;
-											}}
 										>
 											<ArrowRight
 												className='h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5'
-												style={{ color: INK }}
+												style={{
+													color: INK,
+												}}
 												strokeWidth={1.5}
 											/>
 										</div>
 									</motion.button>
 								))}
 							</nav>
-
-							{/* Footer row */}
-							<motion.div
-								{...slideUp(0.35)}
-								className='mt-14 flex flex-col gap-8 pt-8 sm:flex-row sm:gap-16 md:mt-20'
-								style={{ borderTop: `1px solid ${INK_GHOST}` }}
-							>
-								{[
-									{
-										label: 'E-mail',
-										value: 'whysadmin@gmail.com',
-										href: 'mailto:whysadmin@gmail.com',
-									},
-									{
-										label: 'WhatsApp',
-										value: '+55 69 9 8116-2676',
-										href: `https://wa.me/${WA_NUMBER}`,
-									},
-									{
-										label: 'Localização',
-										value: 'Porto Velho, RO — Brasil',
-										href: null,
-									},
-								].map(({ label, value, href }) => (
-									<div key={label}>
-										<p
-											className='mb-1.5 font-black text-[9px] uppercase tracking-[0.3em]'
-											style={{ color: `${INK}33` }}
-										>
-											{label}
-										</p>
-										{href ? (
-											<a
-												href={href}
-												target={href.startsWith('http') ? '_blank' : undefined}
-												className='font-light text-sm transition-colors duration-200 hover:opacity-70'
-												style={{ color: INK }}
-											>
-												{value}
-											</a>
-										) : (
-											<p className='font-light text-sm' style={{ color: INK }}>
-												{value}
-											</p>
-										)}
-									</div>
-								))}
-							</motion.div>
 						</motion.div>
 					) : (
-						/* ───── FORM ───── */
 						<motion.div
 							key={selected}
 							variants={sectionAnim}
@@ -550,13 +493,18 @@ export default function Contato() {
 							animate='visible'
 							exit='exit'
 						>
-							{/* Back button */}
 							<motion.button
 								{...slideUp(0)}
+								type='button'
 								onClick={() => setSelected(null)}
 								className='group mb-12 flex items-center gap-2 font-semibold text-sm'
-								style={{ color: `${INK}60` }}
-								whileHover={{ x: -4, color: INK }}
+								style={{
+									color: `${INK}60`,
+								}}
+								whileHover={{
+									x: -4,
+									color: INK,
+								}}
 							>
 								<ArrowLeft
 									className='h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1'
@@ -565,7 +513,6 @@ export default function Contato() {
 								Voltar
 							</motion.button>
 
-							{/* Form */}
 							<motion.div {...slideUp(0.1)}>
 								{funnel && <funnel.Form />}
 							</motion.div>

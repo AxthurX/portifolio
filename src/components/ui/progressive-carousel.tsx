@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion } from 'framer-motion';
 import React, {
+	type CSSProperties,
 	createContext,
 	type ReactNode,
 	useContext,
@@ -10,13 +11,26 @@ import React, {
 	useState,
 } from 'react';
 
-const ProgressSliderContext = createContext(undefined);
+interface ProgressSliderContextType {
+	active: string;
+	progress: number;
+	handleButtonClick: (value: string) => void;
+	vertical: boolean;
+}
 
-export const useProgressSliderContext = () => {
+const ProgressSliderContext = createContext<ProgressSliderContextType | null>(
+	null,
+);
+
+export function useProgressSliderContext() {
 	const context = useContext(ProgressSliderContext);
-	if (!context) throw new Error('Must be used within a ProgressSlider');
+
+	if (!context) {
+		throw new Error('Must be used within a ProgressSlider');
+	}
+
 	return context;
-};
+}
 
 type ProgressSliderProps = {
 	children: ReactNode;
@@ -41,21 +55,24 @@ export const ProgressSlider = ({
 
 	const frame = useRef(0);
 	const firstFrameTime = useRef(performance.now());
-	const targetValue = useRef(null);
+	const targetValue = useRef<string | null>(null);
 	const progressRef = useRef(0);
 
 	const [sliderValues, setSliderValues] = useState([]);
 
 	useEffect(() => {
-		const getChildren = React.Children.toArray(children).find(
-			(child) => child.type === SliderContent,
+		const contentChild = React.Children.toArray(children).find(
+			(child): child is React.ReactElement =>
+				React.isValidElement(child) && child.type === SliderContent,
 		);
-		if (getChildren) {
-			const values = React.Children.toArray(getChildren.props.children).map(
-				(child) => child.props.value,
-			);
-			setSliderValues(values);
-		}
+
+		if (!contentChild) return;
+
+		const values = React.Children.toArray(contentChild.props.children)
+			.filter(React.isValidElement)
+			.map((child) => child.props.value as string);
+
+		setSliderValues(values);
 	}, [children]);
 
 	useEffect(() => {
@@ -68,34 +85,48 @@ export const ProgressSlider = ({
 		return () => cancelAnimationFrame(frame.current);
 	}, [active, isFastForward, sliderValues]);
 
-	const animate = (now) => {
+	const animate = (now: number) => {
 		const currentDuration = isFastForward ? fastDuration : duration;
+
 		const elapsedTime = now - firstFrameTime.current;
+
 		const timeFraction = elapsedTime / currentDuration;
 
 		if (timeFraction <= 1) {
 			const newProgress = isFastForward
 				? progressRef.current + (100 - progressRef.current) * timeFraction
 				: timeFraction * 100;
+
 			progressRef.current = newProgress;
+
 			setProgress(newProgress);
+
 			frame.current = requestAnimationFrame(animate);
-		} else {
-			if (isFastForward) {
-				setIsFastForward(false);
-				if (targetValue.current !== null) {
-					setActive(targetValue.current);
-					targetValue.current = null;
-				}
-			} else {
-				const currentIndex = sliderValues.indexOf(active);
-				const nextIndex = (currentIndex + 1) % sliderValues.length;
-				setActive(sliderValues[nextIndex]);
-			}
-			progressRef.current = 0;
-			setProgress(0);
-			firstFrameTime.current = performance.now();
+
+			return;
 		}
+
+		if (isFastForward) {
+			setIsFastForward(false);
+
+			if (targetValue.current !== null) {
+				setActive(targetValue.current);
+
+				targetValue.current = null;
+			}
+		} else {
+			const currentIndex = sliderValues.indexOf(active);
+
+			const nextIndex = (currentIndex + 1) % sliderValues.length;
+
+			setActive(sliderValues[nextIndex]);
+		}
+
+		progressRef.current = 0;
+
+		setProgress(0);
+
+		firstFrameTime.current = performance.now();
 	};
 
 	const handleButtonClick = (value: string) => {
@@ -105,26 +136,50 @@ export const ProgressSlider = ({
 
 		progressRef.current = (elapsedTime / duration) * 100;
 
-		targetValue.current = value;
+		if (value) targetValue.current = value;
 
 		setIsFastForward(true);
 
 		firstFrameTime.current = performance.now();
 	};
+
 	return (
 		<ProgressSliderContext.Provider
-			value={{ active, progress, handleButtonClick, vertical }}
+			value={{
+				active,
+				progress,
+				handleButtonClick,
+				vertical,
+			}}
 		>
 			<div className={`relative ${className}`}>{children}</div>
 		</ProgressSliderContext.Provider>
 	);
 };
 
-export const SliderContent = ({ children, className = '' }) => (
-	<div className={className}>{children}</div>
-);
+interface SliderContentProps {
+	children: ReactNode;
+	className?: string;
+}
 
-export const SliderWrapper = ({ children, value, className = '' }) => {
+export function SliderContent({
+	children,
+	className = '',
+}: SliderContentProps) {
+	return <div className={className}>{children}</div>;
+}
+
+interface SliderWrapperProps {
+	children: ReactNode;
+	value: string;
+	className?: string;
+}
+
+export function SliderWrapper({
+	children,
+	value,
+	className = '',
+}: SliderWrapperProps) {
 	const { active } = useProgressSliderContext();
 	return (
 		<AnimatePresence mode='popLayout'>
@@ -142,29 +197,35 @@ export const SliderWrapper = ({ children, value, className = '' }) => {
 			)}
 		</AnimatePresence>
 	);
-};
+}
 
-export const SliderBtnGroup = ({ children, className = '' }) => (
-	<div className={className}>{children}</div>
-);
+interface SliderBtnGroupProps {
+	children: ReactNode;
+	className?: string;
+}
 
-/**
- * SliderBtn with TRUE color-inversion effect:
- *
- * Key technique:
- *  - `isolation: isolate` on the button creates a stacking context
- *  - The white progress fill sits at z-index 20 (ABOVE the text)
- *  - `mix-blend-mode: difference` causes: white fill over white text = black text
- *    (255 - 255 = 0), and white fill over dark bg = white bg (255 - 0 = 255)
- *  - `pointer-events: none` on the overlay so clicks still work
- */
-export const SliderBtn = ({
+export function SliderBtnGroup({
+	children,
+	className = '',
+}: SliderBtnGroupProps) {
+	return <div className={className}>{children}</div>;
+}
+
+interface SliderBtnProps {
+	children: ReactNode;
+	value: string;
+	className?: string;
+	progressBarClass?: string;
+	progressStyle?: CSSProperties;
+}
+
+export function SliderBtn({
 	children,
 	value,
 	className = '',
 	progressBarClass = '',
 	progressStyle = {},
-}) => {
+}: SliderBtnProps) {
 	const { active, progress, handleButtonClick, vertical } =
 		useProgressSliderContext();
 
@@ -176,10 +237,8 @@ export const SliderBtn = ({
 			style={{ isolation: 'isolate' }}
 			onClick={() => handleButtonClick(value)}
 		>
-			{/* Text content — z-index 10, rendered in stacking context */}
 			<div className='relative z-10'>{children}</div>
 
-			{/* White progress overlay — z-index 20 (ABOVE text), mix-blend-mode inverts */}
 			<div
 				className='pointer-events-none absolute inset-0 z-20'
 				role='progressbar'
@@ -199,4 +258,4 @@ export const SliderBtn = ({
 			</div>
 		</button>
 	);
-};
+}

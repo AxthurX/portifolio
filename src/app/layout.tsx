@@ -1,12 +1,8 @@
 import { Inter, Playfair_Display } from 'next/font/google';
 import './globals.css';
+import type { Metadata } from 'next';
 import Analytics from '../components/Analytics';
 import { ThemeProvider } from '../components/ThemeProvider';
-import {
-	localBusinessSchema,
-	organizationSchema,
-	websiteSchema,
-} from '../lib/structured-data';
 
 const inter = Inter({
 	subsets: ['latin'],
@@ -23,7 +19,7 @@ const playfair = Playfair_Display({
 	display: 'swap',
 });
 
-export const metadata = {
+export const metadata: Metadata = {
 	metadataBase: new URL('https://whysbr.com'),
 	title: {
 		default: 'WHYS | Creative Design Digital Studio',
@@ -42,8 +38,14 @@ export const metadata = {
 		'Brasil',
 		'WHYS',
 	],
-	authors: [{ name: 'WHYS Studio', url: 'https://whysbr.com' }],
+	authors: [
+		{
+			name: 'WHYS Studio',
+			url: 'https://whysbr.com',
+		},
+	],
 	creator: 'WHYS Studio',
+
 	openGraph: {
 		type: 'website',
 		locale: 'pt_BR',
@@ -61,14 +63,7 @@ export const metadata = {
 			},
 		],
 	},
-	twitter: {
-		card: 'summary_large_image',
-		title: 'WHYS | Creative Design Digital Studio',
-		description:
-			'Estúdio digital focado em criar experiências imersivas e marcas que impressionam.',
-		images: ['/og-image.png'],
-		creator: '@whysstudio',
-	},
+
 	robots: {
 		index: true,
 		follow: true,
@@ -80,12 +75,17 @@ export const metadata = {
 			'max-snippet': -1,
 		},
 	},
+
 	alternates: {
 		canonical: 'https://whysbr.com',
 	},
 };
 
-export default function RootLayout({ children }) {
+interface RootLayoutProps {
+	children: React.ReactNode;
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
 	return (
 		<html
 			lang='pt-BR'
@@ -93,37 +93,39 @@ export default function RootLayout({ children }) {
 			suppressHydrationWarning
 		>
 			<head>
-				<link rel='preconnect' href='https://fonts.googleapis.com' />
-				<link
-					rel='preconnect'
-					href='https://fonts.gstatic.com'
-					crossOrigin='anonymous'
-				/>
 				<link rel='icon' href='/logo-simbolo.png' type='image/png' />
+
 				<meta
 					name='viewport'
 					content='width=device-width, initial-scale=1, maximum-scale=5'
 				/>
+
 				<meta name='theme-color' content='#f4f4f0' />
+
 				<meta property='og:url' content='https://whysbr.com' />
-				{/* —— JSON-LD Structured Data —— */}
-				<script
+
+				{/* <script
 					type='application/ld+json'
 					dangerouslySetInnerHTML={{
 						__html: JSON.stringify(organizationSchema),
 					}}
 				/>
+
 				<script
 					type='application/ld+json'
-					dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+					dangerouslySetInnerHTML={{
+						__html: JSON.stringify(websiteSchema),
+					}}
 				/>
+
 				<script
 					type='application/ld+json'
 					dangerouslySetInnerHTML={{
 						__html: JSON.stringify(localBusinessSchema),
 					}}
-				/>
+				/> */}
 			</head>
+
 			<body className='min-h-screen overflow-x-hidden bg-background font-sans text-foreground antialiased'>
 				<ThemeProvider
 					attribute='class'
