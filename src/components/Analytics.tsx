@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import Script from "next/script";
+import Script from 'next/script';
 
 /**
  * Google Analytics 4 + Meta Pixel (optional)
@@ -16,17 +16,17 @@ const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
 
 export default function Analytics() {
-  if (!GA_ID) return null;
+	if (!GA_ID) return null;
 
-  return (
-    <>
-      {/* ——— Google Analytics 4 ——— */}
-      <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
-        strategy="afterInteractive"
-      />
-      <Script id="ga4-init" strategy="afterInteractive">
-        {`
+	return (
+		<>
+			{/* ——— Google Analytics 4 ——— */}
+			<Script
+				src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+				strategy='afterInteractive'
+			/>
+			<Script id='ga4-init' strategy='afterInteractive'>
+				{`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
@@ -35,11 +35,11 @@ export default function Analytics() {
             anonymize_ip: true,
           });
         `}
-      </Script>
+			</Script>
 
-      {/* ——— Custom Event: Contact Form Submit ——— */}
-      <Script id="whys-events" strategy="afterInteractive">
-        {`
+			{/* ——— Custom Event: Contact Form Submit ——— */}
+			<Script id='whys-events' strategy='afterInteractive'>
+				{`
           document.addEventListener('DOMContentLoaded', function() {
             var form = document.querySelector('#contato form');
             if (form) {
@@ -54,12 +54,12 @@ export default function Analytics() {
             }
           });
         `}
-      </Script>
+			</Script>
 
-      {/* ——— Meta Pixel (optional) ——— */}
-      {META_PIXEL_ID && (
-        <Script id="meta-pixel" strategy="afterInteractive">
-          {`
+			{/* ——— Meta Pixel (optional) ——— */}
+			{META_PIXEL_ID && (
+				<Script id='meta-pixel' strategy='afterInteractive'>
+					{`
             !function(f,b,e,v,n,t,s)
             {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
             n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -71,8 +71,8 @@ export default function Analytics() {
             fbq('init', '${META_PIXEL_ID}');
             fbq('track', 'PageView');
           `}
-        </Script>
-      )}
-    </>
-  );
+				</Script>
+			)}
+		</>
+	);
 }
