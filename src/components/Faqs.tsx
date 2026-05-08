@@ -15,29 +15,29 @@ interface FAQItem {
 
 const faqs: FAQItem[] = [
 	{
-		question: 'Quanto tempo demora para criar um site premium?',
+		question: 'Quanto tempo demora para criar um projeto?',
 		answer:
-			'Um projeto completo, desde o briefing até a entrega final com animações avançadas e otimização de performance, geralmente leva de 4 a 8 semanas, dependendo da complexidade do escopo.',
+			'Um projeto completo, desde o briefing ate a entrega final com animacoes avancadas e otimizacao de performance, geralmente leva de 4 a 8 semanas, dependendo da complexidade do escopo.',
 	},
 	{
-		question: 'Quais tecnologias vocês utilizam no desenvolvimento?',
+		question: 'Quais tecnologias voce utiliza no desenvolvimento?',
 		answer:
-			'Nossa stack é focada no que há de mais moderno: Next.js (React) no front-end, TailwindCSS para estilização milimétrica, e GSAP / Lenis / Framer Motion para animações super fluidas.',
+			'Minha stack e focada no que ha de mais moderno: Next.js (React) no front-end, TailwindCSS para estilizacao, e GSAP / Lenis / Framer Motion para animacoes super fluidas. No backend, uso Node.js com Fastify e Prisma.',
 	},
 	{
-		question: 'O código final e o design serão meus?',
+		question: 'O codigo final sera meu?',
 		answer:
-			'Sim, 100%. Ao final do projeto, todos os assets de design (Figma) e o repositório de código fonte são transferidos diretamente para você ou para a conta da sua empresa.',
+			'Sim, 100%. Ao final do projeto, todos os assets de design e o repositorio de codigo fonte sao transferidos diretamente para voce ou para a conta da sua empresa.',
 	},
 	{
-		question: 'Vocês fazem manutenção ou SEO depois do site estar online?',
+		question: 'Voce faz manutencao depois do site estar online?',
 		answer:
-			'Com certeza. Oferecemos pacotes de pós-venda e manutenção (Technical SEO, atualizações de segurança e integrações) para garantir que sua plataforma continue no topo do mercado.',
+			'Com certeza. Ofereco pacotes de pos-venda e manutencao (Technical SEO, atualizacoes de seguranca e integracoes) para garantir que sua plataforma continue funcionando perfeitamente.',
 	},
 	{
-		question: 'Como funciona a comunicação durante o projeto?',
+		question: 'Como funciona a comunicacao durante o projeto?',
 		answer:
-			'Criamos um canal direto e exclusivo de comunicação (via Slack ou WhatsApp). Temos reuniões de alinhamento e demonstrações visuais ao fim de cada milestone para que você acompanhe cada pixel do processo.',
+			'Criamos um canal direto e exclusivo de comunicacao (via Slack ou WhatsApp). Temos reunioes de alinhamento e demonstracoes visuais ao fim de cada milestone para que voce acompanhe cada detalhe do processo.',
 	},
 ];
 
@@ -104,26 +104,26 @@ export default function Faqs() {
 		<section
 			ref={sectionRef}
 			id='faqs'
-			className='relative mt-8 w-full overflow-hidden border-foreground/10 border-t py-16 md:mt-12 md:py-40'
+			className='relative mt-8 w-full overflow-hidden border-border border-t py-16 md:mt-12 md:py-32'
 		>
 			<div className='relative z-10 px-4 md:px-0'>
-				<div className='mb-12 md:mb-20'>
-					<h2 className='mb-4 font-black text-foreground/35 text-xs uppercase tracking-[0.35em] md:mb-6'>
-						Suas Dúvidas
-					</h2>
+				<div className='mb-12 md:mb-16'>
+					<span className='mb-4 block font-medium text-primary text-xs uppercase tracking-widest md:mb-6'>
+						Duvidas
+					</span>
 
 					<h3
 						ref={headingRef}
-						className='max-w-3xl font-black text-4xl tracking-[-0.03em] sm:text-5xl md:text-6xl lg:text-7xl'
+						className='max-w-2xl font-bold text-3xl tracking-tight sm:text-4xl md:text-5xl lg:text-6xl'
 					>
 						Perguntas{' '}
-						<span className='font-normal font-serif text-primary italic'>
+						<span className='font-serif text-primary italic font-normal'>
 							Frequentes
 						</span>
 					</h3>
 				</div>
 
-				<div className='flex flex-col border-foreground/10 border-t'>
+				<div className='flex flex-col border-border border-t'>
 					{faqs.map((faq, index) => {
 						const isOpen = openIndex === index;
 
@@ -145,31 +145,31 @@ export default function Faqs() {
 									duration: 0.5,
 									delay: index * 0.08,
 								}}
-								className='border-foreground/10 border-b'
+								className='border-border border-b'
 							>
 								<button
 									type='button'
 									onClick={() => toggleOpen(index)}
-									className='group flex w-full items-center justify-between py-5 text-left focus:outline-none md:py-8'
+									className='group flex w-full items-center justify-between py-5 text-left focus:outline-none md:py-6'
 								>
 									<span
-										className={`pr-4 font-light text-lg transition-colors sm:text-xl md:text-2xl lg:text-3xl ${
+										className={`pr-4 text-base font-medium transition-colors md:text-lg lg:text-xl ${
 											isOpen
 												? 'text-foreground'
-												: 'text-foreground/70 group-hover:text-foreground'
+												: 'text-muted-foreground group-hover:text-foreground'
 										}`}
 									>
 										{faq.question}
 									</span>
 
 									<div
-										className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full border transition-all duration-300 md:h-12 md:w-12 ${
+										className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full border transition-all duration-300 ${
 											isOpen
-												? 'rotate-180 border-primary bg-primary text-white'
-												: 'border-foreground/20 text-foreground group-hover:border-foreground'
+												? 'rotate-180 border-primary bg-primary text-primary-foreground'
+												: 'border-border text-muted-foreground group-hover:border-foreground group-hover:text-foreground'
 										}`}
 									>
-										<ChevronDown size={20} />
+										<ChevronDown size={18} />
 									</div>
 								</button>
 
@@ -194,7 +194,7 @@ export default function Faqs() {
 											}}
 											className='overflow-hidden'
 										>
-											<div className='pt-2 pr-4 pb-6 font-light text-base text-foreground/50 leading-relaxed md:pr-12 md:pb-8 md:text-xl'>
+											<div className='pb-6 pr-4 text-muted-foreground text-sm leading-relaxed md:pr-12 md:text-base'>
 												{faq.answer}
 											</div>
 										</motion.div>

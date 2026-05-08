@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 		template: '%s | Arthur Martins',
 	},
 	description:
-		'Portfólio pessoal de Arthur Martins, desenvolvedor fullstack especializado em React, Next.js, Node.js, TypeScript e experiências web modernas.',
+		'Portfolio pessoal de Arthur Martins, desenvolvedor fullstack especializado em React, Next.js, Node.js, TypeScript e experiencias web modernas.',
 	keywords: [
 		'Arthur Martins',
 		'arthurmartins.dev',
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
 		'Node.js',
 		'Tailwind CSS',
 		'UX/UI',
-		'Portfólio',
+		'Portfolio',
 		'Porto Velho',
 		'Brasil',
 	],
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
 		siteName: 'Arthur Martins',
 		title: 'Arthur Martins | Desenvolvedor Fullstack',
 		description:
-			'Desenvolvedor fullstack focado em interfaces modernas, performance, arquitetura escalável e experiências digitais imersivas.',
+			'Desenvolvedor fullstack focado em interfaces modernas, performance, arquitetura escalavel e experiencias digitais imersivas.',
 
 		images: [
 			{
@@ -94,7 +94,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 	return (
 		<html
 			lang='pt-BR'
-			className={`${inter.variable} ${playfair.variable}`}
+			className={`${inter.variable} ${playfair.variable} bg-background`}
 			suppressHydrationWarning
 			data-theme='arthur'
 		>
@@ -104,14 +104,14 @@ export default function RootLayout({ children }: RootLayoutProps) {
 					name='viewport'
 					content='width=device-width, initial-scale=1, maximum-scale=5'
 				/>
-				<meta name='theme-color' content='#f4f4f0' />
+				<meta name='theme-color' content='#0a0a0b' />
 				<meta property='og:url' content='https://arthurmartins.dev' />
 			</head>
 
 			<body className='min-h-screen overflow-x-hidden bg-background font-sans text-foreground antialiased'>
 				<ThemeProvider
 					attribute='class'
-					defaultTheme='light'
+					defaultTheme='dark'
 					enableSystem={false}
 					disableTransitionOnChange={false}
 				>

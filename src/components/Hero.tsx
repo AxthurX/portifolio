@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, type Transition } from 'framer-motion';
-import { ArrowDownRight, Code2, MoveDown } from 'lucide-react';
+import { ArrowDownRight, Github, Linkedin, Mail } from 'lucide-react';
 import Link from 'next/link';
 import { useRef } from 'react';
 
@@ -49,63 +49,103 @@ export default function Hero() {
 			ref={sectionRef}
 			initial='hidden'
 			animate='visible'
-			className='relative flex min-h-screen w-full flex-col justify-between overflow-hidden bg-secondary/70 py-6 md:p-10'
+			className='relative flex min-h-screen w-full flex-col justify-between overflow-hidden px-6 py-8 md:px-12 lg:px-20'
 		>
-			{/* TOP */}
+			{/* Subtle gradient background */}
+			<div className='pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5' />
+			
+			{/* Grid pattern overlay */}
+			<div 
+				className='pointer-events-none absolute inset-0 opacity-[0.02]'
+				style={{
+					backgroundImage: `linear-gradient(var(--foreground) 1px, transparent 1px),
+						linear-gradient(90deg, var(--foreground) 1px, transparent 1px)`,
+					backgroundSize: '64px 64px'
+				}}
+			/>
+
+			{/* TOP - Profile */}
 			<motion.div
 				{...fadeIn(0.2)}
-				className='flex items-center justify-between'
+				className='relative z-10 flex items-center justify-between pt-20'
 			>
-				<div className='flex items-center gap-2'>
-					<div className='flex h-10 w-10 items-center justify-center rounded-2xl border border-white/10 bg-white/5 backdrop-blur'>
-						<Code2 className='h-5 w-5 text-primary' />
+				<div className='flex items-center gap-4'>
+					<div className='flex h-12 w-12 items-center justify-center rounded-full border border-border bg-surface'>
+						<span className='text-gradient font-bold text-lg'>AM</span>
 					</div>
 
 					<div>
-						<p className='font-semibold text-primary text-sm'>Arthur Martins</p>
-						<p className='text-primary/50 text-xs'>
-							Frontend • Fullstack Developer
+						<p className='font-medium text-foreground'>Arthur Martins</p>
+						<p className='text-muted-foreground text-sm'>
+							Fullstack Developer
 						</p>
 					</div>
 				</div>
+
+				{/* Social Links */}
+				<div className='hidden items-center gap-3 md:flex'>
+					<a
+						href='https://github.com/AxthurX'
+						target='_blank'
+						rel='noopener noreferrer'
+						className='flex h-10 w-10 items-center justify-center rounded-full border border-border transition-all hover:border-primary hover:text-primary'
+						aria-label='GitHub'
+					>
+						<Github className='h-4 w-4' />
+					</a>
+					<a
+						href='https://linkedin.com/in/arthurmartins'
+						target='_blank'
+						rel='noopener noreferrer'
+						className='flex h-10 w-10 items-center justify-center rounded-full border border-border transition-all hover:border-primary hover:text-primary'
+						aria-label='LinkedIn'
+					>
+						<Linkedin className='h-4 w-4' />
+					</a>
+					<a
+						href='mailto:contato@arthurmartins.dev'
+						className='flex h-10 w-10 items-center justify-center rounded-full border border-border transition-all hover:border-primary hover:text-primary'
+						aria-label='Email'
+					>
+						<Mail className='h-4 w-4' />
+					</a>
+				</div>
 			</motion.div>
 
-			{/* CENTER */}
-			<div className='relative z-10 flex flex-1 flex-col justify-center py-16'>
+			{/* CENTER - Main Content */}
+			<div className='relative z-10 flex flex-1 flex-col justify-center py-12 md:py-16'>
 				{/* MOBILE */}
 				<div className='flex flex-col md:hidden'>
-					{['Interfaces', 'Modernas', 'Experiências'].map((word, index) => (
+					<motion.p
+						{...fadeIn(0.1)}
+						className='mb-4 font-medium text-primary text-sm uppercase tracking-widest'
+					>
+						Fullstack Developer
+					</motion.p>
+
+					{['Crafting', 'Digital', 'Experiences'].map((word, index) => (
 						<div key={word} className='overflow-hidden'>
 							<motion.h1
-								{...wordReveal(0.1 + index * 0.12)}
-								className='font-black text-[15vw] text-white uppercase leading-[0.85] tracking-[-0.05em]'
+								{...wordReveal(0.15 + index * 0.1)}
+								className='font-bold text-[13vw] uppercase leading-[0.9] tracking-tight'
 							>
 								{word}
 							</motion.h1>
 						</div>
 					))}
 
-					<div className='overflow-hidden'>
-						<motion.h1
-							{...wordReveal(0.48)}
-							className='font-serif text-[16vw] text-primary italic leading-[0.9]'
-						>
-							Digitais
-						</motion.h1>
-					</div>
-
 					<motion.p
-						{...fadeIn(0.7)}
-						className='mt-8 max-w-md text-base text-white/60 leading-relaxed'
+						{...fadeIn(0.6)}
+						className='mt-8 max-w-md text-muted-foreground text-base leading-relaxed'
 					>
-						Desenvolvedor frontend com foco em experiências premium, performance
-						e animações modernas.
+						Desenvolvedor fullstack com foco em experiencias digitais premium, 
+						performance e animacoes modernas.
 					</motion.p>
 
-					<motion.div {...fadeIn(0.9)} className='mt-10 flex gap-4'>
+					<motion.div {...fadeIn(0.8)} className='mt-10 flex gap-4'>
 						<Link
-							href='#projetos'
-							className='flex items-center gap-2 rounded-full bg-primary px-5 py-3 font-medium text-white transition-transform hover:scale-105'
+							href='#cases'
+							className='flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-medium text-primary-foreground text-sm transition-all hover:scale-105 hover:shadow-lg hover:shadow-primary/25'
 						>
 							Ver projetos
 							<ArrowDownRight className='h-4 w-4' />
@@ -113,7 +153,7 @@ export default function Hero() {
 
 						<Link
 							href='#contato'
-							className='rounded-full border border-white/10 bg-white/5 px-5 py-3 font-medium text-white/80 backdrop-blur transition-colors hover:bg-white/10'
+							className='rounded-full border border-border px-6 py-3 font-medium text-sm transition-all hover:border-foreground hover:bg-foreground hover:text-background'
 						>
 							Contato
 						</Link>
@@ -122,62 +162,86 @@ export default function Hero() {
 
 				{/* DESKTOP */}
 				<div className='hidden flex-col md:flex'>
+					<motion.p
+						{...fadeIn(0.1)}
+						className='mb-6 font-medium text-primary text-xs uppercase tracking-[0.3em]'
+					>
+						Fullstack Developer / Porto Velho, Brasil
+					</motion.p>
+
 					{/* LINE 1 */}
-					<div className='flex items-end justify-between overflow-hidden'>
+					<div className='overflow-hidden'>
 						<motion.h1
-							{...wordReveal(0.1)}
-							className='font-black text-[8vw] text-white uppercase leading-[0.82] tracking-[-0.06em]'
+							{...wordReveal(0.15)}
+							className='font-bold text-[7vw] uppercase leading-[0.9] tracking-tight xl:text-[6.5vw]'
 						>
-							Frontend
+							Crafting Digital
 						</motion.h1>
 					</div>
 
 					{/* LINE 2 */}
-					<div className='relative flex items-end overflow-hidden'>
+					<div className='flex items-end gap-6 overflow-hidden'>
 						<motion.h1
-							{...wordReveal(0.2)}
-							className='font-black text-[8vw] text-white uppercase leading-[0.82] tracking-[-0.06em]'
+							{...wordReveal(0.25)}
+							className='font-bold text-[7vw] uppercase leading-[0.9] tracking-tight xl:text-[6.5vw]'
 						>
-							Developer
+							Experiences
 						</motion.h1>
+
+						<motion.span
+							{...wordReveal(0.35)}
+							className='mb-2 font-serif text-[5vw] text-primary italic leading-none xl:text-[4.5vw]'
+						>
+							with code
+						</motion.span>
 					</div>
 
-					{/* LINE 3 */}
-					<div className='relative mt-2 flex items-end justify-between overflow-hidden'>
-						<div className='flex items-end gap-6'>
-							<motion.h1
-								{...wordReveal(0.3)}
-								className='font-black text-[8vw] text-white uppercase leading-[0.82] tracking-[-0.06em]'
-							>
-								Creating
-							</motion.h1>
+					{/* Description */}
+					<motion.p
+						{...fadeIn(0.5)}
+						className='mt-12 max-w-lg text-lg text-muted-foreground leading-relaxed'
+					>
+						Desenvolvedor fullstack com foco em interfaces modernas, performance 
+						e animacoes imersivas. Especializado em React, Next.js e TypeScript.
+					</motion.p>
 
-							<motion.h1
-								{...wordReveal(0.4)}
-								className='pb-2 font-serif text-[8.2vw] text-primary italic leading-none'
-							>
-								Experiences
-							</motion.h1>
-						</div>
+					{/* CTAs */}
+					<motion.div {...fadeIn(0.7)} className='mt-10 flex items-center gap-6'>
+						<Link
+							href='#cases'
+							className='group flex items-center gap-3 rounded-full bg-primary px-8 py-4 font-medium text-primary-foreground transition-all hover:scale-105 hover:shadow-lg hover:shadow-primary/25'
+						>
+							Ver projetos
+							<ArrowDownRight className='h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5' />
+						</Link>
 
-						{/* PROJECT CTA */}
-						<motion.div {...fadeIn(0.8)} className='group mb-10'>
-							<Link href='#projetos' className='flex flex-col items-start'>
-								<div className='flex items-center gap-3 font-black text-lg text-white/60 uppercase tracking-tight transition-colors group-hover:text-white'>
-									VER
-									<div className='flex h-7 w-7 items-center justify-center rounded-full border border-white/20 transition-all group-hover:border-primary group-hover:bg-primary'>
-										<MoveDown className='h-4 w-4' />
-									</div>
-								</div>
-
-								<span className='font-black text-lg text-white/60 uppercase tracking-tight transition-colors group-hover:text-primary'>
-									PROJETOS
-								</span>
-							</Link>
-						</motion.div>
-					</div>
+						<Link
+							href='#contato'
+							className='rounded-full border border-border px-8 py-4 font-medium transition-all hover:border-foreground hover:bg-foreground hover:text-background'
+						>
+							Entre em contato
+						</Link>
+					</motion.div>
 				</div>
 			</div>
+
+			{/* BOTTOM - Scroll indicator */}
+			<motion.div
+				{...fadeIn(1)}
+				className='relative z-10 flex items-center justify-between'
+			>
+				<p className='text-muted-foreground text-xs uppercase tracking-widest'>
+					Scroll para explorar
+				</p>
+
+				<motion.div
+					animate={{ y: [0, 8, 0] }}
+					transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+					className='flex h-12 w-6 items-start justify-center rounded-full border border-border p-2'
+				>
+					<div className='h-2 w-1 rounded-full bg-primary' />
+				</motion.div>
+			</motion.div>
 		</motion.section>
 	);
 }

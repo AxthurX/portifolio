@@ -26,31 +26,31 @@ const STEPS: Step[] = [
 	{
 		id: '01',
 		title: 'Frontend Specialist',
-		desc: '5+ anos criando interfaces modernas, performáticas e experiências refinadas com React, Next.js e TypeScript.',
+		desc: '5+ anos criando interfaces modernas, performaticas e experiencias refinadas com React, Next.js e TypeScript.',
 		Icon: LayoutTemplate,
 	},
 	{
 		id: '02',
 		title: 'Arquitetura & Clean Code',
-		desc: 'Aplicação de princípios como Clean Architecture, componentização e organização escalável de código.',
+		desc: 'Aplicacao de principios como Clean Architecture, componentizacao e organizacao escalavel de codigo.',
 		Icon: FileText,
 	},
 	{
 		id: '03',
 		title: 'Backend & APIs',
-		desc: 'Experiência com Node.js, Fastify, Prisma, filas, uploads, integrações e construção de APIs robustas.',
+		desc: 'Experiencia com Node.js, Fastify, Prisma, filas, uploads, integracoes e construcao de APIs robustas.',
 		Icon: Code,
 	},
 	{
 		id: '04',
 		title: 'UX & Performance',
-		desc: 'Foco em fluidez, acessibilidade, animações avançadas e otimizações para entregar produtos premium.',
+		desc: 'Foco em fluidez, acessibilidade, animacoes avancadas e otimizacoes para entregar produtos premium.',
 		Icon: Users,
 	},
 	{
 		id: '05',
-		title: 'Resolução de Problemas',
-		desc: 'Transformando ideias complexas em soluções funcionais, escaláveis e fáceis de manter.',
+		title: 'Resolucao de Problemas',
+		desc: 'Transformando ideias complexas em solucoes funcionais, escalaveis e faceis de manter.',
 		Icon: Wrench,
 	},
 ];
@@ -101,30 +101,31 @@ export default function Processos() {
 		<section
 			ref={sectionRef}
 			id='processos'
-			className='relative w-full overflow-hidden border-foreground/10 border-t py-16 md:py-40'
+			className='relative w-full overflow-hidden border-border border-t py-16 md:py-32'
 		>
-			{/* Title — LEFT aligned */}
-			<div className='relative z-10 mb-16 px-4 text-left md:mb-32'>
-				<h2 className='mb-4 font-black text-foreground/35 text-xs uppercase tracking-[0.35em] md:mb-6'>
-					experiências
-				</h2>
+			{/* Title */}
+			<div className='relative z-10 mb-16 px-4 text-left md:mb-24'>
+				<span className='mb-4 block font-medium text-primary text-xs uppercase tracking-widest md:mb-6'>
+					Habilidades
+				</span>
 
 				<h3
 					ref={headingRef}
-					className='font-black text-4xl tracking-[-0.03em] sm:text-5xl md:text-6xl lg:text-7xl'
+					className='font-bold text-3xl tracking-tight sm:text-4xl md:text-5xl lg:text-6xl'
 				>
 					Minhas{' '}
-					<span className='font-normal font-serif text-primary italic'>
-						experiências
+					<span className='font-serif text-primary italic font-normal'>
+						experiencias
 					</span>
 				</h3>
 			</div>
 
 			{/* Timeline */}
-			<div className='relative mx-auto max-w-6xl px-4 md:px-6'>
-				<div className='absolute top-0 bottom-0 left-1/2 hidden w-px -translate-x-1/2 bg-foreground/10 md:block' />
+			<div className='relative mx-auto max-w-5xl px-4 md:px-6'>
+				{/* Vertical line */}
+				<div className='absolute top-0 bottom-0 left-1/2 hidden w-px -translate-x-1/2 bg-border md:block' />
 
-				<div className='relative flex flex-col gap-10'>
+				<div className='relative flex flex-col gap-8'>
 					{STEPS.map((step, index) => {
 						const isEven = index % 2 === 0;
 						const { Icon } = step;
@@ -136,6 +137,7 @@ export default function Processos() {
 									isEven ? 'md:flex-row' : 'md:flex-row-reverse'
 								}`}
 							>
+								{/* Connection line */}
 								<motion.div
 									initial={{ scaleX: 0 }}
 									whileInView={{ scaleX: 1 }}
@@ -147,11 +149,12 @@ export default function Processos() {
 									style={{
 										transformOrigin: isEven ? 'right' : 'left',
 									}}
-									className={`absolute top-1/2 hidden h-px w-[calc(50%-2rem)] -translate-y-1/2 bg-primary/40 md:block ${
-										isEven ? 'left-8' : 'right-8'
-									}`}
+									className={`absolute top-1/2 hidden h-px w-[calc(50%-2rem)] -translate-y-1/2 bg-gradient-to-r ${
+										isEven ? 'from-transparent to-primary/50 left-8' : 'from-primary/50 to-transparent right-8'
+									} md:block`}
 								/>
 
+								{/* Center dot */}
 								<motion.div
 									initial={{ scale: 0 }}
 									whileInView={{ scale: 1 }}
@@ -160,10 +163,11 @@ export default function Processos() {
 										duration: 0.5,
 										delay: 0.1,
 									}}
-									className='absolute top-1/2 left-1/2 z-20 hidden h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-primary bg-background md:block'
+									className='absolute top-1/2 left-1/2 z-20 hidden h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary md:block'
 								/>
 
-								<div className='z-10 w-full md:w-[calc(50%-4rem)]'>
+								{/* Card */}
+								<div className='z-10 w-full md:w-[calc(50%-3rem)]'>
 									<motion.div
 										initial={{ opacity: 0, y: 25 }}
 										whileInView={{
@@ -179,36 +183,35 @@ export default function Processos() {
 											delay: 0.15,
 											ease: [0.16, 1, 0.3, 1],
 										}}
-										style={{
-											background: 'var(--surface)',
-										}}
-										className='group relative h-80 w-full cursor-default overflow-hidden rounded-3xl border border-foreground/8 p-6 transition-colors duration-500 hover:border-primary/40 md:rounded-4xl md:p-8'
+										className='group relative h-72 w-full cursor-default overflow-hidden rounded-2xl border border-border bg-surface p-6 transition-all duration-500 hover:border-primary/40 md:p-8'
 									>
-										<div className='pointer-events-none absolute inset-0 bg-linear-to-br from-primary/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100' />
+										{/* Hover gradient */}
+										<div className='pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100' />
 
 										<div className='relative z-10'>
-											<div className='mb-6 flex items-center gap-4 md:mb-8'>
-												<div className='flex h-12 w-12 items-center justify-center rounded-full border border-foreground/20 text-foreground transition-all duration-300 group-hover:border-primary group-hover:bg-primary group-hover:text-white md:h-14 md:w-14'>
-													<Icon className='h-6 w-6' strokeWidth={1.5} />
+											<div className='mb-6 flex items-center gap-4'>
+												<div className='flex h-12 w-12 items-center justify-center rounded-xl border border-border bg-background text-foreground transition-all duration-300 group-hover:border-primary group-hover:bg-primary group-hover:text-primary-foreground'>
+													<Icon className='h-5 w-5' strokeWidth={1.5} />
 												</div>
 
-												<span className='font-serif text-2xl text-primary italic md:text-3xl'>
+												<span className='font-serif text-2xl text-primary italic'>
 													{step.id}
 												</span>
 											</div>
 
-											<h4 className='mb-3 text-2xl text-foreground md:mb-4 md:text-3xl'>
+											<h4 className='mb-3 text-xl font-medium text-foreground md:text-2xl'>
 												{step.title}
 											</h4>
 
-											<p className='text-foreground/60 text-sm leading-relaxed tracking-wide md:text-base'>
+											<p className='text-muted-foreground text-sm leading-relaxed'>
 												{step.desc}
 											</p>
 										</div>
 									</motion.div>
 								</div>
 
-								<div className='hidden w-[calc(50%-4rem)] md:block' />
+								{/* Spacer */}
+								<div className='hidden w-[calc(50%-3rem)] md:block' />
 							</div>
 						);
 					})}
