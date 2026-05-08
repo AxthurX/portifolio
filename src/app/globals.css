@@ -48,39 +48,135 @@
 ));
 
 @theme {
-	--font-sans: var(--font-inter), sans-serif;
-	--font-serif: var(--font-playfair), serif;
+	--font-sans: var(--font-inter), sans-serif, system-ui, sans-serif;
+	--font-serif: var(--font-playfair), ui-serif, Georgia, serif;
+
+	--color-primary-50: #eef4ff;
+	--color-primary-100: #d9e5ff;
+	--color-primary-200: #bcd2ff;
+	--color-primary-300: #8db3ff;
+	--color-primary-400: #568cff;
+	--color-primary-500: #205bff;
+	--color-primary-600: #1748db;
+	--color-primary-700: #1338ad;
+	--color-primary-800: #142f87;
+	--color-primary-900: #172d69;
+	--color-primary-950: #101b3d;
+
+	/* secondary palette */
+	--color-secondary-50: #f7f8fa;
+	--color-secondary-100: #eef1f4;
+	--color-secondary-200: #d9e0e7;
+	--color-secondary-300: #b8c4d1;
+	--color-secondary-400: #95a4b6;
+	--color-secondary-500: #74869d;
+	--color-secondary-600: #5d6d82;
+	--color-secondary-700: #4d596a;
+	--color-secondary-800: #424b58;
+	--color-secondary-900: #3a414c;
+	--color-secondary-950: #252a31;
+
+	/* accent palette */
+	--color-accent-50: #eef5ff;
+	--color-accent-100: #dbe9ff;
+	--color-accent-200: #bfd6ff;
+	--color-accent-300: #93bbff;
+	--color-accent-400: #5f97ff;
+	--color-accent-500: #1351b4;
+	--color-accent-600: #10459a;
+	--color-accent-700: #10387b;
+	--color-accent-800: #122f65;
+	--color-accent-900: #142952;
+	--color-accent-950: #0d1933;
+
+	/* neutral palette */
+	--color-neutral-50: #f8fafc;
+	--color-neutral-100: #f1f5f9;
+	--color-neutral-200: #e2e8f0;
+	--color-neutral-300: #cbd5e1;
+	--color-neutral-400: #94a3b8;
+	--color-neutral-500: #64748b;
+	--color-neutral-600: #475569;
+	--color-neutral-700: #334155;
+	--color-neutral-800: #1f2937;
+	--color-neutral-900: #111827;
+	--color-neutral-950: #020617;
+
+	/* cream / surfaces */
+	--color-cream-50: #fdfdfc;
+	--color-cream-100: #f8f8f5;
+	--color-cream-200: #f4f4f0;
+	--color-cream-300: #eeede9;
+	--color-cream-400: #dedcd6;
+	--color-cream-500: #c8c5bc;
+	--color-cream-600: #a5a196;
+	--color-cream-700: #7f7a70;
+	--color-cream-800: #5f5b54;
+	--color-cream-900: #403d38;
 
 	--color-background: var(--background);
 	--color-foreground: var(--foreground);
 
-	--color-secondary-foreground: var(--secondary-foreground);
-	--color-secondary: var(--secondary);
-	--color-primary-foreground: var(--primary-foreground);
-	--color-primary: var(--primary);
 	--color-destructive: var(--destructive);
 	--color-accent-foreground: var(--accent-foreground);
 	--color-accent: var(--accent);
 	--color-muted-foreground: var(--muted-foreground);
+	--color-muted: var(--muted);
+	--color-secondary-foreground: var(--secondary-foreground);
+	--color-secondary: var(--secondary);
+	--color-primary-foreground: var(--primary-foreground);
+	--color-primary: var(--primary);
 
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+
+	--color-border: var(--border);
 	--color-input: var(--border);
 	--color-ring: var(--ring);
+
+	--color-muted: var(--muted);
+	--color-muted-foreground: var(--muted-foreground);
+
+	--color-destructive: var(--destructive);
+
+	--color-primary: var(--primary);
+	--color-primary-foreground: var(--primary-foreground);
+
+	--color-secondary: var(--secondary);
+	--color-secondary-foreground: var(--secondary-foreground);
+
 	--color-accent: var(--accent);
 	--color-accent-foreground: var(--accent-foreground);
-	--color-cream: var(--cream);
+
 	--color-surface: var(--surface);
+	--color-cream: var(--cream);
 }
 
 /* ── LIGHT (default) — cream palette ── */
 :root {
-	--background: #f4f4f0;
+	--background: #fafafa;
 	--foreground: #1a1a1a;
+
+	--primary: #205bff;
+	--primary-foreground: #ffffff;
+
+	--secondary: #95a4b6;
+	--secondary-foreground: #ffffff;
+
+	--accent: #1351b4;
+	--accent-foreground: #ffffff;
+
+	--muted: #f5f7fa;
+	--muted-foreground: #667085;
+
+	--destructive: #f87272;
+
 	--border: rgba(26, 26, 26, 0.12);
-	--accent: rgba(26, 26, 26, 0.06);
-	--accent-foreground: #1a1a1a;
+	--ring: rgba(32, 91, 255, 0.35);
 
 	--cream: #f4f4f0;
-	--surface: #eeede9; /* slightly deeper cream for cards */
+	--surface: #eeede9;
+
 	--header-bg: rgba(244, 244, 240, 0.82);
 
 	--spacing-scale-2x: 16px;

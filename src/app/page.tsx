@@ -2,7 +2,6 @@
 
 import Lenis from 'lenis';
 import { useEffect, useRef, useState } from 'react';
-import BentoGrid from '../components/BentoGrid';
 import Cases from '../components/Cases';
 import Contato from '../components/Contato';
 import Faqs from '../components/Faqs';
@@ -58,15 +57,17 @@ export default function Home() {
 			<main className='relative flex min-h-screen w-full flex-col items-center bg-background text-foreground'>
 				<Header onPortfolioOpen={() => setPortfolioOpen(true)} />
 
-				<div className='flex w-full max-w-450 flex-col gap-12 px-4 pt-30 pb-12 md:px-8 xl:px-12'>
+				<div className='flex w-full max-w-450 flex-col gap-12 pt-30 pb-12'>
 					<Hero />
-					<BentoGrid />
-					<Cases />
-					<QuemSomos />
-					<Processos />
-					<Faqs />
-					<NossoTime />
-					<Contato />
+					<div className='px-4 md:px-8 xl:px-12'>
+						{/* <BentoGrid /> */}
+						<Cases />
+						<QuemSomos />
+						<Processos />
+						<Faqs />
+						<NossoTime />
+						<Contato />
+					</div>
 				</div>
 			</main>
 

@@ -121,10 +121,10 @@ export default function Processos() {
 			</div>
 
 			{/* Timeline */}
-			<div className='relative mx-auto max-w-5xl px-4 md:px-6'>
+			<div className='relative mx-auto max-w-6xl px-4 md:px-6'>
 				<div className='absolute top-0 bottom-0 left-1/2 hidden w-px -translate-x-1/2 bg-foreground/10 md:block' />
 
-				<div className='relative flex flex-col gap-10 md:gap-40'>
+				<div className='relative flex flex-col gap-10'>
 					{STEPS.map((step, index) => {
 						const isEven = index % 2 === 0;
 						const { Icon } = step;
@@ -179,10 +179,10 @@ export default function Processos() {
 											delay: 0.15,
 											ease: [0.16, 1, 0.3, 1],
 										}}
-										className='group relative w-full cursor-default overflow-hidden rounded-3xl border border-foreground/8 p-6 transition-colors duration-500 hover:border-primary/40 md:rounded-4xl md:p-8'
 										style={{
 											background: 'var(--surface)',
 										}}
+										className='group relative h-80 w-full cursor-default overflow-hidden rounded-3xl border border-foreground/8 p-6 transition-colors duration-500 hover:border-primary/40 md:rounded-4xl md:p-8'
 									>
 										<div className='pointer-events-none absolute inset-0 bg-linear-to-br from-primary/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100' />
 

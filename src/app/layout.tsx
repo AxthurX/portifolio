@@ -96,6 +96,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 			lang='pt-BR'
 			className={`${inter.variable} ${playfair.variable}`}
 			suppressHydrationWarning
+			data-theme='arthur'
 		>
 			<head>
 				<link rel='icon' href='/logo-simbolo.png' type='image/png' />

@@ -5,6 +5,7 @@ import React, {
 	type CSSProperties,
 	createContext,
 	type ReactNode,
+	useCallback,
 	useContext,
 	useEffect,
 	useRef,
@@ -60,6 +61,53 @@ export const ProgressSlider = ({
 
 	const [sliderValues, setSliderValues] = useState([]);
 
+	const animate = useCallback(
+		(now: number) => {
+			const currentDuration = isFastForward ? fastDuration : duration;
+
+			const elapsedTime = now - firstFrameTime.current;
+
+			const timeFraction = elapsedTime / currentDuration;
+
+			if (timeFraction <= 1) {
+				const newProgress = isFastForward
+					? progressRef.current + (100 - progressRef.current) * timeFraction
+					: timeFraction * 100;
+
+				progressRef.current = newProgress;
+
+				setProgress(newProgress);
+
+				frame.current = requestAnimationFrame(animate);
+
+				return;
+			}
+
+			if (isFastForward) {
+				setIsFastForward(false);
+
+				if (targetValue.current !== null) {
+					setActive(targetValue.current);
+
+					targetValue.current = null;
+				}
+			} else {
+				const currentIndex = sliderValues.indexOf(active);
+
+				const nextIndex = (currentIndex + 1) % sliderValues.length;
+
+				setActive(sliderValues[nextIndex]);
+			}
+
+			progressRef.current = 0;
+
+			setProgress(0);
+
+			firstFrameTime.current = performance.now();
+		},
+		[active, duration, fastDuration, isFastForward, sliderValues],
+	);
+
 	useEffect(() => {
 		const contentChild = React.Children.toArray(children).find(
 			(child): child is React.ReactElement =>
@@ -83,51 +131,7 @@ export const ProgressSlider = ({
 		frame.current = requestAnimationFrame(animate);
 
 		return () => cancelAnimationFrame(frame.current);
-	}, [active, isFastForward, sliderValues]);
-
-	const animate = (now: number) => {
-		const currentDuration = isFastForward ? fastDuration : duration;
-
-		const elapsedTime = now - firstFrameTime.current;
-
-		const timeFraction = elapsedTime / currentDuration;
-
-		if (timeFraction <= 1) {
-			const newProgress = isFastForward
-				? progressRef.current + (100 - progressRef.current) * timeFraction
-				: timeFraction * 100;
-
-			progressRef.current = newProgress;
-
-			setProgress(newProgress);
-
-			frame.current = requestAnimationFrame(animate);
-
-			return;
-		}
-
-		if (isFastForward) {
-			setIsFastForward(false);
-
-			if (targetValue.current !== null) {
-				setActive(targetValue.current);
-
-				targetValue.current = null;
-			}
-		} else {
-			const currentIndex = sliderValues.indexOf(active);
-
-			const nextIndex = (currentIndex + 1) % sliderValues.length;
-
-			setActive(sliderValues[nextIndex]);
-		}
-
-		progressRef.current = 0;
-
-		setProgress(0);
-
-		firstFrameTime.current = performance.now();
-	};
+	}, [animate, sliderValues]);
 
 	const handleButtonClick = (value: string) => {
 		if (value === active) return;
@@ -231,6 +235,7 @@ export function SliderBtn({
 
 	return (
 		<button
+			type='button'
 			className={`relative overflow-hidden ${
 				active === value ? 'opacity-100' : 'opacity-50 hover:opacity-75'
 			} transition-opacity ${className}`}
