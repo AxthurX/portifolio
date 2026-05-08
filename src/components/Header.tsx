@@ -1,15 +1,16 @@
 'use client';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Download, Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 
 const navLinks = [
 	{ href: '#quem-somos', label: 'Sobre' },
+	{ href: '#experiencias', label: 'Experiência' },
 	{ href: '#processos', label: 'Skills' },
 	{ href: '#cases', label: 'Projetos' },
-	{ href: '#faqs', label: 'FAQ' },
+	{ href: '#faqs', label: 'Certificados' },
 ];
 
 export default function Header({
@@ -34,7 +35,7 @@ export default function Header({
 				/>
 
 				{/* Left - Logo */}
-				<div className='pointer-events-auto relative z-10 flex h-14 cursor-pointer items-center pl-5'>
+				<div className='pointer-events-auto relative z-10 flex h-14 items-center gap-2 pl-5'>
 					<Link href='/' className='flex items-center gap-3 transition-opacity hover:opacity-80'>
 						<div className='flex h-8 w-8 items-center justify-center rounded-full border border-primary/30 bg-primary/10'>
 							<span className='text-gradient font-bold text-xs'>AM</span>
@@ -43,6 +44,15 @@ export default function Header({
 							Arthur Martins
 						</span>
 					</Link>
+					<a
+						href='/curriculo.pdf'
+						download
+						title='Baixar Currículo'
+						className='hidden items-center gap-1.5 rounded-full border border-border bg-foreground/5 px-3 py-1.5 text-muted-foreground text-xs font-medium transition-all hover:border-primary/40 hover:text-primary md:flex'
+					>
+						<Download className='h-3 w-3' />
+						Currículo
+					</a>
 				</div>
 
 				{/* Center - Nav (Desktop only) */}
@@ -157,7 +167,16 @@ export default function Header({
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.4, delay: 0.4 }}
+							className='flex flex-col gap-3'
 						>
+							<a
+								href='/curriculo.pdf'
+								download
+								className='flex w-full items-center justify-center gap-2 rounded-full border border-border bg-foreground/5 px-6 py-4 font-medium text-foreground transition-all hover:border-primary/40 hover:text-primary'
+							>
+								<Download className='h-4 w-4' />
+								Baixar Currículo
+							</a>
 							<Link
 								href='#contato'
 								onClick={() => setMenuOpen(false)}
