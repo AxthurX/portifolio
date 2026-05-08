@@ -20,50 +20,55 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-	metadataBase: new URL('https://whysbr.com'),
+	metadataBase: new URL('https://arthurmartins.dev'),
 	title: {
-		default: 'WHYS | Creative Design Digital Studio',
-		template: '%s | WHYS',
+		default: 'Arthur Martins | Desenvolvedor Fullstack',
+		template: '%s | Arthur Martins',
 	},
 	description:
-		'Estúdio digital focado em criar experiências imersivas. Design meticuloso, pixel-perfect, com tecnologias de alta performance. Branding, UX/UI, Web Design e muito mais.',
+		'Portfólio pessoal de Arthur Martins, desenvolvedor fullstack especializado em React, Next.js, Node.js, TypeScript e experiências web modernas.',
 	keywords: [
-		'web design',
-		'agência digital',
-		'branding',
-		'UX/UI',
+		'Arthur Martins',
+		'arthurmartins.dev',
+		'desenvolvedor fullstack',
+		'frontend developer',
+		'backend developer',
 		'Next.js',
-		'design studio',
+		'React',
+		'TypeScript',
+		'Node.js',
+		'Tailwind CSS',
+		'UX/UI',
+		'Portfólio',
 		'Porto Velho',
 		'Brasil',
-		'WHYS',
 	],
 	authors: [
 		{
-			name: 'WHYS Studio',
-			url: 'https://whysbr.com',
+			name: 'Arthur Martins',
+			url: 'https://arthurmartins.dev',
 		},
 	],
-	creator: 'WHYS Studio',
-
+	creator: 'Arthur Martins',
+	publisher: 'Arthur Martins',
 	openGraph: {
 		type: 'website',
 		locale: 'pt_BR',
-		url: 'https://whysbr.com',
-		siteName: 'WHYS Studio',
-		title: 'WHYS | Creative Design Digital Studio',
+		url: 'https://arthurmartins.dev',
+		siteName: 'Arthur Martins',
+		title: 'Arthur Martins | Desenvolvedor Fullstack',
 		description:
-			'Estúdio digital focado em criar experiências imersivas e marcas que impressionam.',
+			'Desenvolvedor fullstack focado em interfaces modernas, performance, arquitetura escalável e experiências digitais imersivas.',
+
 		images: [
 			{
 				url: '/og-image.png',
 				width: 1200,
 				height: 630,
-				alt: 'WHYS Creative Design Digital Studio',
+				alt: 'Arthur Martins - Desenvolvedor Fullstack',
 			},
 		],
 	},
-
 	robots: {
 		index: true,
 		follow: true,
@@ -75,10 +80,10 @@ export const metadata: Metadata = {
 			'max-snippet': -1,
 		},
 	},
-
 	alternates: {
-		canonical: 'https://whysbr.com',
+		canonical: 'https://arthurmartins.dev',
 	},
+	category: 'technology',
 };
 
 interface RootLayoutProps {
@@ -94,36 +99,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
 		>
 			<head>
 				<link rel='icon' href='/logo-simbolo.png' type='image/png' />
-
 				<meta
 					name='viewport'
 					content='width=device-width, initial-scale=1, maximum-scale=5'
 				/>
-
 				<meta name='theme-color' content='#f4f4f0' />
-
-				<meta property='og:url' content='https://whysbr.com' />
-
-				{/* <script
-					type='application/ld+json'
-					dangerouslySetInnerHTML={{
-						__html: JSON.stringify(organizationSchema),
-					}}
-				/>
-
-				<script
-					type='application/ld+json'
-					dangerouslySetInnerHTML={{
-						__html: JSON.stringify(websiteSchema),
-					}}
-				/>
-
-				<script
-					type='application/ld+json'
-					dangerouslySetInnerHTML={{
-						__html: JSON.stringify(localBusinessSchema),
-					}}
-				/> */}
+				<meta property='og:url' content='https://arthurmartins.dev' />
 			</head>
 
 			<body className='min-h-screen overflow-x-hidden bg-background font-sans text-foreground antialiased'>

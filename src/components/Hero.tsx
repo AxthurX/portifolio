@@ -1,23 +1,56 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Eye, Globe, MoveDown, Plus, Share2 } from 'lucide-react';
+import {
+	Eye,
+	Globe,
+	type LucideIcon,
+	MoveDown,
+	Plus,
+	Share2,
+} from 'lucide-react';
 import { useRef } from 'react';
 
 export default function Hero() {
-	const sectionRef = useRef(null);
+	const sectionRef = useRef<HTMLElement | null>(null);
+
+	const transition: Transition = {
+		duration: 1,
+		ease: [0.16, 1, 0.3, 1],
+	};
 
 	const wordReveal = (delay = 0) => ({
-		initial: { y: '110%', opacity: 0 },
-		animate: { y: 0, opacity: 1 },
-		transition: { duration: 1, ease: [0.16, 1, 0.3, 1], delay },
+		initial: {
+			y: '110%',
+			opacity: 0,
+		},
+		animate: {
+			y: 0,
+			opacity: 1,
+		},
+		transition: {
+			...transition,
+			delay,
+		},
 	});
 
 	const fadeIn = (delay = 0) => ({
-		initial: { opacity: 0, y: 16 },
-		animate: { opacity: 1, y: 0 },
-		transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1], delay },
+		initial: {
+			opacity: 0,
+			y: 16,
+		},
+		animate: {
+			opacity: 1,
+			y: 0,
+		},
+		transition: {
+			duration: 0.8,
+			ease: [0.16, 1, 0.3, 1],
+			delay,
+		},
 	});
+
+	const floatingIcons: LucideIcon[] = [Eye, Share2];
 
 	return (
 		<motion.section
@@ -26,7 +59,7 @@ export default function Hero() {
 			animate='visible'
 			className='relative flex w-full flex-col justify-end overflow-hidden pt-28 pb-8 md:pt-40 md:pb-12'
 		>
-			{/* —— TOP METADATA — left on desktop, hidden on mobile —— */}
+			{/* TOP METADATA */}
 			<motion.div
 				{...fadeIn(0.3)}
 				className='absolute top-0 left-0 mt-8 hidden w-full items-start justify-between px-4 sm:flex md:px-0'
@@ -38,92 +71,94 @@ export default function Hero() {
 					<br />
 					deslumbrantes e envolventes
 				</p>
+
 				<div className='text-right font-medium text-[12px] text-foreground/50 leading-snug md:text-[13px]'>
 					<p>design criativo</p>
 					<p>branding</p>
+
 					<p className='flex items-center justify-end gap-2'>
-						ux/ui{' '}
+						ux/ui
 						<span className='mt-0.5 block h-2 w-2 rounded-full bg-foreground/60' />
 					</p>
 				</div>
 			</motion.div>
 
-			{/* —— GLOBE (desktop only) —— */}
+			{/* GLOBE */}
 			<motion.div
 				{...fadeIn(0.4)}
-				className='absolute top-[10%] left-[50%] z-10 hidden -translate-x-1/2 flex-col items-center md:flex'
+				className='absolute top-[10%] left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center md:flex'
 			>
 				<span className='mb-3 font-black text-[11px] text-foreground/40 uppercase tracking-widest'>
 					explorar
 				</span>
-				<div className='group flex h-[120px] w-[120px] cursor-pointer items-center justify-center rounded-full border border-foreground/15 p-2 transition-all duration-300 hover:scale-105 hover:border-[#965EC7]/40'>
-					<div className='flex h-full w-full items-center justify-center rounded-full border border-foreground/5 bg-foreground/5 transition-colors group-hover:bg-[#965EC7]/10'>
+
+				<div className='group flex h-[120px] w-[120px] cursor-pointer items-center justify-center rounded-full border border-foreground/15 p-2 transition-all duration-300 hover:scale-105 hover:border-primary/40'>
+					<div className='flex h-full w-full items-center justify-center rounded-full border border-foreground/5 bg-foreground/5 transition-colors group-hover:bg-primary/10'>
 						<Globe
 							strokeWidth={1}
-							className='h-8 w-8 text-foreground/60 transition-all duration-500 group-hover:rotate-45 group-hover:text-[#965EC7]'
+							className='h-8 w-8 text-foreground/60 transition-all duration-500 group-hover:rotate-45 group-hover:text-primary'
 						/>
 					</div>
 				</div>
 			</motion.div>
 
-			{/* —— FLOATING ICONS (desktop only) —— */}
+			{/* FLOATING ICONS */}
 			<motion.div
 				{...fadeIn(0.5)}
-				className='absolute bottom-[75%] left-[3%] hidden h-12 w-12 cursor-pointer items-center justify-center rounded-full border border-foreground/20 text-foreground/60 transition-all duration-300 hover:scale-110 hover:border-[#965EC7] hover:bg-[#965EC7] hover:text-white md:flex'
+				className='absolute bottom-[75%] left-[3%] hidden h-12 w-12 cursor-pointer items-center justify-center rounded-full border border-foreground/20 text-foreground/60 transition-all duration-300 hover:scale-110 hover:border-primary hover:bg-primary hover:text-white md:flex'
 			>
 				<Plus className='h-6 w-6' strokeWidth={1.5} />
 			</motion.div>
+
 			<motion.div
 				{...fadeIn(0.55)}
 				className='absolute bottom-[70%] left-[20%] hidden gap-4 md:flex'
 			>
-				{[Eye, Share2].map((Icon, i) => (
+				{floatingIcons.map((Icon, index) => (
 					<div
-						key={i}
-						className='flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border border-foreground/20 text-foreground/60 transition-all duration-300 hover:scale-110 hover:border-[#965EC7] hover:bg-[#965EC7] hover:text-white'
+						key={index}
+						className='flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border border-foreground/20 text-foreground/60 transition-all duration-300 hover:scale-110 hover:border-primary hover:bg-primary hover:text-white'
 					>
 						<Icon className='h-6 w-6' strokeWidth={1.5} />
 					</div>
 				))}
 			</motion.div>
 
-			{/* —— CONQUER TEXT (desktop only) —— */}
+			{/* RIGHT TEXT */}
 			<motion.div
 				{...fadeIn(0.5)}
 				className='absolute right-4 bottom-[70%] hidden text-right font-medium text-[12px] text-foreground/50 leading-snug sm:block md:right-0 md:text-[13px]'
 			>
 				conquiste os lugares
 				<br />
-				mais altos <span className='font-black text-[#965EC7]'>conosco</span>
+				mais altos <span className='font-black text-primary'>conosco</span>
 			</motion.div>
 
-			{/* ============================================
-          TIPOGRAFIA PRINCIPAL — LEFT ALIGNED
-          /bolder: font-black + tracking tighter
-         ============================================ */}
+			{/* MAIN TYPOGRAPHY */}
 			<div className='relative z-0 mt-8 flex w-full flex-col px-4 md:mt-16 md:px-0'>
-				{/* === MOBILE LAYOUT (< md) === */}
+				{/* MOBILE */}
 				<div className='flex flex-col leading-[0.85] md:hidden'>
-					{['Creative', 'Design', 'Digital'].map((word, i) => (
+					{['Creative', 'Design', 'Digital'].map((word, index) => (
 						<div key={word} className='overflow-hidden'>
 							<motion.span
-								{...wordReveal(0.1 + i * 0.12)}
+								{...wordReveal(0.1 + index * 0.12)}
 								className='block font-black text-[14vw] text-foreground uppercase tracking-[-0.03em]'
 							>
 								{word}
 							</motion.span>
 						</div>
 					))}
+
 					<div className='overflow-hidden'>
 						<motion.span
 							{...wordReveal(0.46)}
-							className='block font-normal font-serif text-[15vw] text-foreground/80 italic tracking-tight'
+							className='block font-serif text-[15vw] text-foreground/80 italic tracking-tight'
 						>
 							Studio
 						</motion.span>
 					</div>
 
-					{/* NOSSOS PROJETOS — mobile */}
+					{/* MOBILE PROJECTS */}
 					<motion.div
 						{...fadeIn(0.7)}
 						className='group mt-8 flex cursor-pointer flex-col items-start'
@@ -137,15 +172,16 @@ export default function Hero() {
 								/>
 							</div>
 						</div>
+
 						<div className='font-black text-foreground/70 text-sm uppercase tracking-tighter transition-colors group-hover:text-foreground'>
 							PROJETOS
 						</div>
 					</motion.div>
 				</div>
 
-				{/* === DESKTOP LAYOUT (>= md) — LEFT ALIGNED === */}
+				{/* DESKTOP */}
 				<div className='hidden flex-col items-start md:flex'>
-					{/* Linha 1: Creative — Design — full width left-to-right */}
+					{/* LINE 1 */}
 					<div className='flex w-full items-end justify-between overflow-hidden leading-[0.85]'>
 						<motion.h1
 							{...wordReveal(0.1)}
@@ -153,6 +189,7 @@ export default function Hero() {
 						>
 							Creative
 						</motion.h1>
+
 						<motion.h1
 							{...wordReveal(0.2)}
 							className='whitespace-nowrap font-black text-[8vw] text-foreground uppercase tracking-[-0.035em]'
@@ -161,28 +198,29 @@ export default function Hero() {
 						</motion.h1>
 					</div>
 
-					{/* Linha 2: Digital — Studio — left aligned */}
+					{/* LINE 2 */}
 					<div className='relative mt-4 flex w-full items-end overflow-hidden leading-[0.85]'>
-						{/* Projects Widget — left edge */}
+						{/* PROJECTS */}
 						<motion.div
 							{...fadeIn(0.6)}
 							className='group absolute bottom-4 left-0 flex cursor-pointer flex-col items-start'
 						>
-							<div className='flex items-center gap-2 font-black text-foreground/60 text-lg uppercase tracking-tighter transition-colors group-hover:text-[#965EC7] xl:text-xl'>
+							<div className='flex items-center gap-2 font-black text-foreground/60 text-lg uppercase tracking-tighter transition-colors group-hover:text-primary xl:text-xl'>
 								NOSSOS
-								<div className='mb-1 flex h-6 w-6 items-center justify-center rounded-full border-2 border-foreground/30 transition-colors group-hover:border-[#965EC7] group-hover:bg-[#965EC7]'>
+								<div className='mb-1 flex h-6 w-6 items-center justify-center rounded-full border-2 border-foreground/30 transition-colors group-hover:border-primary group-hover:bg-primary'>
 									<MoveDown
 										strokeWidth={3}
 										className='h-4 w-4 text-foreground/40 transition-colors group-hover:text-white'
 									/>
 								</div>
 							</div>
-							<div className='font-black text-foreground/60 text-lg uppercase tracking-tighter transition-colors group-hover:text-[#965EC7] xl:text-xl'>
+
+							<div className='font-black text-foreground/60 text-lg uppercase tracking-tighter transition-colors group-hover:text-primary xl:text-xl'>
 								PROJETOS
 							</div>
 						</motion.div>
 
-						{/* Rotating star */}
+						{/* STAR */}
 						<motion.div
 							animate={{ rotate: 360 }}
 							transition={{
@@ -203,11 +241,12 @@ export default function Hero() {
 								strokeLinejoin='round'
 								className='text-foreground/25'
 							>
+								<title>Star</title>
 								<path d='M12 2L13.5 10.5L22 12L13.5 13.5L12 22L10.5 13.5L2 12L10.5 10.5L12 2Z' />
 							</svg>
 						</motion.div>
 
-						{/* Words */}
+						{/* WORDS */}
 						<div className='flex pt-2 pb-6'>
 							<motion.h1
 								{...wordReveal(0.3)}
@@ -215,15 +254,16 @@ export default function Hero() {
 							>
 								Digital
 							</motion.h1>
+
 							<motion.h1
 								{...wordReveal(0.4)}
-								className='whitespace-nowrap pl-8 font-normal font-serif text-[8.5vw] text-foreground/75 italic tracking-tight'
+								className='whitespace-nowrap pl-8 font-serif text-[8.5vw] text-foreground/75 italic tracking-tight'
 							>
 								Studio
 							</motion.h1>
 						</div>
 
-						{/* Dots — right edge */}
+						{/* DOTS */}
 						<motion.div
 							{...fadeIn(0.7)}
 							className='absolute right-0 bottom-6 flex gap-2'

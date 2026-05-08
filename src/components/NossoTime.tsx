@@ -53,7 +53,7 @@ export default function NossoTime() {
 				</h2>
 				<h3 className='font-black text-4xl tracking-[-0.03em] sm:text-5xl md:text-6xl'>
 					Nosso{' '}
-					<span className='font-normal font-serif text-[#965EC7] italic'>
+					<span className='font-normal font-serif text-primary italic'>
 						Time
 					</span>
 				</h3>

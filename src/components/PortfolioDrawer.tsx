@@ -1,7 +1,7 @@
 'use client';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import { ArrowUpRight, ChevronUp } from 'lucide-react';
+import { ArrowUpRight, ChevronUp, Link } from 'lucide-react';
 import Image from 'next/image';
 import {
 	ProgressSlider,
@@ -11,7 +11,21 @@ import {
 	SliderWrapper,
 } from './ui/progressive-carousel';
 
-const PROJECTS = [
+type PortfolioDrawerProps = {
+	isOpen: boolean;
+	onClose: () => void;
+};
+
+type Project = {
+	sliderName: string;
+	client: string;
+	category: string;
+	year: string;
+	desc: string;
+	img: string;
+};
+
+const PROJECTS: Project[] = [
 	{
 		sliderName: 'elevate',
 		client: 'ELEVATE TECH',
@@ -46,12 +60,15 @@ const PROJECTS = [
 	},
 ];
 
-export default function PortfolioDrawer({ isOpen, onClose }) {
+export default function PortfolioDrawer({
+	isOpen,
+	onClose,
+}: PortfolioDrawerProps) {
 	return (
 		<AnimatePresence>
 			{isOpen && (
 				<>
-					{/* ── Backdrop — only the bottom part visible below the drawer ── */}
+					{/* Backdrop */}
 					<motion.div
 						key='backdrop'
 						initial={{ opacity: 0 }}
@@ -59,38 +76,38 @@ export default function PortfolioDrawer({ isOpen, onClose }) {
 						exit={{ opacity: 0 }}
 						transition={{ duration: 0.4 }}
 						onClick={onClose}
-						className='fixed inset-0 z-[60] bg-black/50 backdrop-blur-sm'
+						className='fixed inset-0 z-60 bg-black/50 backdrop-blur-sm'
 					/>
 
-					{/* ── Drawer — slides DOWN from the top ── */}
+					{/* Drawer */}
 					<motion.div
 						key='drawer'
 						initial={{ y: '-100%' }}
 						animate={{ y: 0 }}
 						exit={{ y: '-100%' }}
-						transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-						className='fixed top-0 right-0 left-0 z-[70] flex flex-col overflow-hidden rounded-b-[2rem]'
-						style={{
-							height: '78vh',
-							background: 'var(--cream)',
-							color: 'var(--foreground)',
+						transition={{
+							duration: 0.65,
+							ease: [0.16, 1, 0.3, 1],
 						}}
+						className='fixed top-0 right-0 left-0 z-70 flex h-[78vh] flex-col overflow-hidden rounded-b-[2rem] bg-(--cream) text-(--foreground)'
 					>
-						{/* Header bar */}
-						<div className='flex flex-shrink-0 items-center justify-between border-foreground/10 border-b px-6 pt-6 pb-4 md:px-10'>
+						{/* Header */}
+						<div className='flex shrink-0 items-center justify-between border-foreground/10 border-b px-6 pt-6 pb-4 md:px-10'>
 							<div>
 								<p className='mb-1 font-black text-[10px] text-foreground/35 uppercase tracking-[0.35em]'>
 									Portfólio
 								</p>
+
 								<h2 className='font-black text-xl tracking-tight md:text-3xl'>
 									Projetos{' '}
-									<span className='font-normal font-serif text-[#965EC7] italic'>
+									<span className='font-normal font-serif text-primary italic'>
 										Recentes
 									</span>
 								</h2>
 							</div>
-							{/* Top-right close (X) */}
+
 							<button
+								type='button'
 								onClick={onClose}
 								aria-label='Fechar portfólio'
 								className='group flex h-10 w-10 items-center justify-center rounded-full border border-foreground/20 transition-all duration-200 hover:bg-foreground hover:text-background'
@@ -102,6 +119,7 @@ export default function PortfolioDrawer({ isOpen, onClose }) {
 									stroke='currentColor'
 									strokeWidth={2}
 								>
+									<title>Fechar</title>
 									<path
 										strokeLinecap='round'
 										strokeLinejoin='round'
@@ -111,74 +129,82 @@ export default function PortfolioDrawer({ isOpen, onClose }) {
 							</button>
 						</div>
 
-						{/* ── Carousel content ── */}
+						{/* Content */}
 						<div className='flex min-h-0 flex-1 flex-col gap-3 overflow-hidden px-4 pt-4 pb-2 md:px-8'>
 							<ProgressSlider
 								activeSlider='elevate'
 								duration={7000}
 								className='flex h-full flex-col gap-3'
 							>
-								{/* Image slides */}
+								{/* Slides */}
 								<SliderContent className='relative min-h-0 flex-1 overflow-hidden rounded-2xl'>
-									{PROJECTS.map((p) => (
+									{PROJECTS.map((project) => (
 										<SliderWrapper
-											key={p.sliderName}
-											value={p.sliderName}
+											key={project.sliderName}
+											value={project.sliderName}
 											className='absolute inset-0'
 										>
 											<div className='relative h-full w-full'>
 												<Image
-													src={p.img}
-													alt={p.client}
+													src={project.img}
+													alt={project.client}
 													fill
-													className='object-cover'
-													sizes='(max-width: 768px) 100vw, 85vw'
 													priority
+													sizes='(max-width: 768px) 100vw, 85vw'
+													className='object-cover'
 												/>
-												<div className='absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent' />
+
+												<div className='absolute inset-0 bg-linear-to-t from-black/80 via-black/10 to-transparent' />
+
 												<div className='absolute right-0 bottom-0 left-0 flex items-end justify-between p-5 md:p-8'>
 													<div>
-														<span className='font-bold text-[#965EC7] text-[10px] uppercase tracking-[0.3em]'>
-															{p.category} · {p.year}
+														<span className='font-bold text-[10px] text-primary uppercase tracking-[0.3em]'>
+															{project.category} · {project.year}
 														</span>
+
 														<h3 className='mt-1 font-semibold text-2xl text-white tracking-tight md:text-4xl'>
-															{p.client}
+															{project.client}
 														</h3>
+
 														<p className='mt-1 hidden max-w-lg text-sm text-white/60 md:block'>
-															{p.desc}
+															{project.desc}
 														</p>
 													</div>
-													<a
+
+													<Link
 														href='#cases'
 														onClick={onClose}
-														className='group flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full border border-white/30 transition-all duration-300 hover:bg-white hover:text-black'
+														className='group flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/30 transition-all duration-300 hover:bg-white hover:text-black'
 													>
 														<ArrowUpRight
-															className='h-5 w-5 text-white group-hover:text-black'
+															className='h-5 w-5 text-white transition-colors group-hover:text-black'
 															strokeWidth={1.5}
 														/>
-													</a>
+													</Link>
 												</div>
 											</div>
 										</SliderWrapper>
 									))}
 								</SliderContent>
 
-								{/* Navigation buttons — white progress bar with mix-blend-mode:difference for color inversion */}
-								<SliderBtnGroup className='grid flex-shrink-0 grid-cols-2 gap-2 md:grid-cols-4'>
-									{PROJECTS.map((p) => (
+								{/* Navigation */}
+								<SliderBtnGroup className='grid shrink-0 grid-cols-2 gap-2 md:grid-cols-4'>
+									{PROJECTS.map((project) => (
 										<SliderBtn
-											key={p.sliderName}
-											value={p.sliderName}
+											key={project.sliderName}
+											value={project.sliderName}
 											className='cursor-pointer overflow-hidden rounded-xl border border-foreground/10 p-3 text-left transition-colors hover:border-foreground/30 md:p-4'
-											progressBarClass='bg-white h-full'
-											progressStyle={{ mixBlendMode: 'difference' }}
+											progressBarClass='h-full bg-white'
+											progressStyle={{
+												mixBlendMode: 'difference',
+											}}
 										>
-											<span className='relative z-10 mb-1 block truncate font-bold text-[#965EC7] text-[9px] uppercase tracking-[0.25em]'>
-												{p.category}
+											<span className='relative z-10 mb-1 block truncate font-bold text-[9px] text-primary uppercase tracking-[0.25em]'>
+												{project.category}
 											</span>
+
 											<span className='relative z-10 block truncate font-semibold text-foreground text-xs md:text-sm'>
-												{p.client}
+												{project.client}
 											</span>
 										</SliderBtn>
 									))}
@@ -186,16 +212,16 @@ export default function PortfolioDrawer({ isOpen, onClose }) {
 							</ProgressSlider>
 						</div>
 
-						{/* ── Close handle — bottom center, primary close affordance ── */}
-						<div className='flex flex-shrink-0 justify-center pt-1 pb-3'>
+						{/* Footer */}
+						<div className='flex shrink-0 justify-center pt-1 pb-3'>
 							<motion.button
+								type='button'
 								onClick={onClose}
 								aria-label='Fechar portfólio'
 								whileHover={{ scale: 1.1 }}
 								whileTap={{ scale: 0.95 }}
 								className='group flex flex-col items-center gap-1'
 							>
-								{/* Bouncing arrow indicator */}
 								<motion.div
 									animate={{ y: [-3, 3, -3] }}
 									transition={{
@@ -203,11 +229,12 @@ export default function PortfolioDrawer({ isOpen, onClose }) {
 										repeat: Number.POSITIVE_INFINITY,
 										ease: 'easeInOut',
 									}}
-									className='flex h-9 w-9 items-center justify-center rounded-full border border-foreground/25 transition-colors duration-300 group-hover:border-[#965EC7] group-hover:text-[#965EC7]'
+									className='flex h-9 w-9 items-center justify-center rounded-full border border-foreground/25 transition-colors duration-300 group-hover:border-primary group-hover:text-primary'
 								>
 									<ChevronUp className='h-4 w-4' strokeWidth={2} />
 								</motion.div>
-								<span className='font-bold text-[9px] text-foreground/30 uppercase tracking-widest transition-colors duration-300 group-hover:text-[#965EC7]'>
+
+								<span className='font-bold text-[9px] text-foreground/30 uppercase tracking-widest transition-colors duration-300 group-hover:text-primary'>
 									fechar
 								</span>
 							</motion.button>

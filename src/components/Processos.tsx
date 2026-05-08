@@ -25,32 +25,32 @@ type Step = {
 const STEPS: Step[] = [
 	{
 		id: '01',
-		title: 'Briefing',
-		desc: 'Entendimento profundo do seu negócio, mercado e objetivos.',
-		Icon: FileText,
-	},
-	{
-		id: '02',
-		title: 'Wireframe & Design',
-		desc: 'Estruturação das telas, UX e aplicação da alta fidelidade visual.',
+		title: 'Frontend Specialist',
+		desc: '5+ anos criando interfaces modernas, performáticas e experiências refinadas com React, Next.js e TypeScript.',
 		Icon: LayoutTemplate,
 	},
 	{
-		id: '03',
-		title: 'Reuniões Constantes',
-		desc: 'Alinhamentos contínuos para garantir que cada pixel exale excelência.',
-		Icon: Users,
+		id: '02',
+		title: 'Arquitetura & Clean Code',
+		desc: 'Aplicação de princípios como Clean Architecture, componentização e organização escalável de código.',
+		Icon: FileText,
 	},
 	{
-		id: '04',
-		title: 'Implementação',
-		desc: 'Desenvolvimento técnico robusto com animações e performance extrema.',
+		id: '03',
+		title: 'Backend & APIs',
+		desc: 'Experiência com Node.js, Fastify, Prisma, filas, uploads, integrações e construção de APIs robustas.',
 		Icon: Code,
 	},
 	{
+		id: '04',
+		title: 'UX & Performance',
+		desc: 'Foco em fluidez, acessibilidade, animações avançadas e otimizações para entregar produtos premium.',
+		Icon: Users,
+	},
+	{
 		id: '05',
-		title: 'Pós-Venda',
-		desc: 'Cuidado e aprimoramento contínuo após o lançamento do projeto.',
+		title: 'Resolução de Problemas',
+		desc: 'Transformando ideias complexas em soluções funcionais, escaláveis e fáceis de manter.',
 		Icon: Wrench,
 	},
 ];
@@ -106,16 +106,16 @@ export default function Processos() {
 			{/* Title — LEFT aligned */}
 			<div className='relative z-10 mb-16 px-4 text-left md:mb-32'>
 				<h2 className='mb-4 font-black text-foreground/35 text-xs uppercase tracking-[0.35em] md:mb-6'>
-					Nossa Metodologia
+					experiências
 				</h2>
 
 				<h3
 					ref={headingRef}
 					className='font-black text-4xl tracking-[-0.03em] sm:text-5xl md:text-6xl lg:text-7xl'
 				>
-					O caminho para o{' '}
-					<span className='font-normal font-serif text-[#965EC7] italic'>
-						sucesso
+					Minhas{' '}
+					<span className='font-normal font-serif text-primary italic'>
+						experiências
 					</span>
 				</h3>
 			</div>
@@ -147,7 +147,7 @@ export default function Processos() {
 									style={{
 										transformOrigin: isEven ? 'right' : 'left',
 									}}
-									className={`absolute top-1/2 hidden h-px w-[calc(50%-2rem)] -translate-y-1/2 bg-[#965EC7]/40 md:block ${
+									className={`absolute top-1/2 hidden h-px w-[calc(50%-2rem)] -translate-y-1/2 bg-primary/40 md:block ${
 										isEven ? 'left-8' : 'right-8'
 									}`}
 								/>
@@ -160,7 +160,7 @@ export default function Processos() {
 										duration: 0.5,
 										delay: 0.1,
 									}}
-									className='absolute top-1/2 left-1/2 z-20 hidden h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-[#965EC7] bg-background md:block'
+									className='absolute top-1/2 left-1/2 z-20 hidden h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-primary bg-background md:block'
 								/>
 
 								<div className='z-10 w-full md:w-[calc(50%-4rem)]'>
@@ -179,20 +179,20 @@ export default function Processos() {
 											delay: 0.15,
 											ease: [0.16, 1, 0.3, 1],
 										}}
-										className='group relative w-full cursor-default overflow-hidden rounded-3xl border border-foreground/8 p-6 transition-colors duration-500 hover:border-[#965EC7]/40 md:rounded-4xl md:p-8'
+										className='group relative w-full cursor-default overflow-hidden rounded-3xl border border-foreground/8 p-6 transition-colors duration-500 hover:border-primary/40 md:rounded-4xl md:p-8'
 										style={{
 											background: 'var(--surface)',
 										}}
 									>
-										<div className='pointer-events-none absolute inset-0 bg-linear-to-br from-[#965EC7]/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100' />
+										<div className='pointer-events-none absolute inset-0 bg-linear-to-br from-primary/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100' />
 
 										<div className='relative z-10'>
 											<div className='mb-6 flex items-center gap-4 md:mb-8'>
-												<div className='flex h-12 w-12 items-center justify-center rounded-full border border-foreground/20 text-foreground transition-all duration-300 group-hover:border-[#965EC7] group-hover:bg-[#965EC7] group-hover:text-white md:h-14 md:w-14'>
+												<div className='flex h-12 w-12 items-center justify-center rounded-full border border-foreground/20 text-foreground transition-all duration-300 group-hover:border-primary group-hover:bg-primary group-hover:text-white md:h-14 md:w-14'>
 													<Icon className='h-6 w-6' strokeWidth={1.5} />
 												</div>
 
-												<span className='font-serif text-2xl text-[#965EC7] italic md:text-3xl'>
+												<span className='font-serif text-2xl text-primary italic md:text-3xl'>
 													{step.id}
 												</span>
 											</div>

@@ -15,31 +15,33 @@ export interface Case {
 const CASES = [
 	{
 		id: '01',
-		client: 'ELEVATE TECH',
-		category: 'Branding & Web Design',
-		title: 'Redefinindo o futuro do setor financeiro',
-		image: '/cases/case-1.jpg',
+		client: 'SEDAM',
+		category: 'Sistema Governamental',
+		title: 'Plataforma de requerimentos digitais e gestão documental',
+		image: '/cases/sedam.jpg',
 	},
 	{
 		id: '02',
-		client: 'AURA BEAUTY',
-		category: 'E-Commerce',
-		title: 'Uma jornada de compra imersiva global',
-		image: '/cases/case-2.jpg',
+		client: 'Portal de Notícias',
+		category: 'CMS & Editor Avançado',
+		title: 'Migração completa do TinyMCE para Tiptap com recursos customizados',
+		image: '/cases/portal.jpg',
 	},
 	{
 		id: '03',
-		client: 'NXT MOBILITY',
-		category: 'UX/UI Design',
-		title: 'Mobilidade urbana através de dados',
-		image: '/cases/case-3.jpg',
+		client: 'Chat IA Corporativo',
+		category: 'AI & Fullstack',
+		title:
+			'Sistema de chat inteligente com RAG, sessões e respostas estruturadas',
+		image: '/cases/chat-ai.jpg',
 	},
 	{
 		id: '04',
-		client: 'LUMINA ART',
-		category: 'Digital Studio',
-		title: 'Experiência interativa para galerias de arte',
-		image: '/cases/case-4.jpg',
+		client: 'Acessibilidade Web',
+		category: 'Frontend Architecture',
+		title:
+			'Biblioteca reutilizável com integração Tailwind e componentes acessíveis',
+		image: '/cases/acessibilidade.jpg',
 	},
 ];
 
@@ -53,7 +55,7 @@ function CaseCard({ projeto }: { projeto: Case }) {
 
 			<div className='relative z-20 flex items-start justify-between'>
 				<div>
-					<span className='mb-2 block font-bold text-[#965EC7] text-xs uppercase tracking-widest'>
+					<span className='mb-2 block font-bold text-primary text-xs uppercase tracking-widest'>
 						{projeto.category}
 					</span>
 					<span className='font-medium text-sm text-white/70 tracking-wider'>
@@ -104,7 +106,7 @@ export default function Cases() {
 					</h2>
 					<h3 className='font-black text-4xl tracking-[-0.03em] md:text-5xl'>
 						Projetos{' '}
-						<span className='font-normal font-serif text-[#965EC7] italic'>
+						<span className='font-normal font-serif text-primary italic'>
 							Recentes
 						</span>
 					</h3>
@@ -139,7 +141,7 @@ export default function Cases() {
 					</h2>
 					<h3 className='font-black text-4xl tracking-[-0.03em] md:text-5xl'>
 						Projetos{' '}
-						<span className='font-normal font-serif text-[#965EC7] italic'>
+						<span className='font-normal font-serif text-primary italic'>
 							Recentes
 						</span>
 					</h3>

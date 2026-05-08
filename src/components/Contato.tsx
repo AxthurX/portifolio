@@ -445,7 +445,7 @@ export default function Contato() {
 
 											<div className='flex flex-col sm:flex-row sm:items-baseline sm:gap-5'>
 												<span
-													className='leading-none tracking-tight transition-colors duration-300 group-hover:text-[#965EC7]'
+													className='leading-none tracking-tight transition-colors duration-300 group-hover:text-primary'
 													style={{
 														fontSize: 'clamp(1.5rem, 4.5vw, 3.25rem)',
 														color: INK,

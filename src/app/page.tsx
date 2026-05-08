@@ -45,6 +45,7 @@ export default function Home() {
 	}, []);
 
 	useEffect(() => {
+		console.log(portfolioOpen);
 		document.body.style.overflow = portfolioOpen ? 'hidden' : '';
 
 		return () => {
