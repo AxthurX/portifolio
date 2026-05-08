@@ -7,11 +7,11 @@ import { X, Menu } from "lucide-react";
 import { AnimatedThemeToggle } from "./ui/animated-theme-toggle";
 
 const navLinks = [
-  { href: "#quem-somos", label: "Quem Somos" },
-  { href: "#processos", label: "Processos" },
-  { href: "#cases", label: "Cases" },
+  { href: "#sobre-mim", label: "Sobre Mim" },
+  { href: "#experiencias", label: "Experiencias" },
+  { href: "#cases", label: "Projetos" },
   { href: "#faqs", label: "FAQs" },
-  { href: "#nosso-time", label: "Nosso Time" },
+  { href: "#contato", label: "Contato" },
 ];
 
 export default function Header({ onPortfolioOpen }) {
@@ -49,14 +49,14 @@ export default function Header({ onPortfolioOpen }) {
         <div className="absolute inset-0 z-10 hidden md:block pointer-events-none">
           {/* Left Links */}
           <div className="absolute right-[calc(50%+3.5rem)] lg:right-[calc(50%+4rem)] top-6 h-20 flex items-center justify-end gap-6 lg:gap-12 xl:gap-16 pointer-events-auto text-[10px] uppercase tracking-widest font-black">
-            <a href="#quem-somos" className="text-foreground/60 hover:text-[#965EC7] transition-colors whitespace-nowrap">Quem Somos</a>
-            <a href="#processos" className="text-foreground/60 hover:text-[#965EC7] transition-colors">Processos</a>
+            <a href="#sobre-mim" className="text-foreground/60 hover:text-[#965EC7] transition-colors whitespace-nowrap">Sobre Mim</a>
+            <a href="#experiencias" className="text-foreground/60 hover:text-[#965EC7] transition-colors">Experiencias</a>
           </div>
           {/* Right Links */}
           <div className="absolute left-[calc(50%+3.5rem)] lg:left-[calc(50%+4rem)] top-6 h-20 flex items-center justify-start gap-6 lg:gap-12 xl:gap-16 pointer-events-auto text-[10px] uppercase tracking-widest font-black">
-            <a href="#cases" className="text-foreground/60 hover:text-[#965EC7] transition-colors whitespace-nowrap">Cases</a>
+            <a href="#cases" className="text-foreground/60 hover:text-[#965EC7] transition-colors whitespace-nowrap">Projetos</a>
             <a href="#faqs" className="text-foreground/60 hover:text-[#965EC7] transition-colors">FAQs</a>
-            <a href="#nosso-time" className="text-foreground/60 hover:text-[#965EC7] transition-colors whitespace-nowrap">Nosso Time</a>
+            <a href="#contato" className="text-foreground/60 hover:text-[#965EC7] transition-colors whitespace-nowrap">Contato</a>
           </div>
         </div>
 
@@ -84,7 +84,7 @@ export default function Header({ onPortfolioOpen }) {
         <div className="relative z-10 flex items-center gap-2 md:gap-4 h-20 pr-3 md:pr-6 pointer-events-auto">
           <AnimatedThemeToggle />
           <a href="#contato" className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-full bg-foreground text-background text-[11px] font-black uppercase tracking-wider hover:bg-[#965EC7] transition-colors duration-300">
-            Trabalhe Conosco
+            Entre em Contato
             <span className="w-4 h-4 rounded-full border border-background/30 flex items-center justify-center text-[8px]">↗</span>
           </a>
           {/* Hamburger — mobile only */}

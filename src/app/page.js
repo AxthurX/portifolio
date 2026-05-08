@@ -5,11 +5,11 @@ import Lenis from "lenis";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import BentoGrid from "@/components/BentoGrid";
-import QuemSomos from "@/components/QuemSomos";
-import Processos from "@/components/Processos";
+import SobreMim from "@/components/SobreMim";
+import Experiencias from "@/components/Experiencias";
 import Faqs from "@/components/Faqs";
 import Cases from "@/components/Cases";
-import NossoTime from "@/components/NossoTime";
+
 import Contato from "@/components/Contato";
 import PortfolioDrawer from "@/components/PortfolioDrawer";
 
@@ -56,10 +56,9 @@ export default function Home() {
           <Hero />
           <BentoGrid />
           <Cases />
-          <QuemSomos />
-          <Processos />
+          <SobreMim />
+          <Experiencias />
           <Faqs />
-          <NossoTime />
           <Contato />
         </div>
       </main>

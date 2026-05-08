@@ -5,7 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function QuemSomos() {
+export default function SobreMim() {
   const sectionRef = useRef(null);
   const headingRef = useRef(null);
   const textRef = useRef(null);
@@ -17,7 +17,6 @@ export default function QuemSomos() {
       // --- Heading reveal (word by word) ---
       const heading = headingRef.current;
       if (heading) {
-        const originalHTML = heading.innerHTML;
         const words = heading.innerText.split(" ");
         heading.innerHTML = words
           .map(
@@ -67,9 +66,9 @@ export default function QuemSomos() {
 
       // --- Counters ---
       const counters = [
-        { el: "#counter-exp", end: 10, suffix: "+" },
-        { el: "#counter-proj", end: 50, suffix: "+" },
-        { el: "#counter-entrega", end: 100, suffix: "%" },
+        { el: "#counter-exp", end: 3, suffix: "+" },
+        { el: "#counter-proj", end: 20, suffix: "+" },
+        { el: "#counter-tech", end: 15, suffix: "+" },
       ];
       counters.forEach(({ el, end, suffix }) => {
         const target = document.querySelector(el);
@@ -93,7 +92,7 @@ export default function QuemSomos() {
   return (
     <section
       ref={sectionRef}
-      id="quem-somos"
+      id="sobre-mim"
       className="w-full min-h-[80vh] flex flex-col md:flex-row border-t border-foreground/10 relative mt-16 md:mt-24"
     >
       {/* Vertical divider */}
@@ -102,12 +101,12 @@ export default function QuemSomos() {
       {/* Left */}
       <div className="w-full md:w-1/2 p-6 md:p-16 lg:p-20 xl:p-28 flex flex-col justify-between border-b md:border-b-0 md:border-r border-foreground/10">
         <div>
-          <h2 className="text-xs uppercase tracking-[0.35em] font-black text-foreground/35 mb-8 md:mb-12">Quem Somos</h2>
+          <h2 className="text-xs uppercase tracking-[0.35em] font-black text-foreground/35 mb-8 md:mb-12">Sobre Mim</h2>
           <h3
             ref={headingRef}
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-tight tracking-[-0.03em]"
           >
-            Desafiamos o <span className="font-serif italic font-normal text-[#965EC7]">ordinário</span> para construir o extraordinário.
+            Transformando ideias em <span className="font-serif italic font-normal text-[#965EC7]">experiencias</span> digitais.
           </h3>
         </div>
       </div>
@@ -120,14 +119,14 @@ export default function QuemSomos() {
             className="text-foreground/70 text-lg md:text-xl lg:text-2xl font-light leading-relaxed mb-6 md:mb-10"
             style={{ opacity: 0 }}
           >
-            A WHYS é um estúdio digital focado em criar experiências imersivas. Nós unimos um design meticuloso, pixel-perfect, com tecnologias de alta performance para entregar resultados que não apenas funcionam, mas impressionam.
+            Sou um desenvolvedor apaixonado por criar interfaces modernas e experiencias de usuario excepcionais. Combino design meticuloso com codigo limpo e performatico para entregar projetos que impressionam.
           </p>
           <p
             ref={text2Ref}
             className="text-foreground/70 text-lg md:text-xl lg:text-2xl font-light leading-relaxed"
             style={{ opacity: 0 }}
           >
-            Nossa missão é elevar o patamar de marcas ambiciosas através de identidades visuais sofisticadas e interfaces interativas.
+            Meu foco e construir aplicacoes web escalveis, responsivas e com atencao aos detalhes que fazem a diferenca na experiencia final do usuario.
           </p>
 
           <div ref={metricsRef} className="mt-12 md:mt-20 pt-8 md:pt-10 border-t border-foreground/10 flex gap-8 md:gap-10">
@@ -140,8 +139,8 @@ export default function QuemSomos() {
               <div className="text-xs uppercase tracking-widest text-foreground/35 font-black">Projetos</div>
             </div>
             <div>
-              <div id="counter-entrega" className="text-5xl md:text-6xl font-black tracking-tight mb-2 md:mb-3 text-[#965EC7]">0%</div>
-              <div className="text-xs uppercase tracking-widest text-foreground/35 font-black">Entrega</div>
+              <div id="counter-tech" className="text-5xl md:text-6xl font-black tracking-tight mb-2 md:mb-3 text-[#965EC7]">0+</div>
+              <div className="text-xs uppercase tracking-widest text-foreground/35 font-black">Tecnologias</div>
             </div>
           </div>
         </div>
