@@ -1,63 +1,84 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import {
-	Code,
-	FileText,
-	LayoutTemplate,
-	type LucideIcon,
-	Users,
-	Wrench,
-} from 'lucide-react';
 import { useEffect, useRef } from 'react';
 
 gsap.registerPlugin(ScrollTrigger);
 
-type Step = {
-	id: string;
-	title: string;
-	desc: string;
-	Icon: LucideIcon;
-};
-
-const STEPS: Step[] = [
+const EXPERIENCIAS = [
 	{
-		id: '01',
-		title: 'Frontend Specialist',
-		desc: '5+ anos criando interfaces modernas, performáticas e experiências refinadas com React, Next.js e TypeScript.',
-		Icon: LayoutTemplate,
+		cargo: 'Software Engineer',
+		empresa: 'Governo de Rondônia',
+		setor: 'Secretaria de Estado do Desenvolvimento Ambiental (SEDAM)',
+		tipo: 'Meio período',
+		periodo: 'mai. 2024 — o momento',
+		duracao: '2 anos 1 mês',
+		local: 'Porto Velho, Rondônia · No local',
+		descricao: [
+			'Responsável pelo desenvolvimento e manutenção de portais e sistemas da SEDAM, com destaque para o Portal SEDAM, principal site institucional da Secretaria, responsável por concentrar informações ambientais, regulatórias, sistema de notícias, serviços online e formulários dinâmicos para solicitações de certificados e autorizações.',
+			'Participando ativamente da definição de padrões de arquitetura, boas práticas de código e da modernização da infraestrutura.',
+			'Utilização de tecnologias como React, Next.js e TypeScript no frontend; Node.js, Prisma ORM e PostgreSQL no backend; além de Docker para conteinerização e padronização dos ambientes de desenvolvimento. Também responsável pela implementação de testes automatizados E2E com Playwright e Cypress.',
+		],
+		techs: [
+			'React',
+			'Next.js',
+			'TypeScript',
+			'Node.js',
+			'Prisma ORM',
+			'PostgreSQL',
+			'Docker',
+			'Playwright',
+			'Cypress',
+		],
+		atual: true,
+		logo: 'RO',
+		logoColor: 'bg-emerald-900/40 text-emerald-400 border-emerald-700/40',
 	},
 	{
-		id: '02',
-		title: 'Arquitetura & Clean Code',
-		desc: 'Aplicação de princípios como Clean Architecture, componentização e organização escalável de código.',
-		Icon: FileText,
-	},
-	{
-		id: '03',
-		title: 'Backend & APIs',
-		desc: 'Experiência com Node.js, Fastify, Prisma, filas, uploads, integrações e construção de APIs robustas.',
-		Icon: Code,
-	},
-	{
-		id: '04',
-		title: 'UX & Performance',
-		desc: 'Foco em fluidez, acessibilidade, animações avançadas e otimizações para entregar produtos premium.',
-		Icon: Users,
-	},
-	{
-		id: '05',
-		title: 'Resolução de Problemas',
-		desc: 'Transformando ideias complexas em soluções funcionais, escaláveis e fáceis de manter.',
-		Icon: Wrench,
+		cargo: 'Software Engineer',
+		empresa: 'Obter Soluções Tecnológicas NossoERP',
+		setor: null,
+		tipo: 'Tempo integral',
+		periodo: 'mai. 2022 — abr. 2024',
+		duracao: '2 anos',
+		local: 'Porto Velho, Rondônia · No local',
+		descricao: [
+			'Desenvolvimento frontend: responsável pelo desenvolvimento de interfaces utilizando Angular Framework e Angular Material, com integração de APIs baseadas em .NET Framework garantindo comunicação eficiente entre frontend e backend.',
+			'Desenvolvimento Mobile Cross-Platform: Implementação e manutenção do NossoERP Connect, aplicativo móvel desenvolvido com Ionic Framework, Cordova e Capacitor, totalmente integrado ao NossoERP oferecendo flexibilidade e mais eficiência nas operações de vendas externas e internas, além de contar com outras ferramentas auxiliares ao sistema principal.',
+			'Desenvolvimento de sistema ERP Desktop: Manutenção e evolução do NossoERP, um sistema completo projetado para simplificar a gestão empresarial, trabalhando desde o controle de estoque avançado até integrações fiscais, controle financeiro e vendas. Atuação com C#, WinForms e .NET, incluindo integração de APIs e administração de bancos de dados SQL e NoSQL (Firebase).',
+		],
+		techs: [
+			'Angular',
+			'Angular Material',
+			'Ionic',
+			'Cordova',
+			'Capacitor',
+			'C#',
+			'WinForms',
+			'.NET',
+			'Firebase',
+			'SQL',
+		],
+		atual: false,
+		logo: 'OB',
+		logoColor: 'bg-blue-900/40 text-blue-400 border-blue-700/40',
 	},
 ];
 
 export default function Processos() {
 	const sectionRef = useRef<HTMLElement | null>(null);
 	const headingRef = useRef<HTMLHeadingElement | null>(null);
+
+	const itemVariants: Variants = {
+		hidden: { opacity: 0, y: 32 },
+		visible: {
+			opacity: 1,
+			y: 0,
+			transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
+		},
+	};
 
 	useEffect(() => {
 		const ctx = gsap.context(() => {
@@ -101,41 +122,39 @@ export default function Processos() {
 		<section
 			ref={sectionRef}
 			id='processos'
-			className='relative w-full overflow-hidden border-foreground/10 border-t py-16 md:py-40'
+			className='relative w-full overflow-hidden border-border border-t py-16 md:py-32'
 		>
-			{/* Title — LEFT aligned */}
-			<div className='relative z-10 mb-16 px-4 text-left md:mb-32'>
-				<h2 className='mb-4 font-black text-foreground/35 text-xs uppercase tracking-[0.35em] md:mb-6'>
-					experiências
-				</h2>
+			<div className='relative z-10 mb-16 px-4 text-left md:mb-24'>
+				<span className='mb-4 block font-medium text-primary text-xs uppercase tracking-widest md:mb-6'>
+					Habilidades
+				</span>
 
 				<h3
 					ref={headingRef}
-					className='font-black text-4xl tracking-[-0.03em] sm:text-5xl md:text-6xl lg:text-7xl'
+					className='font-bold text-3xl tracking-tight sm:text-4xl md:text-5xl lg:text-6xl'
 				>
 					Minhas{' '}
 					<span className='font-normal font-serif text-primary italic'>
-						experiências
+						experiencias
 					</span>
 				</h3>
 			</div>
 
-			{/* Timeline */}
-			<div className='relative mx-auto max-w-6xl px-4 md:px-6'>
-				<div className='absolute top-0 bottom-0 left-1/2 hidden w-px -translate-x-1/2 bg-foreground/10 md:block' />
+			<div className='relative mx-auto px-4 md:px-6'>
+				<div className='absolute top-0 bottom-0 left-1/2 hidden w-px -translate-x-1/2 bg-border md:block' />
 
-				<div className='relative flex flex-col gap-10'>
-					{STEPS.map((step, index) => {
+				<div className='relative flex flex-col gap-8'>
+					{EXPERIENCIAS.map((exp, index) => {
 						const isEven = index % 2 === 0;
-						const { Icon } = step;
 
 						return (
 							<div
-								key={step.id}
+								key={exp.cargo}
 								className={`relative flex w-full flex-col items-start md:items-center md:justify-between ${
 									isEven ? 'md:flex-row' : 'md:flex-row-reverse'
 								}`}
 							>
+								{/* Connection line */}
 								<motion.div
 									initial={{ scaleX: 0 }}
 									whileInView={{ scaleX: 1 }}
@@ -147,68 +166,111 @@ export default function Processos() {
 									style={{
 										transformOrigin: isEven ? 'right' : 'left',
 									}}
-									className={`absolute top-1/2 hidden h-px w-[calc(50%-2rem)] -translate-y-1/2 bg-primary/40 md:block ${
-										isEven ? 'left-8' : 'right-8'
-									}`}
+									className={`absolute top-1/2 hidden h-px w-[calc(50%-2rem)] -translate-y-1/2 bg-linear-to-r ${
+										isEven
+											? 'left-8 from-transparent to-primary/50'
+											: 'right-8 from-primary/50 to-transparent'
+									} md:block`}
 								/>
 
+								{/* Center dot */}
 								<motion.div
-									initial={{ scale: 0 }}
-									whileInView={{ scale: 1 }}
-									viewport={{ once: true, margin: '-20%' }}
-									transition={{
-										duration: 0.5,
-										delay: 0.1,
-									}}
-									className='absolute top-1/2 left-1/2 z-20 hidden h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-primary bg-background md:block'
-								/>
-
-								<div className='z-10 w-full md:w-[calc(50%-4rem)]'>
-									<motion.div
-										initial={{ opacity: 0, y: 25 }}
-										whileInView={{
-											opacity: 1,
-											y: 0,
-										}}
-										viewport={{
-											once: true,
-											margin: '-15%',
-										}}
-										transition={{
-											duration: 0.7,
-											delay: 0.15,
-											ease: [0.16, 1, 0.3, 1],
-										}}
-										style={{
-											background: 'var(--surface)',
-										}}
-										className='group relative h-80 w-full cursor-default overflow-hidden rounded-3xl border border-foreground/8 p-6 transition-colors duration-500 hover:border-primary/40 md:rounded-4xl md:p-8'
+									className='absolute top-1/2 left-1/2 z-20 hidden -translate-x-1/2 -translate-y-1/2 flex-col items-center md:flex'
+									style={{ width: '42px' }}
+								>
+									<div
+										className={`relative z-10 mt-1 flex h-10 w-10 items-center justify-center rounded-full border-2 bg-primary font-bold text-xs ${exp.logoColor}`}
 									>
-										<div className='pointer-events-none absolute inset-0 bg-linear-to-br from-primary/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100' />
+										{exp.logo}
+									</div>
+								</motion.div>
 
-										<div className='relative z-10'>
-											<div className='mb-6 flex items-center gap-4 md:mb-8'>
-												<div className='flex h-12 w-12 items-center justify-center rounded-full border border-foreground/20 text-foreground transition-all duration-300 group-hover:border-primary group-hover:bg-primary group-hover:text-white md:h-14 md:w-14'>
-													<Icon className='h-6 w-6' strokeWidth={1.5} />
+								{/* Card */}
+								<div className='z-10 w-full md:w-[calc(50%-3rem)]'>
+									<motion.div
+										key={exp.cargo}
+										variants={itemVariants}
+										className='relative flex flex-col gap-6 md:flex-row md:gap-10'
+									>
+										<div
+											className={`mb-10 flex-1 rounded-2xl border bg-surface p-6 transition-all duration-300 hover:border-primary/30 hover:shadow-[0_0_30px_rgba(94,234,212,0.06)] md:p-8 ${exp.atual ? 'border-primary/20' : 'border-border'}`}
+										>
+											<div className='mb-5 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between'>
+												<div>
+													<div className='mb-1 flex items-center gap-2'>
+														<div
+															className={`flex h-8 w-8 items-center justify-center rounded-full border font-bold text-[10px] md:hidden ${exp.logoColor}`}
+														>
+															{exp.logo}
+														</div>
+														<h3 className='font-bold text-foreground text-lg leading-tight'>
+															{exp.cargo}
+														</h3>
+														{exp.atual && (
+															<span className='rounded-full bg-primary/10 px-2 py-0.5 font-semibold text-[10px] text-primary uppercase tracking-wider'>
+																Atual
+															</span>
+														)}
+													</div>
+													<p className='font-medium text-foreground/80 text-sm'>
+														{exp.empresa}
+														<span className='font-normal text-muted-foreground'>
+															{' '}
+															· {exp.tipo}
+														</span>
+													</p>
+													{exp.setor && (
+														<p className='mt-0.5 text-muted-foreground text-xs'>
+															{exp.setor}
+														</p>
+													)}
 												</div>
 
-												<span className='font-serif text-2xl text-primary italic md:text-3xl'>
-													{step.id}
-												</span>
+												<div className='shrink-0 text-right'>
+													<p className='font-medium text-foreground/70 text-xs tabular-nums'>
+														{exp.periodo}
+													</p>
+													<p className='text-muted-foreground text-xs'>
+														{exp.duracao}
+													</p>
+													<p className='mt-0.5 text-muted-foreground text-xs'>
+														{exp.local}
+													</p>
+												</div>
 											</div>
 
-											<h4 className='mb-3 text-2xl text-foreground md:mb-4 md:text-3xl'>
-												{step.title}
-											</h4>
+											{/* Divider */}
+											<div className='mb-5 h-px bg-border' />
 
-											<p className='text-foreground/60 text-sm leading-relaxed tracking-wide md:text-base'>
-												{step.desc}
-											</p>
+											{/* Description */}
+											<ul className='mb-6 flex flex-col gap-3'>
+												{exp.descricao.map((item) => (
+													<li
+														key={item}
+														className='flex gap-3 text-muted-foreground text-sm leading-relaxed'
+													>
+														<span className='mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary/60' />
+														{item}
+													</li>
+												))}
+											</ul>
+
+											{/* Tech badges */}
+											<div className='flex flex-wrap gap-2'>
+												{exp.techs.map((tech) => (
+													<span
+														key={tech}
+														className='rounded-full border border-border bg-foreground/5 px-3 py-1 text-foreground/70 text-xs transition-colors hover:border-primary/40 hover:text-primary'
+													>
+														{tech}
+													</span>
+												))}
+											</div>
 										</div>
 									</motion.div>
 								</div>
 
-								<div className='hidden w-[calc(50%-4rem)] md:block' />
+								<div className='hidden w-[calc(50%-3rem)] md:block' />
 							</div>
 						);
 					})}

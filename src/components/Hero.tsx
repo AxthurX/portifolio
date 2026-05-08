@@ -1,9 +1,35 @@
 'use client';
 
 import { motion, type Transition } from 'framer-motion';
-import { ArrowDownRight, Code2, MoveDown } from 'lucide-react';
+import { ArrowDownRight, Mail } from 'lucide-react';
 import Link from 'next/link';
 import { useRef } from 'react';
+
+function GithubIcon({ className }: { className?: string }) {
+	return (
+		<svg
+			className={className}
+			viewBox='0 0 24 24'
+			fill='currentColor'
+			aria-hidden='true'
+		>
+			<path d='M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z' />
+		</svg>
+	);
+}
+
+function LinkedinIcon({ className }: { className?: string }) {
+	return (
+		<svg
+			className={className}
+			viewBox='0 0 24 24'
+			fill='currentColor'
+			aria-hidden='true'
+		>
+			<path d='M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z' />
+		</svg>
+	);
+}
 
 export default function Hero() {
 	const sectionRef = useRef<HTMLElement | null>(null);
@@ -38,8 +64,8 @@ export default function Hero() {
 			y: 0,
 		},
 		transition: {
+			...transition,
 			duration: 0.8,
-			ease: [0.16, 1, 0.3, 1],
 			delay,
 		},
 	});
@@ -49,63 +75,95 @@ export default function Hero() {
 			ref={sectionRef}
 			initial='hidden'
 			animate='visible'
-			className='relative flex min-h-screen w-full flex-col justify-between overflow-hidden bg-secondary/70 py-6 md:p-10'
+			className='relative flex min-h-screen w-full flex-col justify-between overflow-hidden px-6 py-8 md:px-12 lg:px-20'
 		>
-			{/* TOP */}
+			<div className='pointer-events-none absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-accent/5' />
+
+			<div
+				className='pointer-events-none absolute inset-0 opacity-[0.02]'
+				style={{
+					backgroundImage: `linear-gradient(var(--foreground) 1px, transparent 1px),
+						linear-gradient(90deg, var(--foreground) 1px, transparent 1px)`,
+					backgroundSize: '64px 64px',
+				}}
+			/>
+
 			<motion.div
 				{...fadeIn(0.2)}
-				className='flex items-center justify-between'
+				className='relative z-10 flex items-center justify-between pt-20'
 			>
-				<div className='flex items-center gap-2'>
-					<div className='flex h-10 w-10 items-center justify-center rounded-2xl border border-white/10 bg-white/5 backdrop-blur'>
-						<Code2 className='h-5 w-5 text-primary' />
+				<div className='flex items-center gap-4'>
+					<div className='flex h-12 w-12 items-center justify-center rounded-full border border-border bg-surface'>
+						<span className='font-bold text-gradient text-lg'>AM</span>
 					</div>
 
 					<div>
-						<p className='font-semibold text-primary text-sm'>Arthur Martins</p>
-						<p className='text-primary/50 text-xs'>
-							Frontend • Fullstack Developer
-						</p>
+						<p className='font-medium text-foreground'>Arthur Martins</p>
+						<p className='text-muted-foreground text-sm'>Fullstack Developer</p>
 					</div>
+				</div>
+
+				<div className='hidden items-center gap-3 md:flex'>
+					<a
+						href='https://github.com/AxthurX'
+						target='_blank'
+						rel='noopener noreferrer'
+						className='flex h-10 w-10 items-center justify-center rounded-full border border-border transition-all hover:border-primary hover:text-primary'
+						aria-label='GitHub'
+					>
+						<GithubIcon className='h-4 w-4' />
+					</a>
+					<a
+						href='https://linkedin.com/in/arthurmartins'
+						target='_blank'
+						rel='noopener noreferrer'
+						className='flex h-10 w-10 items-center justify-center rounded-full border border-border transition-all hover:border-primary hover:text-primary'
+						aria-label='LinkedIn'
+					>
+						<LinkedinIcon className='h-4 w-4' />
+					</a>
+					<a
+						href='mailto:contato@arthurmartins.dev'
+						className='flex h-10 w-10 items-center justify-center rounded-full border border-border transition-all hover:border-primary hover:text-primary'
+						aria-label='Email'
+					>
+						<Mail className='h-4 w-4' />
+					</a>
 				</div>
 			</motion.div>
 
-			{/* CENTER */}
-			<div className='relative z-10 flex flex-1 flex-col justify-center py-16'>
-				{/* MOBILE */}
+			<div className='relative z-10 flex flex-1 flex-col justify-center py-12 md:py-16'>
 				<div className='flex flex-col md:hidden'>
-					{['Interfaces', 'Modernas', 'Experiências'].map((word, index) => (
+					<motion.p
+						{...fadeIn(0.1)}
+						className='mb-4 font-medium text-primary text-sm uppercase tracking-widest'
+					>
+						Fullstack Developer
+					</motion.p>
+
+					{['Crafting', 'Digital', 'Experiences'].map((word, index) => (
 						<div key={word} className='overflow-hidden'>
 							<motion.h1
-								{...wordReveal(0.1 + index * 0.12)}
-								className='font-black text-[15vw] text-white uppercase leading-[0.85] tracking-[-0.05em]'
+								{...wordReveal(0.15 + index * 0.1)}
+								className='font-bold text-[13vw] uppercase leading-[0.9] tracking-tight'
 							>
 								{word}
 							</motion.h1>
 						</div>
 					))}
 
-					<div className='overflow-hidden'>
-						<motion.h1
-							{...wordReveal(0.48)}
-							className='font-serif text-[16vw] text-primary italic leading-[0.9]'
-						>
-							Digitais
-						</motion.h1>
-					</div>
-
 					<motion.p
-						{...fadeIn(0.7)}
-						className='mt-8 max-w-md text-base text-white/60 leading-relaxed'
+						{...fadeIn(0.6)}
+						className='mt-8 max-w-md text-base text-muted-foreground leading-relaxed'
 					>
-						Desenvolvedor frontend com foco em experiências premium, performance
-						e animações modernas.
+						Desenvolvedor fullstack com foco em experiencias digitais premium,
+						performance e animacoes modernas.
 					</motion.p>
 
-					<motion.div {...fadeIn(0.9)} className='mt-10 flex gap-4'>
+					<motion.div {...fadeIn(0.8)} className='mt-10 flex gap-4'>
 						<Link
-							href='#projetos'
-							className='flex items-center gap-2 rounded-full bg-primary px-5 py-3 font-medium text-white transition-transform hover:scale-105'
+							href='#cases'
+							className='flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-medium text-primary-foreground text-sm transition-all hover:scale-105 hover:shadow-lg hover:shadow-primary/25'
 						>
 							Ver projetos
 							<ArrowDownRight className='h-4 w-4' />
@@ -113,71 +171,84 @@ export default function Hero() {
 
 						<Link
 							href='#contato'
-							className='rounded-full border border-white/10 bg-white/5 px-5 py-3 font-medium text-white/80 backdrop-blur transition-colors hover:bg-white/10'
+							className='rounded-full border border-border px-6 py-3 font-medium text-sm transition-all hover:border-foreground hover:bg-foreground hover:text-background'
 						>
 							Contato
 						</Link>
 					</motion.div>
 				</div>
 
-				{/* DESKTOP */}
 				<div className='hidden flex-col md:flex'>
-					{/* LINE 1 */}
-					<div className='flex items-end justify-between overflow-hidden'>
+					<motion.p
+						{...fadeIn(0.1)}
+						className='mb-6 font-medium text-primary text-xs uppercase tracking-[0.3em]'
+					>
+						Fullstack Developer / Porto Velho, Brasil
+					</motion.p>
+
+					<div className='overflow-hidden'>
 						<motion.h1
-							{...wordReveal(0.1)}
-							className='font-black text-[8vw] text-white uppercase leading-[0.82] tracking-[-0.06em]'
+							{...wordReveal(0.15)}
+							className='font-bold text-[7vw] uppercase leading-[0.9] tracking-tight xl:text-[6.5vw]'
 						>
-							Frontend
+							Crafting Digital
 						</motion.h1>
 					</div>
 
-					{/* LINE 2 */}
-					<div className='relative flex items-end overflow-hidden'>
+					<div className='flex items-end gap-6 overflow-hidden'>
 						<motion.h1
-							{...wordReveal(0.2)}
-							className='font-black text-[8vw] text-white uppercase leading-[0.82] tracking-[-0.06em]'
+							{...wordReveal(0.25)}
+							className='font-bold text-[7vw] uppercase leading-[0.9] tracking-tight xl:text-[6.5vw]'
 						>
-							Developer
+							Experiences
 						</motion.h1>
+
+						<motion.span
+							{...wordReveal(0.35)}
+							className='mb-2 font-serif text-[5vw] text-primary italic leading-none xl:text-[4.5vw]'
+						>
+							with code
+						</motion.span>
 					</div>
 
-					{/* LINE 3 */}
-					<div className='relative mt-2 flex items-end justify-between overflow-hidden'>
-						<div className='flex items-end gap-6'>
-							<motion.h1
-								{...wordReveal(0.3)}
-								className='font-black text-[8vw] text-white uppercase leading-[0.82] tracking-[-0.06em]'
-							>
-								Creating
-							</motion.h1>
+					<motion.p
+						{...fadeIn(0.5)}
+						className='mt-12 max-w-lg text-lg text-muted-foreground leading-relaxed'
+					>
+						Desenvolvedor fullstack com foco em interfaces modernas, performance
+						e animações imersivas. Especializado em React, Next.js e TypeScript.
+					</motion.p>
 
-							<motion.h1
-								{...wordReveal(0.4)}
-								className='pb-2 font-serif text-[8.2vw] text-primary italic leading-none'
-							>
-								Experiences
-							</motion.h1>
-						</div>
+					<motion.div
+						{...fadeIn(0.7)}
+						className='mt-10 flex items-center gap-6'
+					>
+						<Link
+							href='#cases'
+							className='group flex items-center gap-3 rounded-full bg-primary px-8 py-4 font-medium text-primary-foreground transition-all hover:scale-105 hover:shadow-lg hover:shadow-primary/25'
+						>
+							Ver projetos
+							<ArrowDownRight className='h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5' />
+						</Link>
 
-						{/* PROJECT CTA */}
-						<motion.div {...fadeIn(0.8)} className='group mb-10'>
-							<Link href='#projetos' className='flex flex-col items-start'>
-								<div className='flex items-center gap-3 font-black text-lg text-white/60 uppercase tracking-tight transition-colors group-hover:text-white'>
-									VER
-									<div className='flex h-7 w-7 items-center justify-center rounded-full border border-white/20 transition-all group-hover:border-primary group-hover:bg-primary'>
-										<MoveDown className='h-4 w-4' />
-									</div>
-								</div>
-
-								<span className='font-black text-lg text-white/60 uppercase tracking-tight transition-colors group-hover:text-primary'>
-									PROJETOS
-								</span>
-							</Link>
-						</motion.div>
-					</div>
+						<Link
+							href='#contato'
+							className='rounded-full border border-border px-8 py-4 font-medium transition-all hover:border-foreground hover:bg-foreground hover:text-background'
+						>
+							Entre em contato
+						</Link>
+					</motion.div>
 				</div>
 			</div>
+
+			<motion.div
+				{...fadeIn(1)}
+				className='relative z-10 flex items-center justify-between'
+			>
+				<p className='text-muted-foreground text-xs uppercase tracking-widest'>
+					Scroll para explorar
+				</p>
+			</motion.div>
 		</motion.section>
 	);
 }

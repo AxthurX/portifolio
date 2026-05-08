@@ -3,8 +3,8 @@
 import Lenis from 'lenis';
 import { useEffect, useRef, useState } from 'react';
 import Cases from '../components/Cases';
+import Certificados from '../components/Certificates';
 import Contato from '../components/Contato';
-import Faqs from '../components/Faqs';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
 import NossoTime from '../components/NossoTime';
@@ -44,7 +44,6 @@ export default function Home() {
 	}, []);
 
 	useEffect(() => {
-		console.log(portfolioOpen);
 		document.body.style.overflow = portfolioOpen ? 'hidden' : '';
 
 		return () => {
@@ -57,18 +56,30 @@ export default function Home() {
 			<main className='relative flex min-h-screen w-full flex-col items-center bg-background text-foreground'>
 				<Header onPortfolioOpen={() => setPortfolioOpen(true)} />
 
-				<div className='flex w-full max-w-450 flex-col gap-12 pt-30 pb-12'>
+				<div className='flex w-full flex-col'>
 					<Hero />
-					<div className='px-4 md:px-8 xl:px-12'>
-						{/* <BentoGrid /> */}
+
+					<div className='mx-auto max-w-7xl px-4 md:px-8 lg:px-12'>
 						<Cases />
 						<QuemSomos />
 						<Processos />
-						<Faqs />
+						<Certificados />
 						<NossoTime />
 						<Contato />
 					</div>
 				</div>
+
+				{/* Footer */}
+				<footer className='mt-8 w-full border-border border-t py-8'>
+					<div className='mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 md:flex-row md:px-8 lg:px-12'>
+						<p className='text-muted-foreground text-sm'>
+							2024 Arthur Martins. Todos os direitos reservados.
+						</p>
+						<p className='text-muted-foreground text-xs'>
+							Feito com Next.js, TailwindCSS e muito cafe
+						</p>
+					</div>
+				</footer>
 			</main>
 
 			<PortfolioDrawer

@@ -11,7 +11,6 @@ export default function QuemSomos() {
 	const headingRef = useRef<HTMLHeadingElement | null>(null);
 	const textRef = useRef<HTMLParagraphElement | null>(null);
 	const text2Ref = useRef<HTMLParagraphElement | null>(null);
-	const metricsRef = useRef<HTMLDivElement | null>(null);
 
 	useEffect(() => {
 		const ctx = gsap.context(() => {
@@ -49,7 +48,6 @@ export default function QuemSomos() {
 				});
 			}
 
-			// --- Paragraph reveals ---
 			if (textRef.current) {
 				gsap.fromTo(
 					textRef.current,
@@ -88,8 +86,8 @@ export default function QuemSomos() {
 			}
 
 			const counters = [
-				{ el: '#counter-exp', end: 10, suffix: '+' },
-				{ el: '#counter-proj', end: 50, suffix: '+' },
+				{ el: '#counter-exp', end: 5, suffix: '+' },
+				{ el: '#counter-proj', end: 20, suffix: '+' },
 				{ el: '#counter-entrega', end: 100, suffix: '%' },
 			];
 
@@ -123,23 +121,25 @@ export default function QuemSomos() {
 		<section
 			ref={sectionRef}
 			id='quem-somos'
-			className='relative mt-16 flex min-h-[80vh] w-full flex-col border-foreground/10 border-t md:mt-24 md:flex-row'
+			className='relative mt-16 flex min-h-[80vh] w-full flex-col border-border border-t md:mt-24 md:flex-row'
 		>
-			<div className='absolute top-0 bottom-0 left-1/2 hidden w-px bg-foreground/10 md:block' />
+			{/* Divider */}
+			<div className='absolute top-0 bottom-0 left-1/2 hidden w-px bg-border md:block' />
 
-			<div className='flex w-full flex-col justify-between border-foreground/10 border-b p-6 md:w-1/2 md:border-r md:border-b-0 md:p-16 lg:p-20 xl:p-28'>
+			{/* Left */}
+			<div className='flex w-full flex-col justify-between border-border border-b p-6 md:w-1/2 md:border-r md:border-b-0 md:p-16 lg:p-20'>
 				<div>
-					<h2 className='mb-8 font-black text-foreground/35 text-xs uppercase tracking-[0.35em] md:mb-12'>
+					<span className='mb-6 block font-medium text-primary text-xs uppercase tracking-widest md:mb-10'>
 						Sobre Mim
-					</h2>
+					</span>
 
 					<h3
 						ref={headingRef}
-						className='font-black text-4xl leading-tight tracking-[-0.03em] sm:text-5xl md:text-6xl lg:text-7xl'
+						className='font-bold text-3xl leading-tight tracking-tight sm:text-4xl md:text-5xl lg:text-6xl'
 					>
 						Transformando{' '}
 						<span className='font-normal font-serif text-primary italic'>
-							ideias malucas
+							ideias
 						</span>{' '}
 						em interfaces funcionais.
 					</h3>
@@ -147,43 +147,40 @@ export default function QuemSomos() {
 			</div>
 
 			{/* Right */}
-			<div className='flex w-full flex-col justify-end p-6 md:w-1/2 md:p-16 lg:p-20 xl:p-28'>
+			<div className='flex w-full flex-col justify-end p-6 md:w-1/2 md:p-16 lg:p-20'>
 				<div className='max-w-xl md:ml-auto'>
 					<p
 						ref={textRef}
-						className='mb-6 font-light text-foreground/70 text-lg leading-relaxed md:mb-10 md:text-xl lg:text-2xl'
+						className='mb-6 text-base text-muted-foreground leading-relaxed md:mb-8 md:text-lg'
 						style={{ opacity: 0 }}
 					>
 						Atuo como desenvolvedor fullstack com forte foco em frontend,
-						criando interfaces performáticas, escaláveis e com atenção extrema
+						criando interfaces performaticas, escalaveis e com atencao extrema
 						aos detalhes. Grande parte do meu trabalho envolve transformar
 						ideias em produtos funcionais usando React, Next.js, TypeScript e
-						animações imersivas.
+						animacoes imersivas.
 					</p>
 
 					<p
 						ref={text2Ref}
-						className='font-light text-foreground/70 text-lg leading-relaxed md:text-xl lg:text-2xl'
+						className='text-base text-muted-foreground leading-relaxed md:text-lg'
 						style={{ opacity: 0 }}
 					>
-						Tenho experiência na construção de aplicações modernas, APIs,
-						arquiteturas escaláveis e componentes reutilizáveis, sempre buscando
-						clean code, performance e uma experiência visual acima do padrão.
+						Tenho experiencia na construcao de aplicacoes modernas, APIs,
+						arquiteturas escalaveis e componentes reutilizaveis, sempre buscando
+						clean code, performance e uma experiencia visual acima do padrao.
 					</p>
 
-					<div
-						ref={metricsRef}
-						className='mt-12 flex gap-8 border-foreground/10 border-t pt-8 md:mt-20 md:gap-10 md:pt-10'
-					>
+					{/* Metrics */}
+					<div className='mt-10 flex gap-8 border-border border-t pt-8 md:mt-16 md:gap-12 md:pt-10'>
 						<div>
 							<div
 								id='counter-exp'
-								className='mb-2 font-black text-5xl tracking-tight md:mb-3 md:text-6xl'
+								className='mb-2 font-bold text-4xl text-gradient tracking-tight md:text-5xl'
 							>
 								5+
 							</div>
-
-							<div className='font-black text-foreground/35 text-xs uppercase tracking-widest'>
+							<div className='text-muted-foreground text-xs uppercase tracking-widest'>
 								Anos de XP
 							</div>
 						</div>
@@ -191,12 +188,11 @@ export default function QuemSomos() {
 						<div>
 							<div
 								id='counter-proj'
-								className='mb-2 font-black text-5xl tracking-tight md:mb-3 md:text-6xl'
+								className='mb-2 font-bold text-4xl text-gradient tracking-tight md:text-5xl'
 							>
 								20+
 							</div>
-
-							<div className='font-black text-foreground/35 text-xs uppercase tracking-widest'>
+							<div className='text-muted-foreground text-xs uppercase tracking-widest'>
 								Projetos
 							</div>
 						</div>
@@ -204,13 +200,12 @@ export default function QuemSomos() {
 						<div>
 							<div
 								id='counter-entrega'
-								className='mb-2 font-black text-5xl text-primary tracking-tight md:mb-3 md:text-6xl'
+								className='mb-2 font-bold text-4xl text-primary tracking-tight md:text-5xl'
 							>
 								100%
 							</div>
-
-							<div className='font-black text-foreground/35 text-xs uppercase tracking-widest'>
-								Dedicação
+							<div className='text-muted-foreground text-xs uppercase tracking-widest'>
+								Dedicacao
 							</div>
 						</div>
 					</div>

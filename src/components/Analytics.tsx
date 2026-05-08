@@ -2,16 +2,6 @@
 
 import Script from 'next/script';
 
-/**
- * Google Analytics 4 + Meta Pixel (optional)
- * GA_ID is read from env: NEXT_PUBLIC_GA_ID
- * META_PIXEL_ID is read from env: NEXT_PUBLIC_META_PIXEL_ID
- *
- * To activate:
- *   Add NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX to your .env.local (or Vercel env vars)
- *   Add NEXT_PUBLIC_META_PIXEL_ID=XXXXXXXXXX (optional)
- */
-
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
 
@@ -20,7 +10,6 @@ export default function Analytics() {
 
 	return (
 		<>
-			{/* ——— Google Analytics 4 ——— */}
 			<Script
 				src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
 				strategy='afterInteractive'
@@ -37,7 +26,6 @@ export default function Analytics() {
         `}
 			</Script>
 
-			{/* ——— Custom Event: Contact Form Submit ——— */}
 			<Script id='whys-events' strategy='afterInteractive'>
 				{`
           document.addEventListener('DOMContentLoaded', function() {
@@ -56,7 +44,6 @@ export default function Analytics() {
         `}
 			</Script>
 
-			{/* ——— Meta Pixel (optional) ——— */}
 			{META_PIXEL_ID && (
 				<Script id='meta-pixel' strategy='afterInteractive'>
 					{`
