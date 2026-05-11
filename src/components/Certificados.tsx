@@ -26,13 +26,11 @@ interface CertificateItem {
 }
 
 const certificates: CertificateItem[] = [
-	// --- Certificados grandes (centro do quadro) ---
 	{
-		id: 'c1',
+		id: '1',
 		title: 'Google Project Management Professional Certificate',
 		issuer: 'Coursera / Google',
 		date: 'Abr 2026',
-		credentialCode: 'PM-PROF-2026',
 		credentialUrl: '#',
 		skills: ['Gestão de Projetos', 'Agile', 'Scrum'],
 		type: 'certificate',
@@ -40,159 +38,42 @@ const certificates: CertificateItem[] = [
 		color: 'gold',
 	},
 	{
-		id: 'c2',
-		title: 'Google Project Management',
-		issuer: 'Google',
-		date: 'Ago 2025',
-		credentialCode: 'G5LRW5CUFGWH',
-		credentialUrl: '#',
-		skills: ['Gestão de Projetos', 'Planejamento'],
-		type: 'certificate',
-		size: 'lg',
-		color: 'gold',
-	},
-	{
-		id: 'c3',
-		title: 'Foundations of Project Management',
-		issuer: 'Google',
-		date: 'Jul 2025',
-		credentialCode: 'FNDPM-2025',
-		credentialUrl: '#',
-		skills: ['Fundamentos', 'Stakeholders'],
-		type: 'certificate',
-		size: 'lg',
-		color: 'silver',
-	},
-	{
-		id: 'c4',
+		id: '2',
 		title: 'Google Agile Project Management',
 		issuer: 'Google',
 		date: 'Ago 2025',
 		credentialCode: '1GAD79VY6B3P',
 		credentialUrl: '#',
-		skills: ['Scrum', 'Kanban', 'Sprint'],
-		type: 'certificate',
-		size: 'lg',
+		skills: ['Scrum', 'Kanban'],
+		type: 'badge',
+		size: 'md',
 		color: 'blue',
 	},
 	{
-		id: 'c5',
-		title: 'Capstone: Applying Project Management in the Real World',
+		id: '3',
+		title: 'Google Project Management',
 		issuer: 'Google',
-		date: 'Set 2025',
-		credentialCode: 'CAPSTONE-2025',
+		date: 'Ago 2025',
+		credentialCode: 'G5LRW5CUFGWH',
 		credentialUrl: '#',
-		skills: ['Case Real', 'Portfolio'],
+		skills: ['Gestão de Projetos'],
 		type: 'certificate',
 		size: 'lg',
-		color: 'green',
+		color: 'gold',
 	},
 	{
-		id: 'c6',
+		id: '4',
 		title: 'Fundamentos de Suporte de TI',
 		issuer: 'Google',
 		date: 'Jan 2025',
-		credentialCode: 'IT-FUND-2025',
 		credentialUrl: '#',
-		skills: ['TI', 'Suporte', 'Redes'],
-		type: 'certificate',
-		size: 'md',
-		color: 'blue',
-	},
-	// --- Badges (pequenos, laterais) ---
-	{
-		id: 'b1',
-		title: 'Google Agile',
-		issuer: 'Google',
-		date: 'Ago 2025',
-		credentialUrl: '#',
-		type: 'badge',
-		size: 'md',
-		color: 'blue',
-	},
-	{
-		id: 'b2',
-		title: 'Scrum Master',
-		issuer: 'Scrum.org',
-		date: 'Jun 2025',
-		credentialUrl: '#',
+		skills: ['TI', 'Suporte'],
 		type: 'badge',
 		size: 'sm',
 		color: 'green',
 	},
 	{
-		id: 'b3',
-		title: 'TypeScript',
-		issuer: 'Microsoft',
-		date: 'Nov 2024',
-		credentialUrl: '#',
-		type: 'badge',
-		size: 'xs',
-		color: 'blue',
-	},
-	{
-		id: 'b4',
-		title: 'Node.js',
-		issuer: 'OpenJS',
-		date: 'Set 2024',
-		credentialUrl: '#',
-		type: 'badge',
-		size: 'xs',
-		color: 'green',
-	},
-	{
-		id: 'b5',
-		title: 'Git & GitHub',
-		issuer: 'GitHub',
-		date: 'Out 2024',
-		credentialUrl: '#',
-		type: 'badge',
-		size: 'sm',
-		color: 'silver',
-	},
-	{
-		id: 'b6',
-		title: 'Docker Essentials',
-		issuer: 'Docker',
-		date: 'Fev 2025',
-		credentialUrl: '#',
-		type: 'badge',
-		size: 'xs',
-		color: 'blue',
-	},
-	{
-		id: 'b7',
-		title: 'SQL Avançado',
-		issuer: 'Oracle',
-		date: 'Mar 2025',
-		credentialUrl: '#',
-		type: 'badge',
-		size: 'sm',
-		color: 'gold',
-	},
-	{
-		id: 'b8',
-		title: 'AWS Cloud Practitioner',
-		issuer: 'Amazon',
-		date: 'Abr 2025',
-		credentialUrl: '#',
-		type: 'badge',
-		size: 'md',
-		color: 'gold',
-	},
-	{
-		id: 'b9',
-		title: 'Linux Essentials',
-		issuer: 'LPI',
-		date: 'Mai 2025',
-		credentialUrl: '#',
-		type: 'badge',
-		size: 'xs',
-		color: 'silver',
-	},
-	// --- Medalhas ---
-	{
-		id: 'm1',
+		id: '5',
 		title: 'Next.js Advanced',
 		issuer: 'Vercel',
 		date: 'Mar 2025',
@@ -203,85 +84,46 @@ const certificates: CertificateItem[] = [
 		color: 'silver',
 	},
 	{
-		id: 'm2',
-		title: 'React Developer',
-		issuer: 'Meta',
-		date: 'Out 2024',
-		credentialUrl: '#',
-		type: 'medal',
-		size: 'sm',
-		color: 'blue',
-	},
-	{
-		id: 'm3',
-		title: 'UX Design',
-		issuer: 'Google',
-		date: 'Dez 2024',
-		credentialUrl: '#',
-		type: 'medal',
-		size: 'sm',
-		color: 'purple',
-	},
-	{
-		id: 'm4',
-		title: 'Agilidade Digital',
-		issuer: 'FIAP',
-		date: 'Jan 2026',
-		credentialUrl: '#',
-		type: 'medal',
-		size: 'md',
-		color: 'gold',
-	},
-	// --- Patches ---
-	{
-		id: 'p1',
+		id: '6',
 		title: 'CSS & Animations',
 		issuer: 'Frontend Masters',
 		date: 'Dez 2024',
 		credentialUrl: '#',
+		skills: ['CSS', 'GSAP'],
 		type: 'patch',
 		size: 'sm',
 		color: 'purple',
 	},
 	{
-		id: 'p2',
-		title: 'UI/UX Designer',
-		issuer: 'Origamid',
-		date: 'Fev 2025',
+		id: '7',
+		title: 'TypeScript',
+		issuer: 'Microsoft',
+		date: 'Nov 2024',
 		credentialUrl: '#',
-		type: 'patch',
+		type: 'badge',
+		size: 'xs',
+		color: 'blue',
+	},
+	{
+		id: '8',
+		title: 'React Developer',
+		issuer: 'Meta',
+		date: 'Out 2024',
+		credentialUrl: '#',
+		skills: ['React'],
+		type: 'medal',
 		size: 'sm',
 		color: 'blue',
 	},
 	{
-		id: 'p3',
-		title: 'Web Acessibilidade',
-		issuer: 'W3C',
-		date: 'Mar 2025',
+		id: '9',
+		title: 'Node.js',
+		issuer: 'OpenJS',
+		date: 'Set 2024',
 		credentialUrl: '#',
-		type: 'patch',
-		size: 'sm',
+		type: 'badge',
+		size: 'xs',
 		color: 'green',
-	},
-	{
-		id: 'p4',
-		title: 'Python Básico',
-		issuer: 'DIO',
-		date: 'Abr 2025',
-		credentialUrl: '#',
-		type: 'patch',
-		size: 'sm',
-		color: 'gold',
-	},
-	{
-		id: 'p5',
-		title: 'Segurança em TI',
-		issuer: 'Cisco',
-		date: 'Jun 2025',
-		credentialUrl: '#',
-		type: 'patch',
-		size: 'sm',
-		color: 'silver',
 	},
 ];
 
@@ -629,13 +471,11 @@ export default function Certificados() {
 		return () => ctx.revert();
 	}, []);
 
-	const certXL   = certificates.filter(c => c.type === 'certificate' && c.size === 'xl');
-	const certLG   = certificates.filter(c => c.type === 'certificate' && c.size === 'lg');
-	const certMD   = certificates.filter(c => c.type === 'certificate' && (c.size === 'md' || c.size === 'sm'));
-	const badgesLG = certificates.filter(c => c.type === 'badge' && (c.size === 'md' || c.size === 'lg'));
-	const badgesSM = certificates.filter(c => c.type === 'badge' && (c.size === 'xs' || c.size === 'sm'));
-	const medals   = certificates.filter(c => c.type === 'medal');
-	const patches  = certificates.filter(c => c.type === 'patch');
+	// Separate items by type for layout
+	const mainCertificates = certificates.filter(c => c.type === 'certificate');
+	const badges = certificates.filter(c => c.type === 'badge');
+	const medals = certificates.filter(c => c.type === 'medal');
+	const patches = certificates.filter(c => c.type === 'patch');
 
 	return (
 		<section
@@ -666,143 +506,89 @@ export default function Certificados() {
 
 				{/* Shadow Box Frame */}
 				<div className='relative mx-auto max-w-5xl'>
-					{/* Outer frame - dark wood */}
-					<div
-						className='relative rounded-lg p-[10px] shadow-2xl'
-						style={{
-							background: 'linear-gradient(145deg, #3f3f46 0%, #18181b 40%, #27272a 70%, #3f3f46 100%)',
-							boxShadow: '0 25px 60px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.08)',
-						}}
-					>
-						{/* Inner mat - blue velvet */}
-						<div
-							className='rounded-md p-[10px]'
-							style={{
-								background: 'linear-gradient(145deg, #1e3a5f 0%, #0f172a 50%, #1e2d3d 100%)',
-							}}
-						>
-							{/* Glass reflection */}
-							<div className='pointer-events-none absolute inset-0 rounded-lg bg-gradient-to-br from-white/[0.04] via-transparent to-transparent' />
-
-							{/* Inner display area */}
-							<div
-								className='relative rounded-sm px-4 py-6 md:px-8 md:py-8'
+					{/* Outer frame - dark wood style */}
+					<div className='relative rounded-lg bg-gradient-to-br from-zinc-800 via-zinc-900 to-zinc-950 p-2 shadow-2xl'>
+						{/* Inner frame border - blue velvet mat */}
+						<div className='rounded-md bg-gradient-to-br from-slate-800 via-slate-900 to-slate-950 p-3 md:p-4'>
+							{/* Glass reflection effect */}
+							<div className='absolute inset-0 rounded-md bg-gradient-to-br from-white/5 via-transparent to-transparent pointer-events-none' />
+							
+							{/* Display area - dark velvet background */}
+							<div 
+								className='relative rounded-sm bg-zinc-950 p-4 md:p-8 min-h-[500px]'
 								style={{
-									background: '#0a0a0f',
-									boxShadow: 'inset 0 0 80px rgba(0,0,0,0.6), inset 0 0 30px rgba(14,30,60,0.3)',
+									backgroundImage: `
+										radial-gradient(ellipse at 20% 20%, rgba(30, 58, 138, 0.08) 0%, transparent 50%),
+										radial-gradient(ellipse at 80% 80%, rgba(30, 58, 138, 0.05) 0%, transparent 50%),
+										linear-gradient(180deg, rgba(0,0,0,0.3) 0%, transparent 20%, transparent 80%, rgba(0,0,0,0.3) 100%)
+									`,
+									boxShadow: 'inset 0 0 60px rgba(0,0,0,0.5)',
 								}}
 							>
-								{/* Year labels */}
-								<div className='absolute top-4 left-5 md:top-5 md:left-7'>
-									<span className='font-mono text-base tracking-[0.35em] text-zinc-600 md:text-xl'>
+								{/* Year markers like in reference image */}
+								<div className='absolute top-4 left-4 md:top-6 md:left-8'>
+									<span className='text-zinc-600 font-mono text-lg md:text-2xl tracking-[0.3em]'>
 										2024
 									</span>
 								</div>
-								<div className='absolute top-4 right-5 md:top-5 md:right-7'>
-									<span className='font-mono text-base tracking-[0.35em] text-zinc-600 md:text-xl'>
+								<div className='absolute top-4 right-4 md:top-6 md:right-8'>
+									<span className='text-zinc-600 font-mono text-lg md:text-2xl tracking-[0.3em]'>
 										2026
 									</span>
 								</div>
 
-								{/* ===== ROW 1: top badges (esq) + cert XL (centro) + top badges (dir) ===== */}
-								<div className='mt-10 flex flex-wrap items-start justify-center gap-3 md:mt-12 md:gap-5'>
-									{/* Left column — badges grandes */}
-									<div className='flex flex-col items-center gap-3'>
-										{badgesLG.slice(0, 2).map((item, i) => (
-											<ShadowBoxItem key={item.id} item={item} index={i} />
-										))}
+								{/* Main content grid - mosaic layout */}
+								<div className='mt-12 md:mt-16'>
+									{/* Top row - badges and small items on sides, certificate in middle */}
+									<div className='flex flex-wrap items-start justify-center gap-4 md:gap-6'>
+										{/* Left side badges */}
+										<div className='flex flex-col gap-4'>
+											{badges.slice(0, 2).map((item, i) => (
+												<ShadowBoxItem key={item.id} item={item} index={i} />
+											))}
+										</div>
+										
+										{/* Center - main certificate */}
+										<div className='flex flex-col items-center gap-4'>
+											{mainCertificates.slice(0, 1).map((item, i) => (
+												<ShadowBoxItem key={item.id} item={item} index={i} />
+											))}
+											
+											{/* Medals row below main cert */}
+											<div className='flex gap-3 mt-2'>
+												{medals.map((item, i) => (
+													<ShadowBoxItem key={item.id} item={item} index={i + 3} />
+												))}
+											</div>
+										</div>
+										
+										{/* Right side badges */}
+										<div className='flex flex-col gap-4'>
+											{badges.slice(2).map((item, i) => (
+												<ShadowBoxItem key={item.id} item={item} index={i + 5} />
+											))}
+										</div>
 									</div>
 
-									{/* Center — certificado principal XL */}
-									<div className='flex flex-col items-center gap-3'>
-										{certXL.map((item, i) => (
-											<ShadowBoxItem key={item.id} item={item} index={i + 2} />
-										))}
-									</div>
-
-									{/* Right column — badges grandes */}
-									<div className='flex flex-col items-center gap-3'>
-										{badgesLG.slice(2).map((item, i) => (
-											<ShadowBoxItem key={item.id} item={item} index={i + 4} />
-										))}
-									</div>
-								</div>
-
-								{/* ===== DIVIDER ===== */}
-								<div className='my-4 flex items-center gap-2 md:my-5'>
-									<div className='h-px flex-1 bg-zinc-800' />
-									<Star className='h-3 w-3 text-zinc-700' />
-									<Star className='h-3 w-3 text-zinc-700' />
-									<Star className='h-3 w-3 text-zinc-700' />
-									<div className='h-px flex-1 bg-zinc-800' />
-								</div>
-
-								{/* ===== ROW 2: badges pequenos (esq) + certs LG (centro) + badges pequenos (dir) ===== */}
-								<div className='flex flex-wrap items-start justify-center gap-3 md:gap-5'>
-									{/* Small badges left */}
-									<div className='flex flex-col items-center gap-3'>
-										{badgesSM.slice(0, 3).map((item, i) => (
+									{/* Middle section - certificates row */}
+									<div className='flex flex-wrap items-center justify-center gap-4 md:gap-6 mt-6 md:mt-8'>
+										{mainCertificates.slice(1).map((item, i) => (
 											<ShadowBoxItem key={item.id} item={item} index={i + 7} />
 										))}
 									</div>
 
-									{/* Certs LG */}
-									<div className='flex flex-col items-center gap-3'>
-										<div className='flex flex-wrap items-start justify-center gap-3'>
-											{certLG.slice(0, 2).map((item, i) => (
-												<ShadowBoxItem key={item.id} item={item} index={i + 10} />
-											))}
-										</div>
-										<div className='flex flex-wrap items-start justify-center gap-3'>
-											{certLG.slice(2).map((item, i) => (
-												<ShadowBoxItem key={item.id} item={item} index={i + 12} />
-											))}
-										</div>
-									</div>
-
-									{/* Small badges right */}
-									<div className='flex flex-col items-center gap-3'>
-										{badgesSM.slice(3).map((item, i) => (
-											<ShadowBoxItem key={item.id} item={item} index={i + 14} />
+									{/* Bottom row - patches and small items */}
+									<div className='flex flex-wrap items-center justify-center gap-4 md:gap-6 mt-6 md:mt-8'>
+										{patches.map((item, i) => (
+											<ShadowBoxItem key={item.id} item={item} index={i + 10} />
 										))}
 									</div>
 								</div>
 
-								{/* ===== DIVIDER ===== */}
-								<div className='my-4 flex items-center gap-2 md:my-5'>
-									<div className='h-px flex-1 bg-zinc-800' />
-									<Star className='h-3 w-3 text-zinc-700' />
-									<Star className='h-3 w-3 text-zinc-700' />
-									<Star className='h-3 w-3 text-zinc-700' />
-									<div className='h-px flex-1 bg-zinc-800' />
-								</div>
-
-								{/* ===== ROW 3: medalhas + certs MD + patches ===== */}
-								<div className='flex flex-wrap items-center justify-center gap-3 md:gap-5'>
-									{medals.map((item, i) => (
-										<ShadowBoxItem key={item.id} item={item} index={i + 17} />
-									))}
-									{certMD.map((item, i) => (
-										<ShadowBoxItem key={item.id} item={item} index={i + 21} />
-									))}
-								</div>
-
-								{/* ===== ROW 4: patches (linha de rodapé) ===== */}
-								<div className='mt-4 flex flex-wrap items-center justify-center gap-3 md:mt-5 md:gap-4'>
-									{patches.map((item, i) => (
-										<ShadowBoxItem key={item.id} item={item} index={i + 23} />
-									))}
-								</div>
-
-								{/* Nameplate */}
-								<div className='mt-6 flex justify-center'>
-									<div
-										className='rounded-sm px-8 py-2 shadow-lg'
-										style={{
-											background: 'linear-gradient(90deg, #92400e, #d97706, #b45309, #d97706, #92400e)',
-										}}
-									>
-										<p className='font-semibold uppercase tracking-[0.25em] text-amber-100 text-[10px] md:text-xs'>
+								{/* Nameplate at bottom */}
+								<div className='absolute bottom-4 left-1/2 -translate-x-1/2'>
+									<div className='px-6 py-2 bg-gradient-to-r from-amber-700 via-amber-600 to-amber-700 rounded-sm shadow-lg'>
+										<p className='text-[10px] md:text-xs font-semibold text-amber-100 uppercase tracking-[0.2em]'>
 											Arthur Martins
 										</p>
 									</div>
@@ -811,11 +597,12 @@ export default function Certificados() {
 						</div>
 					</div>
 
-					{/* Cast shadow below frame */}
-					<div className='absolute -bottom-6 left-6 right-6 h-10 rounded-full bg-black/40 blur-xl' />
+					{/* Frame shadow on surface */}
+					<div className='absolute -bottom-4 left-4 right-4 h-8 bg-gradient-to-b from-black/20 to-transparent blur-md rounded-full' />
 				</div>
 			</div>
 
+			{/* Custom CSS for ribbon clip path */}
 			<style jsx>{`
 				.clip-ribbon {
 					clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%);
