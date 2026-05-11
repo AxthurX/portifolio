@@ -380,7 +380,7 @@ export default function Certificados() {
 						ref={headingRef}
 						className='max-w-2xl font-bold text-3xl tracking-tight sm:text-4xl md:text-5xl lg:text-6xl'
 					>
-						Licencas &amp;{' '}
+						Licenças &amp;{' '}
 						<span className='font-normal font-serif text-primary italic'>
 							Certificados
 						</span>

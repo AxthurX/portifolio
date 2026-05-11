@@ -157,12 +157,12 @@ export default function Main() {
 						className='mt-8 max-w-md text-base text-muted-foreground leading-relaxed'
 					>
 						Desenvolvedor fullstack com foco em experiencias digitais premium,
-						performance e animacoes modernas.
+						performance e animações modernas.
 					</motion.p>
 
 					<motion.div {...fadeIn(0.8)} className='mt-10 flex gap-4'>
 						<Link
-							href='#cases'
+							href='#projetos'
 							className='flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-medium text-primary-foreground text-sm transition-all hover:scale-105 hover:shadow-lg hover:shadow-primary/25'
 						>
 							Ver projetos
@@ -183,7 +183,7 @@ export default function Main() {
 						{...fadeIn(0.1)}
 						className='mb-6 font-medium text-primary text-xs uppercase tracking-[0.3em]'
 					>
-						Fullstack Developer / Porto Velho, Brasil
+						Porto Velho, Rondônia — Brasil
 					</motion.p>
 
 					<div className='overflow-hidden'>
@@ -191,7 +191,7 @@ export default function Main() {
 							{...wordReveal(0.15)}
 							className='font-bold text-[7vw] uppercase leading-[0.9] tracking-tight xl:text-[6.5vw]'
 						>
-							Crafting Digital
+							Engenheiro de
 						</motion.h1>
 					</div>
 
@@ -200,14 +200,14 @@ export default function Main() {
 							{...wordReveal(0.25)}
 							className='font-bold text-[7vw] uppercase leading-[0.9] tracking-tight xl:text-[6.5vw]'
 						>
-							Experiences
+							software
 						</motion.h1>
 
 						<motion.span
 							{...wordReveal(0.35)}
 							className='mb-2 font-serif text-[5vw] text-primary italic leading-none xl:text-[4.5vw]'
 						>
-							with code
+							fullstack
 						</motion.span>
 					</div>
 
@@ -215,8 +215,9 @@ export default function Main() {
 						{...fadeIn(0.5)}
 						className='mt-12 max-w-lg text-lg text-muted-foreground leading-relaxed'
 					>
-						Desenvolvedor fullstack com foco em interfaces modernas, performance
-						e animações imersivas. Especializado em React, Next.js e TypeScript.
+						Desenvolvedor com forte ênfase em frontend, com 5+ anos de
+						experiência, profissional em transformar ideias malucas em
+						interfaces funcionais.
 					</motion.p>
 
 					<motion.div
@@ -224,7 +225,7 @@ export default function Main() {
 						className='mt-10 flex items-center gap-6'
 					>
 						<Link
-							href='#cases'
+							href='#projetos'
 							className='group flex items-center gap-3 rounded-full bg-primary px-8 py-4 font-medium text-primary-foreground transition-all hover:scale-105 hover:shadow-lg hover:shadow-primary/25'
 						>
 							Ver projetos

@@ -160,7 +160,7 @@ export default function PortfolioDrawer({
 													</div>
 
 													<Link
-														href='#cases'
+														href='#projetos'
 														onClick={onClose}
 														className='group flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-border transition-all duration-300 hover:border-primary hover:bg-primary hover:text-primary-foreground'
 													>

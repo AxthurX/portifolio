@@ -71,10 +71,10 @@ export default function Home() {
 				<footer className='mt-8 w-full border-border border-t py-8'>
 					<div className='mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 md:flex-row md:px-8 lg:px-12'>
 						<p className='text-muted-foreground text-sm'>
-							2024 Arthur Martins. Todos os direitos reservados.
+							© Todos os Direitos Reservados - 2026
 						</p>
 						<p className='text-muted-foreground text-xs'>
-							Feito com Next.js, TailwindCSS e muito cafe
+							Arthur Martins LTDA. Feito com Next.js e muito cafe
 						</p>
 					</div>
 				</footer>

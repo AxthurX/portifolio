@@ -13,7 +13,7 @@ export default function sitemap() {
 			priority: 0.8,
 		},
 		{
-			url: 'https://arthurmartins.dev/#cases',
+			url: 'https://arthurmartins.dev/#projetos',
 			lastModified: new Date(),
 			changeFrequency: 'weekly',
 			priority: 0.9,

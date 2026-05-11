@@ -16,32 +16,50 @@ const PROJECTS = [
 	{
 		id: '01',
 		client: 'SEDAM',
-		category: 'Sistema Governamental',
-		title: 'Plataforma de requerimentos digitais e gestão documental',
+		category: 'Fullstack & Governo Digital',
+		title:
+			'Plataforma de requerimentos digitais com upload inteligente, validações e gestão documental',
 		image: '/projetos/sedam.jpg',
 	},
 	{
 		id: '02',
-		client: 'Portal de Noticias',
-		category: 'CMS & Editor Avançado',
-		title: 'Migração completa do TinyMCE para Tiptap com recursos customizados',
+		client: 'Portal Institucional',
+		category: 'Editor Visual & CMS',
+		title:
+			'Migração de editor legado para Tiptap com galerias customizadas, uploads e experiência otimizada',
 		image: '/projetos/portal.jpg',
 	},
 	{
 		id: '03',
-		client: 'Chat IA Corporativo',
-		category: 'AI & Fullstack',
+		client: 'Assistente IA',
+		category: 'AI Engineering',
 		title:
-			'Sistema de chat inteligente com RAG, sessões e respostas estruturadas',
+			'Chat corporativo com RAG, sessões persistentes e renderização dinâmica de mensagens',
 		image: '/projetos/chat-ai.jpg',
 	},
 	{
 		id: '04',
-		client: 'Acessibilidade Web',
+		client: 'Design System',
 		category: 'Frontend Architecture',
 		title:
-			'Biblioteca reutilizável com integração Tailwind e componentes acessíveis',
+			'Biblioteca acessível de componentes reutilizáveis integrada com Tailwind e Next.js',
 		image: '/projetos/acessibilidade.jpg',
+	},
+	{
+		id: '05',
+		client: 'Painel Administrativo',
+		category: 'Dashboard & UX',
+		title:
+			'Interface administrativa com filtros dinâmicos, tabelas performáticas e fluxos otimizados',
+		image: '/projetos/dashboard.jpg',
+	},
+	{
+		id: '06',
+		client: 'Portfólio Interativo',
+		category: 'Creative Development',
+		title:
+			'Experiência frontend com animações fluidas, microinterações e foco em performance',
+		image: '/projetos/portfolio.jpg',
 	},
 ];
 
