@@ -9,13 +9,14 @@ gsap.registerPlugin(ScrollTrigger);
 
 const EXPERIENCIAS = [
 	{
+		id: 1,
 		cargo: 'Software Engineer',
 		empresa: 'Governo de Rondônia',
-		setor: 'Secretaria de Estado do Desenvolvimento Ambiental (SEDAM)',
 		tipo: 'Meio período',
 		periodo: 'mai. 2024 — o momento',
 		duracao: '2 anos 1 mês',
 		local: 'Porto Velho, Rondônia · No local',
+		setor: 'Secretaria de Estado do Desenvolvimento Ambiental (SEDAM)',
 		descricao: [
 			'Responsável pelo desenvolvimento e manutenção de portais e sistemas da SEDAM, com destaque para o Portal SEDAM, principal site institucional da Secretaria, responsável por concentrar informações ambientais, regulatórias, sistema de notícias, serviços online e formulários dinâmicos para solicitações de certificados e autorizações.',
 			'Participando ativamente da definição de padrões de arquitetura, boas práticas de código e da modernização da infraestrutura.',
@@ -34,9 +35,9 @@ const EXPERIENCIAS = [
 		],
 		atual: true,
 		logo: 'RO',
-		logoColor: 'bg-emerald-900/40 text-emerald-400 border-emerald-700/40',
 	},
 	{
+		id: 2,
 		cargo: 'Software Engineer',
 		empresa: 'Obter Soluções Tecnológicas NossoERP',
 		setor: null,
@@ -63,11 +64,10 @@ const EXPERIENCIAS = [
 		],
 		atual: false,
 		logo: 'OB',
-		logoColor: 'bg-blue-900/40 text-blue-400 border-blue-700/40',
 	},
 ];
 
-export default function Processos() {
+export default function Experiencias() {
 	const sectionRef = useRef<HTMLElement | null>(null);
 	const headingRef = useRef<HTMLHeadingElement | null>(null);
 
@@ -121,11 +121,11 @@ export default function Processos() {
 	return (
 		<section
 			ref={sectionRef}
-			id='processos'
+			id='experiencias'
 			className='relative w-full overflow-hidden border-border border-t py-16 md:py-32'
 		>
-			<div className='relative z-10 mb-16 px-4 text-left md:mb-24'>
-				<span className='mb-4 block font-medium text-primary text-xs uppercase tracking-widest md:mb-6'>
+			<div className='relative z-10 mb-16 px-4 text-left md:mb-12'>
+				<span className='mb-4 block font-medium text-primary text-xs uppercase tracking-widest'>
 					Habilidades
 				</span>
 
@@ -140,7 +140,7 @@ export default function Processos() {
 				</h3>
 			</div>
 
-			<div className='relative mx-auto px-4 md:px-6'>
+			<div className='relative mx-auto px-4'>
 				<div className='absolute top-0 bottom-0 left-1/2 hidden w-px -translate-x-1/2 bg-border md:block' />
 
 				<div className='relative flex flex-col gap-8'>
@@ -149,7 +149,7 @@ export default function Processos() {
 
 						return (
 							<div
-								key={exp.cargo}
+								key={exp.id}
 								className={`relative flex w-full flex-col items-start md:items-center md:justify-between ${
 									isEven ? 'md:flex-row' : 'md:flex-row-reverse'
 								}`}
@@ -179,9 +179,11 @@ export default function Processos() {
 									style={{ width: '42px' }}
 								>
 									<div
-										className={`relative z-10 mt-1 flex h-10 w-10 items-center justify-center rounded-full border-2 bg-primary font-bold text-xs ${exp.logoColor}`}
+										className={
+											'relative z-10 mt-1 flex h-10 w-10 items-center justify-center rounded-full border-2 bg-primary font-bold text-primary-content text-xs'
+										}
 									>
-										{exp.logo}
+										{exp.atual ? 'Atual' : exp.periodo.split(' ')[1]}
 									</div>
 								</motion.div>
 
@@ -199,7 +201,9 @@ export default function Processos() {
 												<div>
 													<div className='mb-1 flex items-center gap-2'>
 														<div
-															className={`flex h-8 w-8 items-center justify-center rounded-full border font-bold text-[10px] md:hidden ${exp.logoColor}`}
+															className={
+																'flex h-8 w-8 items-center justify-center rounded-full border font-bold text-[10px] md:hidden'
+															}
 														>
 															{exp.logo}
 														</div>
@@ -219,11 +223,6 @@ export default function Processos() {
 															· {exp.tipo}
 														</span>
 													</p>
-													{exp.setor && (
-														<p className='mt-0.5 text-muted-foreground text-xs'>
-															{exp.setor}
-														</p>
-													)}
 												</div>
 
 												<div className='shrink-0 text-right'>
@@ -239,11 +238,14 @@ export default function Processos() {
 												</div>
 											</div>
 
-											{/* Divider */}
 											<div className='mb-5 h-px bg-border' />
 
-											{/* Description */}
 											<ul className='mb-6 flex flex-col gap-3'>
+												{exp.setor && (
+													<p className='mt-0.5 text-muted-foreground text-sm'>
+														{exp.setor}
+													</p>
+												)}
 												{exp.descricao.map((item) => (
 													<li
 														key={item}

@@ -31,7 +31,7 @@ function LinkedinIcon({ className }: { className?: string }) {
 	);
 }
 
-export default function Hero() {
+export default function Main() {
 	const sectionRef = useRef<HTMLElement | null>(null);
 
 	const transition: Transition = {
@@ -75,7 +75,7 @@ export default function Hero() {
 			ref={sectionRef}
 			initial='hidden'
 			animate='visible'
-			className='relative flex min-h-screen w-full flex-col justify-between overflow-hidden px-6 py-8 md:px-12 lg:px-20'
+			className='relative flex min-h-screen w-full flex-col justify-between overflow-hidden px-6 py-8 md:px-12 lg:px-50'
 		>
 			<div className='pointer-events-none absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-accent/5' />
 

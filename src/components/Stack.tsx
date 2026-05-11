@@ -23,10 +23,10 @@ const tools = [
 	'Notion',
 ];
 
-export default function NossoTime() {
+export default function Stack() {
 	return (
 		<section
-			id='nosso-time'
+			id='stack'
 			className='mb-8 flex w-full flex-col items-start border-border border-t py-16 md:mb-16 md:py-24'
 		>
 			{/* Header */}

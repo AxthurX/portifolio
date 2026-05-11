@@ -1,7 +1,6 @@
 import { Inter, Playfair_Display } from 'next/font/google';
 import './globals.css';
 import type { Metadata } from 'next';
-import Analytics from '../components/Analytics';
 import { ThemeProvider } from '../components/ThemeProvider';
 
 const inter = Inter({
@@ -95,7 +94,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
 		<html
 			lang='pt-BR'
 			className={`${inter.variable} ${playfair.variable} bg-background`}
-			suppressHydrationWarning
 			data-theme='arthur'
 		>
 			<head>
@@ -108,7 +106,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 				<meta property='og:url' content='https://arthurmartins.dev' />
 			</head>
 
-			<body className='min-h-screen overflow-x-hidden bg-background font-sans text-foreground antialiased'>
+			<body className='flex min-h-screen flex-col items-center bg-background font-sans text-foreground antialiased'>
 				<ThemeProvider
 					attribute='class'
 					defaultTheme='dark'
@@ -116,7 +114,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
 					disableTransitionOnChange={false}
 				>
 					{children}
-					<Analytics />
 				</ThemeProvider>
 			</body>
 		</html>

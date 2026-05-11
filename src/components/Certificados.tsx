@@ -373,7 +373,7 @@ export default function Certificados() {
 			<div className='relative z-10 px-4 md:px-0'>
 				{/* Header */}
 				<div className='mb-12 md:mb-16'>
-					<span className='mb-4 block font-medium text-primary text-xs uppercase tracking-widest md:mb-6'>
+					<span className='mb-4 block font-medium text-primary text-xs uppercase tracking-widest'>
 						Conquistas
 					</span>
 					<h3
@@ -391,8 +391,7 @@ export default function Certificados() {
 					</p>
 				</div>
 
-				{/* Trophy Cabinet Frame */}
-				<div className='relative mx-auto max-w-7xl'>
+				<div className='relative mx-auto'>
 					<div className='relative rounded-2xl border border-border bg-card/30 p-1 shadow-2xl backdrop-blur-sm'>
 						<div className='flex items-center gap-3 rounded-t-xl border-border border-b bg-card/60 px-6 py-3'>
 							<div className='ml-auto font-medium text-[10px] text-muted-foreground uppercase tracking-widest'>

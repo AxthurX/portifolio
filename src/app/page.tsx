@@ -1,21 +1,19 @@
 'use client';
 
 import Lenis from 'lenis';
-import { useEffect, useRef, useState } from 'react';
-import Cases from '../components/Cases';
-import Certificados from '../components/Certificates';
+import { useEffect, useState } from 'react';
+import Certificados from '../components/Certificados';
 import Contato from '../components/Contato';
+import Experiencias from '../components/Experiencias';
 import Header from '../components/Header';
-import Hero from '../components/Hero';
-import NossoTime from '../components/NossoTime';
+import Main from '../components/Main';
 import PortfolioDrawer from '../components/PortfolioDrawer';
-import Processos from '../components/Processos';
-import QuemSomos from '../components/QuemSomos';
+import Projetos from '../components/Projetos';
+import SobreMim from '../components/SobreMim';
+import Stack from '../components/Stack';
 
 export default function Home() {
 	const [portfolioOpen, setPortfolioOpen] = useState<boolean>(false);
-
-	const rafRef = useRef<number | null>(null);
 
 	useEffect(() => {
 		const lenis = new Lenis({
@@ -26,18 +24,18 @@ export default function Home() {
 			touchMultiplier: 2,
 		});
 
-		const raf = (time: number) => {
+		let raf_id = 0;
+
+		const animate = (time: number) => {
 			lenis.raf(time);
 
-			rafRef.current = requestAnimationFrame(raf);
+			raf_id = requestAnimationFrame(animate);
 		};
 
-		rafRef.current = requestAnimationFrame(raf);
+		raf_id = requestAnimationFrame(animate);
 
 		return () => {
-			if (rafRef.current) {
-				cancelAnimationFrame(rafRef.current);
-			}
+			if (raf_id) cancelAnimationFrame(raf_id);
 
 			lenis.destroy();
 		};
@@ -53,18 +51,18 @@ export default function Home() {
 
 	return (
 		<>
-			<main className='relative flex min-h-screen w-full flex-col items-center bg-background text-foreground'>
+			<main className='relative flex min-h-screen w-full grow flex-col items-center'>
 				<Header onPortfolioOpen={() => setPortfolioOpen(true)} />
 
-				<div className='flex w-full flex-col'>
-					<Hero />
+				<div className='w-full flex-col'>
+					<Main />
 
-					<div className='mx-auto max-w-7xl px-4 md:px-8 lg:px-12'>
-						<Cases />
-						<QuemSomos />
-						<Processos />
+					<div className='mx-auto max-w-430 px-4 md:px-8 lg:px-12'>
+						<SobreMim />
+						<Projetos />
+						<Experiencias />
 						<Certificados />
-						<NossoTime />
+						<Stack />
 						<Contato />
 					</div>
 				</div>

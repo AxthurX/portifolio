@@ -4,7 +4,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 
-export interface Case {
+export interface Projeto {
 	id: string;
 	client: string;
 	category: string;
@@ -12,20 +12,20 @@ export interface Case {
 	image: string;
 }
 
-const CASES = [
+const PROJECTS = [
 	{
 		id: '01',
 		client: 'SEDAM',
 		category: 'Sistema Governamental',
 		title: 'Plataforma de requerimentos digitais e gestão documental',
-		image: '/cases/sedam.jpg',
+		image: '/projetos/sedam.jpg',
 	},
 	{
 		id: '02',
 		client: 'Portal de Noticias',
 		category: 'CMS & Editor Avançado',
 		title: 'Migração completa do TinyMCE para Tiptap com recursos customizados',
-		image: '/cases/portal.jpg',
+		image: '/projetos/portal.jpg',
 	},
 	{
 		id: '03',
@@ -33,7 +33,7 @@ const CASES = [
 		category: 'AI & Fullstack',
 		title:
 			'Sistema de chat inteligente com RAG, sessões e respostas estruturadas',
-		image: '/cases/chat-ai.jpg',
+		image: '/projetos/chat-ai.jpg',
 	},
 	{
 		id: '04',
@@ -41,11 +41,11 @@ const CASES = [
 		category: 'Frontend Architecture',
 		title:
 			'Biblioteca reutilizável com integração Tailwind e componentes acessíveis',
-		image: '/cases/acessibilidade.jpg',
+		image: '/projetos/acessibilidade.jpg',
 	},
 ];
 
-function CaseCard({ projeto }: { projeto: Case }) {
+function ProjectCard({ projeto }: { projeto: Projeto }) {
 	return (
 		<div className='group relative flex h-[60vh] w-full shrink-0 cursor-pointer flex-col justify-between overflow-hidden rounded-2xl border border-border bg-surface p-6 md:h-[70vh] md:w-[55vw] md:p-8'>
 			{/* Background gradient */}
@@ -93,7 +93,7 @@ function CaseCard({ projeto }: { projeto: Case }) {
 	);
 }
 
-export default function Cases() {
+export default function Projetos() {
 	const targetRef = useRef(null);
 	const [isMobile, setIsMobile] = useState(false);
 
@@ -109,7 +109,7 @@ export default function Cases() {
 
 	if (isMobile) {
 		return (
-			<section id='cases' className='w-full px-4 py-16'>
+			<section id='projetos' className='w-full px-4 py-16'>
 				<div className='mb-12'>
 					<span className='mb-4 block font-medium text-primary text-xs uppercase tracking-widest'>
 						Projetos
@@ -123,7 +123,7 @@ export default function Cases() {
 				</div>
 
 				<div className='flex flex-col gap-6'>
-					{CASES.map((projeto) => (
+					{PROJECTS.map((projeto) => (
 						<motion.div
 							key={projeto.id}
 							initial={{ opacity: 0, y: 30 }}
@@ -131,7 +131,7 @@ export default function Cases() {
 							viewport={{ once: true, margin: '-50px' }}
 							transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
 						>
-							<CaseCard projeto={projeto} />
+							<ProjectCard projeto={projeto} />
 						</motion.div>
 					))}
 				</div>
@@ -140,7 +140,7 @@ export default function Cases() {
 	}
 
 	return (
-		<section id='cases' ref={targetRef} className='relative h-[400vh]'>
+		<section id='projetos' ref={targetRef} className='relative h-[400vh]'>
 			<div className='sticky top-0 flex h-screen items-center overflow-hidden'>
 				<div className='absolute top-24 left-8 z-20 md:left-12'>
 					<span className='mb-4 block font-medium text-primary text-xs uppercase tracking-widest'>
@@ -156,10 +156,10 @@ export default function Cases() {
 
 				<motion.div
 					style={{ x }}
-					className='flex gap-8 px-4 pt-24 pl-[5vw] md:gap-12 md:px-12 md:pl-[20vw]'
+					className='flex gap-8 px-4 pt-42 pl-[5vw] md:gap-12 md:px-14'
 				>
-					{CASES.map((projeto) => (
-						<CaseCard key={projeto.id} projeto={projeto} />
+					{PROJECTS.map((projeto) => (
+						<ProjectCard key={projeto.id} projeto={projeto} />
 					))}
 				</motion.div>
 			</div>

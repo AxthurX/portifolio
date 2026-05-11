@@ -5,11 +5,12 @@ import { Download, Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 
-const navLinks = [
-	{ href: '#quem-somos', label: 'Sobre' },
-	{ href: '#processos', label: 'Skills' },
-	{ href: '#cases', label: 'Projetos' },
-	{ href: '#faqs', label: 'FAQ' },
+const LINKS = [
+	{ href: '#sobre-mim', label: 'Sobre' },
+	{ href: '#projetos', label: 'Projetos' },
+	{ href: '#experiencias', label: 'Experiencias' },
+	{ href: '#certificados', label: 'Licenças & Certificados' },
+	{ href: '#certificados', label: 'Stack' },
 ];
 
 export default function Header({
@@ -25,7 +26,7 @@ export default function Header({
 				initial={{ y: -50, opacity: 0 }}
 				animate={{ y: 0, opacity: 1 }}
 				transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
-				className='pointer-events-none fixed top-0 left-0 z-50 flex w-full items-start justify-between px-4 pt-4 md:px-8 lg:px-12'
+				className='pointer-events-none fixed top-0 z-50 flex w-full max-w-400 justify-between px-4 pt-4 md:px-8 lg:px-12'
 			>
 				{/* Backdrop */}
 				<div
@@ -34,7 +35,7 @@ export default function Header({
 				/>
 
 				{/* Left - Logo */}
-				<div className='pointer-events-auto relative z-10 flex h-14 items-center gap-2 pl-5'>
+				<div className='pointer-events-auto relative z-10 flex h-14 items-center gap-6 pl-5'>
 					<Link
 						href='/'
 						className='flex items-center gap-3 transition-opacity hover:opacity-80'
@@ -46,21 +47,22 @@ export default function Header({
 							Arthur Martins
 						</span>
 					</Link>
-					<a
-						href='/curriculo.pdf'
+
+					<Link
 						download
+						href='/curriculo.pdf'
 						title='Baixar Currículo'
 						className='hidden items-center gap-1.5 rounded-full border border-border bg-foreground/5 px-3 py-1.5 font-medium text-muted-foreground text-xs transition-all hover:border-primary/40 hover:text-primary md:flex'
 					>
 						<Download className='h-3 w-3' />
 						Currículo
-					</a>
+					</Link>
 				</div>
 
 				{/* Center - Nav (Desktop only) */}
 				<nav className='pointer-events-auto absolute inset-x-0 top-4 z-10 hidden h-14 items-center justify-center md:flex'>
 					<div className='flex items-center gap-1 rounded-full border border-border bg-surface/50 p-1'>
-						{navLinks.map((link) => (
+						{LINKS.map((link) => (
 							<a
 								key={link.href}
 								href={link.href}
@@ -149,7 +151,7 @@ export default function Header({
 								Portfolio
 							</motion.button>
 
-							{navLinks.map((link, i) => (
+							{LINKS.map((link, i) => (
 								<motion.a
 									key={link.href}
 									href={link.href}

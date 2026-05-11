@@ -32,7 +32,7 @@ const PROJECTS: Project[] = [
 		client: 'ELEVATE TECH',
 		category: 'Branding & Web Design',
 		year: '2024',
-		desc: 'Redesign completo de identidade visual e plataforma digital para uma startup de financas que triplicou sua conversao.',
+		desc: 'Redesign completo de identidade visual e plataforma digital para uma startup de finanças que triplicou sua conversão.',
 		img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1415&auto=format&fit=crop',
 	},
 	{
@@ -48,7 +48,7 @@ const PROJECTS: Project[] = [
 		client: 'NXT MOBILITY',
 		category: 'UX/UI & Dashboard',
 		year: '2023',
-		desc: 'App de mobilidade urbana com dashboard de dados em tempo real, design system proprietario e animacoes nativas.',
+		desc: 'App de mobilidade urbana com dashboard de dados em tempo real, design system proprietário e animações nativas.',
 		img: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1374&auto=format&fit=crop',
 	},
 	{
@@ -56,7 +56,7 @@ const PROJECTS: Project[] = [
 		client: 'LUMINA ART',
 		category: 'Digital Studio',
 		year: '2023',
-		desc: 'Plataforma interativa para galeria de arte contemporanea com tours virtuais e integracao com Web3.',
+		desc: 'Plataforma interativa para galeria de arte contemporânea com tours virtuais e integração com Web3.',
 		img: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1364&auto=format&fit=crop',
 	},
 ];
