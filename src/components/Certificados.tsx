@@ -1,325 +1,432 @@
-/** biome-ignore-all lint/a11y/noStaticElementInteractions: <explanation> */
 'use client';
 
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ExternalLink } from 'lucide-react';
+import { Award, BadgeCheck, ExternalLink, Medal, Shield, Star } from 'lucide-react';
 import { type RefObject, useEffect, useRef, useState } from 'react';
 
 gsap.registerPlugin(ScrollTrigger);
 
-type TrophySize = 'large' | 'medium' | 'small' | 'mini';
+type ItemType = 'badge' | 'certificate' | 'medal' | 'patch';
+type ItemSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
-interface Certificate {
+interface CertificateItem {
+	id: string;
 	title: string;
 	issuer: string;
 	date: string;
 	credentialCode?: string;
 	credentialUrl?: string;
 	skills?: string[];
-	size: TrophySize;
-	color: 'gold' | 'silver' | 'bronze' | 'teal';
+	type: ItemType;
+	size: ItemSize;
+	color: 'gold' | 'silver' | 'blue' | 'green' | 'purple';
+	gridArea?: string;
 }
 
-const certificates: Certificate[] = [
+const certificates: CertificateItem[] = [
 	{
+		id: '1',
 		title: 'Google Project Management Professional Certificate',
 		issuer: 'Coursera / Google',
 		date: 'Abr 2026',
 		credentialUrl: '#',
 		skills: ['Gestão de Projetos', 'Agile', 'Scrum'],
-		size: 'large',
+		type: 'certificate',
+		size: 'xl',
 		color: 'gold',
 	},
 	{
+		id: '2',
+		title: 'Google Agile Project Management',
+		issuer: 'Google',
+		date: 'Ago 2025',
+		credentialCode: '1GAD79VY6B3P',
+		credentialUrl: '#',
+		skills: ['Scrum', 'Kanban'],
+		type: 'badge',
+		size: 'md',
+		color: 'blue',
+	},
+	{
+		id: '3',
 		title: 'Google Project Management',
 		issuer: 'Google',
 		date: 'Ago 2025',
 		credentialCode: 'G5LRW5CUFGWH',
 		credentialUrl: '#',
 		skills: ['Gestão de Projetos'],
-		size: 'medium',
+		type: 'certificate',
+		size: 'lg',
 		color: 'gold',
 	},
 	{
-		title: 'Google Agile Project Management',
-		issuer: 'Google',
-		date: 'Ago 2025',
-		credentialCode: '1GAD79VY6B3P',
-		credentialUrl: '#',
-		skills: ['Scrum', 'Gestão de Projetos'],
-		size: 'medium',
-		color: 'silver',
-	},
-	{
+		id: '4',
 		title: 'Fundamentos de Suporte de TI',
 		issuer: 'Google',
 		date: 'Jan 2025',
 		credentialUrl: '#',
-		skills: ['TI', 'Suporte Técnico'],
-		size: 'small',
-		color: 'bronze',
+		skills: ['TI', 'Suporte'],
+		type: 'badge',
+		size: 'sm',
+		color: 'green',
 	},
 	{
-		title: 'Next.js Advanced Patterns',
+		id: '5',
+		title: 'Next.js Advanced',
 		issuer: 'Vercel',
 		date: 'Mar 2025',
 		credentialUrl: '#',
-		skills: ['Next.js', 'React', 'TypeScript'],
-		size: 'medium',
-		color: 'teal',
-	},
-	{
-		title: 'CSS & Animations Mastery',
-		issuer: 'Frontend Masters',
-		date: 'Dez 2024',
-		credentialUrl: '#',
-		skills: ['CSS', 'Animações', 'GSAP'],
-		size: 'small',
+		skills: ['Next.js', 'React'],
+		type: 'medal',
+		size: 'md',
 		color: 'silver',
 	},
 	{
-		title: 'TypeScript Fundamentals',
+		id: '6',
+		title: 'CSS & Animations',
+		issuer: 'Frontend Masters',
+		date: 'Dez 2024',
+		credentialUrl: '#',
+		skills: ['CSS', 'GSAP'],
+		type: 'patch',
+		size: 'sm',
+		color: 'purple',
+	},
+	{
+		id: '7',
+		title: 'TypeScript',
 		issuer: 'Microsoft',
 		date: 'Nov 2024',
 		credentialUrl: '#',
-		size: 'mini',
-		color: 'bronze',
+		type: 'badge',
+		size: 'xs',
+		color: 'blue',
 	},
 	{
-		title: 'React Developer Certification',
+		id: '8',
+		title: 'React Developer',
 		issuer: 'Meta',
 		date: 'Out 2024',
 		credentialUrl: '#',
-		skills: ['React', 'Hooks'],
-		size: 'small',
-		color: 'teal',
+		skills: ['React'],
+		type: 'medal',
+		size: 'sm',
+		color: 'blue',
 	},
 	{
-		title: 'Node.js & APIs',
-		issuer: 'OpenJS Foundation',
+		id: '9',
+		title: 'Node.js',
+		issuer: 'OpenJS',
 		date: 'Set 2024',
 		credentialUrl: '#',
-		size: 'mini',
-		color: 'gold',
+		type: 'badge',
+		size: 'xs',
+		color: 'green',
 	},
 ];
 
-const colorMap = {
+const colorSchemes = {
 	gold: {
-		cup: 'text-yellow-400',
-		base: 'bg-yellow-400/10 border-yellow-400/30',
-		glow: 'shadow-yellow-400/20',
-		badge: 'bg-yellow-400/15 text-yellow-300 border-yellow-400/30',
-		stem: 'bg-yellow-400/40',
-		label: 'text-yellow-300',
+		bg: 'bg-amber-500/10',
+		border: 'border-amber-500/40',
+		text: 'text-amber-400',
+		glow: 'shadow-amber-500/20',
+		ribbon: 'bg-gradient-to-r from-amber-600 via-amber-400 to-amber-600',
+		accent: '#f59e0b',
 	},
 	silver: {
-		cup: 'text-zinc-300',
-		base: 'bg-zinc-300/10 border-zinc-300/30',
-		glow: 'shadow-zinc-300/20',
-		badge: 'bg-zinc-300/15 text-zinc-200 border-zinc-300/30',
-		stem: 'bg-zinc-300/40',
-		label: 'text-zinc-300',
+		bg: 'bg-zinc-400/10',
+		border: 'border-zinc-400/40',
+		text: 'text-zinc-300',
+		glow: 'shadow-zinc-400/20',
+		ribbon: 'bg-gradient-to-r from-zinc-500 via-zinc-300 to-zinc-500',
+		accent: '#a1a1aa',
 	},
-	bronze: {
-		cup: 'text-orange-400',
-		base: 'bg-orange-400/10 border-orange-400/30',
-		glow: 'shadow-orange-400/20',
-		badge: 'bg-orange-400/15 text-orange-300 border-orange-400/30',
-		stem: 'bg-orange-400/40',
-		label: 'text-orange-300',
+	blue: {
+		bg: 'bg-blue-500/10',
+		border: 'border-blue-500/40',
+		text: 'text-blue-400',
+		glow: 'shadow-blue-500/20',
+		ribbon: 'bg-gradient-to-r from-blue-600 via-blue-400 to-blue-600',
+		accent: '#3b82f6',
 	},
-	teal: {
-		cup: 'text-teal-400',
-		base: 'bg-teal-400/10 border-teal-400/30',
-		glow: 'shadow-teal-400/20',
-		badge: 'bg-teal-400/15 text-teal-300 border-teal-400/30',
-		stem: 'bg-teal-400/40',
-		label: 'text-teal-300',
+	green: {
+		bg: 'bg-emerald-500/10',
+		border: 'border-emerald-500/40',
+		text: 'text-emerald-400',
+		glow: 'shadow-emerald-500/20',
+		ribbon: 'bg-gradient-to-r from-emerald-600 via-emerald-400 to-emerald-600',
+		accent: '#10b981',
 	},
-};
-
-const sizeConfig = {
-	large: {
-		cupH: 'h-20',
-		cupW: 'w-16',
-		stemH: 'h-8',
-		baseW: 'w-20',
-		cardW: 'col-span-2 row-span-2',
-		minH: 'min-h-[260px]',
-	},
-	medium: {
-		cupH: 'h-14',
-		cupW: 'w-12',
-		stemH: 'h-5',
-		baseW: 'w-16',
-		cardW: 'col-span-1 row-span-2',
-		minH: 'min-h-[200px]',
-	},
-	small: {
-		cupH: 'h-10',
-		cupW: 'w-9',
-		stemH: 'h-4',
-		baseW: 'w-12',
-		cardW: 'col-span-1 row-span-1',
-		minH: 'min-h-[160px]',
-	},
-	mini: {
-		cupH: 'h-7',
-		cupW: 'w-7',
-		stemH: 'h-3',
-		baseW: 'w-10',
-		cardW: 'col-span-1 row-span-1',
-		minH: 'min-h-[140px]',
+	purple: {
+		bg: 'bg-violet-500/10',
+		border: 'border-violet-500/40',
+		text: 'text-violet-400',
+		glow: 'shadow-violet-500/20',
+		ribbon: 'bg-gradient-to-r from-violet-600 via-violet-400 to-violet-600',
+		accent: '#8b5cf6',
 	},
 };
 
-function TrophySVG({
-	size,
-	color,
-}: {
-	size: TrophySize;
-	color: Certificate['color'];
-}) {
-	const c = colorMap[color];
-	const s = sizeConfig[size];
-
-	return (
-		<div className='flex flex-col items-center'>
-			{/* Cup body */}
-			<div className={`relative ${s.cupH} ${s.cupW} ${c.cup}`}>
-				<svg
-					viewBox='0 0 64 72'
-					fill='currentColor'
-					className='h-full w-full drop-shadow-lg'
-				>
-					<title>Trophy</title>
-					<path
-						d='M4 14 Q0 14 0 22 Q0 30 6 32 L10 30 Q6 28 6 22 Q6 18 8 16 Z'
-						opacity='0.7'
-					/>
-					<path
-						d='M60 14 Q64 14 64 22 Q64 30 58 32 L54 30 Q58 28 58 22 Q58 18 56 16 Z'
-						opacity='0.7'
-					/>
-					{/* Main cup */}
-					<path d='M8 6 Q8 0 32 0 Q56 0 56 6 L52 42 Q50 52 32 54 Q14 52 12 42 Z' />
-					{/* Shine */}
-					<path
-						d='M14 8 Q16 4 24 3 L22 20 Q16 18 14 8 Z'
-						fill='white'
-						opacity='0.15'
-					/>
-					{/* Star or detail for large */}
-					{size === 'large' && (
-						<path
-							d='M32 18 L34 24 L40 24 L35 28 L37 34 L32 30 L27 34 L29 28 L24 24 L30 24 Z'
-							fill='white'
-							opacity='0.3'
-						/>
-					)}
-				</svg>
-			</div>
-			{/* Stem */}
-			<div className={`${s.stemH} w-2 ${c.stem} rounded-sm`} />
-			{/* Base */}
-			<div className={`h-2 ${s.baseW} ${c.stem} rounded-sm opacity-80`} />
-			<div className={`mt-0.5 h-1.5 w-8 ${c.stem} rounded-sm opacity-50`} />
-		</div>
-	);
-}
-
-function CertificateCard({
-	cert,
-	index,
-}: {
-	cert: Certificate;
-	index: number;
-}) {
+// Badge Component - circular/shield shape
+function BadgeItem({ item, index }: { item: CertificateItem; index: number }) {
 	const [hovered, setHovered] = useState(false);
-	const c = colorMap[cert.color];
-	const s = sizeConfig[cert.size];
+	const scheme = colorSchemes[item.color];
+	
+	const sizeClasses = {
+		xs: 'w-16 h-16',
+		sm: 'w-20 h-20',
+		md: 'w-28 h-28',
+		lg: 'w-32 h-32',
+		xl: 'w-40 h-40',
+	};
 
 	return (
 		<motion.div
-			className={`${s.cardW} ${s.minH}`}
+			initial={{ opacity: 0, scale: 0.8 }}
+			whileInView={{ opacity: 1, scale: 1 }}
+			viewport={{ once: true }}
+			transition={{ duration: 0.5, delay: index * 0.08 }}
+			className="flex flex-col items-center gap-2"
+			onMouseEnter={() => setHovered(true)}
+			onMouseLeave={() => setHovered(false)}
+		>
+			<div
+				className={`relative ${sizeClasses[item.size]} flex items-center justify-center rounded-full ${scheme.bg} border-2 ${scheme.border} transition-all duration-300 ${hovered ? `shadow-lg ${scheme.glow} scale-110` : ''}`}
+			>
+				{/* Inner glow ring */}
+				<div className={`absolute inset-2 rounded-full border ${scheme.border} opacity-50`} />
+				
+				{/* Icon */}
+				<Shield className={`${scheme.text} ${item.size === 'xs' ? 'w-6 h-6' : item.size === 'sm' ? 'w-8 h-8' : 'w-12 h-12'}`} />
+				
+				{/* Link on hover */}
+				{item.credentialUrl && hovered && (
+					<a
+						href={item.credentialUrl}
+						target="_blank"
+						rel="noopener noreferrer"
+						className={`absolute -top-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full ${scheme.bg} border ${scheme.border} ${scheme.text}`}
+						aria-label={`Ver credencial: ${item.title}`}
+					>
+						<ExternalLink size={10} />
+					</a>
+				)}
+			</div>
+			
+			{/* Label below badge */}
+			<div className="text-center max-w-24">
+				<p className={`text-[9px] font-semibold ${scheme.text} leading-tight truncate`}>
+					{item.title}
+				</p>
+				<p className="text-[8px] text-zinc-500">{item.issuer}</p>
+			</div>
+		</motion.div>
+	);
+}
+
+// Medal Component - ribbon style
+function MedalItem({ item, index }: { item: CertificateItem; index: number }) {
+	const [hovered, setHovered] = useState(false);
+	const scheme = colorSchemes[item.color];
+
+	return (
+		<motion.div
+			initial={{ opacity: 0, y: 20 }}
+			whileInView={{ opacity: 1, y: 0 }}
+			viewport={{ once: true }}
+			transition={{ duration: 0.5, delay: index * 0.08 }}
+			className="flex flex-col items-center"
+			onMouseEnter={() => setHovered(true)}
+			onMouseLeave={() => setHovered(false)}
+		>
+			{/* Ribbon */}
+			<div className={`w-8 h-6 ${scheme.ribbon} clip-ribbon`} />
+			
+			{/* Medal circle */}
+			<div
+				className={`relative -mt-1 w-14 h-14 flex items-center justify-center rounded-full ${scheme.bg} border-2 ${scheme.border} transition-all duration-300 ${hovered ? `shadow-lg ${scheme.glow} scale-105` : ''}`}
+			>
+				<Medal className={`${scheme.text} w-6 h-6`} />
+				
+				{item.credentialUrl && hovered && (
+					<a
+						href={item.credentialUrl}
+						target="_blank"
+						rel="noopener noreferrer"
+						className={`absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-zinc-900 border ${scheme.border} ${scheme.text}`}
+						aria-label={`Ver credencial: ${item.title}`}
+					>
+						<ExternalLink size={8} />
+					</a>
+				)}
+			</div>
+			
+			{/* Label */}
+			<div className="text-center mt-2 max-w-20">
+				<p className={`text-[9px] font-semibold ${scheme.text} leading-tight`}>
+					{item.title}
+				</p>
+				<p className="text-[7px] text-zinc-500">{item.date}</p>
+			</div>
+		</motion.div>
+	);
+}
+
+// Patch Component - embroidered style
+function PatchItem({ item, index }: { item: CertificateItem; index: number }) {
+	const [hovered, setHovered] = useState(false);
+	const scheme = colorSchemes[item.color];
+
+	return (
+		<motion.div
+			initial={{ opacity: 0, rotate: -5 }}
+			whileInView={{ opacity: 1, rotate: 0 }}
+			viewport={{ once: true }}
+			transition={{ duration: 0.5, delay: index * 0.08 }}
+			className="flex flex-col items-center"
+			onMouseEnter={() => setHovered(true)}
+			onMouseLeave={() => setHovered(false)}
+		>
+			<div
+				className={`relative w-20 h-16 flex flex-col items-center justify-center rounded-lg ${scheme.bg} border-2 ${scheme.border} transition-all duration-300 ${hovered ? `shadow-lg ${scheme.glow} scale-105` : ''}`}
+				style={{ 
+					backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255,255,255,0.02) 2px, rgba(255,255,255,0.02) 4px)' 
+				}}
+			>
+				<BadgeCheck className={`${scheme.text} w-6 h-6`} />
+				<p className={`text-[8px] font-bold ${scheme.text} mt-1 uppercase tracking-wider`}>
+					{item.issuer}
+				</p>
+				
+				{item.credentialUrl && hovered && (
+					<a
+						href={item.credentialUrl}
+						target="_blank"
+						rel="noopener noreferrer"
+						className={`absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-zinc-900 border ${scheme.border} ${scheme.text}`}
+						aria-label={`Ver credencial: ${item.title}`}
+					>
+						<ExternalLink size={8} />
+					</a>
+				)}
+			</div>
+			<p className={`text-[9px] font-medium ${scheme.text} mt-1 text-center max-w-20`}>
+				{item.title}
+			</p>
+		</motion.div>
+	);
+}
+
+// Certificate Component - horizontal document style
+function CertificateCard({ item, index }: { item: CertificateItem; index: number }) {
+	const [hovered, setHovered] = useState(false);
+	const scheme = colorSchemes[item.color];
+	
+	const sizeClasses = {
+		xs: 'w-32 h-20',
+		sm: 'w-40 h-24',
+		md: 'w-48 h-28',
+		lg: 'w-56 h-32',
+		xl: 'w-72 h-40',
+	};
+
+	return (
+		<motion.div
 			initial={{ opacity: 0, y: 30 }}
 			whileInView={{ opacity: 1, y: 0 }}
 			viewport={{ once: true }}
-			transition={{ duration: 0.5, delay: index * 0.06 }}
+			transition={{ duration: 0.5, delay: index * 0.08 }}
+			className={`relative ${sizeClasses[item.size]}`}
+			onMouseEnter={() => setHovered(true)}
+			onMouseLeave={() => setHovered(false)}
 		>
+			{/* Certificate frame */}
 			<div
-				className={`relative flex h-full cursor-pointer flex-col justify-between overflow-hidden rounded-xl border p-4 transition-all duration-300 ${c.base} ${hovered ? `shadow-lg ${c.glow}` : 'shadow-sm'}`}
-				onMouseEnter={() => setHovered(true)}
-				onMouseLeave={() => setHovered(false)}
+				className={`relative h-full w-full flex flex-col overflow-hidden rounded-sm bg-zinc-900/80 border-2 ${scheme.border} transition-all duration-300 ${hovered ? `shadow-xl ${scheme.glow}` : 'shadow-md'}`}
 			>
-				{/* Shelf glow top line */}
-				<div
-					className={`absolute top-0 right-0 left-0 h-px bg-linear-to-r from-transparent via-current to-transparent ${c.cup} opacity-30`}
-				/>
-
-				{/* Trophy */}
-				<div
-					className={`flex justify-center transition-transform duration-300 ${hovered ? '-translate-y-1' : ''}`}
-				>
-					<TrophySVG size={cert.size} color={cert.color} />
-				</div>
-
-				{/* Info */}
-				<div className='mt-3 flex flex-col gap-1'>
-					<p
-						className={`font-semibold text-foreground leading-tight ${cert.size === 'large' ? 'text-sm' : cert.size === 'mini' ? 'text-[10px]' : 'text-xs'}`}
-					>
-						{cert.title}
-					</p>
-					<p
-						className={`${c.label} font-medium ${cert.size === 'mini' ? 'text-[9px]' : 'text-[10px]'}`}
-					>
-						{cert.issuer}
-					</p>
-					<p className='text-[9px] text-muted-foreground'>{cert.date}</p>
-
-					{cert.skills && cert.size !== 'mini' && (
-						<div className='mt-1 flex flex-wrap gap-1'>
-							{cert.skills
-								.slice(0, cert.size === 'large' ? 3 : 1)
-								.map((skill) => (
+				{/* Top decorative border */}
+				<div className={`h-1.5 w-full ${scheme.ribbon}`} />
+				
+				{/* Content */}
+				<div className="flex-1 p-3 flex flex-col justify-between">
+					{/* Header with star */}
+					<div className="flex items-start gap-2">
+						<Award className={`${scheme.text} w-5 h-5 flex-shrink-0`} />
+						<div className="flex-1 min-w-0">
+							<p className={`text-[10px] font-bold ${scheme.text} leading-tight line-clamp-2`}>
+								{item.title}
+							</p>
+						</div>
+					</div>
+					
+					{/* Footer info */}
+					<div className="mt-auto">
+						<div className="flex items-center justify-between">
+							<div>
+								<p className="text-[9px] text-zinc-400 font-medium">{item.issuer}</p>
+								<p className="text-[8px] text-zinc-500">{item.date}</p>
+							</div>
+							{item.credentialCode && (
+								<div className={`px-1.5 py-0.5 rounded text-[7px] ${scheme.bg} ${scheme.text} border ${scheme.border}`}>
+									{item.credentialCode.slice(0, 8)}...
+								</div>
+							)}
+						</div>
+						
+						{/* Skills tags */}
+						{item.skills && item.size !== 'xs' && item.size !== 'sm' && (
+							<div className="flex flex-wrap gap-1 mt-2">
+								{item.skills.slice(0, 3).map((skill) => (
 									<span
 										key={skill}
-										className={`rounded-full border px-1.5 py-0.5 font-medium text-[8px] ${c.badge}`}
+										className="px-1.5 py-0.5 rounded-full bg-zinc-800 text-[7px] text-zinc-400 border border-zinc-700"
 									>
 										{skill}
 									</span>
 								))}
-						</div>
-					)}
+							</div>
+						)}
+					</div>
 				</div>
 
-				{/* Link icon on hover */}
-				{cert.credentialUrl && (
-					<motion.div
-						initial={{ opacity: 0, scale: 0.8 }}
-						animate={{ opacity: hovered ? 1 : 0, scale: hovered ? 1 : 0.8 }}
-						transition={{ duration: 0.2 }}
-						className='absolute top-3 right-3'
+				{/* Gold seal/stamp effect */}
+				<div className={`absolute bottom-2 right-2 w-8 h-8 rounded-full ${scheme.bg} border ${scheme.border} flex items-center justify-center opacity-60`}>
+					<Star className={`${scheme.text} w-4 h-4`} />
+				</div>
+
+				{/* Link overlay on hover */}
+				{item.credentialUrl && hovered && (
+					<a
+						href={item.credentialUrl}
+						target="_blank"
+						rel="noopener noreferrer"
+						className={`absolute top-2 right-2 flex h-6 w-6 items-center justify-center rounded-full bg-zinc-900/90 border ${scheme.border} ${scheme.text} transition-all`}
+						aria-label={`Ver credencial: ${item.title}`}
 					>
-						<a
-							href={cert.credentialUrl}
-							target='_blank'
-							rel='noopener noreferrer'
-							className={`flex h-6 w-6 items-center justify-center rounded-full border ${c.badge} transition-colors`}
-							onClick={(e) => e.stopPropagation()}
-							aria-label={`Ver credencial: ${cert.title}`}
-						>
-							<ExternalLink size={10} />
-						</a>
-					</motion.div>
+						<ExternalLink size={12} />
+					</a>
 				)}
 			</div>
 		</motion.div>
 	);
+}
+
+// Render item based on type
+function ShadowBoxItem({ item, index }: { item: CertificateItem; index: number }) {
+	switch (item.type) {
+		case 'badge':
+			return <BadgeItem item={item} index={index} />;
+		case 'medal':
+			return <MedalItem item={item} index={index} />;
+		case 'patch':
+			return <PatchItem item={item} index={index} />;
+		case 'certificate':
+		default:
+			return <CertificateCard item={item} index={index} />;
+	}
 }
 
 export default function Certificados() {
@@ -364,6 +471,12 @@ export default function Certificados() {
 		return () => ctx.revert();
 	}, []);
 
+	// Separate items by type for layout
+	const mainCertificates = certificates.filter(c => c.type === 'certificate');
+	const badges = certificates.filter(c => c.type === 'badge');
+	const medals = certificates.filter(c => c.type === 'medal');
+	const patches = certificates.filter(c => c.type === 'patch');
+
 	return (
 		<section
 			ref={sectionRef}
@@ -391,30 +504,110 @@ export default function Certificados() {
 					</p>
 				</div>
 
-				<div className='relative mx-auto'>
-					<div className='relative rounded-2xl border border-border bg-card/30 p-1 shadow-2xl backdrop-blur-sm'>
-						<div className='flex items-center gap-3 rounded-t-xl border-border border-b bg-card/60 px-6 py-3'>
-							<div className='ml-auto font-medium text-[10px] text-muted-foreground uppercase tracking-widest'>
-								Vitrine de Conquistas
-							</div>
-						</div>
+				{/* Shadow Box Frame */}
+				<div className='relative mx-auto max-w-5xl'>
+					{/* Outer frame - dark wood style */}
+					<div className='relative rounded-lg bg-gradient-to-br from-zinc-800 via-zinc-900 to-zinc-950 p-2 shadow-2xl'>
+						{/* Inner frame border - blue velvet mat */}
+						<div className='rounded-md bg-gradient-to-br from-slate-800 via-slate-900 to-slate-950 p-3 md:p-4'>
+							{/* Glass reflection effect */}
+							<div className='absolute inset-0 rounded-md bg-gradient-to-br from-white/5 via-transparent to-transparent pointer-events-none' />
+							
+							{/* Display area - dark velvet background */}
+							<div 
+								className='relative rounded-sm bg-zinc-950 p-4 md:p-8 min-h-[500px]'
+								style={{
+									backgroundImage: `
+										radial-gradient(ellipse at 20% 20%, rgba(30, 58, 138, 0.08) 0%, transparent 50%),
+										radial-gradient(ellipse at 80% 80%, rgba(30, 58, 138, 0.05) 0%, transparent 50%),
+										linear-gradient(180deg, rgba(0,0,0,0.3) 0%, transparent 20%, transparent 80%, rgba(0,0,0,0.3) 100%)
+									`,
+									boxShadow: 'inset 0 0 60px rgba(0,0,0,0.5)',
+								}}
+							>
+								{/* Year markers like in reference image */}
+								<div className='absolute top-4 left-4 md:top-6 md:left-8'>
+									<span className='text-zinc-600 font-mono text-lg md:text-2xl tracking-[0.3em]'>
+										2024
+									</span>
+								</div>
+								<div className='absolute top-4 right-4 md:top-6 md:right-8'>
+									<span className='text-zinc-600 font-mono text-lg md:text-2xl tracking-[0.3em]'>
+										2026
+									</span>
+								</div>
 
-						{/* Cabinet glass interior */}
-						<div className='relative rounded-b-xl bg-linear-to-b from-card/40 to-background/60 p-6'>
-							{/* Shelf lines */}
-							<div className='pointer-events-none absolute inset-x-6 top-[42%] h-px bg-border/50' />
-							<div className='pointer-events-none absolute inset-x-6 top-[72%] h-px bg-border/50' />
+								{/* Main content grid - mosaic layout */}
+								<div className='mt-12 md:mt-16'>
+									{/* Top row - badges and small items on sides, certificate in middle */}
+									<div className='flex flex-wrap items-start justify-center gap-4 md:gap-6'>
+										{/* Left side badges */}
+										<div className='flex flex-col gap-4'>
+											{badges.slice(0, 2).map((item, i) => (
+												<ShadowBoxItem key={item.id} item={item} index={i} />
+											))}
+										</div>
+										
+										{/* Center - main certificate */}
+										<div className='flex flex-col items-center gap-4'>
+											{mainCertificates.slice(0, 1).map((item, i) => (
+												<ShadowBoxItem key={item.id} item={item} index={i} />
+											))}
+											
+											{/* Medals row below main cert */}
+											<div className='flex gap-3 mt-2'>
+												{medals.map((item, i) => (
+													<ShadowBoxItem key={item.id} item={item} index={i + 3} />
+												))}
+											</div>
+										</div>
+										
+										{/* Right side badges */}
+										<div className='flex flex-col gap-4'>
+											{badges.slice(2).map((item, i) => (
+												<ShadowBoxItem key={item.id} item={item} index={i + 5} />
+											))}
+										</div>
+									</div>
 
-							{/* Trophy grid */}
-							<div className='grid grid-cols-4 grid-rows-3 gap-3 md:gap-4'>
-								{certificates.map((cert, i) => (
-									<CertificateCard key={cert.title} cert={cert} index={i} />
-								))}
+									{/* Middle section - certificates row */}
+									<div className='flex flex-wrap items-center justify-center gap-4 md:gap-6 mt-6 md:mt-8'>
+										{mainCertificates.slice(1).map((item, i) => (
+											<ShadowBoxItem key={item.id} item={item} index={i + 7} />
+										))}
+									</div>
+
+									{/* Bottom row - patches and small items */}
+									<div className='flex flex-wrap items-center justify-center gap-4 md:gap-6 mt-6 md:mt-8'>
+										{patches.map((item, i) => (
+											<ShadowBoxItem key={item.id} item={item} index={i + 10} />
+										))}
+									</div>
+								</div>
+
+								{/* Nameplate at bottom */}
+								<div className='absolute bottom-4 left-1/2 -translate-x-1/2'>
+									<div className='px-6 py-2 bg-gradient-to-r from-amber-700 via-amber-600 to-amber-700 rounded-sm shadow-lg'>
+										<p className='text-[10px] md:text-xs font-semibold text-amber-100 uppercase tracking-[0.2em]'>
+											Arthur Martins
+										</p>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
+
+					{/* Frame shadow on surface */}
+					<div className='absolute -bottom-4 left-4 right-4 h-8 bg-gradient-to-b from-black/20 to-transparent blur-md rounded-full' />
 				</div>
 			</div>
+
+			{/* Custom CSS for ribbon clip path */}
+			<style jsx>{`
+				.clip-ribbon {
+					clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%);
+				}
+			`}</style>
 		</section>
 	);
 }
