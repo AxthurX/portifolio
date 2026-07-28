@@ -41,7 +41,7 @@ export function SmartHome() {
 	return (
 		<div className='grid gap-4 md:grid-cols-3'>
 			<div className='grid gap-4 md:col-span-2'>
-				<Card className='overflow-hidden border-0 bg-white/10 text-white backdrop-blur-md'>
+				<Card className='overflow-hidden bg-white/10 text-white backdrop-blur-md'>
 					<div className='p-6'>
 						<div className='mb-6 flex items-center justify-between'>
 							<div className='flex items-center gap-3'>
@@ -124,7 +124,7 @@ export function SmartHome() {
 				</Card>
 
 				<div className='grid grid-cols-2 gap-4 md:grid-cols-4'>
-					<Card className='border-0 bg-white/10 p-4 text-white backdrop-blur-md'>
+					<Card className='bg-white/10 p-4 text-white backdrop-blur-md'>
 						<div className='flex flex-col items-center gap-2'>
 							<div className='flex h-10 w-10 items-center justify-center rounded-full bg-lime-400/20'>
 								<LightbulbIcon className='h-5 w-5 text-lime-400' />
@@ -134,7 +134,7 @@ export function SmartHome() {
 						</div>
 					</Card>
 
-					<Card className='border-0 bg-white/10 p-4 text-white backdrop-blur-md'>
+					<Card className='bg-white/10 p-4 text-white backdrop-blur-md'>
 						<div className='flex flex-col items-center gap-2'>
 							<div className='flex h-10 w-10 items-center justify-center rounded-full bg-lime-400/20'>
 								<Droplets className='h-5 w-5 text-lime-400' />
@@ -144,7 +144,7 @@ export function SmartHome() {
 						</div>
 					</Card>
 
-					<Card className='border-0 bg-white/10 p-4 text-white backdrop-blur-md'>
+					<Card className='bg-white/10 p-4 text-white backdrop-blur-md'>
 						<div className='flex flex-col items-center gap-2'>
 							<div className='flex h-10 w-10 items-center justify-center rounded-full bg-lime-400/20'>
 								<Thermometer className='h-5 w-5 text-lime-400' />
@@ -154,7 +154,7 @@ export function SmartHome() {
 						</div>
 					</Card>
 
-					<Card className='border-0 bg-white/10 p-4 text-white backdrop-blur-md'>
+					<Card className='bg-white/10 p-4 text-white backdrop-blur-md'>
 						<div className='flex flex-col items-center gap-2'>
 							<div className='flex h-10 w-10 items-center justify-center rounded-full bg-lime-400/20'>
 								<LightbulbIcon className='h-5 w-5 text-lime-400' />
@@ -167,7 +167,7 @@ export function SmartHome() {
 			</div>
 
 			<div className='grid content-start gap-4'>
-				<Card className='overflow-hidden border-0 bg-white/10 text-white backdrop-blur-md'>
+				<Card className='overflow-hidden bg-white/10 text-white backdrop-blur-md'>
 					<div className='p-4'>
 						<div className='mb-2 flex items-center justify-between'>
 							<h3 className='font-medium text-sm'>Camera</h3>
@@ -191,7 +191,7 @@ export function SmartHome() {
 					</div>
 				</Card>
 
-				<Card className='border-0 bg-white/10 p-4 text-white backdrop-blur-md'>
+				<Card className='bg-white/10 p-4 text-white backdrop-blur-md'>
 					<div className='mb-4 flex items-center justify-between'>
 						<div className='flex items-center gap-2'>
 							<div className='text-yellow-400'>
@@ -212,7 +212,7 @@ export function SmartHome() {
 					</div>
 				</Card>
 
-				<Card className='border-0 bg-white/10 p-4 text-white backdrop-blur-md'>
+				<Card className='bg-white/10 p-4 text-white backdrop-blur-md'>
 					<h3 className='mb-4 font-medium text-lg'>Devices</h3>
 					<div className='grid grid-cols-2 gap-4'>
 						<div className='flex flex-col gap-2'>

@@ -105,10 +105,7 @@ export function ExpenseTracker() {
 
 	const filteredExpenses = getFilteredExpenses();
 
-	const totalExpenses = filteredExpenses.reduce(
-		(sum, expense) => sum + expense.amount,
-		0,
-	);
+	const totalExpenses = filteredExpenses.reduce((sum, expense) => sum + expense.amount, 0);
 
 	const expensesByCategory = filteredExpenses.reduce(
 		(acc, expense) => {
@@ -137,12 +134,10 @@ export function ExpenseTracker() {
 
 	return (
 		<div className='grid gap-4 md:grid-cols-2'>
-			<Card className='border-0 bg-white/10 text-white backdrop-blur-md'>
+			<Card className='bg-white/10 text-white backdrop-blur-md'>
 				<CardHeader>
 					<CardTitle>Add Expense</CardTitle>
-					<CardDescription className='text-gray-300'>
-						Track your household expenses
-					</CardDescription>
+					<CardDescription className='text-gray-300'>Track your household expenses</CardDescription>
 				</CardHeader>
 				<CardContent>
 					<div className='grid gap-4'>
@@ -153,9 +148,7 @@ export function ExpenseTracker() {
 								type='number'
 								placeholder='0.00'
 								value={newExpense.amount}
-								onChange={(e) =>
-									setNewExpense({ ...newExpense, amount: e.target.value })
-								}
+								onChange={(e) => setNewExpense({ ...newExpense, amount: e.target.value })}
 								className='border-gray-700 bg-white/10 text-white'
 							/>
 						</div>
@@ -165,9 +158,7 @@ export function ExpenseTracker() {
 								id='description'
 								placeholder='What was this expense for?'
 								value={newExpense.description}
-								onChange={(e) =>
-									setNewExpense({ ...newExpense, description: e.target.value })
-								}
+								onChange={(e) => setNewExpense({ ...newExpense, description: e.target.value })}
 								className='border-gray-700 bg-white/10 text-white'
 							/>
 						</div>
@@ -175,14 +166,9 @@ export function ExpenseTracker() {
 							<Label htmlFor='category'>Category</Label>
 							<Select
 								value={newExpense.category}
-								onValueChange={(value) =>
-									setNewExpense({ ...newExpense, category: value })
-								}
+								onValueChange={(value) => setNewExpense({ ...newExpense, category: value })}
 							>
-								<SelectTrigger
-									id='category'
-									className='border-gray-700 bg-white/10 text-white'
-								>
+								<SelectTrigger id='category' className='border-gray-700 bg-white/10 text-white'>
 									<SelectValue placeholder='Select category' />
 								</SelectTrigger>
 								<SelectContent className='border-gray-700 bg-gray-800/90 text-white backdrop-blur-md'>
@@ -209,15 +195,11 @@ export function ExpenseTracker() {
 			</Card>
 
 			<div className='grid gap-4'>
-				<Card className='border-0 bg-white/10 text-white backdrop-blur-md'>
+				<Card className='bg-white/10 text-white backdrop-blur-md'>
 					<CardHeader className='pb-2'>
 						<div className='flex items-center justify-between'>
 							<CardTitle>Expense Summary</CardTitle>
-							<Tabs
-								value={period}
-								onValueChange={setPeriod}
-								className='w-[200px]'
-							>
+							<Tabs value={period} onValueChange={setPeriod} className='w-[200px]'>
 								<TabsList className='grid w-full grid-cols-3 bg-white/10'>
 									<TabsTrigger
 										value='week'
@@ -249,15 +231,10 @@ export function ExpenseTracker() {
 						</CardDescription>
 					</CardHeader>
 					<CardContent>
-						<div className='font-bold text-2xl'>
-							${totalExpenses.toFixed(2)}
-						</div>
+						<div className='font-bold text-2xl'>${totalExpenses.toFixed(2)}</div>
 						<div className='mt-4 space-y-2'>
 							{Object.entries(expensesByCategory).map(([category, amount]) => (
-								<div
-									key={category}
-									className='flex items-center justify-between'
-								>
+								<div key={category} className='flex items-center justify-between'>
 									<span>{getCategoryLabel(category)}</span>
 									<span className='font-medium'>${amount.toFixed(2)}</span>
 								</div>
@@ -266,7 +243,7 @@ export function ExpenseTracker() {
 					</CardContent>
 				</Card>
 
-				<Card className='border-0 bg-white/10 text-white backdrop-blur-md'>
+				<Card className='bg-white/10 text-white backdrop-blur-md'>
 					<CardHeader>
 						<CardTitle>Recent Expenses</CardTitle>
 					</CardHeader>
@@ -275,9 +252,7 @@ export function ExpenseTracker() {
 							{filteredExpenses.length === 0 ? (
 								<div className='flex h-[100px] items-center justify-center rounded-md border border-gray-700 border-dashed'>
 									<div className='text-center'>
-										<p className='text-gray-400 text-sm'>
-											No expenses recorded
-										</p>
+										<p className='text-gray-400 text-sm'>No expenses recorded</p>
 									</div>
 								</div>
 							) : (
@@ -289,14 +264,11 @@ export function ExpenseTracker() {
 										<div>
 											<div className='font-medium'>{expense.description}</div>
 											<div className='text-gray-400 text-xs'>
-												{getCategoryLabel(expense.category)} •{' '}
-												{format(expense.date, 'MMM d, yyyy')}
+												{getCategoryLabel(expense.category)} • {format(expense.date, 'MMM d, yyyy')}
 											</div>
 										</div>
 										<div className='flex items-center gap-2'>
-											<span className='font-medium'>
-												${expense.amount.toFixed(2)}
-											</span>
+											<span className='font-medium'>${expense.amount.toFixed(2)}</span>
 											<Button
 												variant='ghost'
 												size='icon'

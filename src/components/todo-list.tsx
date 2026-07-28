@@ -61,9 +61,7 @@ export function TodoList() {
 
 	const toggleTodo = (id: string) => {
 		setTodos(
-			todos.map((todo) =>
-				todo.id === id ? { ...todo, completed: !todo.completed } : todo,
-			),
+			todos.map((todo) => (todo.id === id ? { ...todo, completed: !todo.completed } : todo)),
 		);
 	};
 
@@ -93,12 +91,10 @@ export function TodoList() {
 
 	return (
 		<div className='grid gap-4 md:grid-cols-2'>
-			<Card className='border-0 bg-white/10 text-white backdrop-blur-md'>
+			<Card className='bg-white/10 text-white backdrop-blur-md'>
 				<CardHeader>
 					<CardTitle>Todo List</CardTitle>
-					<CardDescription className='text-gray-300'>
-						Manage your tasks and to-dos
-					</CardDescription>
+					<CardDescription className='text-gray-300'>Manage your tasks and to-dos</CardDescription>
 				</CardHeader>
 				<CardContent>
 					<div className='flex space-x-2'>
@@ -121,10 +117,7 @@ export function TodoList() {
 								<SelectItem value='shopping'>Shopping</SelectItem>
 							</SelectContent>
 						</Select>
-						<Button
-							onClick={handleAddTodo}
-							className='bg-lime-400 text-black hover:bg-lime-500'
-						>
+						<Button onClick={handleAddTodo} className='bg-lime-400 text-black hover:bg-lime-500'>
 							<Plus className='h-4 w-4' />
 						</Button>
 					</div>
@@ -149,7 +142,7 @@ export function TodoList() {
 				</CardFooter>
 			</Card>
 
-			<Card className='border-0 bg-white/10 text-white backdrop-blur-md'>
+			<Card className='bg-white/10 text-white backdrop-blur-md'>
 				<CardHeader>
 					<CardTitle>Tasks</CardTitle>
 					<CardDescription className='text-gray-300'>
@@ -168,9 +161,7 @@ export function TodoList() {
 							<div className='flex h-[200px] items-center justify-center rounded-md border border-gray-700 border-dashed'>
 								<div className='text-center'>
 									<h3 className='font-medium text-lg'>No tasks</h3>
-									<p className='text-gray-400 text-sm'>
-										Add a task to get started
-									</p>
+									<p className='text-gray-400 text-sm'>Add a task to get started</p>
 								</div>
 							</div>
 						) : (
@@ -185,17 +176,10 @@ export function TodoList() {
 											onCheckedChange={() => toggleTodo(todo.id)}
 											className='border-gray-600 data-[state=checked]:border-lime-400 data-[state=checked]:bg-lime-400'
 										/>
-										<span
-											className={
-												todo.completed ? 'text-gray-400 line-through' : ''
-											}
-										>
+										<span className={todo.completed ? 'text-gray-400 line-through' : ''}>
 											{todo.text}
 										</span>
-										<Badge
-											variant='outline'
-											className='ml-2 border-gray-600 text-gray-300'
-										>
+										<Badge variant='outline' className='ml-2 border-gray-600 text-gray-300'>
 											{todo.category}
 										</Badge>
 									</div>

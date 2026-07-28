@@ -24,11 +24,7 @@ import {
 } from '@/src/components/ui/dialog';
 import { Input } from '@/src/components/ui/input';
 import { Label } from '@/src/components/ui/label';
-import {
-	Popover,
-	PopoverContent,
-	PopoverTrigger,
-} from '@/src/components/ui/popover';
+import { Popover, PopoverContent, PopoverTrigger } from '@/src/components/ui/popover';
 import { Textarea } from '@/src/components/ui/textarea';
 import { cn } from '@/src/lib/utils';
 
@@ -78,12 +74,10 @@ export function Calendar() {
 
 	return (
 		<div className='grid gap-4 md:grid-cols-2 lg:grid-cols-3'>
-			<Card className='col-span-1 border-0 bg-white/10 text-white backdrop-blur-md'>
+			<Card className='col-span-1 bg-white/10 text-white backdrop-blur-md'>
 				<CardHeader>
 					<CardTitle>Calendar</CardTitle>
-					<CardDescription className='text-gray-300'>
-						View and manage your schedule
-					</CardDescription>
+					<CardDescription className='text-gray-300'>View and manage your schedule</CardDescription>
 				</CardHeader>
 				<CardContent className='p-0'>
 					<CalendarComponent
@@ -97,10 +91,7 @@ export function Calendar() {
 					<p className='text-gray-300 text-sm'>{format(date, 'PPP')}</p>
 					<Dialog>
 						<DialogTrigger asChild>
-							<Button
-								size='sm'
-								className='bg-lime-400 text-black hover:bg-lime-500'
-							>
+							<Button size='sm' className='bg-lime-400 text-black hover:bg-lime-500'>
 								<Plus className='mr-2 h-4 w-4' />
 								Add Event
 							</Button>
@@ -118,9 +109,7 @@ export function Calendar() {
 									<Input
 										id='title'
 										value={newEvent.title}
-										onChange={(e) =>
-											setNewEvent({ ...newEvent, title: e.target.value })
-										}
+										onChange={(e) => setNewEvent({ ...newEvent, title: e.target.value })}
 										className='border-gray-700 bg-white/10 text-white'
 									/>
 								</div>
@@ -129,9 +118,7 @@ export function Calendar() {
 									<Textarea
 										id='description'
 										value={newEvent.description}
-										onChange={(e) =>
-											setNewEvent({ ...newEvent, description: e.target.value })
-										}
+										onChange={(e) => setNewEvent({ ...newEvent, description: e.target.value })}
 										className='border-gray-700 bg-white/10 text-white'
 									/>
 								</div>
@@ -147,20 +134,14 @@ export function Calendar() {
 												)}
 											>
 												<CalendarIcon className='mr-2 h-4 w-4' />
-												{newEvent.date ? (
-													format(newEvent.date, 'PPP')
-												) : (
-													<span>Pick a date</span>
-												)}
+												{newEvent.date ? format(newEvent.date, 'PPP') : <span>Pick a date</span>}
 											</Button>
 										</PopoverTrigger>
 										<PopoverContent className='w-auto border-gray-700 bg-gray-800 p-0'>
 											<CalendarComponent
 												mode='single'
 												selected={newEvent.date}
-												onSelect={(date) =>
-													date && setNewEvent({ ...newEvent, date })
-												}
+												onSelect={(date) => date && setNewEvent({ ...newEvent, date })}
 												initialFocus
 											/>
 										</PopoverContent>
@@ -179,7 +160,7 @@ export function Calendar() {
 					</Dialog>
 				</CardFooter>
 			</Card>
-			<Card className='col-span-1 border-0 bg-white/10 text-white backdrop-blur-md md:col-span-1 lg:col-span-2'>
+			<Card className='col-span-1 bg-white/10 text-white backdrop-blur-md md:col-span-1 lg:col-span-2'>
 				<CardHeader>
 					<CardTitle>Events for {format(date, 'MMMM d, yyyy')}</CardTitle>
 					<CardDescription className='text-gray-300'>
@@ -194,22 +175,15 @@ export function Calendar() {
 							<div className='flex h-[200px] items-center justify-center rounded-md border border-gray-700 border-dashed'>
 								<div className='text-center'>
 									<h3 className='font-medium text-lg'>No events</h3>
-									<p className='text-gray-400 text-sm'>
-										Add an event to get started
-									</p>
+									<p className='text-gray-400 text-sm'>Add an event to get started</p>
 								</div>
 							</div>
 						) : (
 							eventsForSelectedDate.map((event) => (
-								<div
-									key={event.id}
-									className='rounded-lg border border-gray-700 bg-white/5 p-4'
-								>
+								<div key={event.id} className='rounded-lg border border-gray-700 bg-white/5 p-4'>
 									<h3 className='font-medium'>{event.title}</h3>
 									<p className='text-gray-300 text-sm'>{event.description}</p>
-									<p className='mt-2 text-gray-400 text-xs'>
-										{format(event.date, 'h:mm a')}
-									</p>
+									<p className='mt-2 text-gray-400 text-xs'>{format(event.date, 'h:mm a')}</p>
 								</div>
 							))
 						)}

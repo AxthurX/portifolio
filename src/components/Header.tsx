@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Download, Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
+import { Button } from './ui/button';
 
 const LINKS = [
 	{ href: '#sobre-mim', label: 'Sobre' },
@@ -67,20 +68,21 @@ export default function Header({ onPortfolioOpen }: { onPortfolioOpen: () => voi
 
 				{/* Right Actions */}
 				<div className='pointer-events-auto relative z-10 flex h-14 items-center gap-3 pr-3'>
-					<button
+					<Button
 						type='button'
 						onClick={onPortfolioOpen}
 						className='hidden items-center rounded-full border border-primary/30 bg-primary/10 px-4 py-2 font-medium text-primary text-xs transition-all hover:bg-primary hover:text-primary-foreground sm:flex'
 					>
 						Portfolio
-					</button>
+					</Button>
 
-					<a
-						href='#contato'
-						className='hidden items-center gap-2 rounded-full bg-foreground px-5 py-2 font-medium text-background text-xs transition-all hover:bg-primary hover:text-primary-foreground md:flex'
+					<Button
+						// href='#contato'
+						onClick={() => setMenuOpen(false)}
+						// className='flex w-full items-center justify-center gap-3 rounded-full bg-primary px-6 py-4 font-medium text-primary-foreground transition-all hover:scale-[1.02]'
 					>
-						Contato
-					</a>
+						Entre em contato
+					</Button>
 
 					{/* Hamburger - mobile only */}
 					<button
@@ -176,13 +178,13 @@ export default function Header({ onPortfolioOpen }: { onPortfolioOpen: () => voi
 								<Download className='h-4 w-4' />
 								Baixar Currículo
 							</a>
-							<Link
-								href='#contato'
+							<Button
+								// href='#contato'
 								onClick={() => setMenuOpen(false)}
 								className='flex w-full items-center justify-center gap-3 rounded-full bg-primary px-6 py-4 font-medium text-primary-foreground transition-all hover:scale-[1.02]'
 							>
 								Entre em contato
-							</Link>
+							</Button>
 						</motion.div>
 					</motion.div>
 				)}

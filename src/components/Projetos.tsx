@@ -3,6 +3,8 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
+import { Button } from './ui/button';
+import { Card } from './ui/card';
 
 export interface Projeto {
 	id: string;
@@ -33,16 +35,14 @@ const PROJECTS = [
 		id: '03',
 		client: 'Assistente IA',
 		category: 'AI Engineering',
-		title:
-			'Chat corporativo com RAG, sessões persistentes e renderização dinâmica de mensagens',
+		title: 'Chat corporativo com RAG, sessões persistentes e renderização dinâmica de mensagens',
 		image: '/projetos/chat-ai.jpg',
 	},
 	{
 		id: '04',
 		client: 'Design System',
 		category: 'Frontend Architecture',
-		title:
-			'Biblioteca acessível de componentes reutilizáveis integrada com Tailwind e Next.js',
+		title: 'Biblioteca acessível de componentes reutilizáveis integrada com Tailwind e Next.js',
 		image: '/projetos/acessibilidade.jpg',
 	},
 	{
@@ -57,15 +57,14 @@ const PROJECTS = [
 		id: '06',
 		client: 'Portfólio Interativo',
 		category: 'Creative Development',
-		title:
-			'Experiência frontend com animações fluidas, microinterações e foco em performance',
+		title: 'Experiência frontend com animações fluidas, microinterações e foco em performance',
 		image: '/projetos/portfolio.jpg',
 	},
 ];
 
 function ProjectCard({ projeto }: { projeto: Projeto }) {
 	return (
-		<div className='group relative flex h-[60vh] w-full shrink-0 cursor-pointer flex-col justify-between overflow-hidden rounded-2xl border border-border bg-surface p-6 md:h-[70vh] md:w-[55vw] md:p-8'>
+		<Card className='group relative flex h-[60vh] w-full shrink-0 cursor-pointer flex-col justify-between overflow-hidden rounded-2xl bg-surface p-6 md:h-[70vh] md:w-[55vw] md:p-8'>
 			{/* Background gradient */}
 			<div className='absolute inset-0 z-0 bg-linear-to-br from-primary/5 via-transparent to-accent/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100' />
 
@@ -73,8 +72,7 @@ function ProjectCard({ projeto }: { projeto: Projeto }) {
 			<div
 				className='pointer-events-none absolute inset-0 opacity-[0.02]'
 				style={{
-					backgroundImage:
-						'radial-gradient(var(--foreground) 1px, transparent 1px)',
+					backgroundImage: 'radial-gradient(var(--foreground) 1px, transparent 1px)',
 					backgroundSize: '24px 24px',
 				}}
 			/>
@@ -84,17 +82,15 @@ function ProjectCard({ projeto }: { projeto: Projeto }) {
 					<span className='mb-2 block font-medium text-primary text-xs uppercase tracking-widest'>
 						{projeto.category}
 					</span>
-					<span className='text-muted-foreground text-sm'>
-						{projeto.client}
-					</span>
+					<span className='text-muted-foreground text-sm'>{projeto.client}</span>
 				</div>
 
-				<div className='flex h-12 w-12 items-center justify-center rounded-full border border-border transition-all duration-300 group-hover:border-primary group-hover:bg-primary group-hover:text-primary-foreground'>
+				<Button className='flex h-12 w-12 items-center justify-center rounded-full transition-all duration-300 group-hover:border-primary group-hover:bg-primary group-hover:text-primary-foreground'>
 					<ArrowUpRight
 						strokeWidth={1.5}
 						className='h-5 w-5 transition-transform group-hover:rotate-45'
 					/>
-				</div>
+				</Button>
 			</div>
 
 			{/* Bottom Title Area */}
@@ -107,7 +103,7 @@ function ProjectCard({ projeto }: { projeto: Projeto }) {
 					{projeto.id}
 				</div>
 			</div>
-		</div>
+		</Card>
 	);
 }
 
@@ -133,10 +129,7 @@ export default function Projetos() {
 						Projetos
 					</span>
 					<h3 className='font-bold text-4xl tracking-tight'>
-						Trabalhos{' '}
-						<span className='font-normal font-serif text-primary italic'>
-							Recentes
-						</span>
+						Trabalhos <span className='font-normal font-serif text-primary italic'>Recentes</span>
 					</h3>
 				</div>
 
@@ -165,17 +158,11 @@ export default function Projetos() {
 						Projetos
 					</span>
 					<h3 className='font-bold text-4xl tracking-tight md:text-5xl'>
-						Trabalhos{' '}
-						<span className='font-normal font-serif text-primary italic'>
-							Recentes
-						</span>
+						Trabalhos <span className='font-normal font-serif text-primary italic'>Recentes</span>
 					</h3>
 				</div>
 
-				<motion.div
-					style={{ x }}
-					className='flex gap-8 px-4 pt-42 pl-[5vw] md:gap-12 md:px-14'
-				>
+				<motion.div style={{ x }} className='flex gap-8 px-4 pt-42 pl-[5vw] md:gap-12 md:px-14'>
 					{PROJECTS.map((projeto) => (
 						<ProjectCard key={projeto.id} projeto={projeto} />
 					))}

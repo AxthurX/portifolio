@@ -31,15 +31,7 @@ type Meal = {
 };
 
 export function MealPlanner() {
-	const days = [
-		'Monday',
-		'Tuesday',
-		'Wednesday',
-		'Thursday',
-		'Friday',
-		'Saturday',
-		'Sunday',
-	];
+	const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
 	const [meals, setMeals] = useState<Meal[]>([
 		{
@@ -107,7 +99,7 @@ export function MealPlanner() {
 
 	return (
 		<div className='grid gap-4 md:grid-cols-2'>
-			<Card className='border-0 bg-white/10 text-white backdrop-blur-md'>
+			<Card className='bg-white/10 text-white backdrop-blur-md'>
 				<CardHeader>
 					<div className='flex items-center gap-2'>
 						<div className='flex h-8 w-8 items-center justify-center rounded-full bg-lime-400/20'>
@@ -115,9 +107,7 @@ export function MealPlanner() {
 						</div>
 						<div>
 							<CardTitle>Meal Planner</CardTitle>
-							<CardDescription className='text-gray-300'>
-								Plan your weekly meals
-							</CardDescription>
+							<CardDescription className='text-gray-300'>Plan your weekly meals</CardDescription>
 						</div>
 					</div>
 				</CardHeader>
@@ -129,9 +119,7 @@ export function MealPlanner() {
 								id='meal-name'
 								placeholder='Enter meal name'
 								value={newMeal.name}
-								onChange={(e) =>
-									setNewMeal({ ...newMeal, name: e.target.value })
-								}
+								onChange={(e) => setNewMeal({ ...newMeal, name: e.target.value })}
 								className='border-gray-700 bg-white/10 text-white'
 							/>
 						</div>
@@ -141,9 +129,7 @@ export function MealPlanner() {
 								id='ingredients'
 								placeholder='List ingredients'
 								value={newMeal.ingredients}
-								onChange={(e) =>
-									setNewMeal({ ...newMeal, ingredients: e.target.value })
-								}
+								onChange={(e) => setNewMeal({ ...newMeal, ingredients: e.target.value })}
 								className='border-gray-700 bg-white/10 text-white'
 							/>
 						</div>
@@ -152,14 +138,9 @@ export function MealPlanner() {
 								<Label htmlFor='meal-type'>Meal Type</Label>
 								<Select
 									value={newMeal.mealType}
-									onValueChange={(value) =>
-										setNewMeal({ ...newMeal, mealType: value })
-									}
+									onValueChange={(value) => setNewMeal({ ...newMeal, mealType: value })}
 								>
-									<SelectTrigger
-										id='meal-type'
-										className='border-gray-700 bg-white/10 text-white'
-									>
+									<SelectTrigger id='meal-type' className='border-gray-700 bg-white/10 text-white'>
 										<SelectValue placeholder='Select type' />
 									</SelectTrigger>
 									<SelectContent className='border-gray-700 bg-gray-800/90 text-white backdrop-blur-md'>
@@ -174,14 +155,9 @@ export function MealPlanner() {
 								<Label htmlFor='day'>Day</Label>
 								<Select
 									value={newMeal.day}
-									onValueChange={(value) =>
-										setNewMeal({ ...newMeal, day: value })
-									}
+									onValueChange={(value) => setNewMeal({ ...newMeal, day: value })}
 								>
-									<SelectTrigger
-										id='day'
-										className='border-gray-700 bg-white/10 text-white'
-									>
+									<SelectTrigger id='day' className='border-gray-700 bg-white/10 text-white'>
 										<SelectValue placeholder='Select day' />
 									</SelectTrigger>
 									<SelectContent className='border-gray-700 bg-gray-800/90 text-white backdrop-blur-md'>
@@ -207,7 +183,7 @@ export function MealPlanner() {
 				</CardFooter>
 			</Card>
 
-			<Card className='border-0 bg-white/10 text-white backdrop-blur-md'>
+			<Card className='bg-white/10 text-white backdrop-blur-md'>
 				<CardHeader>
 					<CardTitle>Weekly Plan</CardTitle>
 					<CardDescription className='text-gray-300'>
@@ -219,15 +195,10 @@ export function MealPlanner() {
 						{days.map((day) => {
 							const dayMeals = getMealsByDay(day);
 							return (
-								<div
-									key={day}
-									className='rounded-lg border border-gray-700 bg-white/5 p-3'
-								>
+								<div key={day} className='rounded-lg border border-gray-700 bg-white/5 p-3'>
 									<h3 className='font-medium'>{day}</h3>
 									{dayMeals.length === 0 ? (
-										<p className='mt-2 text-gray-400 text-sm'>
-											No meals planned
-										</p>
+										<p className='mt-2 text-gray-400 text-sm'>No meals planned</p>
 									) : (
 										<div className='mt-2 space-y-2'>
 											{dayMeals.map((meal) => (
