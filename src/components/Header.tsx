@@ -10,14 +10,10 @@ const LINKS = [
 	{ href: '#projetos', label: 'Projetos' },
 	{ href: '#experiencias', label: 'Experiencias' },
 	{ href: '#certificados', label: 'Licenças & Certificados' },
-	{ href: '#certificados', label: 'Stack' },
+	{ href: '#stack', label: 'Stack' },
 ];
 
-export default function Header({
-	onPortfolioOpen,
-}: {
-	onPortfolioOpen: () => void;
-}) {
+export default function Header({ onPortfolioOpen }: { onPortfolioOpen: () => void }) {
 	const [menuOpen, setMenuOpen] = useState(false);
 
 	return (
@@ -36,21 +32,16 @@ export default function Header({
 
 				{/* Left - Logo */}
 				<div className='pointer-events-auto relative z-10 flex h-14 items-center gap-6 pl-5'>
-					<Link
-						href='/'
-						className='flex items-center gap-3 transition-opacity hover:opacity-80'
-					>
+					<Link href='/' className='flex items-center gap-3 transition-opacity hover:opacity-80'>
 						<div className='flex h-8 w-8 items-center justify-center rounded-full border border-primary/30 bg-primary/10'>
 							<span className='font-bold text-gradient text-xs'>AM</span>
 						</div>
-						<span className='hidden font-medium text-sm md:block'>
-							Arthur Martins
-						</span>
+						<span className='hidden font-medium text-sm md:block'>Arthur Martins</span>
 					</Link>
 
 					<Link
 						download
-						href='/curriculo.pdf'
+						href='/ARTHUR MARTINS.pdf'
 						title='Baixar Currículo'
 						className='hidden items-center gap-1.5 rounded-full border border-border bg-foreground/5 px-3 py-1.5 font-medium text-muted-foreground text-xs transition-all hover:border-primary/40 hover:text-primary md:flex'
 					>
@@ -178,7 +169,7 @@ export default function Header({
 							className='flex flex-col gap-4'
 						>
 							<a
-								href='/curriculo.pdf'
+								href='/ARTHUR MARTINS.pdf'
 								download
 								className='flex w-full items-center justify-center gap-2 rounded-full border border-border bg-foreground/5 px-6 py-4 font-medium text-foreground transition-all hover:border-primary/40 hover:text-primary'
 							>
