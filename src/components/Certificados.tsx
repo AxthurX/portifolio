@@ -1,11 +1,11 @@
-/** biome-ignore-all lint/a11y/noStaticElementInteractions: <explanation> */
 'use client';
 
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ExternalLink } from 'lucide-react';
-import { type RefObject, useEffect, useRef, useState } from 'react';
+import { memo, type RefObject, useEffect, useMemo, useRef, useState } from 'react';
+import { loadCertificates } from '../lib/pdf';
+import { cn } from '../lib/utils';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -18,95 +18,12 @@ interface Certificate {
 	credentialCode?: string;
 	credentialUrl?: string;
 	skills?: string[];
+	image: string;
 	size: TrophySize;
 	color: 'gold' | 'silver' | 'bronze' | 'teal';
 }
 
-const certificates: Certificate[] = [
-	{
-		title: 'Google Project Management Professional Certificate',
-		issuer: 'Coursera / Google',
-		date: 'Abr 2026',
-		credentialUrl: '#',
-		skills: ['Gestão de Projetos', 'Agile', 'Scrum'],
-		size: 'large',
-		color: 'gold',
-	},
-	{
-		title: 'Google Project Management',
-		issuer: 'Google',
-		date: 'Ago 2025',
-		credentialCode: 'G5LRW5CUFGWH',
-		credentialUrl: '#',
-		skills: ['Gestão de Projetos'],
-		size: 'medium',
-		color: 'gold',
-	},
-	{
-		title: 'Google Agile Project Management',
-		issuer: 'Google',
-		date: 'Ago 2025',
-		credentialCode: '1GAD79VY6B3P',
-		credentialUrl: '#',
-		skills: ['Scrum', 'Gestão de Projetos'],
-		size: 'medium',
-		color: 'silver',
-	},
-	{
-		title: 'Fundamentos de Suporte de TI',
-		issuer: 'Google',
-		date: 'Jan 2025',
-		credentialUrl: '#',
-		skills: ['TI', 'Suporte Técnico'],
-		size: 'small',
-		color: 'bronze',
-	},
-	{
-		title: 'Next.js Advanced Patterns',
-		issuer: 'Vercel',
-		date: 'Mar 2025',
-		credentialUrl: '#',
-		skills: ['Next.js', 'React', 'TypeScript'],
-		size: 'medium',
-		color: 'teal',
-	},
-	{
-		title: 'CSS & Animations Mastery',
-		issuer: 'Frontend Masters',
-		date: 'Dez 2024',
-		credentialUrl: '#',
-		skills: ['CSS', 'Animações', 'GSAP'],
-		size: 'small',
-		color: 'silver',
-	},
-	{
-		title: 'TypeScript Fundamentals',
-		issuer: 'Microsoft',
-		date: 'Nov 2024',
-		credentialUrl: '#',
-		size: 'mini',
-		color: 'bronze',
-	},
-	{
-		title: 'React Developer Certification',
-		issuer: 'Meta',
-		date: 'Out 2024',
-		credentialUrl: '#',
-		skills: ['React', 'Hooks'],
-		size: 'small',
-		color: 'teal',
-	},
-	{
-		title: 'Node.js & APIs',
-		issuer: 'OpenJS Foundation',
-		date: 'Set 2024',
-		credentialUrl: '#',
-		size: 'mini',
-		color: 'gold',
-	},
-];
-
-const colorMap = {
+const COLOR_MAP = {
 	gold: {
 		cup: 'text-yellow-400',
 		base: 'bg-yellow-400/10 border-yellow-400/30',
@@ -141,7 +58,7 @@ const colorMap = {
 	},
 };
 
-const sizeConfig = {
+const SIZE_CONFIG = {
 	large: {
 		cupH: 'h-20',
 		cupW: 'w-16',
@@ -176,71 +93,24 @@ const sizeConfig = {
 	},
 };
 
-function TrophySVG({
-	size,
-	color,
-}: {
-	size: TrophySize;
-	color: Certificate['color'];
-}) {
-	const c = colorMap[color];
-	const s = sizeConfig[size];
-
-	return (
-		<div className='flex flex-col items-center'>
-			{/* Cup body */}
-			<div className={`relative ${s.cupH} ${s.cupW} ${c.cup}`}>
-				<svg
-					viewBox='0 0 64 72'
-					fill='currentColor'
-					className='h-full w-full drop-shadow-lg'
-				>
-					<title>Trophy</title>
-					<path
-						d='M4 14 Q0 14 0 22 Q0 30 6 32 L10 30 Q6 28 6 22 Q6 18 8 16 Z'
-						opacity='0.7'
-					/>
-					<path
-						d='M60 14 Q64 14 64 22 Q64 30 58 32 L54 30 Q58 28 58 22 Q58 18 56 16 Z'
-						opacity='0.7'
-					/>
-					{/* Main cup */}
-					<path d='M8 6 Q8 0 32 0 Q56 0 56 6 L52 42 Q50 52 32 54 Q14 52 12 42 Z' />
-					{/* Shine */}
-					<path
-						d='M14 8 Q16 4 24 3 L22 20 Q16 18 14 8 Z'
-						fill='white'
-						opacity='0.15'
-					/>
-					{/* Star or detail for large */}
-					{size === 'large' && (
-						<path
-							d='M32 18 L34 24 L40 24 L35 28 L37 34 L32 30 L27 34 L29 28 L24 24 L30 24 Z'
-							fill='white'
-							opacity='0.3'
-						/>
-					)}
-				</svg>
-			</div>
-			{/* Stem */}
-			<div className={`${s.stemH} w-2 ${c.stem} rounded-sm`} />
-			{/* Base */}
-			<div className={`h-2 ${s.baseW} ${c.stem} rounded-sm opacity-80`} />
-			<div className={`mt-0.5 h-1.5 w-8 ${c.stem} rounded-sm opacity-50`} />
-		</div>
-	);
-}
-
-function CertificateCard({
+const CertificateCard = memo(function CertificateCard({
 	cert,
 	index,
 }: {
 	cert: Certificate;
 	index: number;
 }) {
-	const [hovered, setHovered] = useState(false);
-	const c = colorMap[cert.color];
-	const s = sizeConfig[cert.size];
+	const c = COLOR_MAP[cert.color];
+	const s = SIZE_CONFIG[cert.size];
+
+	const BACKGROUND_STYLE = useMemo(
+		() => ({
+			backgroundImage: `url(${cert.image})`,
+			backgroundSize: 'cover',
+			backgroundPosition: 'center',
+		}),
+		[cert.image],
+	);
 
 	return (
 		<motion.div
@@ -248,27 +118,26 @@ function CertificateCard({
 			initial={{ opacity: 0, y: 30 }}
 			whileInView={{ opacity: 1, y: 0 }}
 			viewport={{ once: true }}
-			transition={{ duration: 0.5, delay: index * 0.06 }}
+			transition={{
+				duration: 0.45,
+			}}
 		>
 			<div
-				className={`relative flex h-full cursor-pointer flex-col justify-between overflow-hidden rounded-xl border p-4 transition-all duration-300 ${c.base} ${hovered ? `shadow-lg ${c.glow}` : 'shadow-sm'}`}
-				onMouseEnter={() => setHovered(true)}
-				onMouseLeave={() => setHovered(false)}
+				className={cn(
+					'group relative flex h-full flex-col justify-between overflow-hidden rounded-xl border p-4 transition-all duration-300',
+					c.base,
+				)}
+				style={BACKGROUND_STYLE}
 			>
-				{/* Shelf glow top line */}
-				<div
-					className={`absolute top-0 right-0 left-0 h-px bg-linear-to-r from-transparent via-current to-transparent ${c.cup} opacity-30`}
-				/>
+				{/* <Image src={`url(${cert.image})`} alt={cert.title} width={300} height={300} /> */}
 
-				{/* Trophy */}
-				<div
-					className={`flex justify-center transition-transform duration-300 ${hovered ? '-translate-y-1' : ''}`}
-				>
-					<TrophySVG size={cert.size} color={cert.color} />
-				</div>
+				{/* Shelf glow top line */}
+				{/* <div
+					className={`absolute top-0 right-0 left-0 h-px bg-linear-to-r from-transparent via-current to-transparent ${c.cup} opacity-30`}
+				/> */}
 
 				{/* Info */}
-				<div className='mt-3 flex flex-col gap-1'>
+				{/* <div className='mt-3 flex flex-col gap-1'>
 					<p
 						className={`font-semibold text-foreground leading-tight ${cert.size === 'large' ? 'text-sm' : cert.size === 'mini' ? 'text-[10px]' : 'text-xs'}`}
 					>
@@ -283,25 +152,23 @@ function CertificateCard({
 
 					{cert.skills && cert.size !== 'mini' && (
 						<div className='mt-1 flex flex-wrap gap-1'>
-							{cert.skills
-								.slice(0, cert.size === 'large' ? 3 : 1)
-								.map((skill) => (
-									<span
-										key={skill}
-										className={`rounded-full border px-1.5 py-0.5 font-medium text-[8px] ${c.badge}`}
-									>
-										{skill}
-									</span>
-								))}
+							{cert.skills.slice(0, cert.size === 'large' ? 3 : 1).map((skill) => (
+								<span
+									key={skill}
+									className={`rounded-full border px-1.5 py-0.5 font-medium text-[8px] ${c.badge}`}
+								>
+									{skill}
+								</span>
+							))}
 						</div>
 					)}
-				</div>
+				</div> */}
 
 				{/* Link icon on hover */}
-				{cert.credentialUrl && (
+				{/* {cert.credentialUrl && (
 					<motion.div
 						initial={{ opacity: 0, scale: 0.8 }}
-						animate={{ opacity: hovered ? 1 : 0, scale: hovered ? 1 : 0.8 }}
+						// animate={{ opacity: hovered ? 1 : 0, scale: hovered ? 1 : 0.8 }}
 						transition={{ duration: 0.2 }}
 						className='absolute top-3 right-3'
 					>
@@ -316,15 +183,42 @@ function CertificateCard({
 							<ExternalLink size={10} />
 						</a>
 					</motion.div>
-				)}
+				)} */}
 			</div>
 		</motion.div>
 	);
-}
+});
 
 export default function Certificados() {
+	const [certificates, setCertificates] = useState<Certificate[]>([]);
+	const [count, setCount] = useState(5);
+
 	const sectionRef = useRef<HTMLElement | null>(null);
 	const headingRef = useRef<HTMLHeadingElement | null>(null);
+
+	useEffect(() => {
+		async function load() {
+			const pdfs = await loadCertificates();
+
+			const colors: Certificate['color'][] = ['gold', 'silver', 'bronze', 'teal'];
+
+			const sizes: TrophySize[] = ['large', 'medium', 'small', 'mini'];
+
+			setCertificates(
+				pdfs.map((pdf, index) => ({
+					title: pdf.title,
+					issuer: '',
+					date: '',
+					image: pdf.image,
+					credentialUrl: pdf.url,
+					size: sizes[index % sizes.length],
+					color: colors[index % colors.length],
+				})),
+			);
+		}
+
+		load();
+	}, []);
 
 	useEffect(() => {
 		if (!sectionRef.current || !headingRef.current) return;
@@ -381,13 +275,11 @@ export default function Certificados() {
 						className='max-w-2xl font-bold text-3xl tracking-tight sm:text-4xl md:text-5xl lg:text-6xl'
 					>
 						Licenças &amp;{' '}
-						<span className='font-normal font-serif text-primary italic'>
-							Certificados
-						</span>
+						<span className='font-normal font-serif text-primary italic'>Certificados</span>
 					</h3>
 					<p className='mt-4 max-w-xl text-muted-foreground text-sm leading-relaxed md:text-base'>
-						Uma vitrine de aprendizado continuo — cada certificado representa
-						uma nova habilidade conquistada.
+						Uma vitrine de aprendizado continuo — cada certificado representa uma nova habilidade
+						conquistada.
 					</p>
 				</div>
 
@@ -407,10 +299,22 @@ export default function Certificados() {
 
 							{/* Trophy grid */}
 							<div className='grid grid-cols-4 grid-rows-3 gap-3 md:gap-4'>
-								{certificates.map((cert, i) => (
+								{certificates.slice(0, count).map((cert, i) => (
 									<CertificateCard key={cert.title} cert={cert} index={i} />
 								))}
 							</div>
+
+							{count < certificates.length && (
+								<div className='mt-8 flex justify-center'>
+									<button
+										type='button'
+										onClick={() => setCount((prev) => prev + 5)}
+										className='rounded-lg border border-border bg-card px-6 py-3 font-medium text-sm transition-colors hover:bg-card/80'
+									>
+										Ver mais
+									</button>
+								</div>
+							)}
 						</div>
 					</div>
 				</div>

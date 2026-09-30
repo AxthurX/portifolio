@@ -95,31 +95,32 @@ export default function Main() {
 				</div>
 
 				<div className='hidden items-center gap-3 md:flex'>
-					<a
-						href='https://github.com/AxthurX'
-						target='_blank'
-						rel='noopener noreferrer'
-						className='flex h-10 w-10 items-center justify-center rounded-full border border-border transition-all hover:border-primary hover:text-primary'
-						aria-label='GitHub'
-					>
-						<GithubIcon className='h-4 w-4' />
-					</a>
-					<a
-						href='https://linkedin.com/in/arthurmartins'
-						target='_blank'
-						rel='noopener noreferrer'
-						className='flex h-10 w-10 items-center justify-center rounded-full border border-border transition-all hover:border-primary hover:text-primary'
-						aria-label='LinkedIn'
-					>
-						<LinkedinIcon className='h-4 w-4' />
-					</a>
-					<a
-						href='mailto:contato@arthurmartins.dev'
-						className='flex h-10 w-10 items-center justify-center rounded-full border border-border transition-all hover:border-primary hover:text-primary'
-						aria-label='Email'
-					>
-						<Mail className='h-4 w-4' />
-					</a>
+					<Button className='rounded-full' variant='link'>
+						<a
+							target='_blank'
+							rel='noopener noreferrer'
+							href='https://github.com/AxthurX'
+							aria-label='GitHub'
+						>
+							<GithubIcon className='h-4 w-4' />
+						</a>
+					</Button>
+					<Button className='rounded-full' variant='link'>
+						<a
+							target='_blank'
+							rel='noopener noreferrer'
+							href='https://linkedin.com/in/arthurmartins'
+							aria-label='LinkedIn'
+						>
+							<LinkedinIcon className='h-4 w-4' />
+						</a>
+					</Button>
+
+					<Button className='rounded-full' variant='link'>
+						<a aria-label='Email' href='mailto:contato@arthurmartins.dev'>
+							<Mail className='h-4 w-4' />
+						</a>
+					</Button>
 				</div>
 			</motion.div>
 
@@ -211,7 +212,7 @@ export default function Main() {
 					</motion.p>
 
 					<motion.div {...fadeIn(0.7)} className='mt-10 flex items-center gap-6'>
-						<Button>
+						<Button className='h-14'>
 							<Link
 								href='#projetos'
 								className='group flex items-center gap-3 rounded-full px-8 py-4 font-medium text-primary-foreground transition-all hover:scale-105'
@@ -221,12 +222,11 @@ export default function Main() {
 							</Link>
 						</Button>
 
-						<Link
-							href='#contato'
-							className='rounded-full border border-border px-8 py-4 font-medium transition-all hover:border-foreground hover:bg-foreground hover:text-background'
-						>
-							Entre em contato
-						</Link>
+						<Button variant='outline' className='h-14 rounded-full'>
+							<Link href='#contato' className='px-8 py-4 font-medium transition-all'>
+								Entre em contato
+							</Link>
+						</Button>
 					</motion.div>
 				</div>
 			</div>

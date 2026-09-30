@@ -5,6 +5,7 @@ import { ArrowUpRight } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { Button } from './ui/button';
 import { Card } from './ui/card';
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from './ui/dialog';
 
 export interface Projeto {
 	id: string;
@@ -85,12 +86,22 @@ function ProjectCard({ projeto }: { projeto: Projeto }) {
 					<span className='text-muted-foreground text-sm'>{projeto.client}</span>
 				</div>
 
-				<Button className='flex h-12 w-12 items-center justify-center rounded-full transition-all duration-300 group-hover:border-primary group-hover:bg-primary group-hover:text-primary-foreground'>
-					<ArrowUpRight
-						strokeWidth={1.5}
-						className='h-5 w-5 transition-transform group-hover:rotate-45'
-					/>
-				</Button>
+				<Dialog>
+					<DialogTrigger>
+						<Button className='flex h-12 w-12 items-center justify-center rounded-full transition-all duration-300 group-hover:border-primary group-hover:bg-primary group-hover:text-primary-foreground'>
+							<ArrowUpRight
+								strokeWidth={1.5}
+								className='h-5 w-5 transition-transform group-hover:rotate-45'
+							/>
+						</Button>
+					</DialogTrigger>
+					<DialogContent>
+						<DialogTitle>Video de apresentação do projeto</DialogTitle>
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo tempore maiores ullam
+						cumque libero reprehenderit alias amet incidunt, earum sint, illo modi dignissimos
+						repudiandae ut eveniet beatae dolore laudantium illum.
+					</DialogContent>
+				</Dialog>
 			</div>
 
 			{/* Bottom Title Area */}

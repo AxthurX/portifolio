@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowUpRight, ChevronUp, X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Button } from './ui/button';
 import {
 	ProgressSlider,
 	SliderBtn,
@@ -61,10 +62,7 @@ const PROJECTS: Project[] = [
 	},
 ];
 
-export default function PortfolioDrawer({
-	isOpen,
-	onClose,
-}: PortfolioDrawerProps) {
+export default function PortfolioDrawer({ isOpen, onClose }: PortfolioDrawerProps) {
 	return (
 		<AnimatePresence>
 			{isOpen && (
@@ -101,20 +99,18 @@ export default function PortfolioDrawer({
 
 								<h2 className='font-bold text-xl tracking-tight md:text-2xl'>
 									Projetos{' '}
-									<span className='font-normal font-serif text-primary italic'>
-										Recentes
-									</span>
+									<span className='font-normal font-serif text-primary italic'>Recentes</span>
 								</h2>
 							</div>
 
-							<button
+							<Button
 								type='button'
 								onClick={onClose}
 								aria-label='Fechar portfolio'
-								className='flex h-10 w-10 items-center justify-center rounded-full border border-border transition-all duration-200 hover:border-foreground hover:bg-foreground hover:text-background'
+								className='rounded-full'
 							>
 								<X className='h-4 w-4' />
-							</button>
+							</Button>
 						</div>
 
 						{/* Content */}
@@ -182,7 +178,7 @@ export default function PortfolioDrawer({
 											key={project.sliderName}
 											value={project.sliderName}
 											className='cursor-pointer overflow-hidden rounded-xl border border-border bg-background p-3 text-left transition-all hover:border-primary/50 md:p-4'
-											progressBarClass='h-full bg-primary'
+											progressBarClass='h-full bg-primary/80'
 											progressStyle={{
 												mixBlendMode: 'difference',
 											}}

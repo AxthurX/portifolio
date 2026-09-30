@@ -19,9 +19,7 @@ interface ProgressSliderContextType {
 	vertical: boolean;
 }
 
-const ProgressSliderContext = createContext<ProgressSliderContextType | null>(
-	null,
-);
+const ProgressSliderContext = createContext<ProgressSliderContextType | null>(null);
 
 export function useProgressSliderContext() {
 	const context = useContext(ProgressSliderContext);
@@ -59,20 +57,20 @@ export const ProgressSlider = ({
 	const targetValue = useRef<string | null>(null);
 	const progressRef = useRef(0);
 
-	const [sliderValues, setSliderValues] = useState([]);
+	const [sliderValues, setSliderValues] = useState<string[]>([]);
 
 	const animate = useCallback(
 		(now: number) => {
-			const currentDuration = isFastForward ? fastDuration : duration;
+			const current_duration = isFastForward ? fastDuration : duration;
 
-			const elapsedTime = now - firstFrameTime.current;
+			const elapsed_time = now - firstFrameTime.current;
 
-			const timeFraction = elapsedTime / currentDuration;
+			const time_fraction = elapsed_time / current_duration;
 
-			if (timeFraction <= 1) {
+			if (time_fraction <= 1) {
 				const newProgress = isFastForward
-					? progressRef.current + (100 - progressRef.current) * timeFraction
-					: timeFraction * 100;
+					? progressRef.current + (100 - progressRef.current) * time_fraction
+					: time_fraction * 100;
 
 				progressRef.current = newProgress;
 
@@ -92,11 +90,11 @@ export const ProgressSlider = ({
 					targetValue.current = null;
 				}
 			} else {
-				const currentIndex = sliderValues.indexOf(active);
+				const current_index = sliderValues.indexOf(active);
 
-				const nextIndex = (currentIndex + 1) % sliderValues.length;
+				const next_index = (current_index + 1) % sliderValues.length;
 
-				setActive(sliderValues[nextIndex]);
+				setActive(sliderValues[next_index]);
 			}
 
 			progressRef.current = 0;
@@ -109,16 +107,18 @@ export const ProgressSlider = ({
 	);
 
 	useEffect(() => {
-		const contentChild = React.Children.toArray(children).find(
-			(child): child is React.ReactElement =>
+		const content_child = React.Children.toArray(children).find(
+			(child): child is React.ReactElement<{ children: React.ReactNode }> =>
 				React.isValidElement(child) && child.type === SliderContent,
 		);
 
-		if (!contentChild) return;
+		if (!content_child) return;
 
-		const values = React.Children.toArray(contentChild.props.children)
-			.filter(React.isValidElement)
-			.map((child) => child.props.value as string);
+		const values = React.Children.toArray(content_child.props.children)
+			.filter((child): child is React.ReactElement<{ value: string }> =>
+				React.isValidElement(child),
+			)
+			.map((child) => child.props.value);
 
 		setSliderValues(values);
 	}, [children]);
@@ -136,9 +136,9 @@ export const ProgressSlider = ({
 	const handleButtonClick = (value: string) => {
 		if (value === active) return;
 
-		const elapsedTime = performance.now() - firstFrameTime.current;
+		const elapsed_time = performance.now() - firstFrameTime.current;
 
-		progressRef.current = (elapsedTime / duration) * 100;
+		progressRef.current = (elapsed_time / duration) * 100;
 
 		if (value) targetValue.current = value;
 
@@ -166,10 +166,7 @@ interface SliderContentProps {
 	className?: string;
 }
 
-export function SliderContent({
-	children,
-	className = '',
-}: SliderContentProps) {
+export function SliderContent({ children, className = '' }: SliderContentProps) {
 	return <div className={className}>{children}</div>;
 }
 
@@ -179,12 +176,9 @@ interface SliderWrapperProps {
 	className?: string;
 }
 
-export function SliderWrapper({
-	children,
-	value,
-	className = '',
-}: SliderWrapperProps) {
+export function SliderWrapper({ children, value, className = '' }: SliderWrapperProps) {
 	const { active } = useProgressSliderContext();
+
 	return (
 		<AnimatePresence mode='popLayout'>
 			{active === value && (
@@ -208,10 +202,7 @@ interface SliderBtnGroupProps {
 	className?: string;
 }
 
-export function SliderBtnGroup({
-	children,
-	className = '',
-}: SliderBtnGroupProps) {
+export function SliderBtnGroup({ children, className = '' }: SliderBtnGroupProps) {
 	return <div className={className}>{children}</div>;
 }
 
@@ -230,17 +221,16 @@ export function SliderBtn({
 	progressBarClass = '',
 	progressStyle = {},
 }: SliderBtnProps) {
-	const { active, progress, handleButtonClick, vertical } =
-		useProgressSliderContext();
+	const { active, progress, handleButtonClick, vertical } = useProgressSliderContext();
 
 	return (
 		<button
 			type='button'
-			className={`relative overflow-hidden ${
-				active === value ? 'opacity-100' : 'opacity-50 hover:opacity-75'
-			} transition-opacity ${className}`}
 			style={{ isolation: 'isolate' }}
 			onClick={() => handleButtonClick(value)}
+			className={`relative overflow-hidden rounded-base border-2 border-border bg-secondary-background transition-all ${
+				active === value ? 'opacity-100' : 'opacity-60 hover:opacity-85'
+			} transition-opacity ${className}`}
 		>
 			<div className='relative z-10'>{children}</div>
 
@@ -251,12 +241,13 @@ export function SliderBtn({
 				aria-valuemin={0}
 				aria-valuemax={100}
 			>
-				<span
-					className={`absolute top-0 left-0 ${progressBarClass}`}
+				<div
+					className={`h-full w-full border-border border-r-2 bg-main transition-none${progressBarClass}
+			`}
 					style={{
-						[vertical ? 'height' : 'width']:
-							active === value ? `${progress}%` : '0%',
-						mixBlendMode: 'difference',
+						transform: vertical
+							? `translateY(${100 - (active === value ? progress : 0)}%)`
+							: `translateX(-${100 - (active === value ? progress : 0)}%)`,
 						...progressStyle,
 					}}
 				/>
