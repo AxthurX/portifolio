@@ -98,10 +98,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 		>
 			<head>
 				<link rel='icon' href='/logo-simbolo.png' type='image/png' />
-				<meta
-					name='viewport'
-					content='width=device-width, initial-scale=1, maximum-scale=5'
-				/>
+				<meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=5' />
 				<meta name='theme-color' content='#0a0a0b' />
 				<meta property='og:url' content='https://arthurmartins.dev' />
 			</head>
