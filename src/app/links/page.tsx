@@ -1,5 +1,6 @@
 import { Asterisk, MoreVertical, Share2 } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Avatar, AvatarImage } from '@/src/components/ui/avatar';
 import { Button } from '@/src/components/ui/button';
 import { Card, CardContent, CardFooter } from '@/src/components/ui/card';
@@ -13,28 +14,55 @@ const ICON_SRC: Record<string, string> = {
 };
 
 export default function Links() {
-	function handleShare() {
-		if (typeof navigator !== 'undefined' && navigator.share) {
-			navigator.share({ title: PROFILE.username, url: window.location.href }).catch(() => {});
-		} else if (typeof navigator !== 'undefined') {
-			navigator.clipboard?.writeText(window.location.href);
+	async function handleShare() {
+		const url = window.location.href;
+
+		try {
+			if (navigator.share) {
+				await navigator.share({
+					title: PROFILE.username,
+					url,
+				});
+
+				return;
+			}
+
+			if (navigator.clipboard) {
+				await navigator.clipboard.writeText(url);
+
+				console.log('Link copiado!');
+				return;
+			}
+
+			const input = document.createElement('input');
+
+			input.value = url;
+			document.body.appendChild(input);
+			input.select();
+
+			document.execCommand('copy');
+			input.remove();
+
+			console.log('Link copiado!');
+		} catch (error) {
+			if (error instanceof DOMException && error.name === 'AbortError') {
+				return;
+			}
+
+			console.error('Erro ao compartilhar:', error);
 		}
 	}
 
 	return (
-		<main className='flex items-center justify-center px-4 py-6'>
-			<Card className='flex w-full max-w-xl flex-col px-6 py-4'>
+		<main className='flex items-center justify-center px-4 py-10'>
+			<Card className='flex w-120 max-w-lg flex-col px-6 py-4'>
 				<header className='flex items-center justify-between'>
 					<Button aria-label='Menu' className='rounded-full'>
 						<Asterisk className='text-secondary-foreground' />
 					</Button>
 
 					<div className='flex items-center gap-2'>
-						<Button
-							// onClick={handleShare}
-							aria-label='Compartilhar'
-							className='rounded-full'
-						>
+						<Button aria-label='Compartilhar' className='rounded-full'>
 							<Share2 className='size-4' />
 						</Button>
 					</div>
@@ -43,8 +71,9 @@ export default function Links() {
 				<CardContent>
 					<div className='mt-10'>
 						<div className='flex flex-col items-center gap-4'>
-							<Avatar className='size-32'>
+							<Avatar className='size-36'>
 								<AvatarImage
+									className='aspect-auto'
 									src={PROFILE.avatar || '/placeholder.svg'}
 									alt={`Foto de perfil de ${PROFILE.username}`}
 								/>
@@ -54,7 +83,7 @@ export default function Links() {
 
 							<nav aria-label='Redes sociais' className='flex items-center justify-center gap-5'>
 								{SOCIALS.map((social) => (
-									<a
+									<Link
 										key={social.key}
 										href={social.url}
 										target='_blank'
@@ -70,7 +99,7 @@ export default function Links() {
 											height={24}
 											className='size-6 brightness-0'
 										/>
-									</a>
+									</Link>
 								))}
 							</nav>
 						</div>

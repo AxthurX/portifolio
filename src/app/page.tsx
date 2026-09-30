@@ -2,12 +2,10 @@
 
 import Lenis from 'lenis';
 import { useEffect, useState } from 'react';
-import Certificados from '../components/Certificados';
 import Contato from '../components/Contato';
 import Experiencias from '../components/Experiencias';
 import Header from '../components/Header';
 import Main from '../components/Main';
-import PortfolioDrawer from '../components/PortfolioDrawer';
 import Projetos from '../components/Projetos';
 import SobreMim from '../components/SobreMim';
 import Stack from '../components/Stack';
@@ -61,7 +59,7 @@ export default function Home() {
 						<SobreMim />
 						<Projetos />
 						<Experiencias />
-						<Certificados />
+						{/* <Certificados /> */}
 						<Stack />
 						<Contato />
 					</div>
@@ -78,7 +76,7 @@ export default function Home() {
 				</footer>
 			</main>
 
-			<PortfolioDrawer isOpen={portfolioOpen} onClose={() => setPortfolioOpen(false)} />
+			{/* <PortfolioDrawer isOpen={portfolioOpen} onClose={() => setPortfolioOpen(false)} /> */}
 		</>
 	);
 }
