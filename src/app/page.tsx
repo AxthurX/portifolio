@@ -2,6 +2,7 @@
 
 import Lenis from 'lenis';
 import { useEffect, useState } from 'react';
+import Certificados from '../components/Certificados';
 import Contato from '../components/Contato';
 import Experiencias from '../components/Experiencias';
 import Header from '../components/Header';
@@ -59,7 +60,7 @@ export default function Home() {
 						<SobreMim />
 						<Projetos />
 						<Experiencias />
-						{/* <Certificados /> */}
+						<Certificados />
 						<Stack />
 						<Contato />
 					</div>

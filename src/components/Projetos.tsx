@@ -10,102 +10,210 @@ import { Dialog, DialogContent, DialogTitle, DialogTrigger } from './ui/dialog';
 export interface Projeto {
 	id: string;
 	client: string;
-	category: string;
 	title: string;
+	category: string;
+	description: string;
 	image: string;
+	technologies: string[];
+	video: string;
 }
 
-const PROJECTS = [
+const PROJECTS: Projeto[] = [
 	{
 		id: '01',
 		client: 'SEDAM',
 		category: 'Fullstack & Governo Digital',
 		title:
-			'Plataforma de requerimentos digitais com upload inteligente, validações e gestão documental',
-		image: '/projetos/sedam.jpg',
+			'Desenvolvimento e evolução de um ecossistema digital com múltiplos sistemas para a SEDAM',
+		description:
+			'Atuação no desenvolvimento e manutenção de plataformas utilizadas para serviços públicos, gestão administrativa, transparência, processos seletivos, inscrições, documentação e atendimento ao cidadão.',
+		image: '/projetos/sedam.png',
+		technologies: ['React', 'Next.js', 'TypeScript', 'Node.js', 'Prisma', 'PostgreSQL'],
+		video: '',
 	},
+
 	{
 		id: '02',
-		client: 'Portal Institucional',
-		category: 'Editor Visual & CMS',
-		title:
-			'Migração de editor legado para Tiptap com galerias customizadas, uploads e experiência otimizada',
-		image: '/projetos/portal.jpg',
+		client: 'Portal SEDAM',
+		category: 'Portal Institucional',
+		title: 'Portal institucional para serviços, notícias, requerimentos e informações ambientais',
+		description:
+			'Principal portal institucional da Secretaria, reunindo informações ambientais, notícias, serviços online, formulários dinâmicos e processos de solicitação de certificados e autorizações.',
+		image: '/projetos/portal.png',
+		technologies: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS'],
+		video: '',
 	},
+
 	{
 		id: '03',
-		client: 'Assistente IA',
-		category: 'AI Engineering',
-		title: 'Chat corporativo com RAG, sessões persistentes e renderização dinâmica de mensagens',
-		image: '/projetos/chat-ai.jpg',
+		client: 'Portal SEDAM — Admin',
+		category: 'CMS & Gestão de Conteúdo',
+		title: 'Painel administrativo para gerenciamento de conteúdo e publicação do Portal SEDAM',
+		description:
+			'Plataforma interna utilizada pelos servidores para gerenciamento de conteúdos, notícias, documentos, categorias e recursos disponibilizados no portal institucional.',
+		image: '/projetos/admin.png',
+		technologies: ['Next.js', 'React', 'TypeScript', 'TipTap'],
+		video: '',
 	},
+
 	{
 		id: '04',
-		client: 'Design System',
-		category: 'Frontend Architecture',
-		title: 'Biblioteca acessível de componentes reutilizáveis integrada com Tailwind e Next.js',
-		image: '/projetos/acessibilidade.jpg',
+		client: 'Busca Inteligente',
+		category: 'Search & Performance',
+		title: 'Busca inteligente com Typesense e resultados instantâneos em menos de 50 ms',
+		description:
+			'Integração de um mecanismo de busca open-source ao Portal SEDAM, com fuzzy search, autocomplete, stemming em português, cache e ranking de resultados.',
+		image: '/projetos/search.png',
+		technologies: ['Typesense', 'Next.js', 'TypeScript', 'Docker'],
+		video: '',
 	},
+
 	{
 		id: '05',
-		client: 'Painel Administrativo',
-		category: 'Dashboard & UX',
-		title:
-			'Interface administrativa com filtros dinâmicos, tabelas performáticas e fluxos otimizados',
-		image: '/projetos/dashboard.jpg',
+		client: 'Editor de Conteúdo',
+		category: 'Headless Editor & CMS',
+		title: 'Editor de conteúdo baseado em TipTap e ProseMirror com extensões personalizadas',
+		description:
+			'Editor rico desenvolvido para publicação de conteúdos e documentação, com galerias, vídeos, tabelas redimensionáveis, upload de arquivos e imagens e integração com armazenamento.',
+		image: '/projetos/tiptap.png',
+		technologies: ['TipTap', 'ProseMirror', 'Next.js', 'TypeScript', 'Fastify', 'MinIO'],
+		video: '',
 	},
 	{
 		id: '06',
-		client: 'Portfólio Interativo',
-		category: 'Creative Development',
-		title: 'Experiência frontend com animações fluidas, microinterações e foco em performance',
-		image: '/projetos/portfolio.jpg',
+		client: 'Acessibilidade',
+		category: 'Accessibility & Design System',
+		title: 'Menu de acessibilidade para diferentes necessidades de uso',
+		description:
+			'Biblioteca de acessibilidade desenvolvida com React, Next.js e Tailwind com recursos de contraste, tamanho de texto, espaçamento, saturação, leitura e comandos de voz.',
+		image: '/projetos/acessibilidade.png',
+		technologies: ['React', 'Next.js', 'Tailwind CSS', 'WCAG'],
+		video: '',
+	},
+	{
+		id: '07',
+		client: 'Portal da Transparência',
+		category: 'Transparência Pública',
+		title: 'Plataforma para disponibilização de informações públicas da SEDAM',
+		description:
+			'Sistema voltado à publicação e consulta de informações públicas, contribuindo para o acesso aos dados institucionais da Secretaria.',
+		image: '/projetos/transparencia.png',
+		technologies: ['React', 'Next.js', 'TypeScript'],
+		video: '',
+	},
+	{
+		id: '08',
+		client: 'Processos & Inscrições',
+		category: 'Sistemas Administrativos',
+		title: 'Plataformas para inscrições, processos seletivos e gerenciamento de documentos',
+		description:
+			'Desenvolvimento e manutenção de sistemas utilizados para inscrições de candidatos a estágio, processos seletivos e gerenciamento de documentos e candidaturas.',
+		image: '/projetos/processos.png',
+		technologies: ['React', 'Next.js', 'TypeScript', 'Node.js'],
+		video: '',
+	},
+	{
+		id: '09',
+		client: 'SEDAM Wiki',
+		category: 'Documentação',
+		title: 'Plataforma de documentação interna para conhecimento e processos da Secretaria',
+		description:
+			'Ambiente dedicado à documentação e organização do conhecimento técnico e institucional da SEDAM.',
+		image: '/projetos/wiki.png',
+		technologies: ['Next.js', 'React', 'TypeScript'],
+		video: '',
 	},
 ];
 
 function ProjectCard({ projeto }: { projeto: Projeto }) {
 	return (
-		<Card className='group relative flex h-[60vh] w-full shrink-0 cursor-pointer flex-col justify-between overflow-hidden rounded-2xl bg-surface p-6 md:h-[70vh] md:w-[55vw] md:p-8'>
-			{/* Background gradient */}
-			<div className='absolute inset-0 z-0 bg-linear-to-br from-primary/5 via-transparent to-accent/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100' />
-
-			{/* Pattern overlay */}
+		<Card className='group relative flex h-[60vh] w-full shrink-0 cursor-pointer flex-col justify-between overflow-hidden rounded-2xl border border-border bg-surface md:h-[70vh] md:w-[55vw]'>
 			<div
-				className='pointer-events-none absolute inset-0 opacity-[0.02]'
+				className='absolute inset-0 z-0 bg-center bg-cover bg-no-repeat transition-transform duration-700 ease-out group-hover:scale-105'
+				style={{
+					backgroundImage: `url(${projeto.image})`,
+				}}
+			/>
+
+			<div className='absolute inset-0 z-1 bg-background/55 transition-opacity duration-500 group-hover:bg-background/40' />
+
+			<div className='absolute inset-0 z-2 bg-linear-to-br from-background/60 via-background/25 to-primary/15' />
+
+			<div
+				className='pointer-events-none absolute inset-0 z-3 opacity-[0.08]'
 				style={{
 					backgroundImage: 'radial-gradient(var(--foreground) 1px, transparent 1px)',
 					backgroundSize: '24px 24px',
 				}}
 			/>
 
-			<div className='relative z-10 flex items-start justify-between'>
+			<div className='pointer-events-none absolute inset-0 z-4 bg-linear-to-br from-primary/10 via-transparent to-accent/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100' />
+
+			<div className='relative z-10 flex items-start justify-between p-6 md:p-8'>
 				<div>
 					<span className='mb-2 block font-medium text-primary text-xs uppercase tracking-widest'>
 						{projeto.category}
 					</span>
+
 					<span className='text-muted-foreground text-sm'>{projeto.client}</span>
 				</div>
 
 				<Dialog>
-					<DialogTrigger>
-						<Button className='flex h-12 w-12 items-center justify-center rounded-full transition-all duration-300 group-hover:border-primary group-hover:bg-primary group-hover:text-primary-foreground'>
+					<DialogTrigger asChild>
+						<Button
+							type='button'
+							variant='outline'
+							className='flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-border bg-background/60 p-0 backdrop-blur-sm transition-all duration-300 hover:border-primary hover:bg-primary hover:text-primary-foreground group-hover:border-primary/50'
+							aria-label={`Ver apresentação de ${projeto.client}`}
+						>
 							<ArrowUpRight
 								strokeWidth={1.5}
-								className='h-5 w-5 transition-transform group-hover:rotate-45'
+								className='h-5 w-5 transition-transform duration-300 group-hover:rotate-45'
 							/>
 						</Button>
 					</DialogTrigger>
-					<DialogContent>
-						<DialogTitle>Video de apresentação do projeto</DialogTitle>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo tempore maiores ullam
-						cumque libero reprehenderit alias amet incidunt, earum sint, illo modi dignissimos
-						repudiandae ut eveniet beatae dolore laudantium illum.
+
+					<DialogContent className='w-full max-w-5xl overflow-hidden border-border bg-surface p-0'>
+						<DialogTitle className='hidden text-xl'>{projeto.client}</DialogTitle>
+
+						{projeto.video ? (
+							<div className='aspect-video w-full overflow-hidden bg-black'>
+								<video
+									className='h-full w-full object-contain'
+									controls
+									playsInline
+									preload='metadata'
+									poster={projeto.image}
+								>
+									<source src={projeto.video} type='video/mp4' />
+									Seu navegador não suporta reprodução de vídeo.
+								</video>
+							</div>
+						) : (
+							<div
+								className='flex aspect-video items-center justify-center bg-center bg-cover'
+								style={{
+									backgroundImage: `linear-gradient(
+										rgba(0, 0, 0, 0.55),
+										rgba(0, 0, 0, 0.55)
+									), url(${projeto.image})`,
+								}}
+							>
+								<div className='text-center text-white'>
+									<p className='font-medium'>Apresentação em breve</p>
+
+									<p className='mt-1 text-sm text-white/60'>
+										O vídeo deste projeto ainda não está disponível.
+									</p>
+								</div>
+							</div>
+						)}
 					</DialogContent>
 				</Dialog>
 			</div>
 
-			{/* Bottom Title Area */}
-			<div className='relative z-10 flex items-end justify-between'>
+			{/* Conteúdo inferior */}
+			<div className='relative z-10 flex items-end justify-between p-6 md:p-8'>
 				<h4 className='max-w-[80%] font-light text-2xl text-foreground leading-tight tracking-tight md:text-4xl xl:text-5xl'>
 					{projeto.title}
 				</h4>

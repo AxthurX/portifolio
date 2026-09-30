@@ -4,6 +4,7 @@ import { motion, type Variants } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useEffect, useRef } from 'react';
+import { Card } from './ui/card';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -151,7 +152,6 @@ export default function Experiencias() {
 									isEven ? 'md:flex-row' : 'md:flex-row-reverse'
 								}`}
 							>
-								{/* Connection line */}
 								<motion.div
 									initial={{ scaleX: 0 }}
 									whileInView={{ scaleX: 1 }}
@@ -163,21 +163,20 @@ export default function Experiencias() {
 									style={{
 										transformOrigin: isEven ? 'right' : 'left',
 									}}
-									className={`absolute top-1/2 hidden h-px w-[calc(50%-2rem)] -translate-y-1/2 bg-linear-to-r ${
+									className={`absolute top-1/2 hidden h-px w-[calc(50%-1rem)] -translate-y-1/2 bg-linear-to-r ${
 										isEven
-											? 'left-8 from-transparent to-primary/50'
-											: 'right-8 from-primary/50 to-transparent'
+											? 'left-10 from-transparent to-primary/70'
+											: 'right-10 from-primary/70 to-transparent'
 									} md:block`}
 								/>
 
-								{/* Center dot */}
 								<motion.div
 									className='absolute top-1/2 left-1/2 z-20 hidden -translate-x-1/2 -translate-y-1/2 flex-col items-center md:flex'
 									style={{ width: '42px' }}
 								>
 									<div
 										className={
-											'relative z-10 mt-1 flex h-10 w-10 items-center justify-center rounded-full border-2 bg-primary font-bold text-primary-content text-xs'
+											'relative z-10 mt-1 flex size-12 items-center justify-center rounded-full border-2 bg-primary font-bold text-primary-content text-xs'
 										}
 									>
 										{exp.atual ? 'Atual' : exp.periodo.split(' ')[1]}
@@ -191,8 +190,10 @@ export default function Experiencias() {
 										variants={itemVariants}
 										className='relative flex flex-col gap-6 md:flex-row md:gap-10'
 									>
-										<div
-											className={`mb-10 flex-1 rounded-2xl border bg-surface p-6 transition-all duration-300 hover:border-primary/30 hover:shadow-[0_0_30px_rgba(94,234,212,0.06)] md:p-8 ${exp.atual ? 'border-primary/20' : 'border-border'}`}
+										<Card
+											className={`mb-10 flex-1 rounded-2xl border bg-surface p-6 shadow-[4px_4px_0_0_#000] transition-all duration-300 hover:border-primary/30 hover:shadow-[4px_4px_0_0_rgba(32,91,255,0.6)] md:p-8 ${
+												exp.atual ? 'border-primary/20' : 'border-border'
+											}`}
 										>
 											<div className='mb-5 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between'>
 												<div>
@@ -204,15 +205,18 @@ export default function Experiencias() {
 														>
 															{exp.logo}
 														</div>
+
 														<h3 className='font-bold text-foreground text-lg leading-tight'>
 															{exp.cargo}
 														</h3>
+
 														{exp.atual && (
 															<span className='rounded-full bg-primary/10 px-2 py-0.5 font-semibold text-[10px] text-primary uppercase tracking-wider'>
 																Atual
 															</span>
 														)}
 													</div>
+
 													<p className='font-medium text-foreground/80 text-sm'>
 														{exp.empresa}
 														<span className='font-normal text-muted-foreground'> · {exp.tipo}</span>
@@ -256,7 +260,7 @@ export default function Experiencias() {
 													</span>
 												))}
 											</div>
-										</div>
+										</Card>
 									</motion.div>
 								</div>
 

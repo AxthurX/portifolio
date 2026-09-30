@@ -3,8 +3,7 @@
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { memo, type RefObject, useEffect, useMemo, useRef, useState } from 'react';
-import { loadCertificates } from '../lib/pdf';
+import { memo, useMemo, useRef, useState } from 'react';
 import { cn } from '../lib/utils';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -196,67 +195,69 @@ export default function Certificados() {
 	const sectionRef = useRef<HTMLElement | null>(null);
 	const headingRef = useRef<HTMLHeadingElement | null>(null);
 
-	useEffect(() => {
-		async function load() {
-			const pdfs = await loadCertificates();
+	// useEffect(() => {
+	// 	async function load() {
+	// 		const pdfs = await loadCertificates();
 
-			const colors: Certificate['color'][] = ['gold', 'silver', 'bronze', 'teal'];
+	// 		const colors: Certificate['color'][] = ['gold', 'silver', 'bronze', 'teal'];
 
-			const sizes: TrophySize[] = ['large', 'medium', 'small', 'mini'];
+	// 		const sizes: TrophySize[] = ['large', 'medium', 'small', 'mini'];
 
-			setCertificates(
-				pdfs.map((pdf, index) => ({
-					title: pdf.title,
-					issuer: '',
-					date: '',
-					image: pdf.image,
-					credentialUrl: pdf.url,
-					size: sizes[index % sizes.length],
-					color: colors[index % colors.length],
-				})),
-			);
-		}
+	// 		setCertificates(
+	// 			pdfs
+	// 				.map((pdf, index) => ({
+	// 					title: pdf.title,
+	// 					issuer: '',
+	// 					date: '',
+	// 					image: pdf.image,
+	// 					credentialUrl: pdf.url,
+	// 					size: sizes[index % sizes.length],
+	// 					color: colors[index % colors.length],
+	// 				}))
+	// 				.reverse(),
+	// 		);
+	// 	}
 
-		load();
-	}, []);
+	// 	load();
+	// }, []);
 
-	useEffect(() => {
-		if (!sectionRef.current || !headingRef.current) return;
+	// useEffect(() => {
+	// 	if (!sectionRef.current || !headingRef.current) return;
 
-		const ctx = gsap.context(
-			() => {
-				const heading = headingRef.current;
-				if (!heading) return;
+	// 	const ctx = gsap.context(
+	// 		() => {
+	// 			const heading = headingRef.current;
+	// 			if (!heading) return;
 
-				const words = heading.innerText.split(' ');
-				heading.innerHTML = words
-					.map(
-						(word) =>
-							`<span style="display:inline-block;overflow:hidden;vertical-align:bottom;">
-							<span class="gsap-cert-word" style="display:inline-block;transform:translateY(110%);">
-								${word}&nbsp;
-							</span>
-						</span>`,
-					)
-					.join('');
+	// 			const words = heading.innerText.split(' ');
+	// 			heading.innerHTML = words
+	// 				.map(
+	// 					(word) =>
+	// 						`<span style="display:inline-block;overflow:hidden;vertical-align:bottom;">
+	// 						<span class="gsap-cert-word" style="display:inline-block;transform:translateY(110%);">
+	// 							${word}&nbsp;
+	// 						</span>
+	// 					</span>`,
+	// 				)
+	// 				.join('');
 
-				gsap.to('.gsap-cert-word', {
-					y: 0,
-					duration: 0.9,
-					stagger: 0.05,
-					ease: 'power3.out',
-					scrollTrigger: {
-						trigger: heading,
-						start: 'top 85%',
-						once: true,
-					},
-				});
-			},
-			sectionRef as RefObject<HTMLElement>,
-		);
+	// 			gsap.to('.gsap-cert-word', {
+	// 				y: 0,
+	// 				duration: 0.9,
+	// 				stagger: 0.05,
+	// 				ease: 'power3.out',
+	// 				scrollTrigger: {
+	// 					trigger: heading,
+	// 					start: 'top 85%',
+	// 					once: true,
+	// 				},
+	// 			});
+	// 		},
+	// 		sectionRef as RefObject<HTMLElement>,
+	// 	);
 
-		return () => ctx.revert();
-	}, []);
+	// 	return () => ctx.revert();
+	// }, []);
 
 	return (
 		<section
@@ -299,9 +300,9 @@ export default function Certificados() {
 
 							{/* Trophy grid */}
 							<div className='grid grid-cols-4 grid-rows-3 gap-3 md:gap-4'>
-								{certificates.slice(0, count).map((cert, i) => (
+								{/* {certificates.slice(0, 4).map((cert, i) => (
 									<CertificateCard key={cert.title} cert={cert} index={i} />
-								))}
+								))} */}
 							</div>
 
 							{count < certificates.length && (
