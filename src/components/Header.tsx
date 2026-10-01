@@ -78,7 +78,7 @@ export default function Header({ onPortfolioOpen }: { onPortfolioOpen: () => voi
 				</nav>
 
 				{/* Right Actions */}
-				<div className='pointer-events-auto relative z-10 flex h-14 items-center gap-3 pr-3'>
+				<div className='relative z-10 flex h-14 items-center gap-3 pr-3'>
 					{/* <Button
 						type='button'
 						onClick={onPortfolioOpen}
@@ -94,7 +94,7 @@ export default function Header({ onPortfolioOpen }: { onPortfolioOpen: () => voi
 						<Asterisk className='text-secondary-foreground' />
 					</Button>
 
-					<Link href='#contato' className='max-sm:hidden'>
+					<Link href='#contato' className='max-lg:hidden'>
 						<Button className='rounded-full bg-primary px-6 py-4 font-medium text-primary-foreground transition-all duration-200'>
 							Entre em contato
 						</Button>

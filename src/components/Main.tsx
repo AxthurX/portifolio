@@ -81,7 +81,7 @@ export default function Main() {
 
 			<motion.div
 				{...fadeIn(0.2)}
-				className='relative z-10 flex items-center justify-between pt-20'
+				className='relative z-10 flex items-center justify-between pt-20 max-sm:flex-wrap max-sm:items-start max-sm:gap-4'
 			>
 				<div className='flex items-center gap-4'>
 					<div className='flex h-12 w-12 items-center justify-center rounded-full border border-border bg-surface'>
@@ -94,7 +94,7 @@ export default function Main() {
 					</div>
 				</div>
 
-				<div className='hidden items-center gap-3 md:flex'>
+				<div className='flex items-center gap-3'>
 					<Button className='rounded-full' variant='link'>
 						<a
 							target='_blank'
@@ -125,52 +125,7 @@ export default function Main() {
 			</motion.div>
 
 			<div className='relative z-10 flex flex-1 flex-col justify-center py-12 md:py-16'>
-				<div className='flex flex-col md:hidden'>
-					<motion.p
-						{...fadeIn(0.1)}
-						className='mb-4 font-medium text-primary text-sm uppercase tracking-widest'
-					>
-						Fullstack Developer
-					</motion.p>
-
-					{['Crafting', 'Digital', 'Experiences'].map((word, index) => (
-						<div key={word} className='overflow-hidden'>
-							<motion.h1
-								{...wordReveal(0.15 + index * 0.1)}
-								className='font-bold text-[13vw] uppercase leading-[0.9] tracking-tight'
-							>
-								{word}
-							</motion.h1>
-						</div>
-					))}
-
-					<motion.p
-						{...fadeIn(0.6)}
-						className='mt-8 max-w-md text-base text-muted-foreground leading-relaxed'
-					>
-						Desenvolvedor fullstack com foco em experiencias digitais premium, performance e
-						animações modernas.
-					</motion.p>
-
-					<motion.div {...fadeIn(0.8)} className='mt-10 flex gap-4'>
-						<Link
-							href='#projetos'
-							className='flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-medium text-primary-foreground text-sm transition-all hover:scale-105 hover:shadow-lg hover:shadow-primary/25'
-						>
-							Ver projetos
-							<ArrowDownRight className='h-4 w-4' />
-						</Link>
-
-						<Link
-							href='#contato'
-							className='rounded-full border border-border px-6 py-3 font-medium text-sm transition-all hover:border-foreground hover:bg-foreground hover:text-background'
-						>
-							Contato
-						</Link>
-					</motion.div>
-				</div>
-
-				<div className='hidden flex-col md:flex'>
+				<div className='flex flex-col'>
 					<motion.p
 						{...fadeIn(0.1)}
 						className='mb-6 font-medium text-primary text-xs uppercase tracking-[0.3em]'
@@ -181,7 +136,7 @@ export default function Main() {
 					<div className='overflow-hidden'>
 						<motion.h1
 							{...wordReveal(0.15)}
-							className='font-bold text-[7vw] uppercase leading-[0.9] tracking-tight xl:text-[6.5vw]'
+							className='font-bold text-[7vw] uppercase leading-[0.9] tracking-tight max-md:text-[10vw] max-md:leading-[0.9] max-md:tracking-tight xl:text-[6.5vw]'
 						>
 							Engenheiro de
 						</motion.h1>
@@ -190,7 +145,7 @@ export default function Main() {
 					<div className='flex items-end gap-6 overflow-hidden'>
 						<motion.h1
 							{...wordReveal(0.25)}
-							className='font-bold text-[7vw] uppercase leading-[0.9] tracking-tight xl:text-[6.5vw]'
+							className='font-bold text-[7vw] uppercase leading-[0.9] tracking-tight max-md:text-[10vw] max-md:leading-[0.9] max-md:tracking-tight xl:text-[6.5vw]'
 						>
 							software
 						</motion.h1>
@@ -205,14 +160,17 @@ export default function Main() {
 
 					<motion.p
 						{...fadeIn(0.5)}
-						className='mt-12 max-w-lg text-lg text-muted-foreground leading-relaxed'
+						className='mt-8 max-w-lg text-lg text-muted-foreground leading-relaxed'
 					>
 						Desenvolvedor com forte ênfase em frontend, com 5+ anos de experiência, profissional em
 						transformar ideias malucas em interfaces funcionais.
 					</motion.p>
 
-					<motion.div {...fadeIn(0.7)} className='mt-10 flex items-center gap-6'>
-						<Button className='h-14'>
+					<motion.div
+						{...fadeIn(0.7)}
+						className='mt-10 flex items-center gap-6 max-sm:flex-wrap max-sm:gap-4'
+					>
+						<Button className='h-14 w-40'>
 							<Link
 								href='#projetos'
 								className='group flex items-center gap-3 rounded-full px-8 py-4 font-medium text-primary-foreground transition-all hover:scale-105'
@@ -222,7 +180,7 @@ export default function Main() {
 							</Link>
 						</Button>
 
-						<Button variant='outline' className='h-14 rounded-full'>
+						<Button variant='outline' className='h-14 w-40 rounded-full'>
 							<Link href='#contato' className='px-8 py-4 font-medium transition-all'>
 								Entre em contato
 							</Link>
