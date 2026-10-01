@@ -56,17 +56,20 @@ export default function Links() {
 		}
 	}
 
-	const handleThemeChange = async (value: string) => {
-		const theme = value || 'arthur';
+	const handleThemeChange = async () => {
+		const data_theme = document.documentElement.getAttribute('data-theme') || 'arthur';
+		const theme = data_theme === 'arthur' ? 'black' : 'arthur';
+
 		document.documentElement.setAttribute('data-theme', theme);
-		await axios.post('/api/theme', { theme: theme });
+
+		await axios.post('/api/theme', { theme });
 	};
 
 	return (
 		<main className='flex items-center justify-center px-4 py-10'>
 			<Card className='flex w-120 max-w-lg flex-col px-6 py-4 max-sm:w-full'>
 				<header className='flex items-center justify-between'>
-					<Button className='rounded-full' onClick={() => handleThemeChange('black')}>
+					<Button className='rounded-full' onClick={handleThemeChange}>
 						<Asterisk className='text-secondary-foreground' />
 					</Button>
 

@@ -21,13 +21,12 @@ export default function Header({ onPortfolioOpen }: { onPortfolioOpen: () => voi
 	const [menuOpen, setMenuOpen] = useState(false);
 
 	const handleThemeChange = async () => {
-		const data_theme = document.documentElement.getAttribute('data-theme');
-		// console.log(data_theme);
-		const theme = data_theme || 'black';
+		const data_theme = document.documentElement.getAttribute('data-theme') || 'arthur';
+		const theme = data_theme === 'arthur' ? 'black' : 'arthur';
 
-		console.log(theme);
 		document.documentElement.setAttribute('data-theme', theme);
-		await axios.post('/api/theme', { theme: theme });
+
+		await axios.post('/api/theme', { theme });
 	};
 
 	return (
