@@ -1,3 +1,6 @@
+'use client';
+
+import axios from 'axios';
 import { Asterisk, MoreVertical, Share2 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -53,11 +56,17 @@ export default function Links() {
 		}
 	}
 
+	const handleThemeChange = async (value: string) => {
+		const theme = value || 'arthur';
+		document.documentElement.setAttribute('data-theme', theme);
+		await axios.post('/api/theme', { theme: theme });
+	};
+
 	return (
 		<main className='flex items-center justify-center px-4 py-10'>
 			<Card className='flex w-120 max-w-lg flex-col px-6 py-4'>
 				<header className='flex items-center justify-between'>
-					<Button aria-label='Menu' className='rounded-full'>
+					<Button className='rounded-full' onClick={() => handleThemeChange('black')}>
 						<Asterisk className='text-secondary-foreground' />
 					</Button>
 
@@ -73,7 +82,7 @@ export default function Links() {
 						<div className='flex flex-col items-center gap-4'>
 							<Avatar className='size-36'>
 								<AvatarImage
-									className='aspect-auto'
+									className='aspect-auto object-cover'
 									src={PROFILE.avatar || '/placeholder.svg'}
 									alt={`Foto de perfil de ${PROFILE.username}`}
 								/>
@@ -93,7 +102,7 @@ export default function Links() {
 									>
 										{/* brightness-0 invert força o SVG monocromático a ficar branco sobre o fundo escuro */}
 										<Image
-											src={ICON_SRC[social.key] || '/placeholder.svg'}
+											src={ICON_SRC[social.key] || '/icons/placeholder.svg'}
 											alt={social.label}
 											width={24}
 											height={24}

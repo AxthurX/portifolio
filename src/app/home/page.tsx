@@ -17,8 +17,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/src/components/ui/ta
 
 export default function Home() {
 	return (
-		<div className='flex min-h-screen w-full flex-col bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 bg-fixed'>
-			<div className="absolute inset-0 bg-[url('/placeholder.svg?height=1080&width=1920')] bg-center bg-cover opacity-10" />
+		<div className='flex min-h-screen w-full flex-col bg-linear-to-br from-gray-900 via-gray-800 to-gray-900 bg-fixed'>
+			<div className="absolute inset-0 bg-[url('/icons/placeholder.svg?height=1080&width=1920')] bg-center bg-cover opacity-10" />
 			<DashboardHeader />
 			<main className='relative z-10 flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8'>
 				<Tabs defaultValue='smart-home'>

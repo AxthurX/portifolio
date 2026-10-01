@@ -178,7 +178,7 @@ export function SmartHome() {
 						</div>
 						<div className='relative overflow-hidden rounded-lg'>
 							<Image
-								src='/placeholder.svg?height=200&width=300'
+								src='/icons/placeholder.svg?height=200&width=300'
 								alt='Room camera view'
 								width={300}
 								height={200}

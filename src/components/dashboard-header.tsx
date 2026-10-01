@@ -8,7 +8,7 @@ export function DashboardHeader() {
 			<div className='flex items-center gap-3'>
 				<div className='relative h-10 w-10 overflow-hidden rounded-full border border-white/20'>
 					<Image
-						src='/placeholder.svg?height=100&width=100'
+						src='/icons/placeholder.svg?height=100&width=100'
 						alt='User avatar'
 						width={40}
 						height={40}

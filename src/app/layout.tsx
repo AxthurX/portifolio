@@ -1,7 +1,7 @@
 import { Inter, Playfair_Display } from 'next/font/google';
 import './globals.css';
 import type { Metadata } from 'next';
-import { ThemeProvider } from '../components/ThemeProvider';
+import { cookies } from 'next/headers';
 
 const inter = Inter({
 	subsets: ['latin'],
@@ -89,29 +89,23 @@ interface RootLayoutProps {
 	children: React.ReactNode;
 }
 
-export default function RootLayout({ children }: RootLayoutProps) {
+export default async function RootLayout({ children }: RootLayoutProps) {
+	const cookie_store = await cookies();
+	const theme = cookie_store.get('theme');
+
 	return (
 		<html
 			lang='pt-BR'
 			className={`${inter.variable} ${playfair.variable} bg-background`}
-			data-theme='arthur'
+			data-theme={theme || 'arthur'}
 		>
 			<head>
-				<link rel='icon' href='/logo-simbolo.png' type='image/png' />
 				<meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=5' />
-				<meta name='theme-color' content='#0a0a0b' />
 				<meta property='og:url' content='https://arthurmartins.dev' />
 			</head>
 
 			<body className='flex min-h-screen flex-col items-center bg-background font-sans text-foreground antialiased'>
-				<ThemeProvider
-					attribute='class'
-					defaultTheme='dark'
-					enableSystem={false}
-					disableTransitionOnChange={false}
-				>
-					{children}
-				</ThemeProvider>
+				{children}
 			</body>
 		</html>
 	);

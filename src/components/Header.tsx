@@ -1,5 +1,6 @@
 'use client';
 
+import axios from 'axios';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Download, Menu, X } from 'lucide-react';
 import Link from 'next/link';
@@ -18,6 +19,12 @@ const CURRICULUM_URL = '/arthur-martins.pdf';
 
 export default function Header({ onPortfolioOpen }: { onPortfolioOpen: () => void }) {
 	const [menuOpen, setMenuOpen] = useState(false);
+
+	const handleThemeChange = async (value: string) => {
+		const theme = value || 'arthur';
+		document.documentElement.setAttribute('data-theme', theme);
+		await axios.post('/api/theme', { theme: theme });
+	};
 
 	return (
 		<>
@@ -77,7 +84,14 @@ export default function Header({ onPortfolioOpen }: { onPortfolioOpen: () => voi
 						Portfolio
 					</Button> */}
 
-					<Link href='#contato'>
+					<Button
+						onClick={() => handleThemeChange('black')}
+						className='rounded-full bg-primary px-6 py-4 font-medium text-primary-foreground transition-all duration-200'
+					>
+						X
+					</Button>
+
+					<Link href='#contato' className='max-sm:hidden'>
 						<Button className='rounded-full bg-primary px-6 py-4 font-medium text-primary-foreground transition-all duration-200'>
 							Entre em contato
 						</Button>

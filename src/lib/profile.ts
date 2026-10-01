@@ -1,6 +1,6 @@
 export const PROFILE = {
 	username: '@arthurmartins.dev',
-	avatar: '/',
+	avatar: '/dev.png',
 };
 
 export const SOCIALS = [
