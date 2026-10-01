@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Download, Menu, X } from 'lucide-react';
+import { Asterisk, Download, Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 import { Button } from './ui/button';
@@ -20,8 +20,12 @@ const CURRICULUM_URL = '/arthur-martins.pdf';
 export default function Header({ onPortfolioOpen }: { onPortfolioOpen: () => void }) {
 	const [menuOpen, setMenuOpen] = useState(false);
 
-	const handleThemeChange = async (value: string) => {
-		const theme = value || 'arthur';
+	const handleThemeChange = async () => {
+		const data_theme = document.documentElement.getAttribute('data-theme');
+		// console.log(data_theme);
+		const theme = data_theme || 'black';
+
+		console.log(theme);
 		document.documentElement.setAttribute('data-theme', theme);
 		await axios.post('/api/theme', { theme: theme });
 	};
@@ -85,10 +89,10 @@ export default function Header({ onPortfolioOpen }: { onPortfolioOpen: () => voi
 					</Button> */}
 
 					<Button
-						onClick={() => handleThemeChange('black')}
+						onClick={handleThemeChange}
 						className='rounded-full bg-primary px-6 py-4 font-medium text-primary-foreground transition-all duration-200'
 					>
-						X
+						<Asterisk className='text-secondary-foreground' />
 					</Button>
 
 					<Link href='#contato' className='max-sm:hidden'>

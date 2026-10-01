@@ -96,8 +96,8 @@ export default async function RootLayout({ children }: RootLayoutProps) {
 	return (
 		<html
 			lang='pt-BR'
-			className={`${inter.variable} ${playfair.variable} bg-background`}
-			data-theme={theme || 'arthur'}
+			className={`${inter.variable} ${playfair.variable}`}
+			data-theme={theme ? theme.value : 'arthur'}
 		>
 			<head>
 				<meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=5' />

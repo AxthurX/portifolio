@@ -6,6 +6,8 @@ export async function POST(request: NextRequest) {
 		const body = await request.json();
 		const { theme } = body;
 
+		console.log('Theme received:', theme);
+
 		(await cookies()).set('theme', theme);
 
 		return NextResponse.json(theme);

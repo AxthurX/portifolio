@@ -64,7 +64,7 @@ export default function Links() {
 
 	return (
 		<main className='flex items-center justify-center px-4 py-10'>
-			<Card className='flex w-120 max-w-lg flex-col px-6 py-4'>
+			<Card className='flex w-120 max-w-lg flex-col px-6 py-4 max-sm:w-full'>
 				<header className='flex items-center justify-between'>
 					<Button className='rounded-full' onClick={() => handleThemeChange('black')}>
 						<Asterisk className='text-secondary-foreground' />
@@ -129,7 +129,7 @@ export default function Links() {
 					</div>
 				</CardContent>
 
-				<CardFooter className='mt-10 flex flex-col items-center gap-4'>
+				<CardFooter className='sm>mt-10 flex flex-col items-center gap-4'>
 					<p className='text-pretty text-center text-muted-foreground text-xs'>
 						Cookie Preferences • Report • Privacy • Explore
 					</p>
