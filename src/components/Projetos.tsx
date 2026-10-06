@@ -135,9 +135,9 @@ function ProjectCard({ projeto }: { projeto: Projeto }) {
 				}}
 			/>
 
-			<div className='absolute inset-0 z-1 bg-background/55 transition-opacity duration-500 group-hover:bg-background/40' />
+			<div className='absolute inset-0 z-1 bg-[#fafafa]/55 transition-opacity duration-500 group-hover:bg-[#fafafa]/40' />
 
-			<div className='absolute inset-0 z-2 bg-linear-to-br from-background/60 via-background/25 to-primary/15' />
+			<div className='absolute inset-0 z-2 bg-linear-to-br from-[#fafafa]/60 via-[#fafafa]/25 to-primary/15' />
 
 			<div
 				className='pointer-events-none absolute inset-0 z-3 opacity-[0.08]'
@@ -163,7 +163,7 @@ function ProjectCard({ projeto }: { projeto: Projeto }) {
 						<Button
 							type='button'
 							variant='outline'
-							className='flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-border bg-background/60 p-0 backdrop-blur-sm transition-all duration-300 hover:border-primary hover:bg-primary hover:text-primary-foreground group-hover:border-primary/50'
+							className='flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-border bg-[#fafafa]/60 p-0 backdrop-blur-sm transition-all duration-300 hover:border-primary hover:bg-primary hover:text-primary-foreground group-hover:border-primary/50'
 							aria-label={`Ver apresentação de ${projeto.client}`}
 						>
 							<ArrowUpRight

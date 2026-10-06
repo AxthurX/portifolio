@@ -133,7 +133,7 @@ export default function Links() {
 				</CardContent>
 
 				<CardFooter className='sm>mt-10 flex flex-col items-center gap-4'>
-					<p className='text-pretty text-center text-muted-foreground text-xs'>
+					<p className='text-pretty text-center text-muted-foreground text-xs dark:text-white/60'>
 						Cookie Preferences • Report • Privacy • Explore
 					</p>
 				</CardFooter>

@@ -151,7 +151,7 @@
 	--color-cream: var(--cream);
 
 	--shadow-light: 4px 4px 0 0 #000;
-	--shadow-dark: 4px 4px 0 0 #000;
+	--shadow-dark: 4px 4px 0 0 #fff;
 
 	--shadow-neobrutalism: 4px 4px 0 0 #000;
 
@@ -176,18 +176,6 @@
 
 /* ── LIGHT (default) — cream palette ── */
 :root {
-	--background: #fafafa;
-	--foreground: #1a1a1a;
-
-	--primary: #205bff;
-	--primary-foreground: #ffffff;
-
-	--secondary: #95a4b6;
-	--secondary-foreground: #ffffff;
-
-	--accent: #1351b4;
-	--accent-foreground: #ffffff;
-
 	--muted: #f5f7fa;
 	--muted-foreground: #667085;
 

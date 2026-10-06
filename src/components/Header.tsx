@@ -89,13 +89,13 @@ export default function Header({ onPortfolioOpen }: { onPortfolioOpen: () => voi
 
 					<Button
 						onClick={handleThemeChange}
-						className='rounded-full bg-primary px-6 py-4 font-medium text-primary-foreground transition-all duration-200'
+						className='rounded-full bg-primary px-6 py-4 font-medium transition-all duration-200'
 					>
 						<Asterisk className='text-secondary-foreground' />
 					</Button>
 
 					<Link href='#contato' className='max-lg:hidden'>
-						<Button className='rounded-full bg-primary px-6 py-4 font-medium text-primary-foreground transition-all duration-200'>
+						<Button className='rounded-full bg-primary px-6 py-4 font-medium transition-all duration-200'>
 							Entre em contato
 						</Button>
 					</Link>
@@ -119,7 +119,7 @@ export default function Header({ onPortfolioOpen }: { onPortfolioOpen: () => voi
 						animate={{ opacity: 1, y: 0 }}
 						exit={{ opacity: 0, y: -20 }}
 						transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-						className='fixed inset-0 z-100 flex flex-col bg-background px-6 py-8'
+						className='fixed inset-0 z-100 flex flex-col px-6 py-8'
 					>
 						{/* Header */}
 						<div className='flex items-center justify-between'>

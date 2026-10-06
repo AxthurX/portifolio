@@ -104,7 +104,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
 				<meta property='og:url' content='https://arthurmartins.dev' />
 			</head>
 
-			<body className='flex min-h-screen flex-col items-center bg-background font-sans text-foreground antialiased'>
+			<body className='flex min-h-screen flex-col items-center font-sans antialiased'>
 				{children}
 			</body>
 		</html>
