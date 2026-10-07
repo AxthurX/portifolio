@@ -107,7 +107,7 @@ export default function Stack() {
 								}}
 								className='group rounded-xl border border-border bg-background/50 p-4 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:bg-primary/3 hover:shadow-[4px_4px_0_0_rgba(94,234,212,0.06)]'
 							>
-								<div className='mb-2 flex items-start justify-between gap-3'>
+								{/* <div className='mb-2 flex items-start justify-between gap-3'>
 									<div className='min-w-0'>
 										<span className='font-medium text-[10px] text-primary uppercase tracking-wider'>
 											{skill.category}
@@ -121,7 +121,7 @@ export default function Stack() {
 									</span>
 								</div>
 
-								<p className='text-muted-foreground text-xs leading-relaxed'>{skill.description}</p>
+								<p className='text-muted-foreground text-xs leading-relaxed'>{skill.description}</p> */}
 							</motion.div>
 						))}
 					</div>

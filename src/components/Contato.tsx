@@ -408,7 +408,7 @@ export default function Contato() {
 										className='flex h-10 w-10 items-center justify-center rounded-full border border-border transition-all hover:border-primary hover:text-primary'
 										aria-label='GitHub'
 									>
-										<GithubIcon className='h-4 w-4' />
+										<GithubIcon className='h-4 w-4 invert' />
 									</a>
 									<a
 										href='https://linkedin.com/in/arthurmartins'
@@ -417,14 +417,14 @@ export default function Contato() {
 										className='flex h-10 w-10 items-center justify-center rounded-full border border-border transition-all hover:border-primary hover:text-primary'
 										aria-label='LinkedIn'
 									>
-										<LinkedinIcon className='h-4 w-4' />
+										<LinkedinIcon className='h-4 w-4 invert' />
 									</a>
 									<a
 										href='mailto:contato@arthurmartins.dev'
 										className='flex h-10 w-10 items-center justify-center rounded-full border border-border transition-all hover:border-primary hover:text-primary'
 										aria-label='Email'
 									>
-										<Mail className='h-4 w-4' />
+										<Mail className='h-4 w-4 invert' />
 									</a>
 								</div>
 							</motion.div>
