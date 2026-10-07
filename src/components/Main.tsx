@@ -102,7 +102,7 @@ export default function Main() {
 							href='https://github.com/AxthurX'
 							aria-label='GitHub'
 						>
-							<GithubIcon className='h-4 w-4' />
+							<GithubIcon className='h-4 w-4 dark:invert' />
 						</a>
 					</Button>
 					<Button className='rounded-full' variant='link'>
@@ -112,13 +112,13 @@ export default function Main() {
 							href='https://linkedin.com/in/arthurmartins'
 							aria-label='LinkedIn'
 						>
-							<LinkedinIcon className='h-4 w-4' />
+							<LinkedinIcon className='h-4 w-4 dark:invert' />
 						</a>
 					</Button>
 
 					<Button className='rounded-full' variant='link'>
 						<a aria-label='Email' href='mailto:contato@arthurmartins.dev'>
-							<Mail className='h-4 w-4' />
+							<Mail className='h-4 w-4 dark:invert' />
 						</a>
 					</Button>
 				</div>
@@ -128,7 +128,7 @@ export default function Main() {
 				<div className='flex flex-col'>
 					<motion.p
 						{...fadeIn(0.1)}
-						className='mb-6 font-medium text-primary text-xs uppercase tracking-[0.3em]'
+						className='mb-6 font-medium text-primary text-xs uppercase tracking-[0.3em] dark:text-primary-content'
 					>
 						Porto Velho, Rondônia — Brasil
 					</motion.p>
@@ -181,7 +181,10 @@ export default function Main() {
 						</Button>
 
 						<Button variant='outline' className='h-14 w-40 rounded-full'>
-							<Link href='#contato' className='px-8 py-4 font-medium transition-all'>
+							<Link
+								href='#contato'
+								className='px-8 py-4 font-medium text-base-content transition-all'
+							>
 								Entre em contato
 							</Link>
 						</Button>

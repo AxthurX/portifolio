@@ -75,7 +75,7 @@ export default function Links() {
 
 					<div className='flex items-center gap-2'>
 						<Button aria-label='Compartilhar' className='rounded-full'>
-							<Share2 className='size-4' />
+							<Share2 className='size-4' onClick={handleShare} />
 						</Button>
 					</div>
 				</header>
@@ -101,7 +101,7 @@ export default function Links() {
 										target='_blank'
 										rel='noopener noreferrer'
 										aria-label={social.label}
-										className='text-foreground/80 transition-opacity hover:opacity-70'
+										className='transition-opacity hover:opacity-70'
 									>
 										{/* brightness-0 invert força o SVG monocromático a ficar branco sobre o fundo escuro */}
 										<Image
@@ -109,7 +109,7 @@ export default function Links() {
 											alt={social.label}
 											width={24}
 											height={24}
-											className='size-6 brightness-0'
+											className='size-6 text-foreground/80 brightness-0 dark:invert'
 										/>
 									</Link>
 								))}
