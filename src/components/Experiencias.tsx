@@ -126,7 +126,7 @@ export default function Experiencias() {
 			className='relative w-full overflow-hidden border-border border-t py-16 md:py-32'
 		>
 			<div className='relative z-10 mb-16 px-4 text-left md:mb-12'>
-				<span className='mb-4 block font-medium text-primary text-xs uppercase tracking-widest'>
+				<span className='mb-4 block font-medium text-primary text-xs uppercase tracking-widest dark:text-base-content/70'>
 					Habilidades
 				</span>
 

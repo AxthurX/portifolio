@@ -69,13 +69,15 @@ export default function Stack() {
 			className='mb-8 flex w-full flex-col items-start border-border border-t py-16 md:mb-16 md:py-24'
 		>
 			<div className='mb-12 w-full px-4 text-left md:mb-16 md:px-0'>
-				<span className='mb-4 block font-medium text-primary text-xs uppercase tracking-widest'>
+				<span className='mb-4 block font-medium text-primary text-xs uppercase tracking-widest dark:text-base-content/70'>
 					Stack
 				</span>
 
 				<h3 className='font-bold text-3xl tracking-tight sm:text-4xl md:text-5xl'>
 					Tecnologias{' '}
-					<span className='font-normal font-serif text-primary italic'>& Ferramentas</span>
+					<span className='font-normal font-serif text-primary italic dark:text-base-content/70'>
+						& Ferramentas
+					</span>
 				</h3>
 			</div>
 

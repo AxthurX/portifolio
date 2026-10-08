@@ -128,7 +128,7 @@ export default function SobreMim() {
 
 			<div className='flex w-full flex-col justify-between border-border border-b p-6 md:w-1/2 md:border-r md:border-b-0 md:p-16 lg:p-20'>
 				<div>
-					<span className='mb-4 block font-medium text-primary text-xs uppercase tracking-widest'>
+					<span className='mb-4 block font-medium text-primary text-xs uppercase tracking-widest dark:text-base-content/70'>
 						Sobre Mim
 					</span>
 
@@ -136,10 +136,7 @@ export default function SobreMim() {
 						ref={headingRef}
 						className='font-bold text-3xl leading-tight tracking-tight sm:text-4xl md:text-5xl lg:text-6xl'
 					>
-						Transformando{' '}
-						<span className='font-normal font-serif text-primary italic'>
-							ideias
-						</span>{' '}
+						Transformando <span className='font-normal font-serif text-primary italic'>ideias</span>{' '}
 						em interfaces funcionais.
 					</h3>
 				</div>
@@ -152,12 +149,11 @@ export default function SobreMim() {
 						className='mb-6 text-base text-muted-foreground leading-relaxed md:mb-8 md:text-lg'
 						style={{ opacity: 0 }}
 					>
-						Atuo como desenvolvedor fullstack, com forte ênfase em frontend, com
-						5+ anos de experiência. Profissional em transformar ideias malucas
-						em interfaces funcionais. Grande parte do meu tempo é dedicado a
-						implementar novas features. Ler documentação confusa virou quase um
-						esporte, gosto de usar princípios de clean architecture, clean code
-						e qualidade do código.
+						Atuo como desenvolvedor fullstack, com forte ênfase em frontend, com 5+ anos de
+						experiência. Profissional em transformar ideias malucas em interfaces funcionais. Grande
+						parte do meu tempo é dedicado a implementar novas features. Ler documentação confusa
+						virou quase um esporte, gosto de usar princípios de clean architecture, clean code e
+						qualidade do código.
 					</p>
 
 					<p
@@ -165,12 +161,11 @@ export default function SobreMim() {
 						className='text-base text-muted-foreground leading-relaxed md:text-lg'
 						style={{ opacity: 0 }}
 					>
-						Nos últimos anos atuo principalmente com tecnologias como: C#,
-						TypeScript, React, Next.js, Angular, Node.js, .NET, Ionic Mobile
-						Cross-Platform (Cordova e Capacitor), além de bancos SQL e NoSQL
-						(SQL Server, MySQL, Firebase), Testes com Cypress, Jest e Playwright
-						e serviços em nuvem como AWS. Sou adepto de boas práticas, design
-						patterns e conceitos no desenvolvimento.
+						Nos últimos anos atuo principalmente com tecnologias como: C#, TypeScript, React,
+						Next.js, Angular, Node.js, .NET, Ionic Mobile Cross-Platform (Cordova e Capacitor), além
+						de bancos SQL e NoSQL (SQL Server, MySQL, Firebase), Testes com Cypress, Jest e
+						Playwright e serviços em nuvem como AWS. Sou adepto de boas práticas, design patterns e
+						conceitos no desenvolvimento.
 					</p>
 
 					{/* Metrics */}

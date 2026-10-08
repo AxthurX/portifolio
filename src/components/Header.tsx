@@ -44,12 +44,17 @@ export default function Header({ onPortfolioOpen }: { onPortfolioOpen: () => voi
 				/>
 
 				<div className='z-50 flex h-14 items-center gap-6 pl-5'>
-					<Link href='/' className='flex items-center gap-3 transition-opacity hover:opacity-80'>
+					<Link
+						href='/'
+						className='flex items-center gap-3 text-base-content transition-opacity hover:opacity-80 dark:text-primary'
+					>
 						<div className='flex h-8 w-8 items-center justify-center rounded-full border border-primary/30 bg-primary/10'>
-							<span className='font-bold text-gradient text-xs'>AM</span>
+							<span className='font-bold text-xs'>AM</span>
 						</div>
 
-						<span className='hidden font-medium text-sm md:block'>Arthur Martins </span>
+						<span className='hidden font-medium text-sm max-sm:block md:block dark:text-primary'>
+							Arthur Martins{' '}
+						</span>
 					</Link>
 
 					<a
@@ -103,7 +108,7 @@ export default function Header({ onPortfolioOpen }: { onPortfolioOpen: () => voi
 					<button
 						type='button'
 						onClick={() => setMenuOpen(true)}
-						className='flex h-10 w-10 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-foreground md:hidden'
+						className='flex h-10 w-10 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-foreground md:hidden dark:border-primary/60 dark:text-primary'
 						aria-label='Abrir menu'
 					>
 						<Menu className='h-4 w-4' />

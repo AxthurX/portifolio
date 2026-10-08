@@ -81,11 +81,11 @@ export default function Main() {
 
 			<motion.div
 				{...fadeIn(0.2)}
-				className='relative z-10 flex items-center justify-between pt-20 max-sm:flex-wrap max-sm:items-start max-sm:gap-4'
+				className='relative z-10 flex items-center justify-between pt-20 max-sm:flex-wrap max-sm:items-start max-sm:gap-2'
 			>
-				<div className='flex items-center gap-4'>
+				<div className='flex items-center gap-4 max-sm:gap-2'>
 					<div className='flex h-12 w-12 items-center justify-center rounded-full border border-border bg-surface'>
-						<span className='font-bold text-gradient text-lg'>AM</span>
+						<span className='font-bold text-gradient text-lg dark:text-primary'>AM</span>
 					</div>
 
 					<div>
@@ -94,7 +94,7 @@ export default function Main() {
 					</div>
 				</div>
 
-				<div className='flex items-center gap-3'>
+				<div className='flex items-center gap-3 max-sm:gap-2'>
 					<Button className='rounded-full' variant='link'>
 						<a
 							target='_blank'
@@ -142,7 +142,7 @@ export default function Main() {
 						</motion.h1>
 					</div>
 
-					<div className='flex items-end gap-6 overflow-hidden'>
+					<div className='flex items-end gap-6 overflow-hidden max-sm:gap-3'>
 						<motion.h1
 							{...wordReveal(0.25)}
 							className='font-bold text-[7vw] uppercase leading-[0.9] tracking-tight max-md:text-[10vw] max-md:leading-[0.9] max-md:tracking-tight xl:text-[6.5vw]'
@@ -152,7 +152,7 @@ export default function Main() {
 
 						<motion.span
 							{...wordReveal(0.35)}
-							className='mb-2 font-serif text-[5vw] text-primary italic leading-none xl:text-[4.5vw]'
+							className='mb-2 font-serif text-[5vw] text-primary italic leading-none max-sm:mb-1 max-sm:text-[7vw] xl:text-[4.5vw]'
 						>
 							fullstack
 						</motion.span>

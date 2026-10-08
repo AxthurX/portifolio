@@ -329,7 +329,7 @@ export default function Contato() {
 								funnel.title
 							) : (
 								<>
-									{'Vamos'}{' '}
+									<span className='text-primary'>{'Vamos'} </span>
 									<span className='font-normal font-serif text-primary italic'>conversar</span>
 								</>
 							)}
@@ -367,12 +367,12 @@ export default function Contato() {
 										className='group flex items-center justify-between border-border border-b py-5 text-left transition-all duration-500 hover:pl-4 md:py-6'
 									>
 										<div className='flex items-baseline gap-4 md:gap-8'>
-											<span className='shrink-0 font-mono text-muted-foreground text-xs tabular-nums'>
+											<span className='shrink-0 font-mono text-muted-foreground text-xs tabular-nums dark:text-primary/80'>
 												{funnelItem.n}
 											</span>
 
 											<div className='flex flex-col sm:flex-row sm:items-baseline sm:gap-5'>
-												<span className='font-bold text-2xl tracking-tight transition-colors duration-300 group-hover:text-primary md:text-3xl'>
+												<span className='font-bold text-2xl tracking-tight transition-colors duration-300 group-hover:text-primary md:text-3xl dark:text-primary'>
 													{funnelItem.title}
 												</span>
 
@@ -382,9 +382,9 @@ export default function Contato() {
 											</div>
 										</div>
 
-										<div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border transition-all duration-300 group-hover:border-primary group-hover:bg-primary group-hover:text-primary-foreground'>
+										<div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border transition-all duration-300 group-hover:border-primary group-hover:bg-primary group-hover:text-primary-foreground dark:border-primary/70'>
 											<ArrowRight
-												className='h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5'
+												className='h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 dark:text-primary'
 												strokeWidth={1.5}
 											/>
 										</div>

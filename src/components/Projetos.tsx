@@ -244,11 +244,14 @@ export default function Projetos() {
 		return (
 			<section id='projetos' className='w-full px-4 py-16'>
 				<div className='mb-12'>
-					<span className='mb-4 block font-medium text-primary text-xs uppercase tracking-widest'>
+					<span className='mb-4 block font-medium text-primary text-xs uppercase tracking-widest dark:text-base-content/70'>
 						Projetos
 					</span>
 					<h3 className='font-bold text-4xl tracking-tight'>
-						Trabalhos <span className='font-normal font-serif text-primary italic'>Recentes</span>
+						Trabalhos{' '}
+						<span className='font-normal font-serif text-primary italic dark:text-base-content/70'>
+							Recentes
+						</span>
 					</h3>
 				</div>
 

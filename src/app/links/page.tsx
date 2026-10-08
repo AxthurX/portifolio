@@ -83,7 +83,7 @@ export default function Links() {
 				<CardContent>
 					<div className='mt-10'>
 						<div className='flex flex-col items-center gap-4'>
-							<Avatar className='size-36'>
+							<Avatar className='size-34'>
 								<AvatarImage
 									className='aspect-auto object-cover'
 									src={PROFILE.avatar || '/placeholder.svg'}
