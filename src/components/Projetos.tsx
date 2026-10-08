@@ -155,7 +155,7 @@ function ProjectCard({ projeto }: { projeto: Projeto }) {
 						{projeto.category}
 					</span>
 
-					<span className='text-muted-foreground text-sm'>{projeto.client}</span>
+					<span className='text-muted-foreground text-sm dark:text-primary'>{projeto.client}</span>
 				</div>
 
 				<Dialog>
@@ -214,7 +214,7 @@ function ProjectCard({ projeto }: { projeto: Projeto }) {
 
 			{/* Conteúdo inferior */}
 			<div className='relative z-10 flex items-end justify-between p-6 md:p-8'>
-				<h4 className='max-w-[80%] font-light text-2xl text-foreground leading-tight tracking-tight md:text-4xl xl:text-5xl'>
+				<h4 className='max-w-[80%] font-light text-2xl text-foreground leading-tight tracking-tight md:text-4xl xl:text-5xl dark:font-semibold dark:text-primary'>
 					{projeto.title}
 				</h4>
 
