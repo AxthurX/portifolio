@@ -15,9 +15,9 @@ import {
 } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
-import { Button } from '@/src/components/ui/button';
-import { Card } from '@/src/components/ui/card';
-import { Switch } from '@/src/components/ui/switch';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Switch } from '@/components/ui/switch';
 
 export function SmartHome() {
 	const [temperature, setTemperature] = useState(22);

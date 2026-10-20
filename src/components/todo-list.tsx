@@ -2,8 +2,8 @@
 
 import { Plus, Trash2 } from 'lucide-react';
 import { useState } from 'react';
-import { Badge } from '@/src/components/ui/badge';
-import { Button } from '@/src/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import {
 	Card,
 	CardContent,
@@ -11,16 +11,16 @@ import {
 	CardFooter,
 	CardHeader,
 	CardTitle,
-} from '@/src/components/ui/card';
-import { Checkbox } from '@/src/components/ui/checkbox';
-import { Input } from '@/src/components/ui/input';
+} from '@/components/ui/card';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Input } from '@/components/ui/input';
 import {
 	Select,
 	SelectContent,
 	SelectItem,
 	SelectTrigger,
 	SelectValue,
-} from '@/src/components/ui/select';
+} from '@/components/ui/select';
 
 type Todo = {
 	id: string;

@@ -3,7 +3,7 @@
 import { format } from 'date-fns';
 import { Plus, Trash2 } from 'lucide-react';
 import { useState } from 'react';
-import { Button } from '@/src/components/ui/button';
+import { Button } from '@/components/ui/button';
 import {
 	Card,
 	CardContent,
@@ -11,17 +11,17 @@ import {
 	CardFooter,
 	CardHeader,
 	CardTitle,
-} from '@/src/components/ui/card';
-import { Input } from '@/src/components/ui/input';
-import { Label } from '@/src/components/ui/label';
+} from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import {
 	Select,
 	SelectContent,
 	SelectItem,
 	SelectTrigger,
 	SelectValue,
-} from '@/src/components/ui/select';
-import { Tabs, TabsList, TabsTrigger } from '@/src/components/ui/tabs';
+} from '@/components/ui/select';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 type Expense = {
 	id: string;

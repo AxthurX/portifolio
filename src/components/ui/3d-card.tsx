@@ -3,7 +3,7 @@
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import * as React from 'react';
-import { cn } from '@/src/lib/utils';
+import { cn } from '@/lib/utils';
 
 type InteractiveTeamCardProps = {
 	title: string;
@@ -15,14 +15,8 @@ type InteractiveTeamCardProps = {
 	className?: string;
 };
 
-export const InteractiveTeamCard = React.forwardRef<
-	HTMLDivElement,
-	InteractiveTeamCardProps
->(
-	(
-		{ title, subtitle, imageUrl, actionText, href, onActionClick, className },
-		ref,
-	) => {
+export const InteractiveTeamCard = React.forwardRef<HTMLDivElement, InteractiveTeamCardProps>(
+	({ title, subtitle, imageUrl, actionText, href, onActionClick, className }, ref) => {
 		const mouseX = useMotionValue(0);
 		const mouseY = useMotionValue(0);
 

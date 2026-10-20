@@ -1,6 +1,6 @@
 import { Bell, Search, Settings } from 'lucide-react';
 import Image from 'next/image';
-import { Button } from '@/src/components/ui/button';
+import { Button } from '@/components/ui/button';
 
 export function DashboardHeader() {
 	return (

@@ -3,8 +3,8 @@
 import { format } from 'date-fns';
 import { CalendarIcon, Plus } from 'lucide-react';
 import { useState } from 'react';
-import { Button } from '@/src/components/ui/button';
-import { Calendar as CalendarComponent } from '@/src/components/ui/calendar';
+import { Button } from '@/components/ui/button';
+import { Calendar as CalendarComponent } from '@/components/ui/calendar';
 import {
 	Card,
 	CardContent,
@@ -12,7 +12,7 @@ import {
 	CardFooter,
 	CardHeader,
 	CardTitle,
-} from '@/src/components/ui/card';
+} from '@/components/ui/card';
 import {
 	Dialog,
 	DialogContent,
@@ -21,12 +21,12 @@ import {
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,
-} from '@/src/components/ui/dialog';
-import { Input } from '@/src/components/ui/input';
-import { Label } from '@/src/components/ui/label';
-import { Popover, PopoverContent, PopoverTrigger } from '@/src/components/ui/popover';
-import { Textarea } from '@/src/components/ui/textarea';
-import { cn } from '@/src/lib/utils';
+} from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Textarea } from '@/components/ui/textarea';
+import { cn } from '@/lib/utils';
 
 type Event = {
 	id: string;

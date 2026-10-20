@@ -23,7 +23,7 @@ export async function GET() {
 		const files = await fs.readdir(directory);
 
 		const certificates: CertificateResponse[] = files
-			.filter((file) => file.toLowerCase().endsWith('.pdf'))
+			.filter((file) => /\.(pdf|png|jpe?g)$/i.test(file))
 			.sort((a, b) => a.localeCompare(b))
 			.map((file) => ({
 				id: file,

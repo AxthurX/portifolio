@@ -4,10 +4,10 @@ import axios from 'axios';
 import { Asterisk, MoreVertical, Share2 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Avatar, AvatarImage } from '@/src/components/ui/avatar';
-import { Button } from '@/src/components/ui/button';
-import { Card, CardContent, CardFooter } from '@/src/components/ui/card';
-import { LINKS, PROFILE, SOCIALS } from '@/src/lib/profile';
+import { Avatar, AvatarImage } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
+import { LINKS, PROFILE, SOCIALS } from '@/lib/profile';
 
 const ICON_SRC: Record<string, string> = {
 	instagram: '/icons/instagram.svg',

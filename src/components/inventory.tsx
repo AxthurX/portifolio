@@ -2,8 +2,8 @@
 
 import { Package, Plus, Search, Trash2 } from 'lucide-react';
 import { useState } from 'react';
-import { Badge } from '@/src/components/ui/badge';
-import { Button } from '@/src/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import {
 	Card,
 	CardContent,
@@ -11,16 +11,16 @@ import {
 	CardFooter,
 	CardHeader,
 	CardTitle,
-} from '@/src/components/ui/card';
-import { Input } from '@/src/components/ui/input';
-import { Label } from '@/src/components/ui/label';
+} from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import {
 	Select,
 	SelectContent,
 	SelectItem,
 	SelectTrigger,
 	SelectValue,
-} from '@/src/components/ui/select';
+} from '@/components/ui/select';
 
 type InventoryItem = {
 	id: string;

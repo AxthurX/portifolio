@@ -1,5 +1,24 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Quadro de certificados (pins)
+
+O quadro de pins usa os certificados de `public/certificados` como fotos emolduradas
+presas por um tarugador metálico. Para não pesar na página, cada certificado vira
+uma miniatura WebP (~3 kB) em `public/pins` — os PNGs originais (300–600 kB) só são
+baixados quando o visitante abre o certificado completo.
+
+```bash
+pnpm assets:pins   # regenera as miniaturas e src/lib/certificados.data.ts
+```
+
+- **Entradas:** `public/certificados/*.png` + os metadados em `scripts/certificados.json`
+  (título, emissor, data e o recorte de interesse de cada família de certificado).
+- **Saídas:** `public/pins/*-160.webp`, `public/pins/*-320.webp` e
+  `src/lib/certificados.data.ts` (gerado — não editar à mão).
+
+Ao adicionar um certificado novo: coloque o PNG em `public/certificados`, acrescente a
+entrada em `scripts/certificados.json` e rode `pnpm assets:pins`.
+
 ## Getting Started
 
 First, run the development server:

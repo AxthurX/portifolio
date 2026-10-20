@@ -6,14 +6,14 @@ import {
 	Package,
 	UtensilsCrossed,
 } from 'lucide-react';
-import { Calendar } from '@/src/components/calendar';
-import { DashboardHeader } from '@/src/components/dashboard-header';
-import { ExpenseTracker } from '@/src/components/expense-tracker';
-import { Inventory } from '@/src/components/inventory';
-import { MealPlanner } from '@/src/components/meal-planner';
-import { SmartHome } from '@/src/components/smart-home';
-import { TodoList } from '@/src/components/todo-list';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/src/components/ui/tabs';
+import { Calendar } from '@/components/calendar';
+import { DashboardHeader } from '@/components/dashboard-header';
+import { ExpenseTracker } from '@/components/expense-tracker';
+import { Inventory } from '@/components/inventory';
+import { MealPlanner } from '@/components/meal-planner';
+import { SmartHome } from '@/components/smart-home';
+import { TodoList } from '@/components/todo-list';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 export default function Home() {
 	return (

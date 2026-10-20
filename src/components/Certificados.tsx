@@ -3,8 +3,16 @@
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { memo, useMemo, useRef, useState } from 'react';
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useIsMobile } from '@/hooks/use-mobile';
+import { usePinBoard } from '@/hooks/use-pin-board';
+import { pinById } from '@/lib/pins';
 import { cn } from '../lib/utils';
+import { BoardFrame } from './pin/BoardFrame';
+import { BoardToolbar } from './pin/BoardToolbar';
+import { PinBoard } from './pin/PinBoard';
+import { PinBoxSheet } from './pin/PinBoxSheet';
+import { PinInspector } from './pin/PinInspector';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -189,75 +197,85 @@ const CertificateCard = memo(function CertificateCard({
 });
 
 export default function Certificados() {
-	const [certificates, setCertificates] = useState<Certificate[]>([]);
-	const [count, setCount] = useState(5);
+	// const [certificates, setCertificates] = useState<Certificate[]>([]);
+	// const [count, setCount] = useState(5);
 
 	const sectionRef = useRef<HTMLElement | null>(null);
 	const headingRef = useRef<HTMLHeadingElement | null>(null);
+	const {
+		placed,
+		count,
+		total,
+		placePin,
+		removePin,
+		movePin,
+		rotatePin,
+		bringToFront,
+		organize,
+		shuffle,
+		reset,
+	} = usePinBoard();
+	const isMobile = useIsMobile();
 
-	// useEffect(() => {
-	// 	async function load() {
-	// 		const pdfs = await loadCertificates();
+	const [boxOpen, setBoxOpen] = useState(false);
+	const [gallery, setGallery] = useState(false);
+	const [selectedId, setSelectedId] = useState<string | null>(null);
+	const [quadroVisivel, setQuadroVisivel] = useState(false);
 
-	// 		const colors: Certificate['color'][] = ['gold', 'silver', 'bronze', 'teal'];
+	// a barra de ferramentas só aparece enquanto o quadro está em tela
+	useEffect(() => {
+		const alvo = sectionRef.current;
+		if (!alvo) return;
 
-	// 		const sizes: TrophySize[] = ['large', 'medium', 'small', 'mini'];
+		const observer = new IntersectionObserver(
+			([entrada]) => setQuadroVisivel(entrada.isIntersecting),
+			{ rootMargin: '-20% 0px -20% 0px' },
+		);
 
-	// 		setCertificates(
-	// 			pdfs
-	// 				.map((pdf, index) => ({
-	// 					title: pdf.title,
-	// 					issuer: '',
-	// 					date: '',
-	// 					image: pdf.image,
-	// 					credentialUrl: pdf.url,
-	// 					size: sizes[index % sizes.length],
-	// 					color: colors[index % colors.length],
-	// 				}))
-	// 				.reverse(),
-	// 		);
-	// 	}
+		observer.observe(alvo);
+		return () => observer.disconnect();
+	}, []);
 
-	// 	load();
-	// }, []);
+	const placedIds = useMemo(() => new Set(placed.map((pin) => pin.id)), [placed]);
+	const selectedPin = selectedId ? pinById(selectedId) : undefined;
 
-	// useEffect(() => {
-	// 	if (!sectionRef.current || !headingRef.current) return;
+	useEffect(() => {
+		if (selectedId && !placedIds.has(selectedId)) setSelectedId(null);
+	}, [placedIds, selectedId]);
 
-	// 	const ctx = gsap.context(
-	// 		() => {
-	// 			const heading = headingRef.current;
-	// 			if (!heading) return;
+	useEffect(() => {
+		const onKeyDown = (event: KeyboardEvent) => {
+			if (event.key !== 'Escape') return;
+			setSelectedId(null);
+			setGallery(false);
+		};
+		window.addEventListener('keydown', onKeyDown);
+		return () => window.removeEventListener('keydown', onKeyDown);
+	}, []);
 
-	// 			const words = heading.innerText.split(' ');
-	// 			heading.innerHTML = words
-	// 				.map(
-	// 					(word) =>
-	// 						`<span style="display:inline-block;overflow:hidden;vertical-align:bottom;">
-	// 						<span class="gsap-cert-word" style="display:inline-block;transform:translateY(110%);">
-	// 							${word}&nbsp;
-	// 						</span>
-	// 					</span>`,
-	// 				)
-	// 				.join('');
+	const togglePin = (id: string) => {
+		if (placedIds.has(id)) {
+			removePin(id);
+			setSelectedId(null);
+			return;
+		}
+		placePin(id);
+	};
 
-	// 			gsap.to('.gsap-cert-word', {
-	// 				y: 0,
-	// 				duration: 0.9,
-	// 				stagger: 0.05,
-	// 				ease: 'power3.out',
-	// 				scrollTrigger: {
-	// 					trigger: heading,
-	// 					start: 'top 85%',
-	// 					once: true,
-	// 				},
-	// 			});
-	// 		},
-	// 		sectionRef as RefObject<HTMLElement>,
-	// 	);
+	// referências estáveis: mantêm os pins memoizados durante o arraste
+	const handleSelect = useCallback((id: string) => {
+		setSelectedId((current) => (current === id ? null : id));
+	}, []);
 
-	// 	return () => ctx.revert();
-	// }, []);
+	const handleRemove = useCallback(
+		(id: string) => {
+			removePin(id);
+			setSelectedId(null);
+		},
+		[removePin],
+	);
+
+	const handleDeselect = useCallback(() => setSelectedId(null), []);
 
 	return (
 		<section
@@ -295,19 +313,59 @@ export default function Certificados() {
 						</div>
 
 						{/* Cabinet glass interior */}
-						<div className='relative rounded-b-xl bg-linear-to-b from-card/40 to-background/60 p-6'>
+						<div className='relative rounded-b-xl bg-linear-to-b from-card/40 to-background/60 p-3 sm:p-6'>
 							{/* Shelf lines */}
 							<div className='pointer-events-none absolute inset-x-6 top-[42%] h-px bg-border/50' />
 							<div className='pointer-events-none absolute inset-x-6 top-[72%] h-px bg-border/50' />
 
-							{/* Trophy grid */}
-							<div className='grid grid-cols-4 grid-rows-3 gap-3 md:gap-4'>
-								{/* {certificates.slice(0, 4).map((cert, i) => (
-									<CertificateCard key={cert.title} cert={cert} index={i} />
-								))} */}
-							</div>
+							<main className='room-surface relative min-h-dvh w-full overflow-hidden'>
+								<div
+									aria-hidden='true'
+									className='pointer-events-none absolute inset-x-0 top-0 z-0 h-115'
+									style={{
+										background:
+											'radial-gradient(58% 100% at 50% 0%, hsl(38 62% 48% / 0.16), transparent 72%)',
+									}}
+								/>
 
-							{count < certificates.length && (
+								<div
+									className={cn(
+										'relative z-10 mx-auto flex min-h-dvh w-full max-w-400 flex-col px-0 pb-28 sm:px-8 sm:pb-32 lg:px-10',
+										gallery ? 'pt-4 pb-24 sm:pt-6' : 'pt-6 sm:pt-10',
+									)}
+								>
+									<BoardFrame
+										count={count}
+										total={total}
+										gallery={gallery}
+										className='min-h-120 flex-1 sm:min-h-200'
+									>
+										<PinBoard
+											placed={placed}
+											selectedId={selectedId}
+											isMobile={isMobile}
+											onMove={movePin}
+											onBringToFront={bringToFront}
+											onSelect={handleSelect}
+											onRemove={handleRemove}
+											onOpenBox={() => setBoxOpen(true)}
+											onDeselect={handleDeselect}
+										/>
+									</BoardFrame>
+								</div>
+
+								<PinBoxSheet
+									open={boxOpen}
+									onOpenChange={setBoxOpen}
+									placedIds={placedIds}
+									count={count}
+									total={total}
+									onToggle={togglePin}
+									onReset={reset}
+								/>
+							</main>
+
+							{/* {count < certificates.length && (
 								<div className='mt-8 flex justify-center'>
 									<button
 										type='button'
@@ -317,11 +375,36 @@ export default function Certificados() {
 										Ver mais
 									</button>
 								</div>
-							)}
+							)} */}
 						</div>
 					</div>
 				</div>
 			</div>
+			{/*
+			 * Fica fora da vitrine (que tem backdrop-blur) para que o `fixed` seja
+			 * calculado em relação à viewport, e não ao cartão.
+			 */}
+			{selectedPin && placedIds.has(selectedPin.id) && (
+				<PinInspector
+					pin={selectedPin}
+					onClose={() => setSelectedId(null)}
+					onRotate={(delta) => rotatePin(selectedPin.id, delta)}
+					onRemove={() => {
+						removePin(selectedPin.id);
+						setSelectedId(null);
+					}}
+				/>
+			)}
+
+			<BoardToolbar
+				boxCount={total - count}
+				gallery={gallery}
+				visivel={quadroVisivel}
+				onOpenBox={() => setBoxOpen(true)}
+				onOrganize={organize}
+				onShuffle={shuffle}
+				onToggleGallery={() => setGallery((value) => !value)}
+			/>
 		</section>
 	);
 }

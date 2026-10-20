@@ -2,7 +2,7 @@
 
 import { Plus, Trash2, UtensilsCrossed } from 'lucide-react';
 import { useState } from 'react';
-import { Button } from '@/src/components/ui/button';
+import { Button } from '@/components/ui/button';
 import {
 	Card,
 	CardContent,
@@ -10,17 +10,17 @@ import {
 	CardFooter,
 	CardHeader,
 	CardTitle,
-} from '@/src/components/ui/card';
-import { Input } from '@/src/components/ui/input';
-import { Label } from '@/src/components/ui/label';
+} from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import {
 	Select,
 	SelectContent,
 	SelectItem,
 	SelectTrigger,
 	SelectValue,
-} from '@/src/components/ui/select';
-import { Textarea } from '@/src/components/ui/textarea';
+} from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
 
 type Meal = {
 	id: string;

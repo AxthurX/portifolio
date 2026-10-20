@@ -1,0 +1,444 @@
+{
+	"ARTHUR MARTINS - SAPIENS-1.png": {
+		"titulo": "Seminário nas Faculdades: água tratada e educação ambiental",
+		"emissor": "UNISAPIENS",
+		"data": "28 de outubro de 2024",
+		"ano": 2024,
+		"familia": "sapiens"
+	},
+	"Certificado-10091-8712516 ingles(1)-1.png": {
+		"titulo": "Inglês intermediário",
+		"emissor": "Prime Cursos",
+		"data": "Janeiro de 2021",
+		"ano": 2021,
+		"familia": "prime"
+	},
+	"Certificado-10091-8712516 Inglês-1.png": {
+		"titulo": "Inglês intermediário",
+		"emissor": "Prime Cursos",
+		"data": "Janeiro de 2021",
+		"ano": 2021,
+		"familia": "prime"
+	},
+	"Certificado-10344-8712516 (1)-1.png": {
+		"titulo": "Pacote Office",
+		"emissor": "Prime Cursos",
+		"data": "Janeiro de 2021",
+		"ano": 2021,
+		"familia": "prime"
+	},
+	"Certificado-10356-8712516 informática-1.png": {
+		"titulo": "Informática intermediária",
+		"emissor": "Prime Cursos",
+		"data": "Janeiro de 2021",
+		"ano": 2021,
+		"familia": "prime"
+	},
+	"Coursera Accelerate Your Job Search with AI-1.png": {
+		"titulo": "Accelerate Your Job Search with AI",
+		"emissor": "Coursera",
+		"data": "29 de agosto de 2025",
+		"ano": 2025,
+		"familia": "coursera"
+	},
+	"Coursera Agile Project Management-1.png": {
+		"titulo": "Agile Project Management",
+		"emissor": "Coursera",
+		"data": "29 de agosto de 2025",
+		"ano": 2025,
+		"familia": "coursera"
+	},
+	"Coursera Capstone_ Applying Project Management in the Real World-1.png": {
+		"titulo": "Capstone: Applying Project Management in the Real World",
+		"emissor": "Coursera",
+		"data": "29 de agosto de 2025",
+		"ano": 2025,
+		"familia": "coursera"
+	},
+	"Coursera Foundations of Project Management-1.png": {
+		"titulo": "Foundations of Project Management",
+		"emissor": "Coursera",
+		"data": "19 de junho de 2025",
+		"ano": 2025,
+		"familia": "coursera"
+	},
+	"Coursera Google Project-1.png": {
+		"titulo": "Google Project Management",
+		"emissor": "Coursera",
+		"data": "29 de agosto de 2025",
+		"ano": 2025,
+		"familia": "coursera",
+		"recorte": { "x0": 0.22, "y0": 0.02, "x1": 0.78, "y1": 0.45 }
+	},
+	"Coursera Project Execution_ Running the Project-1.png": {
+		"titulo": "Project Execution: Running the Project",
+		"emissor": "Coursera",
+		"data": "28 de agosto de 2025",
+		"ano": 2025,
+		"familia": "coursera"
+	},
+	"Coursera Project Initiation_ Starting a Successful Project.pdf-1.png": {
+		"titulo": "Project Initiation: Starting a Successful Project",
+		"emissor": "Coursera",
+		"data": "7 de julho de 2025",
+		"ano": 2025,
+		"familia": "coursera"
+	},
+	"Coursera Project Planning_ Putting It All Together-1.png": {
+		"titulo": "Project Planning: Putting It All Together",
+		"emissor": "Coursera",
+		"data": "22 de julho de 2025",
+		"ano": 2025,
+		"familia": "coursera"
+	},
+	"Curso Acessibilidade web parte 1_ tornando seu front-end inclusivo - Alura-1.png": {
+		"titulo": "Acessibilidade web: tornando seu front-end inclusivo",
+		"emissor": "Alura",
+		"data": "13 de junho de 2022",
+		"ano": 2022,
+		"familia": "alura"
+	},
+	"Curso Algoritmos com JavaScript II_ aprofundando em algoritmos de ordenação e busca - Alura-1.png": {
+		"titulo": "Algoritmos com JavaScript II: ordenação e busca",
+		"emissor": "Alura",
+		"data": "4 de agosto de 2022",
+		"ano": 2022,
+		"familia": "alura"
+	},
+	"Curso Angular_ boas práticas em arquiteturas e formulários - Alura-1.png": {
+		"titulo": "Angular: boas práticas em arquiteturas e formulários",
+		"emissor": "Alura",
+		"data": "25 de novembro de 2022",
+		"ano": 2022,
+		"familia": "alura"
+	},
+	"Curso Angular_ explorando o framework - Alura-1.png": {
+		"titulo": "Angular: explorando o framework",
+		"emissor": "Alura",
+		"data": "19 de setembro de 2022",
+		"ano": 2022,
+		"familia": "alura"
+	},
+	"Curso Arquitetura CSS_ descomplicando os problemas - Alura-1.png": {
+		"titulo": "Arquitetura CSS: descomplicando os problemas",
+		"emissor": "Alura",
+		"data": "26 de agosto de 2022",
+		"ano": 2022,
+		"familia": "alura"
+	},
+	"Curso Arquitetura de computadores_ por trás de como seu programa funciona - Alura-1.png": {
+		"titulo": "Arquitetura de computadores: por trás de como seu programa funciona",
+		"emissor": "Alura",
+		"data": "23 de junho de 2022",
+		"ano": 2022,
+		"familia": "alura"
+	},
+	"Curso CSS Grid_ simplificando layouts - Alura-1.png": {
+		"titulo": "CSS Grid: simplificando layouts",
+		"emissor": "Alura",
+		"data": "31 de agosto de 2022",
+		"ano": 2022,
+		"familia": "alura"
+	},
+	"Curso CSS_ dispondo elementos com Flexbox e Grid - Alura-1.png": {
+		"titulo": "CSS: dispondo elementos com Flexbox e Grid",
+		"emissor": "Alura",
+		"data": "10 de junho de 2022",
+		"ano": 2022,
+		"familia": "alura"
+	},
+	"Curso Expressões regulares_ capturando textos de forma mágica - Alura-1.png": {
+		"titulo": "Expressões regulares: capturando textos de forma mágica",
+		"emissor": "Alura",
+		"data": "15 de dezembro de 2022",
+		"ano": 2022,
+		"familia": "alura"
+	},
+	"Curso Flexbox_ posicione elementos na tela - Alura-1.png": {
+		"titulo": "Flexbox: posicione elementos na tela",
+		"emissor": "Alura",
+		"data": "30 de agosto de 2022",
+		"ano": 2022,
+		"familia": "alura"
+	},
+	"Curso Git e Github_ controle e compartilhe seu código - Alura-1.png": {
+		"titulo": "Git e Github: controle e compartilhe seu código",
+		"emissor": "Alura",
+		"data": "4 de agosto de 2022",
+		"ano": 2022,
+		"familia": "alura"
+	},
+	"Curso HTML e CSS_ praticando HTML_CSS - Alura-1.png": {
+		"titulo": "HTML e CSS: praticando HTML e CSS",
+		"emissor": "Alura",
+		"data": "2 de junho de 2022",
+		"ano": 2022,
+		"familia": "alura"
+	},
+	"Curso HTML5 e CSS3 parte 1_ crie uma página da Web - Alura-1.png": {
+		"titulo": "HTML5 e CSS3 parte 1: crie uma página da Web",
+		"emissor": "Alura",
+		"data": "26 de maio de 2022",
+		"ano": 2022,
+		"familia": "alura"
+	},
+	"Curso HTML5 e CSS3 parte 2_ posicionamento, listas e navegação - Alura-1.png": {
+		"titulo": "HTML5 e CSS3 parte 2: posicionamento, listas e navegação",
+		"emissor": "Alura",
+		"data": "27 de maio de 2022",
+		"ano": 2022,
+		"familia": "alura"
+	},
+	"Curso HTML5 e CSS3 parte 3_ trabalhando com formulários e tabelas - Alura-1.png": {
+		"titulo": "HTML5 e CSS3 parte 3: formulários e tabelas",
+		"emissor": "Alura",
+		"data": "30 de maio de 2022",
+		"ano": 2022,
+		"familia": "alura"
+	},
+	"Curso HTML5 e CSS3 parte 4_ avançando no CSS - Alura-1.png": {
+		"titulo": "HTML5 e CSS3 parte 4: avançando no CSS",
+		"emissor": "Alura",
+		"data": "30 de maio de 2022",
+		"ano": 2022,
+		"familia": "alura"
+	},
+	"Curso HTTP_ Entendendo a web por baixo dos panos - Alura-1.png": {
+		"titulo": "HTTP: entendendo a web por baixo dos panos",
+		"emissor": "Alura",
+		"data": "28 de novembro de 2022",
+		"ano": 2022,
+		"familia": "alura"
+	},
+	"Curso Java JRE e JDK_ compile e execute o seu programa - Alura-1.png": {
+		"titulo": "Java JRE e JDK: compile e execute o seu programa",
+		"emissor": "Alura",
+		"data": "5 de julho de 2022",
+		"ano": 2022,
+		"familia": "alura"
+	},
+	"Curso Java OO_ entendendo a Orientação a Objetos - Alura-1.png": {
+		"titulo": "Java OO: entendendo a Orientação a Objetos",
+		"emissor": "Alura",
+		"data": "7 de julho de 2022",
+		"ano": 2022,
+		"familia": "alura"
+	},
+	"Curso JavaScript I_ algoritmos de ordenação - Alura-1.png": {
+		"titulo": "JavaScript I: algoritmos de ordenação",
+		"emissor": "Alura",
+		"data": "27 de julho de 2022",
+		"ano": 2022,
+		"familia": "alura"
+	},
+	"Curso JavaScript e HTML_ desenvolva um jogo e pratique lógica de programação - Alura-1.png": {
+		"titulo": "JavaScript e HTML: desenvolva um jogo e pratique lógica",
+		"emissor": "Alura",
+		"data": "24 de junho de 2022",
+		"ano": 2022,
+		"familia": "alura"
+	},
+	"Curso JavaScript e HTML_ pratique lógica com desenhos, animações e um jogo - Alura-1.png": {
+		"titulo": "JavaScript e HTML: desenhe, anime e jogue",
+		"emissor": "Alura",
+		"data": "27 de junho de 2022",
+		"ano": 2022,
+		"familia": "alura"
+	},
+	"Curso JavaScript na Web_ armazenando dados no navegador - Alura-1.png": {
+		"titulo": "JavaScript na Web: armazenando dados no navegador",
+		"emissor": "Alura",
+		"data": "18 de agosto de 2022",
+		"ano": 2022,
+		"familia": "alura"
+	},
+	"Curso JavaScript na Web_ validação de Formulários e HTML5 - Alura-1.png": {
+		"titulo": "JavaScript na Web: validação de formulários e HTML5",
+		"emissor": "Alura",
+		"data": "28 de novembro de 2022",
+		"ano": 2022,
+		"familia": "alura"
+	},
+	"Curso JavaScript para Web_ Crie páginas dinâmicas - Alura-1.png": {
+		"titulo": "JavaScript para Web: crie páginas dinâmicas",
+		"emissor": "Alura",
+		"data": "14 de junho de 2022",
+		"ano": 2022,
+		"familia": "alura"
+	},
+	"Curso JavaScript_ Arrays - Alura-1.png": {
+		"titulo": "JavaScript: Arrays",
+		"emissor": "Alura",
+		"data": "7 de junho de 2022",
+		"ano": 2022,
+		"familia": "alura"
+	},
+	"Curso JavaScript_ conhecendo o Browser e padrões de projeto - Alura-1.png": {
+		"titulo": "JavaScript: conhecendo o Browser e padrões de projeto",
+		"emissor": "Alura",
+		"data": "19 de junho de 2022",
+		"ano": 2022,
+		"familia": "alura"
+	},
+	"Curso JavaScript_ consumindo e tratando dados de uma API - Alura-1.png": {
+		"titulo": "JavaScript: consumindo e tratando dados de uma API",
+		"emissor": "Alura",
+		"data": "1 de setembro de 2022",
+		"ano": 2022,
+		"familia": "alura"
+	},
+	"Curso JavaScript_ explorando a linguagem - Alura-1.png": {
+		"titulo": "JavaScript: explorando a linguagem",
+		"emissor": "Alura",
+		"data": "27 de junho de 2022",
+		"ano": 2022,
+		"familia": "alura"
+	},
+	"Curso JavaScript_ interfaces e Herança em Orientação a Objetos - Alura-1.png": {
+		"titulo": "JavaScript: interfaces e Herança em Orientação a Objetos",
+		"emissor": "Alura",
+		"data": "11 de junho de 2022",
+		"ano": 2022,
+		"familia": "alura"
+	},
+	"Curso JavaScript_ manipulando o DOM - Alura-1.png": {
+		"titulo": "JavaScript: manipulando o DOM",
+		"emissor": "Alura",
+		"data": "11 de agosto de 2022",
+		"ano": 2022,
+		"familia": "alura"
+	},
+	"Curso JavaScript_ métodos de array - Alura-1.png": {
+		"titulo": "JavaScript: métodos de array",
+		"emissor": "Alura",
+		"data": "15 de setembro de 2022",
+		"ano": 2022,
+		"familia": "alura"
+	},
+	"Curso JavaScript_ objetos - Alura-1.png": {
+		"titulo": "JavaScript: objetos",
+		"emissor": "Alura",
+		"data": "17 de junho de 2022",
+		"ano": 2022,
+		"familia": "alura"
+	},
+	"Curso JavaScript_ programando a Orientação a Objetos - Alura-1.png": {
+		"titulo": "JavaScript: programando a Orientação a Objetos",
+		"emissor": "Alura",
+		"data": "4 de junho de 2022",
+		"ano": 2022,
+		"familia": "alura"
+	},
+	"Curso JavaScript_ programação orientada a objetos - Alura-1.png": {
+		"titulo": "JavaScript: programação orientada a objetos",
+		"emissor": "Alura",
+		"data": "9 de agosto de 2022",
+		"ano": 2022,
+		"familia": "alura"
+	},
+	"Curso JavaScript_ tipos, variáveis e funções - Alura-1.png": {
+		"titulo": "JavaScript: tipos, variáveis e funções",
+		"emissor": "Alura",
+		"data": "28 de janeiro de 2022",
+		"ano": 2022,
+		"familia": "alura"
+	},
+	"Curso JavaScript_ validações e reconhecimento de voz - Alura-1.png": {
+		"titulo": "JavaScript: validações e reconhecimento de voz",
+		"emissor": "Alura",
+		"data": "26 de agosto de 2022",
+		"ano": 2022,
+		"familia": "alura"
+	},
+	"Curso Layouts Responsivos_ trabalhando com layouts mobile - Alura-1.png": {
+		"titulo": "Layouts responsivos: trabalhando com layouts mobile",
+		"emissor": "Alura",
+		"data": "10 de junho de 2022",
+		"ano": 2022,
+		"familia": "alura"
+	},
+	"Curso Linux I_ conhecendo e utilizando o terminal - Alura-1.png": {
+		"titulo": "Linux I: conhecendo e utilizando o terminal",
+		"emissor": "Alura",
+		"data": "13 de junho de 2022",
+		"ano": 2022,
+		"familia": "alura"
+	},
+	"Curso Lógica de programação_ comece em lógica com o jogo Pong e JavaScript - Alura-1.png": {
+		"titulo": "Lógica de programação: Pong e JavaScript",
+		"emissor": "Alura",
+		"data": "31 de maio de 2022",
+		"ano": 2022,
+		"familia": "alura"
+	},
+	"Curso SEO_ otimização de sites - Alura-1.png": {
+		"titulo": "SEO: otimização de sites",
+		"emissor": "Alura",
+		"data": "14 de novembro de 2022",
+		"ano": 2022,
+		"familia": "alura"
+	},
+	"Curso Tecnologia da informação-1.png": {
+		"titulo": "Tecnologia da informação e comunicação",
+		"emissor": "SENAI",
+		"data": "11 de dezembro de 2021",
+		"ano": 2021,
+		"familia": "senai"
+	},
+	"Curso TypeScript parte 1_ evoluindo seu JavaScript - Alura-1.png": {
+		"titulo": "TypeScript parte 1: evoluindo seu JavaScript",
+		"emissor": "Alura",
+		"data": "28 de junho de 2022",
+		"ano": 2022,
+		"familia": "alura"
+	},
+	"Curso TypeScript parte 2_ avançando na linguagem - Alura-1.png": {
+		"titulo": "TypeScript parte 2: avançando na linguagem",
+		"emissor": "Alura",
+		"data": "22 de julho de 2022",
+		"ano": 2022,
+		"familia": "alura"
+	},
+	"Curso Typescript parte 3_ mais técnicas e boas práticas - Alura-1.png": {
+		"titulo": "TypeScript parte 3: mais técnicas e boas práticas",
+		"emissor": "Alura",
+		"data": "4 de novembro de 2022",
+		"ano": 2022,
+		"familia": "alura"
+	},
+	"Formação Front-end - Alura-1.png": {
+		"titulo": "Formação Front-end",
+		"emissor": "Alura",
+		"data": "15 de dezembro de 2022",
+		"ano": 2022,
+		"familia": "alura"
+	},
+	"Formação HTML e CSS - Alura-1.png": {
+		"titulo": "Formação HTML e CSS",
+		"emissor": "Alura",
+		"data": "10 de junho de 2022",
+		"ano": 2022,
+		"familia": "alura"
+	},
+	"Formação Melhore sua experiência de desenvolvimento com TypeScript - Alura-1.png": {
+		"titulo": "Formação: melhore sua experiência com TypeScript",
+		"emissor": "Alura",
+		"data": "4 de novembro de 2022",
+		"ano": 2022,
+		"familia": "alura"
+	},
+	"Ionic4A-1.png": {
+		"titulo": "Ionic 4: Angular, Firebase, Firestore e Login com Facebook",
+		"emissor": "Udemy",
+		"data": "20 de outubro de 2019",
+		"ano": 2019,
+		"familia": "udemy"
+	},
+	"UC-eef72880-a375-4e52-92df-852a2857fb78-1.png": {
+		"titulo": "SQL Server para desenvolvedores: do básico ao avançado",
+		"emissor": "Udemy",
+		"data": "28 de agosto de 2025",
+		"ano": 2025,
+		"familia": "udemy"
+	}
+}
