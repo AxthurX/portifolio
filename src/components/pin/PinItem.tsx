@@ -173,7 +173,7 @@ const PinItemBase = ({
 				className={cn(
 					'group block touch-none rounded-[6px] outline-none',
 					dragging ? 'cursor-grabbing' : 'cursor-grab',
-					'focus-visible:ring-2 focus-visible:ring-[hsl(var(--brass-light)/0.85)] focus-visible:ring-offset-4 focus-visible:ring-offset-transparent',
+					'focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 focus-visible:ring-offset-transparent',
 				)}
 				style={{
 					transform: `rotate(${placement.rotation + tilt}deg) scale(${scale})`,

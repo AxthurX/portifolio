@@ -14,8 +14,8 @@ export interface BoardState {
 	placed: PlacedPin[];
 }
 
-export const BOARD_VERSION = 3;
-const STORAGE_KEY = 'quadro-pins:v3';
+export const BOARD_VERSION = 4;
+const STORAGE_KEY = 'quadro-pins:v4';
 
 export const clamp = (value: number, min: number, max: number) =>
 	Math.min(max, Math.max(min, value));

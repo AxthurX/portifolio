@@ -40,19 +40,19 @@ export const PinBoxSheet = ({
 			<SheetContent
 				side={isMobile ? 'bottom' : 'right'}
 				className={cn(
-					'flex flex-col gap-0 border-[hsl(var(--brass)/0.28)] bg-[hsl(var(--wood))] p-0 text-[hsl(var(--paper))]',
+					'flex flex-col gap-0 border-border bg-base-100 p-0 text-foreground',
 					isMobile ? 'max-h-[86vh] rounded-t-[26px]' : 'w-full sm:max-w-105',
 				)}
 			>
-				<SheetHeader className='space-y-1.5 border-[hsl(var(--brass)/0.18)] border-b p-5 pb-4 text-left'>
-					<p className='eyebrow'>A caixa</p>
-					<SheetTitle className='font-display font-normal text-2xl text-[hsl(var(--paper))]'>
+				<SheetHeader className='space-y-1.5 border-border border-b p-5 pb-4 text-left'>
+					<p className='font-medium text-[10px] text-primary uppercase tracking-[0.2em]'>A caixa</p>
+					<SheetTitle className='font-normal font-serif text-2xl text-foreground'>
 						Todos os pins
 					</SheetTitle>
-					<SheetDescription className='text-[13px] text-[hsl(var(--paper)/0.7)] leading-snug'>
+					<SheetDescription className='text-[13px] text-muted-foreground leading-snug'>
 						Toque em um pin para pendurar no quadro ou devolver para a caixa.
 					</SheetDescription>
-					<p className='pt-1 text-[11px] text-[hsl(var(--brass-light)/0.85)] uppercase tracking-[0.18em]'>
+					<p className='pt-1 text-[11px] text-muted-foreground uppercase tracking-[0.18em]'>
 						{count} no quadro · {total - count} guardados
 					</p>
 				</SheetHeader>
@@ -69,10 +69,10 @@ export const PinBoxSheet = ({
 									aria-pressed={onBoard}
 									className={cn(
 										'group flex flex-col items-center gap-2 rounded-2xl border p-2.5 text-center transition-colors',
-										'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--brass-light)/0.7)]',
+										'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary',
 										onBoard
-											? 'border-[hsl(var(--brass)/0.45)] bg-[hsl(var(--paper)/0.08)]'
-											: 'border-[hsl(var(--brass)/0.16)] bg-[hsl(var(--paper)/0.03)] hover:border-[hsl(var(--brass)/0.4)] hover:bg-[hsl(var(--paper)/0.07)]',
+											? 'border-primary/45 bg-primary/5'
+											: 'border-border bg-base-100 hover:border-primary/40 hover:bg-base-200/60',
 									)}
 								>
 									<div className='relative'>
@@ -88,15 +88,15 @@ export const PinBoxSheet = ({
 											className='transition-transform duration-300 group-hover:-translate-y-0.5'
 										/>
 										{onBoard && (
-											<span className='absolute -top-1.5 -right-1.5 grid h-5 w-5 place-items-center rounded-full bg-[hsl(var(--brass))] text-[hsl(var(--brass-ink))] shadow-brass'>
+											<span className='absolute -top-1.5 -right-1.5 grid h-5 w-5 place-items-center rounded-full bg-primary text-primary-foreground'>
 												<Check className='h-3 w-3' strokeWidth={3} />
 											</span>
 										)}
 									</div>
-									<span className='font-medium text-[12px] text-[hsl(var(--paper))] leading-tight'>
+									<span className='font-medium text-[12px] text-foreground leading-tight'>
 										{pin.name}
 									</span>
-									<span className='text-[9px] text-[hsl(var(--paper)/0.55)] uppercase tracking-[0.16em]'>
+									<span className='text-[9px] text-muted-foreground uppercase tracking-[0.16em]'>
 										{pin.series} · {pin.year}
 									</span>
 								</button>
@@ -105,20 +105,20 @@ export const PinBoxSheet = ({
 					</div>
 				</div>
 
-				<div className='flex items-center justify-between gap-2 border-[hsl(var(--brass)/0.18)] border-t p-4 pb-[max(1rem,env(safe-area-inset-bottom))]'>
+				<div className='flex items-center justify-between gap-2 border-border border-t p-4 pb-[max(1rem,env(safe-area-inset-bottom))]'>
 					{confirming ? (
 						<div className='flex items-center gap-2'>
 							<button
 								type='button'
 								onClick={handleReset}
-								className='rounded-full bg-[hsl(0_70%_44%)] px-3 py-1.5 font-semibold text-white text-xs transition hover:brightness-110'
+								className='rounded-full bg-destructive px-3 py-1.5 font-semibold text-destructive-content text-xs transition hover:brightness-110'
 							>
 								Confirmar
 							</button>
 							<button
 								type='button'
 								onClick={() => setConfirming(false)}
-								className='rounded-full px-3 py-1.5 font-medium text-[hsl(var(--paper)/0.7)] text-xs transition hover:text-[hsl(var(--paper))]'
+								className='rounded-full px-3 py-1.5 font-medium text-muted-foreground text-xs transition hover:text-foreground'
 							>
 								Cancelar
 							</button>
@@ -127,7 +127,7 @@ export const PinBoxSheet = ({
 						<button
 							type='button'
 							onClick={() => setConfirming(true)}
-							className='flex items-center gap-1.5 rounded-full px-2 py-1.5 font-medium text-[hsl(var(--paper)/0.7)] text-xs transition-colors hover:text-[hsl(var(--paper))]'
+							className='flex items-center gap-1.5 rounded-full px-2 py-1.5 font-medium text-muted-foreground text-xs transition-colors hover:text-foreground'
 						>
 							<RotateCcw className='h-3.5 w-3.5' />
 							Restaurar coleção inicial
@@ -138,7 +138,7 @@ export const PinBoxSheet = ({
 						type='button'
 						onClick={() => onOpenChange(false)}
 						aria-label='Fechar a caixa'
-						className='flex items-center gap-1.5 rounded-full border border-[hsl(var(--brass-light)/0.35)] px-3 py-1.5 font-semibold text-[hsl(var(--brass-light))] text-xs transition-colors hover:bg-[hsl(var(--brass-light)/0.12)]'
+						className='flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 font-semibold text-foreground text-xs transition-colors hover:bg-muted'
 					>
 						<X className='h-3.5 w-3.5' />
 						Fechar

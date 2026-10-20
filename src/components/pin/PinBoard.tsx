@@ -58,18 +58,18 @@ export const PinBoard = ({
 
 			{placed.length === 0 && (
 				<div className='absolute inset-0 z-12 flex items-center justify-center p-6'>
-					<div className='flex max-w-sm flex-col items-center gap-3 rounded-[20px] border-2 border-[hsl(var(--paper)/0.42)] border-dashed bg-[hsl(22_38%_18%/0.18)] px-6 py-8 text-center backdrop-blur-[1px]'>
-						<span className='grid h-12 w-12 place-items-center rounded-full bg-[hsl(var(--paper)/0.14)] text-[hsl(var(--paper)/0.9)]'>
+					<div className='flex max-w-sm flex-col items-center gap-3 rounded-2xl border-2 border-border border-dashed bg-muted/40 px-6 py-8 text-center'>
+						<span className='grid h-12 w-12 place-items-center rounded-full bg-primary/10 text-primary'>
 							<PackageOpen className='h-6 w-6' strokeWidth={1.6} />
 						</span>
-						<p className='font-display text-[hsl(var(--paper)/0.94)] text-xl'>Quadro vazio</p>
-						<p className='text-[hsl(var(--paper)/0.7)] text-sm leading-snug'>
+						<p className='font-serif text-foreground text-xl'>Quadro vazio</p>
+						<p className='text-muted-foreground text-sm leading-snug'>
 							A coleção está guardada na caixa. Pendure o primeiro pin e comece a montar.
 						</p>
 						<button
 							type='button'
 							onClick={onOpenBox}
-							className='mt-1 rounded-full bg-[hsl(var(--paper)/0.92)] px-4 py-2 font-semibold text-[hsl(var(--paper-ink))] text-sm transition hover:bg-[hsl(var(--paper))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--brass-light))]'
+							className='mt-1 rounded-full bg-primary px-4 py-2 font-semibold text-primary-foreground text-sm transition hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary'
 						>
 							Abrir a caixa
 						</button>

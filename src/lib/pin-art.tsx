@@ -139,7 +139,7 @@ export const PinArt = ({
 						style={{ top: margem + alturaFoto, height: alturaLegenda }}
 					>
 						<p
-							className='line-clamp-2 font-hand text-[hsl(28_28%_26%)] leading-[1.15]'
+							className='line-clamp-2 font-serif text-[hsl(28_28%_26%)] italic leading-[1.15]'
 							style={{ fontSize: tamanhoLetra }}
 						>
 							{label}

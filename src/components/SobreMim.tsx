@@ -149,11 +149,10 @@ export default function SobreMim() {
 						className='mb-6 text-base text-muted-foreground leading-relaxed md:mb-8 md:text-lg'
 						style={{ opacity: 0 }}
 					>
-						Atuo como desenvolvedor fullstack, com forte ênfase em frontend, com 5+ anos de
-						experiência. Profissional em transformar ideias malucas em interfaces funcionais. Grande
-						parte do meu tempo é dedicado a implementar novas features. Ler documentação confusa
-						virou quase um esporte, gosto de usar princípios de clean architecture, clean code e
-						qualidade do código.
+						Atuo como desenvolvedor full stack com ênfase em front-end, com 4+ anos de experiência.
+						atualmente como Engenheiro de Software na SEDAM (Governo de Rondônia). No meu papel
+						atual, desenvolvo e evoluo portais e sistemas institucionais com React, Next.js,
+						Node.js, Prisma, PostgreSQL e Docker, com testes E2E em Playwright e Cypress.
 					</p>
 
 					<p
@@ -161,11 +160,13 @@ export default function SobreMim() {
 						className='text-base text-muted-foreground leading-relaxed md:text-lg'
 						style={{ opacity: 0 }}
 					>
-						Nos últimos anos atuo principalmente com tecnologias como: C#, TypeScript, React,
-						Next.js, Angular, Node.js, .NET, Ionic Mobile Cross-Platform (Cordova e Capacitor), além
-						de bancos SQL e NoSQL (SQL Server, MySQL, Firebase), Testes com Cypress, Jest e
-						Playwright e serviços em nuvem como AWS. Sou adepto de boas práticas, design patterns e
-						conceitos no desenvolvimento.
+						Profissional em transformar ideias malucas em interfaces funcionais, ler documentação
+						confusa virou quase um esporte, gosto de usar princípios de clean architecture, clean
+						code e qualidade do código Nos últimos anos atuo principalmente com tecnologias como:
+						C#, TypeScript, React, Next.js, Angular, Node.js, .NET, Ionic Mobile Cross-Platform
+						(Cordova e Capacitor), além de bancos SQL e NoSQL (SQL Server, MySQL, Firebase), Testes
+						com Cypress, Jest e Playwright e serviços em nuvem como AWS. Sou adepto de boas
+						práticas, design patterns e conceitos no desenvolvimento.
 					</p>
 
 					{/* Metrics */}

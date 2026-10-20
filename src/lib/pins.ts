@@ -139,11 +139,6 @@ const escolher = <T>(ciclo: T[], id: string, deslocamento = 0): T => {
 	return ciclo[soma % ciclo.length];
 };
 
-/**
- * A coleção do quadro: cada certificado é um pin emoldurado, preso por um
- * tarugador metálico. Os dados vêm de `certificados.data.ts` (gerado por
- * `pnpm assets:pins`).
- */
 export const PINS: PinDefinition[] = CERTIFICADOS.map((certificado, index) => ({
 	id: certificado.id,
 	name: certificado.titulo,
@@ -154,7 +149,7 @@ export const PINS: PinDefinition[] = CERTIFICADOS.map((certificado, index) => ({
 	image: certificado.imagem,
 	imageSrcSet: certificado.imagemSrcSet,
 	source: certificado.original,
-	diameter: 134 + (index % 5) * 8,
+	diameter: 134 + (index % 5) * 9,
 	shape: escolher(SHAPE_CYCLE, certificado.id),
 	enamel: escolher(ENAMEL_CYCLE, certificado.id),
 	metal: escolher(METAL_CYCLE, certificado.id, index),
@@ -171,31 +166,19 @@ export const PIN_BY_ID: Record<string, PinDefinition> = PINS.reduce<Record<strin
 
 export const pinById = (id: string): PinDefinition | undefined => PIN_BY_ID[id];
 
-/** Composição inicial: 14 pins grandes, espalhados em 3 fileiras, como num quadro real. */
 export const SEED_PLACEMENTS: SeedPlacement[] = [
-	{ id: 'alura-html5-e-css3-parte-1-crie-uma-pagina-da-web', x: 0.13, y: 0.23, rotation: -5 },
-	{ id: 'coursera-agile-project-management', x: 0.33, y: 0.21, rotation: 6 },
-	{ id: 'alura-formacao-front-end', x: 0.53, y: 0.24, rotation: -4 },
-	{ id: 'coursera-google-project-management', x: 0.72, y: 0.22, rotation: 5 },
-	{ id: 'prime-pacote-office', x: 0.89, y: 0.25, rotation: -3 },
-	{ id: 'alura-javascript-explorando-a-linguagem', x: 0.15, y: 0.49, rotation: 7 },
-	{ id: 'senai-tecnologia-da-informacao-e-comunicacao', x: 0.35, y: 0.51, rotation: -6 },
-	{ id: 'alura-css-grid-simplificando-layouts', x: 0.54, y: 0.48, rotation: 4 },
+	{ id: 'alura-html5-e-css3-parte-1-crie-uma-pagina-da-web', x: 0.17, y: 0.19, rotation: -5 },
+	{ id: 'coursera-agile-project-management', x: 0.4, y: 0.17, rotation: 6 },
+	{ id: 'alura-formacao-front-end', x: 0.63, y: 0.2, rotation: -4 },
+	{ id: 'coursera-google-project-management', x: 0.84, y: 0.18, rotation: 5 },
+	{ id: 'alura-javascript-explorando-a-linguagem', x: 0.51, y: 0.44, rotation: 7 },
+	{ id: 'senai-tecnologia-da-informacao-e-comunicacao', x: 0.74, y: 0.47, rotation: -6 },
+	{ id: 'alura-css-grid-simplificando-layouts', x: 0.19, y: 0.75, rotation: 4 },
 	{
 		id: 'udemy-sql-server-para-desenvolvedores-do-basico-ao-avancado',
-		x: 0.73,
-		y: 0.51,
+		x: 0.43,
+		y: 0.77,
 		rotation: -3,
-	},
-	{ id: 'alura-seo-otimizacao-de-sites', x: 0.9, y: 0.49, rotation: 5 },
-	{ id: 'alura-typescript-parte-1-evoluindo-seu-javascript', x: 0.23, y: 0.76, rotation: -4 },
-	{ id: 'coursera-project-planning-putting-it-all-together', x: 0.43, y: 0.73, rotation: 6 },
-	{ id: 'alura-git-e-github-controle-e-compartilhe-seu-codigo', x: 0.63, y: 0.76, rotation: -7 },
-	{
-		id: 'sapiens-seminario-nas-faculdades-agua-tratada-e-educacao-amb-',
-		x: 0.82,
-		y: 0.73,
-		rotation: 4,
 	},
 ];
 

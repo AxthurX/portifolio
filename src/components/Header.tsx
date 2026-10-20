@@ -53,7 +53,8 @@ export default function Header({ onPortfolioOpen }: { onPortfolioOpen: () => voi
 						</div>
 
 						<span className='hidden font-medium text-sm max-sm:block md:block dark:text-primary'>
-							Arthur Martins{' '}
+							<p className='font-medium text-foreground'>Arthur Martins</p>
+							<p className='text-muted-foreground text-xs'>Fullstack Developer</p>
 						</span>
 					</Link>
 

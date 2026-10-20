@@ -30,6 +30,8 @@ export default function Main() {
 		ease: [0.16, 1, 0.3, 1],
 	};
 
+	const CURRICULUM_URL = '/arthur-martins.pdf';
+
 	const wordReveal = (delay = 0) => ({
 		initial: {
 			y: '110%',
@@ -83,16 +85,7 @@ export default function Main() {
 				{...fadeIn(0.2)}
 				className='relative z-10 flex items-center justify-between pt-20 max-sm:flex-wrap max-sm:items-start max-sm:gap-2'
 			>
-				<div className='flex items-center gap-4 max-sm:gap-2'>
-					<div className='flex h-12 w-12 items-center justify-center rounded-full border border-border bg-surface'>
-						<span className='font-bold text-gradient text-lg dark:text-primary'>AM</span>
-					</div>
-
-					<div>
-						<p className='font-medium text-foreground'>Arthur Martins</p>
-						<p className='text-muted-foreground text-sm'>Fullstack Developer</p>
-					</div>
-				</div>
+				<span />
 
 				<div className='flex items-center gap-3 max-sm:gap-2'>
 					<Button className='rounded-full' variant='link'>
@@ -109,7 +102,7 @@ export default function Main() {
 						<a
 							target='_blank'
 							rel='noopener noreferrer'
-							href='https://linkedin.com/in/arthurmartins'
+							href='https://linkedin.com/in/arthurxmartins'
 							aria-label='LinkedIn'
 						>
 							<LinkedinIcon className='h-4 w-4 dark:invert' />
@@ -162,7 +155,7 @@ export default function Main() {
 						{...fadeIn(0.5)}
 						className='mt-8 max-w-lg text-lg text-muted-foreground leading-relaxed'
 					>
-						Desenvolvedor com forte ênfase em frontend, com 5+ anos de experiência, profissional em
+						Desenvolvedor com ênfase no frontend, com 4+ anos de experiência, profissional em
 						transformar ideias malucas em interfaces funcionais.
 					</motion.p>
 
@@ -170,7 +163,7 @@ export default function Main() {
 						{...fadeIn(0.7)}
 						className='mt-10 flex items-center gap-6 max-sm:flex-wrap max-sm:gap-4'
 					>
-						<Button className='h-14 w-40'>
+						<Button className='h-14 w-40 rounded-full'>
 							<Link
 								href='#projetos'
 								className='group flex items-center gap-3 rounded-full px-8 py-4 font-medium text-primary-foreground transition-all hover:scale-105'

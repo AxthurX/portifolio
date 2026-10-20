@@ -9,7 +9,6 @@ import Header from '../components/Header';
 import Main from '../components/Main';
 import Projetos from '../components/Projetos';
 import SobreMim from '../components/SobreMim';
-import Stack from '../components/Stack';
 
 export default function Home() {
 	const [portfolioOpen, setPortfolioOpen] = useState<boolean>(false);
@@ -61,7 +60,7 @@ export default function Home() {
 						<Projetos />
 						<Experiencias />
 						<Certificados />
-						<Stack />
+						{/* <Stack /> */}
 						<Contato />
 					</div>
 				</div>

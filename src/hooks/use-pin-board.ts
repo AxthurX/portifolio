@@ -43,8 +43,6 @@ const tidyLayout = (count: number): Array<{ x: number; y: number }> =>
 	Array.from({ length: count }, (_, index) => gridSlot(index, count));
 
 export const usePinBoard = () => {
-	// O servidor e o primeiro render do cliente usam a mesma composição inicial;
-	// o quadro salvo em localStorage entra só depois da hidratação.
 	const [placed, setPlaced] = useState<PlacedPin[]>(() => seedBoard().placed);
 	const [pronto, setPronto] = useState(false);
 	const zRef = useRef(placed.reduce((max, pin) => Math.max(max, pin.z), 0));

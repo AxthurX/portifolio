@@ -299,91 +299,30 @@ export default function Certificados() {
 						</span>
 					</h3>
 					<p className='mt-4 max-w-xl text-muted-foreground text-sm leading-relaxed md:text-base'>
-						Uma vitrine de aprendizado continuo — cada certificado representa uma nova habilidade
-						conquistada.
+						Uma foto emoldurada de cada curso concluído — arraste, gire e monte a sua coleção.
 					</p>
 				</div>
 
-				<div className='relative mx-auto'>
-					<div className='relative rounded-2xl border border-border bg-card/30 p-1 shadow-2xl backdrop-blur-sm'>
-						<div className='flex items-center gap-3 rounded-t-xl border-border border-b bg-card/60 px-6 py-3'>
-							<div className='ml-auto font-medium text-[10px] text-muted-foreground uppercase tracking-widest'>
-								Vitrine de Conquistas
-							</div>
-						</div>
-
-						{/* Cabinet glass interior */}
-						<div className='relative rounded-b-xl bg-linear-to-b from-card/40 to-background/60 p-3 sm:p-6'>
-							{/* Shelf lines */}
-							<div className='pointer-events-none absolute inset-x-6 top-[42%] h-px bg-border/50' />
-							<div className='pointer-events-none absolute inset-x-6 top-[72%] h-px bg-border/50' />
-
-							<main className='room-surface relative min-h-dvh w-full overflow-hidden'>
-								<div
-									aria-hidden='true'
-									className='pointer-events-none absolute inset-x-0 top-0 z-0 h-115'
-									style={{
-										background:
-											'radial-gradient(58% 100% at 50% 0%, hsl(38 62% 48% / 0.16), transparent 72%)',
-									}}
-								/>
-
-								<div
-									className={cn(
-										'relative z-10 mx-auto flex min-h-dvh w-full max-w-400 flex-col px-0 pb-28 sm:px-8 sm:pb-32 lg:px-10',
-										gallery ? 'pt-4 pb-24 sm:pt-6' : 'pt-6 sm:pt-10',
-									)}
-								>
-									<BoardFrame
-										count={count}
-										total={total}
-										gallery={gallery}
-										className='min-h-120 flex-1 sm:min-h-200'
-									>
-										<PinBoard
-											placed={placed}
-											selectedId={selectedId}
-											isMobile={isMobile}
-											onMove={movePin}
-											onBringToFront={bringToFront}
-											onSelect={handleSelect}
-											onRemove={handleRemove}
-											onOpenBox={() => setBoxOpen(true)}
-											onDeselect={handleDeselect}
-										/>
-									</BoardFrame>
-								</div>
-
-								<PinBoxSheet
-									open={boxOpen}
-									onOpenChange={setBoxOpen}
-									placedIds={placedIds}
-									count={count}
-									total={total}
-									onToggle={togglePin}
-									onReset={reset}
-								/>
-							</main>
-
-							{/* {count < certificates.length && (
-								<div className='mt-8 flex justify-center'>
-									<button
-										type='button'
-										onClick={() => setCount((prev) => prev + 5)}
-										className='rounded-lg border border-border bg-card px-6 py-3 font-medium text-sm transition-colors hover:bg-card/80'
-									>
-										Ver mais
-									</button>
-								</div>
-							)} */}
-						</div>
-					</div>
-				</div>
+				<BoardFrame
+					count={count}
+					total={total}
+					gallery={gallery}
+					className='min-h-120 sm:min-h-200'
+				>
+					<PinBoard
+						placed={placed}
+						selectedId={selectedId}
+						isMobile={isMobile}
+						onMove={movePin}
+						onBringToFront={bringToFront}
+						onSelect={handleSelect}
+						onRemove={handleRemove}
+						onOpenBox={() => setBoxOpen(true)}
+						onDeselect={handleDeselect}
+					/>
+				</BoardFrame>
 			</div>
-			{/*
-			 * Fica fora da vitrine (que tem backdrop-blur) para que o `fixed` seja
-			 * calculado em relação à viewport, e não ao cartão.
-			 */}
+
 			{selectedPin && placedIds.has(selectedPin.id) && (
 				<PinInspector
 					pin={selectedPin}
@@ -404,6 +343,16 @@ export default function Certificados() {
 				onOrganize={organize}
 				onShuffle={shuffle}
 				onToggleGallery={() => setGallery((value) => !value)}
+			/>
+
+			<PinBoxSheet
+				open={boxOpen}
+				onOpenChange={setBoxOpen}
+				placedIds={placedIds}
+				count={count}
+				total={total}
+				onToggle={togglePin}
+				onReset={reset}
 			/>
 		</section>
 	);

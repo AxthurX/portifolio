@@ -124,7 +124,6 @@ export default function Stack() {
 					experiências digitais — do frontend ao deploy.
 				</p>
 
-				{/* legenda dos níveis */}
 				<div className='mt-6 flex flex-wrap items-center gap-x-6 gap-y-2'>
 					{Object.entries(TECH_LEVELS).map(([nivel, { label, steps }]) => (
 						<span key={nivel} className='flex items-center gap-2 text-[11px] text-muted-foreground'>
