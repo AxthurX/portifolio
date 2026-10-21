@@ -122,11 +122,11 @@ export default function SobreMim() {
 		<section
 			ref={sectionRef}
 			id='sobre-mim'
-			className='relative mt-16 flex min-h-[80vh] w-full flex-col border-border border-t md:mt-24 md:flex-row'
+			className='relative mt-16 flex min-h-[80vh] w-full flex-col border-black border-t-2 md:mt-24 md:flex-row dark:border-white'
 		>
-			<div className='absolute top-0 bottom-0 left-1/2 hidden w-px bg-border md:block' />
+			<div className='absolute top-0 bottom-0 left-1/2 hidden w-0.5 bg-black md:block dark:bg-white' />
 
-			<div className='flex w-full flex-col justify-between border-border border-b p-6 md:w-1/2 md:border-r md:border-b-0 md:p-16 lg:p-20'>
+			<div className='flex w-full flex-col justify-between border-black border-b-2 p-6 md:w-1/2 md:border-r-2 md:border-b-0 md:p-16 lg:p-20 dark:border-white'>
 				<div>
 					<span className='mb-4 block font-medium text-primary text-xs uppercase tracking-widest dark:text-base-content/70'>
 						Sobre Mim
@@ -169,7 +169,7 @@ export default function SobreMim() {
 						práticas, design patterns e conceitos no desenvolvimento.
 					</p>
 
-					<div className='mt-10 flex gap-8 border-border border-t pt-8 md:mt-16 md:gap-12 md:pt-16'>
+					<div className='mt-10 flex gap-8 border-black border-t-2 pt-8 md:mt-16 md:gap-12 md:pt-16 dark:border-white'>
 						<div>
 							<div
 								id='counter-exp'

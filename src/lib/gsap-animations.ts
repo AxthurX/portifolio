@@ -38,12 +38,7 @@ type AnimateCounterOptions = {
 	suffix?: string;
 };
 
-type GSAPTarget =
-	| string
-	| Element
-	| HTMLElement
-	| NodeListOf<Element>
-	| Element[];
+type GSAPTarget = string | Element | HTMLElement | NodeListOf<Element> | Element[];
 
 export function wrapLines(el: HTMLElement | null): HTMLElement[] {
 	if (!el) return [];
@@ -71,12 +66,7 @@ export function wrapLines(el: HTMLElement | null): HTMLElement[] {
  */
 export function revealText(
 	selector: string,
-	{
-		delay = 0,
-		stagger = 0.04,
-		duration = 0.9,
-		trigger = null,
-	}: RevealTextOptions = {},
+	{ delay = 0, stagger = 0.04, duration = 0.9, trigger = null }: RevealTextOptions = {},
 ): void {
 	const elements = document.querySelectorAll<HTMLElement>(selector);
 
@@ -113,12 +103,7 @@ export function revealText(
  */
 export function revealFadeUp(
 	selector: GSAPTarget,
-	{
-		stagger = 0.12,
-		duration = 0.8,
-		y = 40,
-		delay = 0,
-	}: RevealFadeUpOptions = {},
+	{ stagger = 0.12, duration = 0.8, y = 40, delay = 0 }: RevealFadeUpOptions = {},
 ): void {
 	gsap.fromTo(
 		selector,

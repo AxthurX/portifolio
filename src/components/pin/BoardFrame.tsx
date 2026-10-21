@@ -18,8 +18,8 @@ export const BoardFrame = ({
 }: BoardFrameProps) => {
 	return (
 		<section className={cn('relative flex flex-col', className)}>
-			<div className='relative flex flex-1 flex-col overflow-hidden rounded-2xl border border-border bg-base-100'>
-				<div className='flex items-center justify-between gap-4 border-border border-b bg-base-200/50 px-4 py-3 md:px-6'>
+			<div className='relative flex flex-1 flex-col overflow-hidden rounded-lg border-2 border-black bg-base-100 shadow-light dark:border-white dark:shadow-dark'>
+				<div className='flex items-center justify-between gap-4 border-black border-b-2 bg-base-200/50 px-4 py-3 md:px-6 dark:border-white'>
 					<div className='min-w-0'>
 						<p className='font-medium text-[10px] text-primary uppercase tracking-[0.2em]'>
 							Meu quadro
@@ -29,7 +29,7 @@ export const BoardFrame = ({
 						</p>
 					</div>
 
-					<span className='shrink-0 rounded-full border border-border bg-base-100 px-3 py-1 text-[11px] text-muted-foreground tabular-nums'>
+					<span className='shrink-0 rounded-base border-2 border-black bg-base-100 px-3 py-1 text-[11px] text-muted-foreground tabular-nums shadow-light dark:border-white dark:shadow-dark'>
 						{count} de {total}
 					</span>
 				</div>

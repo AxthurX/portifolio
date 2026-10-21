@@ -199,7 +199,7 @@ export function ExpenseTracker() {
 					<CardHeader className='pb-2'>
 						<div className='flex items-center justify-between'>
 							<CardTitle>Expense Summary</CardTitle>
-							<Tabs value={period} onValueChange={setPeriod} className='w-[200px]'>
+							<Tabs value={period} onValueChange={setPeriod} className='w-50'>
 								<TabsList className='grid w-full grid-cols-3 bg-white/10'>
 									<TabsTrigger
 										value='week'
@@ -250,7 +250,7 @@ export function ExpenseTracker() {
 					<CardContent>
 						<div className='space-y-4'>
 							{filteredExpenses.length === 0 ? (
-								<div className='flex h-[100px] items-center justify-center rounded-md border border-gray-700 border-dashed'>
+								<div className='flex h-25 items-center justify-center rounded-md border border-gray-700 border-dashed'>
 									<div className='text-center'>
 										<p className='text-gray-400 text-sm'>No expenses recorded</p>
 									</div>

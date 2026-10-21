@@ -10,16 +10,16 @@ interface PinInspectorProps {
 }
 
 const actionClass =
-	'flex items-center gap-1.5 rounded-full border border-border px-2.5 py-1.5 font-semibold text-[11px] text-muted-foreground transition-colors hover:border-primary/40 hover:bg-primary/5 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary';
+	'flex items-center gap-1.5 rounded-base border-2 border-black bg-base-100 px-2.5 py-1.5 font-semibold text-[11px] text-muted-foreground shadow-light transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary dark:border-white dark:shadow-dark';
 
 export const PinInspector = ({ pin, onClose, onRotate, onRemove }: PinInspectorProps) => (
 	<aside className='fixed inset-x-4 bottom-22 z-40 animate-fade-up sm:inset-x-auto sm:bottom-24 sm:left-8 sm:w-105'>
-		<div className='relative rounded-2xl border border-border bg-base-100/95 p-4 shadow-xl backdrop-blur'>
+		<div className='relative rounded-lg border-2 border-black bg-base-100 p-4 shadow-light dark:border-white dark:shadow-dark'>
 			<button
 				type='button'
 				onClick={onClose}
 				aria-label='Fechar ficha do pin'
-				className='absolute top-2.5 right-2.5 rounded-full p-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary'
+				className='absolute top-2.5 right-2.5 rounded-base border-2 border-black bg-base-100 p-1.5 text-muted-foreground shadow-light transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary dark:border-white dark:shadow-dark'
 			>
 				<X className='h-4 w-4' />
 			</button>
@@ -59,7 +59,7 @@ export const PinInspector = ({ pin, onClose, onRotate, onRemove }: PinInspectorP
 				</div>
 			</div>
 
-			<div className='mt-3 flex flex-wrap items-center gap-1.5 border-border border-t pt-3'>
+			<div className='mt-3 flex flex-wrap items-center gap-1.5 border-black border-t-2 pt-3 dark:border-white'>
 				<button
 					type='button'
 					onClick={() => onRotate(-15)}

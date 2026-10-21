@@ -123,7 +123,7 @@ export default function Experiencias() {
 		<section
 			ref={sectionRef}
 			id='experiencias'
-			className='relative w-full overflow-hidden border-border border-t py-16 md:py-32'
+			className='relative w-full overflow-hidden border-black border-t-2 py-16 md:py-32 dark:border-white'
 		>
 			<div className='relative z-10 mb-16 px-4 text-left md:mb-12'>
 				<span className='mb-4 block font-medium text-primary text-xs uppercase tracking-widest dark:text-base-content/70'>
@@ -139,7 +139,7 @@ export default function Experiencias() {
 			</div>
 
 			<div className='relative mx-auto px-4'>
-				<div className='absolute top-0 bottom-0 left-1/2 hidden w-px -translate-x-1/2 bg-border md:block' />
+				<div className='absolute top-0 bottom-0 left-1/2 hidden w-0.5 -translate-x-1/2 bg-black md:block dark:bg-white' />
 
 				<div className='relative flex flex-col gap-8'>
 					{EXPERIENCIAS.map((exp, index) => {
@@ -163,10 +163,10 @@ export default function Experiencias() {
 									style={{
 										transformOrigin: isEven ? 'right' : 'left',
 									}}
-									className={`absolute top-1/2 hidden h-px w-[calc(50%-1rem)] -translate-y-1/2 bg-linear-to-r ${
+									className={`absolute top-1/2 hidden h-0.5 w-[calc(50%-1rem)] -translate-y-1/2 bg-linear-to-r ${
 										isEven
-											? 'left-10 from-transparent to-primary/70'
-											: 'right-10 from-primary/70 to-transparent'
+											? 'left-10 from-transparent to-base-content/70'
+											: 'right-10 from-base-content/70 to-transparent'
 									} md:block`}
 								/>
 
@@ -176,7 +176,7 @@ export default function Experiencias() {
 								>
 									<div
 										className={
-											'relative z-10 mt-1 flex size-12 items-center justify-center rounded-full border-2 bg-primary font-bold text-primary-content text-xs'
+											'relative z-10 mt-1 flex size-12 items-center justify-center rounded-base border-2 border-black bg-primary font-bold text-primary-content text-xs shadow-light dark:border-white dark:shadow-dark'
 										}
 									>
 										{exp.atual ? 'Atual' : exp.periodo.split(' ')[1]}
@@ -190,16 +190,16 @@ export default function Experiencias() {
 										className='relative flex flex-col gap-6 md:flex-row md:gap-10'
 									>
 										<Card
-											className={`mb-10 flex-1 rounded-2xl border bg-surface p-6 shadow-[4px_4px_0_0_#000] transition-all duration-300 hover:border-primary/30 hover:shadow-[4px_4px_0_0_rgba(32,91,255,0.6)] md:p-8 ${
-												exp.atual ? 'border-primary/20' : 'border-border'
-											}`}
+											className={
+												'mb-10 flex-1 rounded-lg border-2 bg-surface p-6 shadow-light transition-all duration-300 hover:border-primary hover:shadow-[4px_4px_0_0_rgba(32,91,255,0.6)] md:p-8 dark:shadow-dark dark:hover:shadow-[4px_4px_0_0_rgba(32,91,255,0.6)]'
+											}
 										>
-											<div className='mb-5 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between'>
+											<div className='mb-5 flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between sm:gap-3'>
 												<div>
 													<div className='mb-1 flex items-center gap-2'>
 														<div
 															className={
-																'flex h-8 w-8 items-center justify-center rounded-full border font-bold text-[10px] md:hidden'
+																'flex h-8 w-8 items-center justify-center rounded-base border-2 border-black bg-primary font-bold text-[10px] text-primary-content shadow-light md:hidden dark:border-white dark:shadow-dark'
 															}
 														>
 															{exp.logo}
@@ -210,19 +210,19 @@ export default function Experiencias() {
 														</h3>
 
 														{exp.atual && (
-															<span className='rounded-full bg-primary/10 px-2 py-0.5 font-semibold text-[10px] text-primary uppercase tracking-wider'>
+															<span className='rounded-base border-2 border-black bg-primary/10 px-2 py-0.5 font-semibold text-[10px] text-primary uppercase tracking-wider dark:border-white'>
 																Atual
 															</span>
 														)}
 													</div>
 
-													<p className='font-medium text-foreground/80 text-sm'>
+													<p className='font-medium text-foreground/80 text-sm max-sm:pt-2'>
 														{exp.empresa}
 														<span className='font-normal text-muted-foreground'> · {exp.tipo}</span>
 													</p>
 												</div>
 
-												<div className='shrink-0 text-right'>
+												<div className='shrink-0 text-right max-sm:text-left'>
 													<p className='font-medium text-foreground/70 text-xs tabular-nums'>
 														{exp.periodo}
 													</p>
@@ -231,7 +231,7 @@ export default function Experiencias() {
 												</div>
 											</div>
 
-											<div className='mb-5 h-px bg-border' />
+											<div className='mb-5 h-0.5 bg-black dark:bg-white' />
 
 											<ul className='mb-6 flex flex-col gap-3'>
 												{exp.setor && (
@@ -253,7 +253,7 @@ export default function Experiencias() {
 												{exp.techs.map((tech) => (
 													<span
 														key={tech}
-														className='rounded-full border border-border bg-foreground/5 px-3 py-1 text-foreground/70 text-xs transition-colors hover:border-primary/40 hover:text-primary'
+														className='rounded-base border-2 border-black bg-base-100 px-3 py-1 text-foreground text-xs shadow-light transition-colors hover:bg-primary hover:text-primary-foreground dark:border-white dark:shadow-dark'
 													>
 														{tech}
 													</span>

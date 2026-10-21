@@ -65,7 +65,7 @@ export default function Contato() {
 	return (
 		<section
 			id='contato'
-			className='relative mt-8 w-full overflow-hidden rounded-3xl border border-border bg-surface'
+			className='relative mt-8 w-full overflow-hidden rounded-lg border-2 border-black bg-surface shadow-light dark:border-white dark:shadow-dark'
 		>
 			<div className='px-6 pt-8 md:px-12'>
 				<span className='font-medium text-muted-foreground text-xs uppercase tracking-widest'>
@@ -117,9 +117,9 @@ export default function Contato() {
 							Como posso te ajudar.
 						</motion.p>
 
-						<nav className='flex flex-col border-border border-t pt-2'>
+						<nav className='flex flex-col border-black border-t-2 pt-2 dark:border-white'>
 							<Link
-								className='w-full border-border border-b pb-2'
+								className='w-full border-black border-b-2 pb-2 dark:border-white'
 								href='mailto:arthurmartins696@gmail.com'
 							>
 								<motion.button
@@ -143,7 +143,7 @@ export default function Contato() {
 										</span>
 									</div>
 
-									<div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border transition-all duration-300 group-hover:border-primary group-hover:bg-primary group-hover:text-primary-content dark:border-primary/70'>
+									<div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-base border-2 border-black bg-base-100 shadow-light transition-all duration-300 group-hover:bg-primary group-hover:text-primary-foreground dark:border-white dark:shadow-dark'>
 										<ArrowRight
 											className='h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 dark:text-primary'
 											strokeWidth={1.5}
@@ -160,7 +160,7 @@ export default function Contato() {
 									href='https://github.com/AxthurX'
 									target='_blank'
 									rel='noopener noreferrer'
-									className='flex h-10 w-10 items-center justify-center rounded-full border border-border transition-all hover:border-primary hover:text-primary'
+									className='flex h-10 w-10 items-center justify-center rounded-base border-2 border-black bg-base-100 shadow-light transition-all hover:bg-primary hover:text-primary-foreground dark:border-white dark:shadow-dark'
 									aria-label='GitHub'
 								>
 									<GithubIcon className='h-4 w-4' />
@@ -170,7 +170,7 @@ export default function Contato() {
 									href='https://linkedin.com/in/arthurxmartins'
 									target='_blank'
 									rel='noopener noreferrer'
-									className='flex h-10 w-10 items-center justify-center rounded-full border border-border transition-all hover:border-primary hover:text-primary'
+									className='flex h-10 w-10 items-center justify-center rounded-base border-2 border-black bg-base-100 shadow-light transition-all hover:bg-primary hover:text-primary-foreground dark:border-white dark:shadow-dark'
 									aria-label='LinkedIn'
 								>
 									<LinkedinIcon className='h-4 w-4' />
@@ -178,7 +178,7 @@ export default function Contato() {
 
 								<Link
 									href='mailto:arthurmartins696@gmail.com'
-									className='flex h-10 w-10 items-center justify-center rounded-full border border-border transition-all hover:border-primary hover:text-primary'
+									className='flex h-10 w-10 items-center justify-center rounded-base border-2 border-black bg-base-100 shadow-light transition-all hover:bg-primary hover:text-primary-foreground dark:border-white dark:shadow-dark'
 									aria-label='Email'
 								>
 									<Mail className='h-4 w-4' />
@@ -189,7 +189,7 @@ export default function Contato() {
 				</AnimatePresence>
 			</div>
 
-			<div className='border-border border-t p-6 md:px-12'>
+			<div className='border-black border-t-2 p-6 md:px-12 dark:border-white'>
 				<p className='text-muted-foreground text-xs'>Arthur LTA © 2026</p>
 			</div>
 		</section>

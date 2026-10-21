@@ -6,20 +6,22 @@ import {
 	Package,
 	UtensilsCrossed,
 } from 'lucide-react';
-import { Calendar } from '@/components/calendar';
-import { DashboardHeader } from '@/components/dashboard-header';
-import { ExpenseTracker } from '@/components/expense-tracker';
-import { Inventory } from '@/components/inventory';
-import { MealPlanner } from '@/components/meal-planner';
-import { SmartHome } from '@/components/smart-home';
-import { TodoList } from '@/components/todo-list';
+import { Calendar } from '@/components/Calendar';
+import { DashboardHeader } from '@/components/DashboardHeader';
+import { ExpenseTracker } from '@/components/ExpenseTracker';
+import { Inventory } from '@/components/Inventory';
+import { MealPlanner } from '@/components/MealPlanner';
+import { SmartHome } from '@/components/SmartHome';
+import { TodoList } from '@/components/TodoList';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 export default function Home() {
 	return (
 		<div className='flex min-h-screen w-full flex-col bg-linear-to-br from-gray-900 via-gray-800 to-gray-900 bg-fixed'>
 			<div className="absolute inset-0 bg-[url('/icons/placeholder.svg?height=1080&width=1920')] bg-center bg-cover opacity-10" />
+
 			<DashboardHeader />
+
 			<main className='relative z-10 flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8'>
 				<Tabs defaultValue='smart-home'>
 					<TabsList className='mx-auto grid w-full max-w-4xl grid-cols-3 rounded-full bg-white/10 backdrop-blur-md md:grid-cols-6'>

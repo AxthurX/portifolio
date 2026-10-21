@@ -95,7 +95,7 @@ export const PinArt = ({
 				aria-hidden='true'
 			>
 				{/* cartão de papel (polaroid) com a foto do certificado */}
-				<div className='absolute inset-0 overflow-hidden rounded-[4px] bg-[hsl(42_32%_96%)]'>
+				<div className='absolute inset-0 overflow-hidden rounded-sm bg-[hsl(42_32%_96%)]'>
 					{/*
 					 * <img> puro de propósito: as miniaturas já são WebP otimizadas,
 					 * servidas com cache imutável pelo next.config — sem passar pelo
@@ -151,7 +151,7 @@ export const PinArt = ({
 				<svg
 					viewBox='0 0 100 100'
 					aria-hidden='true'
-					className='pointer-events-none absolute -top-[5%] left-1/2 h-[14%] w-[14%] -translate-x-1/2 overflow-visible'
+					className='pointer-events-none absolute top-[-5%] left-1/2 h-[14%] w-[14%] -translate-x-1/2 overflow-visible'
 				>
 					<title>Tarugador</title>
 					<defs>
@@ -181,7 +181,7 @@ export const PinArt = ({
 				</svg>
 
 				{selected && (
-					<span className='pointer-events-none absolute -inset-1 rounded-[5px] border-2 border-[hsl(45_66%_78%)] border-dashed' />
+					<span className='pointer-events-none absolute -inset-1 rounded-base border-2 border-[hsl(45_66%_78%)] border-dashed' />
 				)}
 			</div>
 		);

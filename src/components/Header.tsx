@@ -4,7 +4,8 @@ import axios from 'axios';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Asterisk, Download, Menu, X } from 'lucide-react';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { cn } from '@/lib/utils';
 import { Button } from './ui/button';
 
 const LINKS = [
@@ -19,6 +20,22 @@ const CURRICULUM_URL = '/arthur-martins.pdf';
 
 export default function Header({ onPortfolioOpen }: { onPortfolioOpen: () => void }) {
 	const [menuOpen, setMenuOpen] = useState(false);
+
+	const [hash, setHash] = useState('');
+
+	useEffect(() => {
+		const updateActiveHash = () => {
+			setHash(window.location.hash);
+		};
+
+		updateActiveHash();
+
+		window.addEventListener('hashchange', updateActiveHash);
+
+		return () => {
+			window.removeEventListener('hashchange', updateActiveHash);
+		};
+	}, []);
 
 	const handleThemeChange = async () => {
 		const data_theme = document.documentElement.getAttribute('data-theme') || 'arthur';
@@ -37,19 +54,18 @@ export default function Header({ onPortfolioOpen }: { onPortfolioOpen: () => voi
 				transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
 				className='fixed top-0 z-50 flex w-full max-w-400 justify-between px-4 pt-4 md:px-8 lg:px-12'
 			>
-				{/* Backdrop */}
 				<div
-					className='absolute inset-x-4 top-4 flex h-14 items-center justify-between rounded-full border border-border backdrop-blur-xl md:inset-x-8 lg:inset-x-12'
+					className='absolute inset-x-4 top-4 flex h-16 items-center justify-between rounded-base border-2 border-black shadow-light backdrop-blur-xl md:inset-x-8 lg:inset-x-12 dark:border-white dark:shadow-dark'
 					style={{ background: 'var(--header-bg)' }}
 				/>
 
-				<div className='z-50 flex h-14 items-center gap-6 pl-5'>
+				<div className='z-50 flex h-15 items-center gap-6 pl-5'>
 					<Link
 						href='/'
 						className='flex items-center gap-3 text-base-content transition-opacity hover:opacity-80 dark:text-primary'
 					>
-						<div className='flex h-8 w-8 items-center justify-center rounded-full border border-primary/30 bg-primary/10'>
-							<span className='font-bold text-xs'>AM</span>
+						<div className='flex h-8 w-8 items-center justify-center rounded-base border-2 border-black bg-primary shadow-light dark:border-white dark:shadow-dark'>
+							<span className='font-bold text-primary-content text-xs'>AM</span>
 						</div>
 
 						<span className='hidden font-medium text-sm max-sm:block md:block dark:text-primary'>
@@ -62,20 +78,22 @@ export default function Header({ onPortfolioOpen }: { onPortfolioOpen: () => voi
 						href={CURRICULUM_URL}
 						download='Arthur-Martins-Curriculo.pdf'
 						title='Baixar Currículo'
-						className='hidden items-center gap-1.5 rounded-full border border-border bg-foreground/5 px-3 py-1.5 font-medium text-muted-foreground text-xs transition-all hover:border-primary/40 hover:text-primary md:flex'
+						className='hidden items-center gap-1.5 rounded-base border-2 border-black bg-base-100 px-3 py-1.5 font-medium text-foreground text-xs shadow-light transition-all hover:bg-primary hover:text-primary-foreground active:translate-x-boxShadowX active:translate-y-boxShadowY active:shadow-none md:flex dark:border-white dark:shadow-dark'
 					>
 						<Download className='h-3 w-3' /> Currículo
 					</a>
 				</div>
 
-				{/* Center - Nav (Desktop only) */}
-				<nav className='absolute inset-x-0 top-4 z-10 hidden h-14 items-center justify-center md:flex'>
-					<div className='flex items-center gap-1 rounded-full border border-border bg-surface/50 p-1'>
+				<nav className='absolute inset-x-0 top-4 z-10 hidden h-15 items-center justify-center py-3 md:flex'>
+					<div className='flex items-center gap-1 rounded-base border-2 border-black bg-base-100 p-1 shadow-light dark:border-white dark:shadow-dark'>
 						{LINKS.map((link) => (
 							<a
 								key={link.href}
 								href={link.href}
-								className='rounded-full px-4 py-2 font-medium text-muted-foreground text-xs transition-all hover:bg-foreground/5 hover:text-foreground'
+								className={cn(
+									'rounded-base px-4 py-2 font-medium text-muted-foreground text-xs transition-all',
+									hash === link.href && 'border-3 border-black',
+								)}
 							>
 								{link.label}
 							</a>
@@ -83,8 +101,7 @@ export default function Header({ onPortfolioOpen }: { onPortfolioOpen: () => voi
 					</div>
 				</nav>
 
-				{/* Right Actions */}
-				<div className='relative z-10 flex h-14 items-center gap-3 pr-3'>
+				<div className='relative z-10 flex h-15 items-center gap-3 pr-3'>
 					{/* <Button
 						type='button'
 						onClick={onPortfolioOpen}
@@ -95,13 +112,13 @@ export default function Header({ onPortfolioOpen }: { onPortfolioOpen: () => voi
 
 					<Button
 						onClick={handleThemeChange}
-						className='rounded-full bg-primary px-6 py-4 font-medium transition-all duration-200'
+						className='px-6 py-4 font-medium transition-all duration-200'
 					>
 						<Asterisk className='text-secondary-foreground' />
 					</Button>
 
 					<Link href='#contato' className='max-lg:hidden'>
-						<Button className='rounded-full bg-primary px-6 py-4 font-medium transition-all duration-200'>
+						<Button className='px-6 py-4 font-medium transition-all duration-200'>
 							Entre em contato
 						</Button>
 					</Link>
@@ -109,7 +126,7 @@ export default function Header({ onPortfolioOpen }: { onPortfolioOpen: () => voi
 					<button
 						type='button'
 						onClick={() => setMenuOpen(true)}
-						className='flex h-10 w-10 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-foreground md:hidden dark:border-primary/60 dark:text-primary'
+						className='flex h-10 w-10 items-center justify-center rounded-base border-2 border-black bg-base-100 text-foreground shadow-light transition-colors hover:bg-primary hover:text-primary-foreground active:translate-x-boxShadowX active:translate-y-boxShadowY active:shadow-none md:hidden dark:border-white dark:shadow-dark'
 						aria-label='Abrir menu'
 					>
 						<Menu className='h-4 w-4' />
@@ -130,8 +147,8 @@ export default function Header({ onPortfolioOpen }: { onPortfolioOpen: () => voi
 						{/* Header */}
 						<div className='flex items-center justify-between'>
 							<div className='flex items-center gap-3'>
-								<div className='flex h-10 w-10 items-center justify-center rounded-full border border-primary/30 bg-primary/10'>
-									<span className='font-bold text-gradient text-sm'>AM</span>
+								<div className='flex h-10 w-10 items-center justify-center rounded-base border-2 border-black bg-primary shadow-light dark:border-white dark:shadow-dark'>
+									<span className='font-bold text-primary-foreground text-sm'>AM</span>
 								</div>
 								<span className='font-medium'>Arthur Martins</span>
 							</div>
@@ -139,7 +156,7 @@ export default function Header({ onPortfolioOpen }: { onPortfolioOpen: () => voi
 							<button
 								type='button'
 								onClick={() => setMenuOpen(false)}
-								className='flex h-10 w-10 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-foreground'
+								className='flex h-10 w-10 items-center justify-center rounded-base border-2 border-black bg-base-100 text-foreground shadow-light transition-colors hover:bg-primary hover:text-primary-foreground active:translate-x-boxShadowX active:translate-y-boxShadowY active:shadow-none'
 								aria-label='Fechar menu'
 							>
 								<X className='h-4 w-4' />
@@ -160,7 +177,7 @@ export default function Header({ onPortfolioOpen }: { onPortfolioOpen: () => voi
 									delay: 0,
 									ease: [0.16, 1, 0.3, 1],
 								}}
-								className='border-border border-b py-4 text-left font-bold text-3xl tracking-tight transition-colors hover:text-primary'
+								className='border-black border-b-2 py-4 text-left font-bold text-3xl tracking-tight transition-colors hover:text-primary dark:border-white'
 							>
 								Portfolio
 							</motion.button>
@@ -177,19 +194,18 @@ export default function Header({ onPortfolioOpen }: { onPortfolioOpen: () => voi
 										delay: (i + 1) * 0.06,
 										ease: [0.16, 1, 0.3, 1],
 									}}
-									className='border-border border-b py-4 text-left font-bold text-3xl tracking-tight transition-colors hover:text-primary'
+									className='border-black border-b-2 py-4 text-left font-bold text-3xl tracking-tight transition-colors hover:text-primary dark:border-white'
 								>
 									{link.label}
 								</motion.a>
 							))}
 						</nav>
 
-						{/* CTA */}
 						<motion.div
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.4, delay: 0.4 }}
-							className='border-border border-b py-4 text-left font-bold text-3xl tracking-tight transition-colors hover:text-primary'
+							className='border-black border-b-2 py-4 text-left font-bold text-3xl tracking-tight transition-colors hover:text-primary dark:border-white'
 						>
 							<a
 								href={CURRICULUM_URL}

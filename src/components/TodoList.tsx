@@ -76,19 +76,6 @@ export function TodoList() {
 		return todo.category === filter;
 	});
 
-	const getCategoryColor = (category: string) => {
-		switch (category) {
-			case 'home':
-				return 'bg-blue-500';
-			case 'finance':
-				return 'bg-green-500';
-			case 'shopping':
-				return 'bg-purple-500';
-			default:
-				return 'bg-gray-500';
-		}
-	};
-
 	return (
 		<div className='grid gap-4 md:grid-cols-2'>
 			<Card className='bg-white/10 text-white backdrop-blur-md'>
@@ -108,7 +95,7 @@ export function TodoList() {
 							className='border-gray-700 bg-white/10 text-white'
 						/>
 						<Select value={category} onValueChange={setCategory}>
-							<SelectTrigger className='w-[120px] border-gray-700 bg-white/10 text-white'>
+							<SelectTrigger className='w-30 border-gray-700 bg-white/10 text-white'>
 								<SelectValue placeholder='Category' />
 							</SelectTrigger>
 							<SelectContent className='border-gray-700 bg-gray-800/90 text-white backdrop-blur-md'>
@@ -127,7 +114,7 @@ export function TodoList() {
 						{todos.filter((todo) => !todo.completed).length} items left
 					</div>
 					<Select value={filter} onValueChange={setFilter}>
-						<SelectTrigger className='w-[120px] border-gray-700 bg-white/10 text-white'>
+						<SelectTrigger className='w-30 border-gray-700 bg-white/10 text-white'>
 							<SelectValue placeholder='Filter' />
 						</SelectTrigger>
 						<SelectContent className='border-gray-700 bg-gray-800/90 text-white backdrop-blur-md'>
@@ -158,7 +145,7 @@ export function TodoList() {
 				<CardContent>
 					<div className='space-y-4'>
 						{filteredTodos.length === 0 ? (
-							<div className='flex h-[200px] items-center justify-center rounded-md border border-gray-700 border-dashed'>
+							<div className='flex h-50 items-center justify-center rounded-md border border-gray-700 border-dashed'>
 								<div className='text-center'>
 									<h3 className='font-medium text-lg'>No tasks</h3>
 									<p className='text-gray-400 text-sm'>Add a task to get started</p>

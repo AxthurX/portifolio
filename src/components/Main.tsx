@@ -30,8 +30,6 @@ export default function Main() {
 		ease: [0.16, 1, 0.3, 1],
 	};
 
-	const CURRICULUM_URL = '/arthur-martins.pdf';
-
 	const wordReveal = (delay = 0) => ({
 		initial: {
 			y: '110%',
@@ -94,7 +92,7 @@ export default function Main() {
 						href='https://github.com/AxthurX'
 						aria-label='GitHub'
 					>
-						<Button className='rounded-full' variant='link'>
+						<Button className='rounded-base border-black dark:border-white' variant='link'>
 							<GithubIcon className='h-4 w-4 dark:invert' />
 						</Button>
 					</Link>
@@ -105,13 +103,13 @@ export default function Main() {
 						href='https://linkedin.com/in/arthurxmartins'
 						aria-label='LinkedIn'
 					>
-						<Button className='rounded-full' variant='link'>
+						<Button className='rounded-base border-black dark:border-white' variant='link'>
 							<LinkedinIcon className='h-4 w-4 dark:invert' />
 						</Button>
 					</Link>
 
 					<Link aria-label='Email' href='mailto:contato@arthurmartins.dev'>
-						<Button className='rounded-full' variant='link'>
+						<Button className='rounded-base border-black dark:border-white' variant='link'>
 							<Mail className='h-4 w-4 dark:invert' />
 						</Button>
 					</Link>
@@ -164,20 +162,23 @@ export default function Main() {
 						{...fadeIn(0.7)}
 						className='mt-10 flex items-center gap-6 max-sm:flex-wrap max-sm:gap-4'
 					>
-						<Button className='h-14 w-40 rounded-full'>
+						<Button className='h-14 w-40 rounded-base'>
 							<Link
 								href='#projetos'
-								className='group flex items-center gap-3 rounded-full px-8 py-4 font-medium text-primary-foreground transition-all hover:scale-105'
+								className='group flex items-center gap-3 rounded-base px-8 py-4 font-medium text-primary-foreground transition-all hover:scale-105'
 							>
 								Ver projetos
 								<ArrowDownRight className='h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5' />
 							</Link>
 						</Button>
 
-						<Button variant='outline' className='h-14 w-40 rounded-full'>
+						<Button
+							variant='outline'
+							className='h-14 w-40 rounded-base border-black dark:border-white'
+						>
 							<Link
 								href='#contato'
-								className='px-8 py-4 font-medium text-base-content transition-all'
+								className='rounded-base px-8 py-4 font-medium text-base-content transition-all'
 							>
 								Entre em contato
 							</Link>

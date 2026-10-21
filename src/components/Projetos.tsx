@@ -127,7 +127,7 @@ const PROJECTS: Projeto[] = [
 
 function ProjectCard({ projeto }: { projeto: Projeto }) {
 	return (
-		<Card className='group relative flex h-[60vh] w-full shrink-0 cursor-pointer flex-col justify-between overflow-hidden rounded-2xl border border-border bg-surface md:h-[70vh] md:w-[55vw]'>
+		<Card className='group relative flex h-[60vh] w-full shrink-0 cursor-pointer flex-col justify-between overflow-hidden rounded-lg border-2 border-black bg-surface shadow-light md:h-[70vh] md:w-[55vw] dark:border-white dark:shadow-dark'>
 			<div
 				className='absolute inset-0 z-0 bg-center bg-cover bg-no-repeat transition-transform duration-700 ease-out group-hover:scale-105'
 				style={{
@@ -163,7 +163,7 @@ function ProjectCard({ projeto }: { projeto: Projeto }) {
 						<Button
 							type='button'
 							variant='outline'
-							className='flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-border bg-[#fafafa]/60 p-0 backdrop-blur-sm transition-all duration-300 hover:border-primary hover:bg-primary hover:text-primary-foreground group-hover:border-primary/50'
+							className='flex h-12 w-12 shrink-0 items-center justify-center rounded-base border-2 border-black bg-[#fafafa]/60 p-0 shadow-light backdrop-blur-sm transition-all duration-300 hover:bg-primary hover:text-primary-foreground active:translate-x-boxShadowX active:translate-y-boxShadowY active:shadow-none group-hover:border-primary dark:border-white dark:shadow-dark'
 							aria-label={`Ver apresentação de ${projeto.client}`}
 						>
 							<ArrowUpRight
@@ -173,7 +173,7 @@ function ProjectCard({ projeto }: { projeto: Projeto }) {
 						</Button>
 					</DialogTrigger>
 
-					<DialogContent className='w-full max-w-5xl overflow-hidden border-border bg-surface p-0'>
+					<DialogContent className='w-full max-w-5xl overflow-hidden border-2 border-black bg-surface p-0 shadow-light dark:border-white dark:shadow-dark'>
 						<DialogTitle className='hidden text-xl'>{projeto.client}</DialogTitle>
 
 						{projeto.video ? (
@@ -185,6 +185,7 @@ function ProjectCard({ projeto }: { projeto: Projeto }) {
 									preload='metadata'
 									poster={projeto.image}
 								>
+									<track kind='captions' />
 									<source src={projeto.video} type='video/mp4' />
 									Seu navegador não suporta reprodução de vídeo.
 								</video>

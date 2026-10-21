@@ -132,7 +132,6 @@ const ICON_CYCLE: IconKey[] = [
 	'star',
 ];
 
-/** Escolhe um item do ciclo de forma estável a partir do id. */
 const escolher = <T>(ciclo: T[], id: string, deslocamento = 0): T => {
 	let soma = deslocamento;
 	for (let i = 0; i < id.length; i++) soma = (soma + id.charCodeAt(i) * (i + 1)) % 9973;
@@ -166,7 +165,6 @@ export const PIN_BY_ID: Record<string, PinDefinition> = PINS.reduce<Record<strin
 
 export const pinById = (id: string): PinDefinition | undefined => PIN_BY_ID[id];
 
-/** Pins que já vêm pendurados no quadro quando o visitante chega. */
 export const SEED_PLACEMENTS: SeedPlacement[] = [
 	{ id: 'alura-html5-e-css3-parte-1-crie-uma-pagina-da-web', x: 0.17, y: 0.19, rotation: -5 },
 	{ id: 'coursera-agile-project-management', x: 0.4, y: 0.17, rotation: 6 },

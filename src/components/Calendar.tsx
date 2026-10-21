@@ -172,7 +172,7 @@ export function Calendar() {
 				<CardContent>
 					<div className='space-y-4'>
 						{eventsForSelectedDate.length === 0 ? (
-							<div className='flex h-[200px] items-center justify-center rounded-md border border-gray-700 border-dashed'>
+							<div className='flex h-50 items-center justify-center rounded-md border border-gray-700 border-dashed'>
 								<div className='text-center'>
 									<h3 className='font-medium text-lg'>No events</h3>
 									<p className='text-gray-400 text-sm'>Add an event to get started</p>

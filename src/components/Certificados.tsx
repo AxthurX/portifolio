@@ -1,13 +1,11 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { usePinBoard } from '@/hooks/use-pin-board';
 import { pinById } from '@/lib/pins';
-import { cn } from '../lib/utils';
 import { BoardFrame } from './pin/BoardFrame';
 import { BoardToolbar } from './pin/BoardToolbar';
 import { PinBoard } from './pin/PinBoard';
@@ -15,186 +13,6 @@ import { PinBoxSheet } from './pin/PinBoxSheet';
 import { PinInspector } from './pin/PinInspector';
 
 gsap.registerPlugin(ScrollTrigger);
-
-type TrophySize = 'large' | 'medium' | 'small' | 'mini';
-
-interface Certificate {
-	title: string;
-	issuer: string;
-	date: string;
-	credentialCode?: string;
-	credentialUrl?: string;
-	skills?: string[];
-	image: string;
-	size: TrophySize;
-	color: 'gold' | 'silver' | 'bronze' | 'teal';
-}
-
-const COLOR_MAP = {
-	gold: {
-		cup: 'text-yellow-400',
-		base: 'bg-yellow-400/10 border-yellow-400/30',
-		glow: 'shadow-yellow-400/20',
-		badge: 'bg-yellow-400/15 text-yellow-300 border-yellow-400/30',
-		stem: 'bg-yellow-400/40',
-		label: 'text-yellow-300',
-	},
-	silver: {
-		cup: 'text-zinc-300',
-		base: 'bg-zinc-300/10 border-zinc-300/30',
-		glow: 'shadow-zinc-300/20',
-		badge: 'bg-zinc-300/15 text-zinc-200 border-zinc-300/30',
-		stem: 'bg-zinc-300/40',
-		label: 'text-zinc-300',
-	},
-	bronze: {
-		cup: 'text-orange-400',
-		base: 'bg-orange-400/10 border-orange-400/30',
-		glow: 'shadow-orange-400/20',
-		badge: 'bg-orange-400/15 text-orange-300 border-orange-400/30',
-		stem: 'bg-orange-400/40',
-		label: 'text-orange-300',
-	},
-	teal: {
-		cup: 'text-teal-400',
-		base: 'bg-teal-400/10 border-teal-400/30',
-		glow: 'shadow-teal-400/20',
-		badge: 'bg-teal-400/15 text-teal-300 border-teal-400/30',
-		stem: 'bg-teal-400/40',
-		label: 'text-teal-300',
-	},
-};
-
-const SIZE_CONFIG = {
-	large: {
-		cupH: 'h-20',
-		cupW: 'w-16',
-		stemH: 'h-8',
-		baseW: 'w-20',
-		cardW: 'col-span-2 row-span-2',
-		minH: 'min-h-[260px]',
-	},
-	medium: {
-		cupH: 'h-14',
-		cupW: 'w-12',
-		stemH: 'h-5',
-		baseW: 'w-16',
-		cardW: 'col-span-1 row-span-2',
-		minH: 'min-h-[200px]',
-	},
-	small: {
-		cupH: 'h-10',
-		cupW: 'w-9',
-		stemH: 'h-4',
-		baseW: 'w-12',
-		cardW: 'col-span-1 row-span-1',
-		minH: 'min-h-[160px]',
-	},
-	mini: {
-		cupH: 'h-7',
-		cupW: 'w-7',
-		stemH: 'h-3',
-		baseW: 'w-10',
-		cardW: 'col-span-1 row-span-1',
-		minH: 'min-h-[140px]',
-	},
-};
-
-const CertificateCard = memo(function CertificateCard({
-	cert,
-	index,
-}: {
-	cert: Certificate;
-	index: number;
-}) {
-	const c = COLOR_MAP[cert.color];
-	const s = SIZE_CONFIG[cert.size];
-
-	const BACKGROUND_STYLE = useMemo(
-		() => ({
-			backgroundImage: `url(${cert.image})`,
-			backgroundSize: 'cover',
-			backgroundPosition: 'center',
-		}),
-		[cert.image],
-	);
-
-	return (
-		<motion.div
-			className={`${s.cardW} ${s.minH}`}
-			initial={{ opacity: 0, y: 30 }}
-			whileInView={{ opacity: 1, y: 0 }}
-			viewport={{ once: true }}
-			transition={{
-				duration: 0.45,
-			}}
-		>
-			<div
-				className={cn(
-					'group relative flex h-full flex-col justify-between overflow-hidden rounded-xl border p-4 transition-all duration-300',
-					c.base,
-				)}
-				style={BACKGROUND_STYLE}
-			>
-				{/* <Image src={`url(${cert.image})`} alt={cert.title} width={300} height={300} /> */}
-
-				{/* Shelf glow top line */}
-				{/* <div
-					className={`absolute top-0 right-0 left-0 h-px bg-linear-to-r from-transparent via-current to-transparent ${c.cup} opacity-30`}
-				/> */}
-
-				{/* Info */}
-				{/* <div className='mt-3 flex flex-col gap-1'>
-					<p
-						className={`font-semibold text-foreground leading-tight ${cert.size === 'large' ? 'text-sm' : cert.size === 'mini' ? 'text-[10px]' : 'text-xs'}`}
-					>
-						{cert.title}
-					</p>
-					<p
-						className={`${c.label} font-medium ${cert.size === 'mini' ? 'text-[9px]' : 'text-[10px]'}`}
-					>
-						{cert.issuer}
-					</p>
-					<p className='text-[9px] text-muted-foreground'>{cert.date}</p>
-
-					{cert.skills && cert.size !== 'mini' && (
-						<div className='mt-1 flex flex-wrap gap-1'>
-							{cert.skills.slice(0, cert.size === 'large' ? 3 : 1).map((skill) => (
-								<span
-									key={skill}
-									className={`rounded-full border px-1.5 py-0.5 font-medium text-[8px] ${c.badge}`}
-								>
-									{skill}
-								</span>
-							))}
-						</div>
-					)}
-				</div> */}
-
-				{/* Link icon on hover */}
-				{/* {cert.credentialUrl && (
-					<motion.div
-						initial={{ opacity: 0, scale: 0.8 }}
-						// animate={{ opacity: hovered ? 1 : 0, scale: hovered ? 1 : 0.8 }}
-						transition={{ duration: 0.2 }}
-						className='absolute top-3 right-3'
-					>
-						<a
-							href={cert.credentialUrl}
-							target='_blank'
-							rel='noopener noreferrer'
-							className={`flex h-6 w-6 items-center justify-center rounded-full border ${c.badge} transition-colors`}
-							onClick={(e) => e.stopPropagation()}
-							aria-label={`Ver credencial: ${cert.title}`}
-						>
-							<ExternalLink size={10} />
-						</a>
-					</motion.div>
-				)} */}
-			</div>
-		</motion.div>
-	);
-});
 
 export default function Certificados() {
 	const sectionRef = useRef<HTMLElement | null>(null);
@@ -278,7 +96,7 @@ export default function Certificados() {
 		<section
 			ref={sectionRef}
 			id='certificados'
-			className='relative mt-8 w-full overflow-hidden border-border border-t py-16 md:mt-12 md:py-32'
+			className='relative mt-8 w-full overflow-hidden border-black border-t-2 py-16 md:mt-12 md:py-32 dark:border-white'
 		>
 			<div className='relative z-10 px-4 md:px-0'>
 				<div className='mb-12 md:mb-16'>

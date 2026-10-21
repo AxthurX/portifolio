@@ -58,7 +58,7 @@ export const PinBoard = ({
 
 			{placed.length === 0 && (
 				<div className='absolute inset-0 z-12 flex items-center justify-center p-6'>
-					<div className='flex max-w-sm flex-col items-center gap-3 rounded-2xl border-2 border-border border-dashed bg-muted/40 px-6 py-8 text-center'>
+					<div className='flex max-w-sm flex-col items-center gap-3 rounded-lg border-2 border-black border-dashed bg-muted/40 px-6 py-8 text-center shadow-light dark:border-white dark:shadow-dark'>
 						<span className='grid h-12 w-12 place-items-center rounded-full bg-primary/10 text-primary'>
 							<PackageOpen className='h-6 w-6' strokeWidth={1.6} />
 						</span>
@@ -69,7 +69,7 @@ export const PinBoard = ({
 						<button
 							type='button'
 							onClick={onOpenBox}
-							className='mt-1 rounded-full bg-primary px-4 py-2 font-semibold text-primary-foreground text-sm transition hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary'
+							className='mt-1 rounded-base border-2 border-black bg-primary px-4 py-2 font-semibold text-primary-foreground text-sm shadow-light transition hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary active:translate-x-boxShadowX active:translate-y-boxShadowY active:shadow-none dark:border-white dark:shadow-dark'
 						>
 							Abrir a caixa
 						</button>

@@ -103,7 +103,6 @@ export default function Links() {
 										aria-label={social.label}
 										className='transition-opacity hover:opacity-70'
 									>
-										{/* brightness-0 invert força o SVG monocromático a ficar branco sobre o fundo escuro */}
 										<Image
 											src={ICON_SRC[social.key] || '/icons/placeholder.svg'}
 											alt={social.label}
