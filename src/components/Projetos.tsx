@@ -21,19 +21,6 @@ export interface Projeto {
 const PROJECTS: Projeto[] = [
 	{
 		id: '01',
-		client: 'SEDAM',
-		category: 'Fullstack & Governo Digital',
-		title:
-			'Desenvolvimento e evolução de um ecossistema digital com múltiplos sistemas para a SEDAM',
-		description:
-			'Atuação no desenvolvimento e manutenção de plataformas utilizadas para serviços públicos, gestão administrativa, transparência, processos seletivos, inscrições, documentação e atendimento ao cidadão.',
-		image: '/projetos/sedam.png',
-		technologies: ['React', 'Next.js', 'TypeScript', 'Node.js', 'Prisma', 'PostgreSQL'],
-		video: '',
-	},
-
-	{
-		id: '02',
 		client: 'Portal SEDAM',
 		category: 'Portal Institucional',
 		title: 'Portal institucional para serviços, notícias, requerimentos e informações ambientais',
@@ -43,9 +30,8 @@ const PROJECTS: Projeto[] = [
 		technologies: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS'],
 		video: '',
 	},
-
 	{
-		id: '03',
+		id: '02',
 		client: 'Portal SEDAM — Admin',
 		category: 'CMS & Gestão de Conteúdo',
 		title: 'Painel administrativo para gerenciamento de conteúdo e publicação do Portal SEDAM',
@@ -55,9 +41,8 @@ const PROJECTS: Projeto[] = [
 		technologies: ['Next.js', 'React', 'TypeScript', 'TipTap'],
 		video: '',
 	},
-
 	{
-		id: '04',
+		id: '03',
 		client: 'Busca Inteligente',
 		category: 'Search & Performance',
 		title: 'Busca inteligente com Typesense e resultados instantâneos em menos de 50 ms',
@@ -67,9 +52,8 @@ const PROJECTS: Projeto[] = [
 		technologies: ['Typesense', 'Next.js', 'TypeScript', 'Docker'],
 		video: '',
 	},
-
 	{
-		id: '05',
+		id: '04',
 		client: 'Editor de Conteúdo',
 		category: 'Headless Editor & CMS',
 		title: 'Editor de conteúdo baseado em TipTap e ProseMirror com extensões personalizadas',
@@ -80,7 +64,7 @@ const PROJECTS: Projeto[] = [
 		video: '',
 	},
 	{
-		id: '06',
+		id: '05',
 		client: 'Acessibilidade',
 		category: 'Accessibility & Design System',
 		title: 'Menu de acessibilidade para diferentes necessidades de uso',
@@ -91,7 +75,7 @@ const PROJECTS: Projeto[] = [
 		video: '',
 	},
 	{
-		id: '07',
+		id: '06',
 		client: 'Portal da Transparência',
 		category: 'Transparência Pública',
 		title: 'Plataforma para disponibilização de informações públicas da SEDAM',
@@ -102,7 +86,7 @@ const PROJECTS: Projeto[] = [
 		video: '',
 	},
 	{
-		id: '08',
+		id: '07',
 		client: 'Processos & Inscrições',
 		category: 'Sistemas Administrativos',
 		title: 'Plataformas para inscrições, processos seletivos e gerenciamento de documentos',
@@ -113,7 +97,7 @@ const PROJECTS: Projeto[] = [
 		video: '',
 	},
 	{
-		id: '09',
+		id: '08',
 		client: 'SEDAM Wiki',
 		category: 'Documentação',
 		title: 'Plataforma de documentação interna para conhecimento e processos da Secretaria',

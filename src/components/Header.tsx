@@ -91,8 +91,8 @@ export default function Header({ onPortfolioOpen }: { onPortfolioOpen: () => voi
 								key={link.href}
 								href={link.href}
 								className={cn(
-									'rounded-base px-4 py-2 font-medium text-muted-foreground text-xs transition-all',
-									hash === link.href && 'border-3 border-black',
+									'rounded-base px-4 py-2 font-normal text-base-content text-xs transition-all',
+									hash === link.href && 'border-2 border-black',
 								)}
 							>
 								{link.label}
