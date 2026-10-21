@@ -253,7 +253,7 @@ export default function Experiencias() {
 												{exp.techs.map((tech) => (
 													<span
 														key={tech}
-														className='rounded-base border-2 border-black bg-base-100 px-3 py-1 text-foreground text-xs shadow-light transition-colors hover:bg-primary hover:text-primary-foreground dark:border-white dark:shadow-dark'
+														className='rounded-base border-2 border-black bg-base-100 px-3 py-1 text-foreground text-xs shadow-light transition-colors hover:bg-primary hover:text-primary-content dark:border-white dark:shadow-dark'
 													>
 														{tech}
 													</span>
