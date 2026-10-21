@@ -2,7 +2,6 @@ import { type PinDefinition, pinById, SEED_PLACEMENTS } from './pins';
 
 export interface PlacedPin {
 	id: string;
-	/** posição normalizada (0–1) dentro da cortiça */
 	x: number;
 	y: number;
 	rotation: number;
@@ -14,18 +13,14 @@ export interface BoardState {
 	placed: PlacedPin[];
 }
 
-export const BOARD_VERSION = 4;
-const STORAGE_KEY = 'quadro-pins:v4';
+export const BOARD_VERSION = 5;
+const STORAGE_KEY = 'quadro-pins:v5';
 
 export const clamp = (value: number, min: number, max: number) =>
 	Math.min(max, Math.max(min, value));
 
 export const clamp01 = (value: number) => clamp(value, 0, 1);
 
-/**
- * Composição inicial. Pins com id desconhecido são ignorados (e avisados no
- * console) para que um erro de digitação não suma com um pin do quadro.
- */
 export const seedBoard = (): BoardState => {
 	const placements: PlacedPin[] = [];
 
@@ -53,6 +48,7 @@ const isRecord = (value: unknown): value is Record<string, unknown> =>
 
 export const loadBoard = (): BoardState | null => {
 	if (typeof window === 'undefined') return null;
+
 	try {
 		const raw = window.localStorage.getItem(STORAGE_KEY);
 		if (!raw) return null;
@@ -95,9 +91,7 @@ export const saveBoard = (state: BoardState) => {
 	if (typeof window === 'undefined') return;
 	try {
 		window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-	} catch {
-		// sem espaço ou modo privado: o quadro continua funcionando na sessão
-	}
+	} catch {}
 };
 
 export const isPlaced = (placed: PlacedPin[], id: string) => placed.some((item) => item.id === id);

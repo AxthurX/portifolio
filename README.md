@@ -19,6 +19,14 @@ pnpm assets:pins   # regenera as miniaturas e src/lib/certificados.data.ts
 Ao adicionar um certificado novo: coloque o PNG em `public/certificados`, acrescente a
 entrada em `scripts/certificados.json` e rode `pnpm assets:pins`.
 
+### Composição inicial do quadro
+
+O quadro começa com **11 pins** já pendurados, definidos em `SEED_PLACEMENTS`
+(`src/lib/pins.ts`). Os demais ficam guardados na caixa, para o visitante pendurar
+como quiser. Ao mudar essa lista, suba o `BOARD_VERSION` e a `STORAGE_KEY`
+(`src/lib/board-state.ts`) — a chave antiga no `localStorage` é ignorada e todos
+veem a nova composição inicial.
+
 ## Getting Started
 
 First, run the development server:

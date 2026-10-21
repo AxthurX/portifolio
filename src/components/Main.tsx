@@ -88,32 +88,33 @@ export default function Main() {
 				<span />
 
 				<div className='flex items-center gap-3 max-sm:gap-2'>
-					<Button className='rounded-full' variant='link'>
-						<a
-							target='_blank'
-							rel='noopener noreferrer'
-							href='https://github.com/AxthurX'
-							aria-label='GitHub'
-						>
+					<Link
+						target='_blank'
+						rel='noopener noreferrer'
+						href='https://github.com/AxthurX'
+						aria-label='GitHub'
+					>
+						<Button className='rounded-full' variant='link'>
 							<GithubIcon className='h-4 w-4 dark:invert' />
-						</a>
-					</Button>
-					<Button className='rounded-full' variant='link'>
-						<a
-							target='_blank'
-							rel='noopener noreferrer'
-							href='https://linkedin.com/in/arthurxmartins'
-							aria-label='LinkedIn'
-						>
-							<LinkedinIcon className='h-4 w-4 dark:invert' />
-						</a>
-					</Button>
+						</Button>
+					</Link>
 
-					<Button className='rounded-full' variant='link'>
-						<a aria-label='Email' href='mailto:contato@arthurmartins.dev'>
+					<Link
+						target='_blank'
+						rel='noopener noreferrer'
+						href='https://linkedin.com/in/arthurxmartins'
+						aria-label='LinkedIn'
+					>
+						<Button className='rounded-full' variant='link'>
+							<LinkedinIcon className='h-4 w-4 dark:invert' />
+						</Button>
+					</Link>
+
+					<Link aria-label='Email' href='mailto:contato@arthurmartins.dev'>
+						<Button className='rounded-full' variant='link'>
 							<Mail className='h-4 w-4 dark:invert' />
-						</a>
-					</Button>
+						</Button>
+					</Link>
 				</div>
 			</motion.div>
 

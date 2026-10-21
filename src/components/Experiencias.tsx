@@ -11,11 +11,11 @@ gsap.registerPlugin(ScrollTrigger);
 const EXPERIENCIAS = [
 	{
 		id: 1,
-		cargo: 'Software Engineer',
+		cargo: 'Engenheiro de Software',
 		empresa: 'Governo de Rondônia',
 		tipo: 'Meio período',
 		periodo: 'mai. 2024 — o momento',
-		duracao: '2 anos 1 mês',
+		duracao: '2 anos 6 meses',
 		local: 'Porto Velho, Rondônia · No local',
 		setor: 'Secretaria de Estado do Desenvolvimento Ambiental (SEDAM)',
 		descricao: [
@@ -39,7 +39,7 @@ const EXPERIENCIAS = [
 	},
 	{
 		id: 2,
-		cargo: 'Software Engineer',
+		cargo: 'Engenheiro de Software',
 		empresa: 'Obter Soluções Tecnológicas NossoERP',
 		setor: null,
 		tipo: 'Tempo integral',
@@ -183,7 +183,6 @@ export default function Experiencias() {
 									</div>
 								</motion.div>
 
-								{/* Card */}
 								<div className='z-10 w-full md:w-[calc(50%-3rem)]'>
 									<motion.div
 										key={exp.cargo}
@@ -238,6 +237,7 @@ export default function Experiencias() {
 												{exp.setor && (
 													<p className='mt-0.5 text-muted-foreground text-sm'>{exp.setor}</p>
 												)}
+
 												{exp.descricao.map((item) => (
 													<li
 														key={item}
@@ -249,7 +249,6 @@ export default function Experiencias() {
 												))}
 											</ul>
 
-											{/* Tech badges */}
 											<div className='flex flex-wrap gap-2'>
 												{exp.techs.map((tech) => (
 													<span

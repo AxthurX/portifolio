@@ -166,11 +166,13 @@ export const PIN_BY_ID: Record<string, PinDefinition> = PINS.reduce<Record<strin
 
 export const pinById = (id: string): PinDefinition | undefined => PIN_BY_ID[id];
 
+/** Pins que já vêm pendurados no quadro quando o visitante chega. */
 export const SEED_PLACEMENTS: SeedPlacement[] = [
 	{ id: 'alura-html5-e-css3-parte-1-crie-uma-pagina-da-web', x: 0.17, y: 0.19, rotation: -5 },
 	{ id: 'coursera-agile-project-management', x: 0.4, y: 0.17, rotation: 6 },
 	{ id: 'alura-formacao-front-end', x: 0.63, y: 0.2, rotation: -4 },
 	{ id: 'coursera-google-project-management', x: 0.84, y: 0.18, rotation: 5 },
+	{ id: 'alura-git-e-github-controle-e-compartilhe-seu-codigo', x: 0.22, y: 0.46, rotation: -6 },
 	{ id: 'alura-javascript-explorando-a-linguagem', x: 0.51, y: 0.44, rotation: 7 },
 	{ id: 'senai-tecnologia-da-informacao-e-comunicacao', x: 0.74, y: 0.47, rotation: -6 },
 	{ id: 'alura-css-grid-simplificando-layouts', x: 0.19, y: 0.75, rotation: 4 },
@@ -179,6 +181,13 @@ export const SEED_PLACEMENTS: SeedPlacement[] = [
 		x: 0.43,
 		y: 0.77,
 		rotation: -3,
+	},
+	{ id: 'alura-formacao-html-e-css', x: 0.66, y: 0.74, rotation: 5 },
+	{
+		id: 'coursera-foundations-of-project-management',
+		x: 0.87,
+		y: 0.76,
+		rotation: -4,
 	},
 ];
 

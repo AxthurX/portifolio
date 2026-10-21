@@ -87,7 +87,7 @@ export default function SobreMim() {
 			}
 
 			const counters = [
-				{ el: '#counter-exp', end: 5, suffix: '+' },
+				{ el: '#counter-exp', end: 4, suffix: '+' },
 				{ el: '#counter-proj', end: 20, suffix: '+' },
 				{ el: '#counter-entrega', end: 100, suffix: '%' },
 			];
@@ -169,14 +169,13 @@ export default function SobreMim() {
 						práticas, design patterns e conceitos no desenvolvimento.
 					</p>
 
-					{/* Metrics */}
 					<div className='mt-10 flex gap-8 border-border border-t pt-8 md:mt-16 md:gap-12 md:pt-16'>
 						<div>
 							<div
 								id='counter-exp'
 								className='mb-2 font-bold text-4xl text-gradient tracking-tight md:text-5xl'
 							>
-								5+
+								4+
 							</div>
 							<div className='text-muted-foreground text-xs uppercase tracking-widest'>
 								Anos de XP

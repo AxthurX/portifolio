@@ -197,11 +197,9 @@ const CertificateCard = memo(function CertificateCard({
 });
 
 export default function Certificados() {
-	// const [certificates, setCertificates] = useState<Certificate[]>([]);
-	// const [count, setCount] = useState(5);
-
 	const sectionRef = useRef<HTMLElement | null>(null);
 	const headingRef = useRef<HTMLHeadingElement | null>(null);
+
 	const {
 		placed,
 		count,
@@ -215,6 +213,7 @@ export default function Certificados() {
 		shuffle,
 		reset,
 	} = usePinBoard();
+
 	const isMobile = useIsMobile();
 
 	const [boxOpen, setBoxOpen] = useState(false);
@@ -222,7 +221,6 @@ export default function Certificados() {
 	const [selectedId, setSelectedId] = useState<string | null>(null);
 	const [quadroVisivel, setQuadroVisivel] = useState(false);
 
-	// a barra de ferramentas só aparece enquanto o quadro está em tela
 	useEffect(() => {
 		const alvo = sectionRef.current;
 		if (!alvo) return;
@@ -262,7 +260,6 @@ export default function Certificados() {
 		placePin(id);
 	};
 
-	// referências estáveis: mantêm os pins memoizados durante o arraste
 	const handleSelect = useCallback((id: string) => {
 		setSelectedId((current) => (current === id ? null : id));
 	}, []);
@@ -284,7 +281,6 @@ export default function Certificados() {
 			className='relative mt-8 w-full overflow-hidden border-border border-t py-16 md:mt-12 md:py-32'
 		>
 			<div className='relative z-10 px-4 md:px-0'>
-				{/* Header */}
 				<div className='mb-12 md:mb-16'>
 					<span className='mb-4 block font-medium text-primary text-xs uppercase tracking-widest dark:text-base-content/70'>
 						Conquistas
