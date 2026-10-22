@@ -168,7 +168,7 @@ export const SEED_PLACEMENTS: SeedPlacement[] = [
 	{ id: 'alura-formacao-front-end', x: 0.63, y: 0.2, rotation: -4 },
 	{ id: 'coursera-google-project-management', x: 0.84, y: 0.18, rotation: 5 },
 	{ id: 'google-project-management-professional-badge', x: 0.22, y: 0.46, rotation: -6 },
-	{ id: 'alura-css-grid-simplificando-layouts', x: 0.19, y: 0.75, rotation: 4 },
+	{ id: 'alura-formacao-html-e-css', x: 0.19, y: 0.75, rotation: 4 },
 	{
 		id: 'udemy-sql-server-para-desenvolvedores-do-basico-ao-avancado',
 		x: 0.43,

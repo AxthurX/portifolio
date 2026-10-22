@@ -224,7 +224,7 @@ export default function Experiencias() {
 
 												<div className='shrink-0 text-right max-sm:text-left'>
 													<p className='font-medium text-foreground/70 text-xs tabular-nums'>
-														{exp.periodo}
+														{exp.periodo + ' to com depressãoo'}
 													</p>
 													<p className='text-muted-foreground text-xs'>{exp.duracao}</p>
 													<p className='mt-0.5 text-muted-foreground text-xs'>{exp.local}</p>
@@ -235,13 +235,13 @@ export default function Experiencias() {
 
 											<ul className='mb-6 flex flex-col gap-3'>
 												{exp.setor && (
-													<p className='mt-0.5 text-muted-foreground text-sm'>{exp.setor}</p>
+													<p className='mt-0.5 text-primary-foreground text-sm'>{exp.setor}</p>
 												)}
 
 												{exp.descricao.map((item) => (
 													<li
 														key={item}
-														className='flex gap-3 text-muted-foreground text-sm leading-relaxed'
+														className='flex gap-3 text-primary-foreground text-sm leading-relaxed'
 													>
 														<span className='mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary/60' />
 														{item}

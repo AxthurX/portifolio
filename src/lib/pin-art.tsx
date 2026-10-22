@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { useId } from 'react';
 import {
 	ENAMELS,
@@ -87,86 +86,85 @@ export const PinArt = ({
 
 		return (
 			<div
-				className={cn('relative select-none', className)}
-				style={{ width: size, height: altura }}
 				aria-hidden='true'
+				style={{ width: size, height: altura }}
+				className={cn('relative select-none', className)}
 			>
-				<div className='absolute inset-0 overflow-hidden rounded-sm bg-[hsl(42_32%_96%)]'>
-					<Image
+				<div className='absolute flex flex-col rounded-sm'>
+					<img
 						src={image}
-						sizes={sizes}
-						width={size}
+						// sizes={sizes}
+						// width={size}
 						height={altura_letra}
 						alt={label ?? 'Certificado'}
 						draggable={false}
 						loading={priority ? 'eager' : 'lazy'}
 						decoding='async'
-						className='pointer-events-none absolute object-cover'
+						className='pointer-events-none'
 						style={
 							legenda
 								? {
-										left: margem,
-										top: margem,
-										width: size - margem * 2,
-										height: altura_letra,
+										// left: margem,
+										// top: margem,
+										// width: size - margem * 2,
+										// height: altura_letra,
 									}
 								: { inset: 0, width: size, height: altura_letra }
 						}
 					/>
-					<div className='pointer-events-none absolute inset-0 shadow-[inset_0_0_0_1px_hsl(38_28%_88%)]' />
-					<div className='pointer-events-none absolute inset-0 bg-[linear-gradient(128deg,hsl(0_0%_100%/0.22),transparent_42%,hsl(0_0%_0%/0.1))]' />
-				</div>
 
-				{legenda && (
-					<div
-						className='pointer-events-none absolute flex items-center justify-center px-[9%] text-center'
-						style={{ top: margem + altura_letra, height: altura_legenda }}
+					<div>
+						{legenda && (
+							<div
+								className='pointer-events-none px-[9%] pt-2 text-center'
+								style={{ top: margem + altura_letra, height: altura_legenda }}
+							>
+								<p
+									className='line-clamp-2 font-serif text-[hsl(28_28%_26%)] italic leading-[1.15]'
+									style={{ fontSize: letra }}
+								>
+									{label}
+								</p>
+							</div>
+						)}
+
+						{/* <svg
+						viewBox='0 0 100 100'
+						aria-hidden='true'
+						className='pointer-events-none absolute top-[-5%] left-1/2 h-[14%] w-[14%] -translate-x-1/2 overflow-visible'
 					>
-						<p
-							className='line-clamp-2 font-serif text-[hsl(28_28%_26%)] italic leading-[1.15]'
-							style={{ fontSize: letra }}
-						>
-							{label}
-						</p>
+						<title>Tarugador</title>
+						<defs>
+							<radialGradient id={`tack-${uid}`} cx='34%' cy='26%' r='82%'>
+								<stop offset='0%' stopColor={metal_recipe.light} />
+								<stop offset='52%' stopColor={metal_recipe.mid} />
+								<stop offset='100%' stopColor={metal_recipe.dark} />
+							</radialGradient>
+						</defs>
+						<ellipse cx='50' cy='92' rx='24' ry='6' fill='hsl(20 45% 5% / 0.32)' />
+						<circle
+							cx='50'
+							cy='50'
+							r='42'
+							fill={`url(#tack-${uid})`}
+							stroke={metal_recipe.dark}
+							strokeWidth='4'
+						/>
+						<ellipse
+							cx='37'
+							cy='34'
+							rx='12'
+							ry='7'
+							fill='hsl(0 0% 100% / 0.55)'
+							transform='rotate(-28 37 34)'
+						/>
+					</svg> */}
+
+						{/* {selected && (
+						<span className='pointer-events-none absolute -inset-1 rounded-base border-2 border-[hsl(45_66%_78%)] border-dashed' />
+					)} */}
 					</div>
-				)}
-
-				{/* tarugador metálico segurando a foto */}
-				<svg
-					viewBox='0 0 100 100'
-					aria-hidden='true'
-					className='pointer-events-none absolute top-[-5%] left-1/2 h-[14%] w-[14%] -translate-x-1/2 overflow-visible'
-				>
-					<title>Tarugador</title>
-					<defs>
-						<radialGradient id={`tack-${uid}`} cx='34%' cy='26%' r='82%'>
-							<stop offset='0%' stopColor={metal_recipe.light} />
-							<stop offset='52%' stopColor={metal_recipe.mid} />
-							<stop offset='100%' stopColor={metal_recipe.dark} />
-						</radialGradient>
-					</defs>
-					<ellipse cx='50' cy='92' rx='24' ry='6' fill='hsl(20 45% 5% / 0.32)' />
-					<circle
-						cx='50'
-						cy='50'
-						r='42'
-						fill={`url(#tack-${uid})`}
-						stroke={metal_recipe.dark}
-						strokeWidth='4'
-					/>
-					<ellipse
-						cx='37'
-						cy='34'
-						rx='12'
-						ry='7'
-						fill='hsl(0 0% 100% / 0.55)'
-						transform='rotate(-28 37 34)'
-					/>
-				</svg>
-
-				{selected && (
-					<span className='pointer-events-none absolute -inset-1 rounded-base border-2 border-[hsl(45_66%_78%)] border-dashed' />
-				)}
+				</div>
 			</div>
 		);
 	}

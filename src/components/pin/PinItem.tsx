@@ -173,7 +173,7 @@ const PinItemBase = ({
 				className={cn(
 					'group block touch-none rounded-md outline-none',
 					dragging ? 'cursor-grabbing' : 'cursor-grab',
-					'focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 focus-visible:ring-offset-transparent',
+					// 'focus-visible:ring-2 focus-visible:ring-primary/5 focus-visible:ring-offset-4 focus-visible:ring-offset-transparent',
 				)}
 				style={{
 					transform: `rotate(${placement.rotation + tilt}deg) scale(${scale})`,
@@ -189,7 +189,6 @@ const PinItemBase = ({
 			>
 				<PinArt
 					image={pin.image}
-					imageSrcSet={pin.imageSrcSet}
 					sizes={`${size}px`}
 					label={pin.name}
 					icon={pin.icon}

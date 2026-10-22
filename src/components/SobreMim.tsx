@@ -146,7 +146,7 @@ export default function SobreMim() {
 				<div className='max-w-xl md:ml-auto'>
 					<p
 						ref={textRef}
-						className='mb-6 text-base text-muted-foreground leading-relaxed md:mb-8 md:text-lg'
+						className='mb-6 text-base leading-relaxed md:mb-8 md:text-lg'
 						style={{ opacity: 0 }}
 					>
 						Atuo como desenvolvedor full stack com ênfase em front-end, com 4+ anos de experiência.
@@ -155,11 +155,7 @@ export default function SobreMim() {
 						Node.js, Prisma, PostgreSQL e Docker, com testes E2E em Playwright e Cypress.
 					</p>
 
-					<p
-						ref={text2Ref}
-						className='text-base text-muted-foreground leading-relaxed md:text-lg'
-						style={{ opacity: 0 }}
-					>
+					<p ref={text2Ref} className='text-base leading-relaxed md:text-lg' style={{ opacity: 0 }}>
 						Profissional em transformar ideias malucas em interfaces funcionais, ler documentação
 						confusa virou quase um esporte, gosto de usar princípios de clean architecture, clean
 						code e qualidade do código Nos últimos anos atuo principalmente com tecnologias como:

@@ -150,10 +150,7 @@ export default function Main() {
 						</motion.span>
 					</div>
 
-					<motion.p
-						{...fadeIn(0.5)}
-						className='mt-8 max-w-lg text-lg text-muted-foreground leading-relaxed'
-					>
+					<motion.p {...fadeIn(0.5)} className='mt-8 max-w-lg text-lg'>
 						Desenvolvedor com ênfase no frontend, com 4+ anos de experiência, profissional em
 						transformar ideias malucas em interfaces funcionais.
 					</motion.p>
