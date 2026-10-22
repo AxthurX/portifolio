@@ -11,7 +11,6 @@ import { cn } from '@/lib/utils';
 interface BoardToolbarProps {
 	boxCount: number;
 	gallery: boolean;
-	/** mostra a barra só quando o quadro está em tela */
 	visivel?: boolean;
 	onOpenBox: () => void;
 	onOrganize: () => void;

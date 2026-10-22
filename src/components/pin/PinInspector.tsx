@@ -1,20 +1,27 @@
 import { ExternalLink, PackageOpen, RotateCcw, RotateCw, X } from 'lucide-react';
 import { PinArt } from '@/lib/pin-art';
 import type { PinDefinition } from '@/lib/pins';
+import { cn } from '@/lib/utils';
 
 interface PinInspectorProps {
 	pin: PinDefinition;
+	visivel: boolean;
 	onClose: () => void;
 	onRotate: (delta: number) => void;
 	onRemove: () => void;
 }
 
-const actionClass =
+const action_class =
 	'flex items-center gap-1.5 rounded-base border-2 border-black bg-base-100 px-2.5 py-1.5 font-semibold text-[11px] text-muted-foreground shadow-light transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary dark:border-white dark:shadow-dark';
 
-export const PinInspector = ({ pin, onClose, onRotate, onRemove }: PinInspectorProps) => (
+export const PinInspector = ({ pin, visivel, onClose, onRotate, onRemove }: PinInspectorProps) => (
 	<aside className='fixed inset-x-4 bottom-22 z-40 animate-fade-up sm:inset-x-auto sm:bottom-24 sm:left-8 sm:w-105'>
-		<div className='relative rounded-lg border-2 border-black bg-base-100 p-4 shadow-light dark:border-white dark:shadow-dark'>
+		<div
+			className={cn(
+				'relative rounded-lg border-2 border-black bg-base-100 p-4 shadow-light transition-all duration-500 dark:border-white dark:shadow-dark',
+				visivel ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-6 opacity-0',
+			)}
+		>
 			<button
 				type='button'
 				onClick={onClose}
@@ -63,7 +70,7 @@ export const PinInspector = ({ pin, onClose, onRotate, onRemove }: PinInspectorP
 				<button
 					type='button'
 					onClick={() => onRotate(-15)}
-					className={actionClass}
+					className={action_class}
 					aria-label='Girar 15 graus para a esquerda'
 				>
 					<RotateCcw className='h-3.5 w-3.5' />
@@ -72,13 +79,13 @@ export const PinInspector = ({ pin, onClose, onRotate, onRemove }: PinInspectorP
 				<button
 					type='button'
 					onClick={() => onRotate(15)}
-					className={actionClass}
+					className={action_class}
 					aria-label='Girar 15 graus para a direita'
 				>
 					<RotateCw className='h-3.5 w-3.5' />
 					Girar
 				</button>
-				<button type='button' onClick={onRemove} className={`${actionClass} ml-auto`}>
+				<button type='button' onClick={onRemove} className={`${action_class} ml-auto`}>
 					<PackageOpen className='h-3.5 w-3.5' />
 					Guardar
 				</button>

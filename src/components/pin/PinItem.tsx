@@ -171,7 +171,7 @@ const PinItemBase = ({
 				onPointerEnter={() => setHovered(true)}
 				onPointerLeave={() => setHovered(false)}
 				className={cn(
-					'group block touch-none rounded-[6px] outline-none',
+					'group block touch-none rounded-md outline-none',
 					dragging ? 'cursor-grabbing' : 'cursor-grab',
 					'focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 focus-visible:ring-offset-transparent',
 				)}
@@ -205,8 +205,4 @@ const PinItemBase = ({
 	);
 };
 
-/**
- * Memoizado: arrastar um pin re-renderiza o quadro inteiro, e sem memo cada
- * foto seria reconciliada a cada movimento do ponteiro.
- */
 export const PinItem = memo(PinItemBase);

@@ -22,6 +22,7 @@ type ShapeProps = {
 
 const ShapeBase = ({ shape, fill, stroke, strokeWidth = 1 }: ShapeProps) => {
 	const common = { fill, stroke, strokeWidth };
+
 	switch (shape) {
 		case 'hex':
 			return <path d='M50 3 L91 26.5 V73.5 L50 97 L9 73.5 V26.5 Z' {...common} />;
@@ -59,10 +60,6 @@ export interface PinArtProps {
 	className?: string;
 }
 
-/**
- * Pin do quadro. Com `image`, o pin é uma foto de certificado emoldurada,
- * presa por um tarugador metálico; sem `image`, cai no pin esmaltado em SVG.
- */
 export const PinArt = ({
 	image,
 	imageSrcSet,
@@ -73,20 +70,21 @@ export const PinArt = ({
 	shape = 'round',
 	enamel = 'cream',
 	metal = 'gold',
-	size = 112,
+	size = 290,
 	selected = false,
 	className,
 }: PinArtProps) => {
 	const uid = useId().replace(/[^a-zA-Z0-9]/g, '');
-	const metalRecipe = METALS[metal];
-	const alturaFoto = Math.round(size / PIN_ASPECT);
+
+	const metal_recipe = METALS[metal];
+	const altura_letra = Math.round(size / PIN_ASPECT);
 
 	if (image) {
 		const margem = Math.round(size * PIN_MARGIN_RATIO);
-		const comLegenda = Boolean(label);
-		const alturaLegenda = comLegenda ? Math.max(20, Math.round(size * PIN_CAPTION_RATIO)) : 0;
-		const altura = comLegenda ? margem + alturaFoto + alturaLegenda : alturaFoto;
-		const tamanhoLetra = Math.max(8, Math.round(size * 0.072));
+		const legenda = Boolean(label);
+		const altura_legenda = legenda ? Math.max(20, Math.round(size * PIN_CAPTION_RATIO)) : 0;
+		const altura = legenda ? margem + altura_letra + altura_legenda : altura_letra;
+		const letra = Math.max(8, Math.round(size * 0.072));
 
 		return (
 			<div
@@ -110,37 +108,35 @@ export const PinArt = ({
 						srcSet={imageSrcSet}
 						sizes={sizes}
 						width={size}
-						height={alturaFoto}
-						alt=''
+						height={altura_letra}
+						alt={label}
 						draggable={false}
 						loading={priority ? 'eager' : 'lazy'}
 						decoding='async'
 						className='pointer-events-none absolute object-cover'
 						style={
-							comLegenda
+							legenda
 								? {
 										left: margem,
 										top: margem,
 										width: size - margem * 2,
-										height: alturaFoto,
+										height: altura_letra,
 									}
-								: { inset: 0, width: size, height: alturaFoto }
+								: { inset: 0, width: size, height: altura_letra }
 						}
 					/>
-					{/* borda clara do papel + vidro */}
 					<div className='pointer-events-none absolute inset-0 shadow-[inset_0_0_0_1px_hsl(38_28%_88%)]' />
 					<div className='pointer-events-none absolute inset-0 bg-[linear-gradient(128deg,hsl(0_0%_100%/0.22),transparent_42%,hsl(0_0%_0%/0.1))]' />
 				</div>
 
-				{/* título na faixa de baixo, como um polaroid */}
-				{comLegenda && (
+				{legenda && (
 					<div
 						className='pointer-events-none absolute flex items-center justify-center px-[9%] text-center'
-						style={{ top: margem + alturaFoto, height: alturaLegenda }}
+						style={{ top: margem + altura_letra, height: altura_legenda }}
 					>
 						<p
 							className='line-clamp-2 font-serif text-[hsl(28_28%_26%)] italic leading-[1.15]'
-							style={{ fontSize: tamanhoLetra }}
+							style={{ fontSize: letra }}
 						>
 							{label}
 						</p>
@@ -156,9 +152,9 @@ export const PinArt = ({
 					<title>Tarugador</title>
 					<defs>
 						<radialGradient id={`tack-${uid}`} cx='34%' cy='26%' r='82%'>
-							<stop offset='0%' stopColor={metalRecipe.light} />
-							<stop offset='52%' stopColor={metalRecipe.mid} />
-							<stop offset='100%' stopColor={metalRecipe.dark} />
+							<stop offset='0%' stopColor={metal_recipe.light} />
+							<stop offset='52%' stopColor={metal_recipe.mid} />
+							<stop offset='100%' stopColor={metal_recipe.dark} />
 						</radialGradient>
 					</defs>
 					<ellipse cx='50' cy='92' rx='24' ry='6' fill='hsl(20 45% 5% / 0.32)' />
@@ -167,7 +163,7 @@ export const PinArt = ({
 						cy='50'
 						r='42'
 						fill={`url(#tack-${uid})`}
-						stroke={metalRecipe.dark}
+						stroke={metal_recipe.dark}
 						strokeWidth='4'
 					/>
 					<ellipse
@@ -188,11 +184,11 @@ export const PinArt = ({
 	}
 
 	const Icon = PIN_ICONS[icon ?? 'star'];
-	const enamelRecipe = ENAMELS[enamel];
+	const enamel_recipe = ENAMELS[enamel];
 
-	const metalGradient = `metal-${uid}`;
-	const enamelGradient = `enamel-${uid}`;
-	const glossGradient = `gloss-${uid}`;
+	const metal_gradient = `metal-${uid}`;
+	const enamel_gradient = `enamel-${uid}`;
+	const gloss_gradient = `gloss-${uid}`;
 	const clip = `clip-${uid}`;
 
 	return (
@@ -204,19 +200,19 @@ export const PinArt = ({
 			<svg viewBox='0 0 100 100' width={size} height={size} className='block overflow-visible'>
 				<title>Pin</title>
 				<defs>
-					<linearGradient id={metalGradient} x1='0' y1='0' x2='1' y2='1'>
-						<stop offset='0%' stopColor={metalRecipe.light} />
-						<stop offset='34%' stopColor={metalRecipe.mid} />
-						<stop offset='52%' stopColor={metalRecipe.light} />
-						<stop offset='78%' stopColor={metalRecipe.mid} />
-						<stop offset='100%' stopColor={metalRecipe.dark} />
+					<linearGradient id={metal_gradient} x1='0' y1='0' x2='1' y2='1'>
+						<stop offset='0%' stopColor={metal_recipe.light} />
+						<stop offset='34%' stopColor={metal_recipe.mid} />
+						<stop offset='52%' stopColor={metal_recipe.light} />
+						<stop offset='78%' stopColor={metal_recipe.mid} />
+						<stop offset='100%' stopColor={metal_recipe.dark} />
 					</linearGradient>
-					<radialGradient id={enamelGradient} cx='34%' cy='24%' r='86%'>
-						<stop offset='0%' stopColor={enamelRecipe.light} />
-						<stop offset='52%' stopColor={enamelRecipe.base} />
-						<stop offset='100%' stopColor={enamelRecipe.dark} />
+					<radialGradient id={enamel_gradient} cx='34%' cy='24%' r='86%'>
+						<stop offset='0%' stopColor={enamel_recipe.light} />
+						<stop offset='52%' stopColor={enamel_recipe.base} />
+						<stop offset='100%' stopColor={enamel_recipe.dark} />
 					</radialGradient>
-					<linearGradient id={glossGradient} x1='0' y1='0' x2='0.4' y2='1'>
+					<linearGradient id={gloss_gradient} x1='0' y1='0' x2='0.4' y2='1'>
 						<stop offset='0%' stopColor='hsl(0 0% 100%)' stopOpacity='0.5' />
 						<stop offset='55%' stopColor='hsl(0 0% 100%)' stopOpacity='0.08' />
 						<stop offset='100%' stopColor='hsl(0 0% 100%)' stopOpacity='0' />
@@ -231,8 +227,8 @@ export const PinArt = ({
 				{/* aro metálico */}
 				<ShapeBase
 					shape={shape}
-					fill={`url(#${metalGradient})`}
-					stroke={metalRecipe.dark}
+					fill={`url(#${metal_gradient})`}
+					stroke={metal_recipe.dark}
 					strokeWidth={1.1}
 				/>
 
@@ -240,8 +236,8 @@ export const PinArt = ({
 				<g transform='translate(50 50) scale(0.83) translate(-50 -50)'>
 					<ShapeBase
 						shape={shape}
-						fill={`url(#${enamelGradient})`}
-						stroke={enamelRecipe.dark}
+						fill={`url(#${enamel_gradient})`}
+						stroke={enamel_recipe.dark}
 						strokeWidth={1.4}
 					/>
 				</g>
@@ -253,7 +249,7 @@ export const PinArt = ({
 						cy='26'
 						rx='30'
 						ry='16'
-						fill={`url(#${glossGradient})`}
+						fill={`url(#${gloss_gradient})`}
 						transform='rotate(-26 36 26)'
 					/>
 					<ellipse
@@ -276,7 +272,7 @@ export const PinArt = ({
 					strokeWidth={1.65}
 					strokeLinecap='round'
 					strokeLinejoin='round'
-					color={enamelRecipe.line}
+					color={enamel_recipe.line}
 					opacity={0.92}
 				/>
 

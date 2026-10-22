@@ -20,6 +20,39 @@ export interface Projeto {
 
 const PROJECTS: Projeto[] = [
 	{
+		id: '05',
+		client: 'Acessibilidade',
+		category: 'Accessibility & Design System',
+		title: 'Menu de acessibilidade para diferentes necessidades de uso',
+		description:
+			'Biblioteca de acessibilidade desenvolvida com React, Next.js e Tailwind com recursos de contraste, tamanho de texto, espaçamento, saturação, leitura e comandos de voz.',
+		image: '/projetos/acessibilidade.png',
+		technologies: ['React', 'Next.js', 'Tailwind CSS', 'WCAG'],
+		video: '',
+	},
+	{
+		id: '04',
+		client: 'Editor de Conteúdo',
+		category: 'Headless Editor & CMS',
+		title: 'Editor de conteúdo baseado em TipTap e ProseMirror com extensões personalizadas',
+		description:
+			'Editor rico desenvolvido para publicação de conteúdos e documentação, com galerias, vídeos, tabelas redimensionáveis, upload de arquivos e imagens e integração com armazenamento.',
+		image: '/projetos/tiptap.png',
+		technologies: ['TipTap', 'ProseMirror', 'Next.js', 'TypeScript', 'Fastify', 'MinIO'],
+		video: '',
+	},
+	{
+		id: '03',
+		client: 'Busca Inteligente',
+		category: 'Search & Performance',
+		title: 'Busca inteligente com Typesense e resultados instantâneos em menos de 50 ms',
+		description:
+			'Integração de um mecanismo de busca open-source ao Portal SEDAM, com fuzzy search, autocomplete, stemming em português, cache e ranking de resultados.',
+		image: '/projetos/search.png',
+		technologies: ['Typesense', 'Next.js', 'TypeScript', 'Docker'],
+		video: '',
+	},
+	{
 		id: '01',
 		client: 'Portal SEDAM',
 		category: 'Portal Institucional',
@@ -39,39 +72,6 @@ const PROJECTS: Projeto[] = [
 			'Plataforma interna utilizada pelos servidores para gerenciamento de conteúdos, notícias, documentos, categorias e recursos disponibilizados no portal institucional.',
 		image: '/projetos/admin.png',
 		technologies: ['Next.js', 'React', 'TypeScript', 'TipTap'],
-		video: '',
-	},
-	{
-		id: '03',
-		client: 'Busca Inteligente',
-		category: 'Search & Performance',
-		title: 'Busca inteligente com Typesense e resultados instantâneos em menos de 50 ms',
-		description:
-			'Integração de um mecanismo de busca open-source ao Portal SEDAM, com fuzzy search, autocomplete, stemming em português, cache e ranking de resultados.',
-		image: '/projetos/search.png',
-		technologies: ['Typesense', 'Next.js', 'TypeScript', 'Docker'],
-		video: '',
-	},
-	{
-		id: '04',
-		client: 'Editor de Conteúdo',
-		category: 'Headless Editor & CMS',
-		title: 'Editor de conteúdo baseado em TipTap e ProseMirror com extensões personalizadas',
-		description:
-			'Editor rico desenvolvido para publicação de conteúdos e documentação, com galerias, vídeos, tabelas redimensionáveis, upload de arquivos e imagens e integração com armazenamento.',
-		image: '/projetos/tiptap.png',
-		technologies: ['TipTap', 'ProseMirror', 'Next.js', 'TypeScript', 'Fastify', 'MinIO'],
-		video: '',
-	},
-	{
-		id: '05',
-		client: 'Acessibilidade',
-		category: 'Accessibility & Design System',
-		title: 'Menu de acessibilidade para diferentes necessidades de uso',
-		description:
-			'Biblioteca de acessibilidade desenvolvida com React, Next.js e Tailwind com recursos de contraste, tamanho de texto, espaçamento, saturação, leitura e comandos de voz.',
-		image: '/projetos/acessibilidade.png',
-		technologies: ['React', 'Next.js', 'Tailwind CSS', 'WCAG'],
 		video: '',
 	},
 	{
@@ -135,7 +135,7 @@ function ProjectCard({ projeto }: { projeto: Projeto }) {
 
 			<div className='relative z-10 flex items-start justify-between p-6 md:p-8'>
 				<div>
-					<span className='mb-2 block font-medium text-primary text-xs uppercase tracking-widest'>
+					<span className='block font-medium text-primary text-sm uppercase tracking-widest'>
 						{projeto.category}
 					</span>
 
@@ -197,15 +197,10 @@ function ProjectCard({ projeto }: { projeto: Projeto }) {
 				</Dialog>
 			</div>
 
-			{/* Conteúdo inferior */}
 			<div className='relative z-10 flex items-end justify-between p-6 md:p-8'>
 				<h4 className='max-w-[80%] font-light text-2xl text-foreground leading-tight tracking-tight md:text-4xl xl:text-5xl dark:font-semibold dark:text-primary'>
 					{projeto.title}
 				</h4>
-
-				<div className='-mb-2 font-serif text-5xl text-foreground/10 italic leading-none tracking-tighter md:text-7xl lg:text-8xl'>
-					{projeto.id}
-				</div>
 			</div>
 		</Card>
 	);
@@ -223,7 +218,7 @@ export default function Projetos() {
 	}, []);
 
 	const { scrollYProgress } = useScroll({ target: targetRef });
-	const x = useTransform(scrollYProgress, [0, 1], ['0%', '-75%']);
+	const x = useTransform(scrollYProgress, [0, 1], ['0%', '-83%']);
 
 	if (isMobile) {
 		return (

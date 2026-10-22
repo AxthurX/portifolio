@@ -55,7 +55,6 @@ export interface PinDefinition {
 	name: string;
 	series: string;
 	year: number;
-	/** data de conclusão por extenso */
 	date: string;
 	note: string;
 	/** miniatura WebP do certificado (usada no quadro e na caixa) */
@@ -66,7 +65,6 @@ export interface PinDefinition {
 	source: string;
 	/** largura base do pin, em px */
 	diameter: number;
-	/** arte esmaltada — usada só quando o pin não tem imagem */
 	shape: PinShape;
 	enamel: EnamelKey;
 	metal: MetalKey;
@@ -81,7 +79,9 @@ export interface SeedPlacement {
 }
 
 /** proporção do quadro (√2): a mesma do papel deitado, como um pin de verdade. */
-export const PIN_ASPECT = Math.SQRT2;
+// export const PIN_ASPECT = Math.SQRT2;
+
+export const PIN_ASPECT = 1.66;
 
 /** margem da moldura de papel em volta da foto (relativa à largura do pin). */
 export const PIN_MARGIN_RATIO = 0.05;
@@ -166,13 +166,11 @@ export const PIN_BY_ID: Record<string, PinDefinition> = PINS.reduce<Record<strin
 export const pinById = (id: string): PinDefinition | undefined => PIN_BY_ID[id];
 
 export const SEED_PLACEMENTS: SeedPlacement[] = [
-	{ id: 'alura-html5-e-css3-parte-1-crie-uma-pagina-da-web', x: 0.17, y: 0.19, rotation: -5 },
+	{ id: 'alura-formacao-melhore-sua-experiencia-com-typescript', x: 0.17, y: 0.19, rotation: -5 },
 	{ id: 'coursera-agile-project-management', x: 0.4, y: 0.17, rotation: 6 },
 	{ id: 'alura-formacao-front-end', x: 0.63, y: 0.2, rotation: -4 },
 	{ id: 'coursera-google-project-management', x: 0.84, y: 0.18, rotation: 5 },
-	{ id: 'alura-git-e-github-controle-e-compartilhe-seu-codigo', x: 0.22, y: 0.46, rotation: -6 },
-	{ id: 'alura-javascript-explorando-a-linguagem', x: 0.51, y: 0.44, rotation: 7 },
-	{ id: 'senai-tecnologia-da-informacao-e-comunicacao', x: 0.74, y: 0.47, rotation: -6 },
+	{ id: 'google-project-management-professional-badge', x: 0.22, y: 0.46, rotation: -6 },
 	{ id: 'alura-css-grid-simplificando-layouts', x: 0.19, y: 0.75, rotation: 4 },
 	{
 		id: 'udemy-sql-server-para-desenvolvedores-do-basico-ao-avancado',
@@ -180,12 +178,11 @@ export const SEED_PLACEMENTS: SeedPlacement[] = [
 		y: 0.77,
 		rotation: -3,
 	},
-	{ id: 'alura-formacao-html-e-css', x: 0.66, y: 0.74, rotation: 5 },
 	{
-		id: 'coursera-foundations-of-project-management',
-		x: 0.87,
-		y: 0.76,
-		rotation: -4,
+		id: 'udemy-ionic-4-angular-firebase-firestore-e-login-com-faceboo-',
+		x: 0.66,
+		y: 0.74,
+		rotation: 5,
 	},
 ];
 

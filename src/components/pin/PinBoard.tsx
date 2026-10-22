@@ -40,13 +40,14 @@ export const PinBoard = ({
 			{placed.map((placement) => {
 				const pin = pinById(placement.id);
 				if (!pin) return null;
+
 				return (
 					<PinItem
 						key={placement.id}
 						pin={pin}
 						placement={placement}
 						boardRef={boardRef}
-						size={Math.round(pin.diameter * (isMobile ? 0.46 : 1.4))}
+						size={Math.round(pin.diameter * (isMobile ? 0.46 : 1.753))}
 						selected={selectedId === placement.id}
 						onMove={onMove}
 						onBringToFront={onBringToFront}

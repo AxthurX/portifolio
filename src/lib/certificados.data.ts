@@ -1,10 +1,3 @@
-/**
- * Dados dos certificados que viram pins no quadro.
- *
- * Arquivo gerado por `pnpm assets:pins` — não editar à mão.
- * As miniaturas em `public/pins` são WebP leves; o PNG original só é
- * baixado quando o visitante abre o certificado completo.
- */
 export interface CertificadoPin {
 	id: string;
 	titulo: string;
@@ -814,5 +807,17 @@ export const CERTIFICADOS: CertificadoPin[] = [
 			'/pins/alura-typescript-parte-3-mais-tecnicas-e-boas-praticas-160.webp 160w, /pins/alura-typescript-parte-3-mais-tecnicas-e-boas-praticas-320.webp 320w',
 		original:
 			'/certificados/Curso%20Typescript%20parte%203_%20mais%20t%C3%A9cnicas%20e%20boas%20pr%C3%A1ticas%20-%20Alura-1.png',
+	},
+	{
+		id: 'google-project-management-professional-badge',
+		titulo: 'Google Project Management Professional Certificate(v.3)',
+		emissor: 'Coursera',
+		data: '29 de agosto de 2025',
+		ano: 2025,
+		nota: 'Conclusão de "TypeScript parte 3: mais técnicas e boas práticas" pela Alura, em 4 de novembro de 2022.',
+		imagem: '/pins/google-project-management-professional-badge-320.webp',
+		imagemSrcSet:
+			'/pins/google-project-management-professional-badge-160.webp 160w, /pins/google-project-management-professional-badge-320.webp 320w',
+		original: '/certificados/google-project-management-professional-badge.png',
 	},
 ];

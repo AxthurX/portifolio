@@ -45,7 +45,7 @@ export default function Certificados() {
 
 		const observer = new IntersectionObserver(
 			([entrada]) => setQuadroVisivel(entrada.isIntersecting),
-			{ rootMargin: '-20% 0px -20% 0px' },
+			{ rootMargin: '-80% 0px -80% 0px' },
 		);
 
 		observer.observe(alvo);
@@ -140,6 +140,7 @@ export default function Certificados() {
 			{selectedPin && placedIds.has(selectedPin.id) && (
 				<PinInspector
 					pin={selectedPin}
+					visivel={quadroVisivel}
 					onClose={() => setSelectedId(null)}
 					onRotate={(delta) => rotatePin(selectedPin.id, delta)}
 					onRemove={() => {
