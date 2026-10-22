@@ -15,7 +15,7 @@ const action_class =
 	'flex items-center gap-1.5 rounded-base border-2 border-black bg-base-100 px-2.5 py-1.5 font-semibold text-[11px] text-muted-foreground shadow-light transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary dark:border-white dark:shadow-dark';
 
 export const PinInspector = ({ pin, visivel, onClose, onRotate, onRemove }: PinInspectorProps) => (
-	<aside className='fixed inset-x-4 bottom-22 z-40 animate-fade-up sm:inset-x-auto sm:bottom-24 sm:left-8 sm:w-105'>
+	<aside className='fixed inset-x-4 bottom-22 z-40 animate-fade-up sm:inset-x-auto sm:bottom-24 sm:left-8 sm:w-110'>
 		<div
 			className={cn(
 				'relative rounded-lg border-2 border-black bg-base-100 p-4 shadow-light transition-all duration-500 dark:border-white dark:shadow-dark',
@@ -35,17 +35,16 @@ export const PinInspector = ({ pin, visivel, onClose, onRotate, onRemove }: PinI
 				<div className='w-38 shrink-0 -rotate-2'>
 					<PinArt
 						image={pin.image}
-						imageSrcSet={pin.imageSrcSet}
-						sizes='152px'
+						sizes='162px'
 						icon={pin.icon}
 						shape={pin.shape}
 						enamel={pin.enamel}
 						metal={pin.metal}
-						size={152}
+						size={160}
 						className='drop-shadow-[0_6px_6px_hsl(20_45%_10%/0.3)]'
 					/>
 				</div>
-				<div className='min-w-0 pt-0.5 pr-5'>
+				<div className='min-w-0 p-5 pt-0.5'>
 					<p className='font-semibold text-[9px] text-muted-foreground uppercase tracking-[0.22em]'>
 						{pin.series} · {pin.year}
 					</p>

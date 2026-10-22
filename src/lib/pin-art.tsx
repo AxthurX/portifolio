@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useId } from 'react';
 import {
 	ENAMELS,
@@ -43,7 +44,6 @@ const ShapeBase = ({ shape, fill, stroke, strokeWidth = 1 }: ShapeProps) => {
 export interface PinArtProps {
 	/** miniatura do certificado — quando presente, o pin vira uma foto emoldurada */
 	image?: string;
-	imageSrcSet?: string;
 	/** dica de largura para o navegador escolher a miniatura certa */
 	sizes?: string;
 	/** carrega a imagem na hora (usado nos pins já visíveis no quadro) */
@@ -62,7 +62,6 @@ export interface PinArtProps {
 
 export const PinArt = ({
 	image,
-	imageSrcSet,
 	sizes,
 	priority = false,
 	label,
@@ -92,24 +91,13 @@ export const PinArt = ({
 				style={{ width: size, height: altura }}
 				aria-hidden='true'
 			>
-				{/* cartão de papel (polaroid) com a foto do certificado */}
 				<div className='absolute inset-0 overflow-hidden rounded-sm bg-[hsl(42_32%_96%)]'>
-					{/*
-					 * <img> puro de propósito: as miniaturas já são WebP otimizadas,
-					 * servidas com cache imutável pelo next.config — sem passar pelo
-					 * otimizador de imagens do Next.
-					 *
-					 * `draggable={false}` + `pointer-events-none`: sem isso o navegador
-					 * inicia o arrasto nativo da imagem e cancela o arraste do pin.
-					 */}
-					{/* biome-ignore lint/performance/noImgElement: miniatura WebP já otimizada */}
-					<img
+					<Image
 						src={image}
-						srcSet={imageSrcSet}
 						sizes={sizes}
 						width={size}
 						height={altura_letra}
-						alt={label}
+						alt={label ?? 'Certificado'}
 						draggable={false}
 						loading={priority ? 'eager' : 'lazy'}
 						decoding='async'

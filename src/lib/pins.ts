@@ -59,8 +59,6 @@ export interface PinDefinition {
 	note: string;
 	/** miniatura WebP do certificado (usada no quadro e na caixa) */
 	image: string;
-	/** conjunto responsivo da miniatura */
-	imageSrcSet: string;
 	/** certificado original, aberto em nova aba */
 	source: string;
 	/** largura base do pin, em px */
@@ -146,7 +144,6 @@ export const PINS: PinDefinition[] = CERTIFICADOS.map((certificado, index) => ({
 	date: certificado.data,
 	note: certificado.nota,
 	image: certificado.imagem,
-	imageSrcSet: certificado.imagemSrcSet,
 	source: certificado.original,
 	diameter: 134 + (index % 5) * 9,
 	shape: escolher(SHAPE_CYCLE, certificado.id),

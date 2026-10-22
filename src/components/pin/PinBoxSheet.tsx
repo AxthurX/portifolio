@@ -78,7 +78,6 @@ export const PinBoxSheet = ({
 									<div className='relative'>
 										<PinArt
 											image={pin.image}
-											imageSrcSet={pin.imageSrcSet}
 											sizes='104px'
 											icon={pin.icon}
 											shape={pin.shape}
