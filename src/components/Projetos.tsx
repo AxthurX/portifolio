@@ -147,7 +147,7 @@ function ProjectCard({ projeto }: { projeto: Projeto }) {
 						<Button
 							type='button'
 							variant='outline'
-							className='flex h-12 w-12 shrink-0 items-center justify-center rounded-base border-2 border-black bg-[#fafafa]/60 p-0 shadow-light backdrop-blur-sm transition-all duration-300 hover:bg-primary hover:text-primary-foreground active:translate-x-boxShadowX active:translate-y-boxShadowY active:shadow-none group-hover:border-primary dark:border-white dark:shadow-dark'
+							className='flex h-12 w-12 shrink-0 items-center justify-center rounded-base border-2 border-black bg-[#fafafa]/60 p-0 shadow-light backdrop-blur-sm transition-all duration-300 hover:bg-primary hover:text-primary-foreground active:translate-x-boxShadowX active:translate-y-boxShadowY active:shadow-none group-hover:border-primary dark:bg-black dark:text-primary-content dark:shadow-dark'
 							aria-label={`Ver apresentação de ${projeto.client}`}
 						>
 							<ArrowUpRight
@@ -223,7 +223,7 @@ export default function Projetos() {
 	if (isMobile) {
 		return (
 			<section id='projetos' className='w-full px-4 py-16'>
-				<div className='mb-12'>
+				<div className='mb-12 max-sm:mb-8'>
 					<span className='mb-4 block font-medium text-primary text-xs uppercase tracking-widest dark:text-base-content/70'>
 						Projetos
 					</span>
@@ -256,11 +256,14 @@ export default function Projetos() {
 		<section id='projetos' ref={targetRef} className='relative h-[400vh]'>
 			<div className='sticky top-0 flex h-screen items-center overflow-hidden'>
 				<div className='absolute top-24 left-8 z-20 md:left-12'>
-					<span className='mb-4 block font-medium text-primary text-xs uppercase tracking-widest'>
+					<span className='mb-4 block font-medium text-primary text-xs uppercase tracking-widest dark:text-base-content/70'>
 						Projetos
 					</span>
 					<h3 className='font-bold text-4xl tracking-tight md:text-5xl'>
-						Trabalhos <span className='font-normal font-serif text-primary italic'>Recentes</span>
+						Trabalhos{' '}
+						<span className='font-normal font-serif text-primary italic dark:text-base-content/70'>
+							Recentes
+						</span>
 					</h3>
 				</div>
 

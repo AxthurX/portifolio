@@ -145,7 +145,7 @@ export default function Contato() {
 
 									<div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-base border-2 border-black bg-base-100 shadow-light transition-all duration-300 group-hover:bg-primary group-hover:text-primary-foreground dark:border-white dark:shadow-dark'>
 										<ArrowRight
-											className='h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 dark:text-primary'
+											className='h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 dark:text-primary-content'
 											strokeWidth={1.5}
 										/>
 									</div>

@@ -4,6 +4,7 @@ import { motion, type Transition } from 'framer-motion';
 import { ArrowDownRight, Mail } from 'lucide-react';
 import Link from 'next/link';
 import { useRef } from 'react';
+import { useIsMobile } from '@/hooks/use-mobile';
 import { Button } from './ui/button';
 
 function GithubIcon({ className }: { className?: string }) {
@@ -24,6 +25,8 @@ function LinkedinIcon({ className }: { className?: string }) {
 
 export default function Main() {
 	const sectionRef = useRef<HTMLElement | null>(null);
+
+	const mobile = useIsMobile();
 
 	const transition: Transition = {
 		duration: 1,
@@ -169,10 +172,7 @@ export default function Main() {
 							</Link>
 						</Button>
 
-						<Button
-							variant='outline'
-							className='h-14 w-40 rounded-base border-black dark:border-white'
-						>
+						<Button variant='outline' className='h-14 w-40 rounded-base border-black'>
 							<Link
 								href='#contato'
 								className='rounded-base px-8 py-4 font-medium text-base-content transition-all'
@@ -186,7 +186,7 @@ export default function Main() {
 
 			<motion.div {...fadeIn(1)} className='relative z-10 flex items-center justify-between'>
 				<p className='text-muted-foreground text-xs uppercase tracking-widest'>
-					Scroll para explorar
+					{mobile ? 'Role para explorar' : 'Scroll para explorar'}
 				</p>
 			</motion.div>
 		</motion.section>

@@ -112,7 +112,7 @@ export default function Header({ onPortfolioOpen }: { onPortfolioOpen: () => voi
 
 					<Button
 						onClick={handleThemeChange}
-						className='px-6 py-4 font-medium transition-all duration-200'
+						className='px-6 py-4 font-medium transition-all duration-200 max-sm:px-2'
 					>
 						<Asterisk className='text-secondary-foreground' />
 					</Button>

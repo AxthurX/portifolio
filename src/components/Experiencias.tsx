@@ -125,7 +125,7 @@ export default function Experiencias() {
 			id='experiencias'
 			className='relative w-full overflow-hidden border-black border-t-2 py-16 md:py-32 dark:border-white'
 		>
-			<div className='relative z-10 mb-16 px-4 text-left md:mb-12'>
+			<div className='relative z-10 mb-16 px-4 text-left max-sm:mb-8 md:mb-12'>
 				<span className='mb-4 block font-medium text-primary text-xs uppercase tracking-widest dark:text-base-content/70'>
 					Habilidades
 				</span>
@@ -134,7 +134,10 @@ export default function Experiencias() {
 					ref={headingRef}
 					className='font-bold text-3xl tracking-tight sm:text-4xl md:text-5xl lg:text-6xl'
 				>
-					Minhas <span className='font-normal font-serif text-primary italic'>experiencias</span>
+					Minhas{' '}
+					<span className='font-normal font-serif text-primary italic dark:text-base-content/70'>
+						experiencias
+					</span>
 				</h3>
 			</div>
 
@@ -205,26 +208,29 @@ export default function Experiencias() {
 															{exp.logo}
 														</div>
 
-														<h3 className='font-bold text-foreground text-lg leading-tight'>
+														<h3 className='font-bold text-foreground text-lg leading-tight max-sm:pl-2 dark:text-primary'>
 															{exp.cargo}
 														</h3>
 
 														{exp.atual && (
-															<span className='rounded-base border-2 border-black bg-primary/10 px-2 py-0.5 font-semibold text-[10px] text-primary uppercase tracking-wider dark:border-white'>
+															<span className='rounded-base border-2 border-black bg-primary/10 px-2 py-0.5 font-semibold text-[10px] text-primary uppercase tracking-wider dark:border-white dark:text-primary'>
 																Atual
 															</span>
 														)}
 													</div>
 
-													<p className='font-medium text-foreground/80 text-sm max-sm:pt-2'>
+													<p className='font-medium text-foreground/80 text-sm max-sm:pt-2 dark:text-primary/90'>
 														{exp.empresa}
-														<span className='font-normal text-muted-foreground'> · {exp.tipo}</span>
+														<span className='font-normal text-muted-foreground dark:text-primary/70'>
+															{' '}
+															· {exp.tipo}
+														</span>
 													</p>
 												</div>
 
 												<div className='shrink-0 text-right max-sm:text-left'>
-													<p className='font-medium text-foreground/70 text-xs tabular-nums'>
-														{exp.periodo + ' to com depressãoo'}
+													<p className='font-medium text-foreground/70 text-xs tabular-nums dark:text-primary'>
+														{exp.periodo}
 													</p>
 													<p className='text-muted-foreground text-xs'>{exp.duracao}</p>
 													<p className='mt-0.5 text-muted-foreground text-xs'>{exp.local}</p>
@@ -235,13 +241,15 @@ export default function Experiencias() {
 
 											<ul className='mb-6 flex flex-col gap-3'>
 												{exp.setor && (
-													<p className='mt-0.5 text-primary-foreground text-sm'>{exp.setor}</p>
+													<p className='mt-0.5 text-primary-foreground text-sm dark:text-primary'>
+														{exp.setor}
+													</p>
 												)}
 
 												{exp.descricao.map((item) => (
 													<li
 														key={item}
-														className='flex gap-3 text-primary-foreground text-sm leading-relaxed'
+														className='flex gap-3 text-primary-foreground text-sm leading-relaxed dark:text-primary'
 													>
 														<span className='mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary/60' />
 														{item}
