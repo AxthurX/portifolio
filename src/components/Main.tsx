@@ -1,10 +1,11 @@
 'use client';
 
 import { motion, type Transition } from 'framer-motion';
-import { ArrowDownRight, Mail } from 'lucide-react';
+import { ArrowDownRight, Download, Mail } from 'lucide-react';
 import Link from 'next/link';
 import { useRef } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { CURRICULUM_URL } from './Header';
 import { Button } from './ui/button';
 
 function GithubIcon({ className }: { className?: string }) {
@@ -86,7 +87,16 @@ export default function Main() {
 				{...fadeIn(0.2)}
 				className='relative z-10 flex items-center justify-between pt-20 max-sm:flex-wrap max-sm:items-start max-sm:gap-2'
 			>
-				<span />
+				<a
+					href={CURRICULUM_URL}
+					download='Arthur-Martins-Curriculo.pdf'
+					title='Baixar Currículo'
+					className='flex items-center gap-1.5 rounded-base border-2 border-black bg-base-100 px-3 py-1.5 font-medium text-foreground text-xs shadow-light transition-all hover:bg-primary hover:text-primary-foreground active:translate-x-boxShadowX active:translate-y-boxShadowY active:shadow-none lg:hidden dark:border-white dark:shadow-dark'
+				>
+					<Download className='h-3 w-3' /> Currículo
+				</a>
+
+				<span className='hidden lg:flex' />
 
 				<div className='flex items-center gap-3 max-sm:gap-2'>
 					<Link

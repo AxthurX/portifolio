@@ -197,7 +197,7 @@ export default function Experiencias() {
 												'mb-10 flex-1 rounded-lg border-2 bg-surface p-6 shadow-light transition-all duration-300 hover:border-primary hover:shadow-[4px_4px_0_0_rgba(32,91,255,0.6)] md:p-8 dark:shadow-dark dark:hover:shadow-[4px_4px_0_0_rgba(32,91,255,0.6)]'
 											}
 										>
-											<div className='mb-5 flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between sm:gap-3'>
+											<div className='mb-5 flex flex-col gap-1 max-lg:gap-2 lg:flex-row lg:items-start lg:justify-between lg:gap-3'>
 												<div>
 													<div className='mb-1 flex items-center gap-2'>
 														<div
@@ -228,7 +228,7 @@ export default function Experiencias() {
 													</p>
 												</div>
 
-												<div className='shrink-0 text-right max-sm:text-left'>
+												<div className='shrink-0 text-right max-lg:text-left'>
 													<p className='font-medium text-foreground/70 text-xs tabular-nums dark:text-primary'>
 														{exp.periodo}
 													</p>

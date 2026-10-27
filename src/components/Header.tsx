@@ -16,7 +16,7 @@ const LINKS = [
 	{ href: '#stack', label: 'Stack' },
 ] as const;
 
-const CURRICULUM_URL = '/arthur-martins.pdf';
+export const CURRICULUM_URL = '/arthur-martins.pdf';
 
 export default function Header({ onPortfolioOpen }: { onPortfolioOpen: () => void }) {
 	const [menuOpen, setMenuOpen] = useState(false);
@@ -68,7 +68,7 @@ export default function Header({ onPortfolioOpen }: { onPortfolioOpen: () => voi
 							<span className='font-bold text-primary-content text-xs'>AM</span>
 						</div>
 
-						<span className='hidden font-medium text-sm max-sm:block md:block dark:text-primary'>
+						<span className='font-medium text-sm md:hidden lg:block dark:text-primary'>
 							<p className='font-medium text-foreground'>Arthur Martins</p>
 							<p className='text-muted-foreground text-xs'>Fullstack Developer</p>
 						</span>
@@ -78,7 +78,7 @@ export default function Header({ onPortfolioOpen }: { onPortfolioOpen: () => voi
 						href={CURRICULUM_URL}
 						download='Arthur-Martins-Curriculo.pdf'
 						title='Baixar Currículo'
-						className='hidden items-center gap-1.5 rounded-base border-2 border-black bg-base-100 px-3 py-1.5 font-medium text-foreground text-xs shadow-light transition-all hover:bg-primary hover:text-primary-foreground active:translate-x-boxShadowX active:translate-y-boxShadowY active:shadow-none md:flex dark:border-white dark:shadow-dark'
+						className='hidden items-center gap-1.5 rounded-base border-2 border-black bg-base-100 px-3 py-1.5 font-medium text-foreground text-xs shadow-light transition-all hover:bg-primary hover:text-primary-foreground active:translate-x-boxShadowX active:translate-y-boxShadowY active:shadow-none min-[1220px]:flex dark:border-white dark:shadow-dark'
 					>
 						<Download className='h-3 w-3' /> Currículo
 					</a>
@@ -142,13 +142,12 @@ export default function Header({ onPortfolioOpen }: { onPortfolioOpen: () => voi
 						animate={{ opacity: 1, y: 0 }}
 						exit={{ opacity: 0, y: -20 }}
 						transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-						className='fixed inset-0 z-100 flex flex-col px-6 py-8'
+						className='fixed inset-0 z-100 flex flex-col bg-primary-content px-6 py-8'
 					>
-						{/* Header */}
-						<div className='flex items-center justify-between'>
+						<div className='flex items-center justify-between pb-8'>
 							<div className='flex items-center gap-3'>
 								<div className='flex h-10 w-10 items-center justify-center rounded-base border-2 border-black bg-primary shadow-light dark:border-white dark:shadow-dark'>
-									<span className='font-bold text-primary-foreground text-sm'>AM</span>
+									<span className='font-bold text-primary-content text-sm'>AM</span>
 								</div>
 								<span className='font-medium'>Arthur Martins</span>
 							</div>
@@ -163,8 +162,7 @@ export default function Header({ onPortfolioOpen }: { onPortfolioOpen: () => voi
 							</button>
 						</div>
 
-						{/* Nav Links */}
-						<nav className='flex flex-1 flex-col justify-center gap-1'>
+						<nav className='flex flex-1 flex-col justify-start gap-1'>
 							<motion.button
 								onClick={() => {
 									setMenuOpen(false);
