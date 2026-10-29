@@ -77,9 +77,7 @@ export interface SeedPlacement {
 }
 
 /** proporção do quadro (√2): a mesma do papel deitado, como um pin de verdade. */
-// export const PIN_ASPECT = Math.SQRT2;
-
-export const PIN_ASPECT = 1.66;
+export const PIN_ASPECT = Math.SQRT2;
 
 /** margem da moldura de papel em volta da foto (relativa à largura do pin). */
 export const PIN_MARGIN_RATIO = 0.05;
@@ -183,8 +181,8 @@ export const SEED_PLACEMENTS: SeedPlacement[] = [
 	},
 ];
 
-type MetalRecipe = { light: string; mid: string; dark: string };
-type EnamelRecipe = { light: string; base: string; dark: string; line: string };
+export type MetalRecipe = { light: string; mid: string; dark: string };
+export type EnamelRecipe = { light: string; base: string; dark: string; line: string };
 
 export const METALS: Record<MetalKey, MetalRecipe> = {
 	gold: { light: 'hsl(46 72% 84%)', mid: 'hsl(41 55% 60%)', dark: 'hsl(33 42% 33%)' },

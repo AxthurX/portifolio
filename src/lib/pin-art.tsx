@@ -5,6 +5,7 @@ import {
 	type IconKey,
 	METALS,
 	type MetalKey,
+	type MetalRecipe,
 	PIN_ASPECT,
 	PIN_CAPTION_RATIO,
 	PIN_ICONS,
@@ -80,91 +81,43 @@ export const PinArt = ({
 	if (image) {
 		const margem = Math.round(size * PIN_MARGIN_RATIO);
 		const legenda = Boolean(label);
-		const altura_legenda = legenda ? Math.max(20, Math.round(size * PIN_CAPTION_RATIO)) : 0;
-		const altura = legenda ? margem + altura_letra + altura_legenda : altura_letra;
-		const letra = Math.max(8, Math.round(size * 0.072));
+		const altura_legenda = legenda ? Math.max(22, Math.round(size * PIN_CAPTION_RATIO)) : 0;
+		const altura = margem + altura_letra + altura_legenda;
+		const letra = Math.max(9, Math.round(size * 0.078));
 
 		return (
 			<div
 				aria-hidden='true'
 				style={{ width: size, height: altura }}
-				className={cn('relative select-none', className)}
+				className={cn('relative select-none overflow-hidden rounded-sm', className)}
 			>
-				<div className='absolute flex flex-col rounded-sm'>
-					<img
-						src={image}
-						// sizes={sizes}
-						// width={size}
-						height={altura_letra}
-						alt={label ?? 'Certificado'}
-						draggable={false}
-						loading={priority ? 'eager' : 'lazy'}
-						decoding='async'
-						className='pointer-events-none'
-						style={
-							legenda
-								? {
-										// left: margem,
-										// top: margem,
-										// width: size - margem * 2,
-										// height: altura_letra,
-									}
-								: { inset: 0, width: size, height: altura_letra }
-						}
-					/>
+				<img
+					src={image}
+					alt={label ?? 'Certificado'}
+					draggable={false}
+					loading={priority ? 'eager' : 'lazy'}
+					decoding='async'
+					className='pointer-events-none absolute left-0 object-contain'
+					style={{ top: margem, width: size, height: altura_letra }}
+				/>
 
-					<div>
-						{legenda && (
-							<div
-								className='pointer-events-none px-[9%] pt-2 text-center'
-								style={{ top: margem + altura_letra, height: altura_legenda }}
-							>
-								<p
-									className='line-clamp-2 font-serif text-[hsl(28_28%_26%)] italic leading-[1.15] dark:text-primary-content'
-									style={{ fontSize: letra }}
-								>
-									{label}
-								</p>
-							</div>
-						)}
-
-						{/* <svg
-						viewBox='0 0 100 100'
-						aria-hidden='true'
-						className='pointer-events-none absolute top-[-5%] left-1/2 h-[14%] w-[14%] -translate-x-1/2 overflow-visible'
+				{legenda && (
+					<div
+						className='pointer-events-none absolute inset-x-0 px-[8%]'
+						style={{
+							top: margem + altura_letra,
+							height: altura_legenda,
+							paddingTop: Math.max(4, Math.round(size * 0.028)),
+						}}
 					>
-						<title>Tarugador</title>
-						<defs>
-							<radialGradient id={`tack-${uid}`} cx='34%' cy='26%' r='82%'>
-								<stop offset='0%' stopColor={metal_recipe.light} />
-								<stop offset='52%' stopColor={metal_recipe.mid} />
-								<stop offset='100%' stopColor={metal_recipe.dark} />
-							</radialGradient>
-						</defs>
-						<ellipse cx='50' cy='92' rx='24' ry='6' fill='hsl(20 45% 5% / 0.32)' />
-						<circle
-							cx='50'
-							cy='50'
-							r='42'
-							fill={`url(#tack-${uid})`}
-							stroke={metal_recipe.dark}
-							strokeWidth='4'
-						/>
-						<ellipse
-							cx='37'
-							cy='34'
-							rx='12'
-							ry='7'
-							fill='hsl(0 0% 100% / 0.55)'
-							transform='rotate(-28 37 34)'
-						/>
-					</svg> */}
-
-						{/* {selected && (
-						<span className='pointer-events-none absolute -inset-1 rounded-base border-2 border-[hsl(45_66%_78%)] border-dashed' />
-					)} */}
+						<p
+							className='line-clamp-2 font-serif text-[hsl(28_28%_26%)] italic leading-[1.15] dark:text-base-content'
+							style={{ fontSize: letra }}
+						>
+							{label}
+						</p>
 					</div>
-				</div>
+				)}
 			</div>
 		);
 	}
@@ -276,5 +229,41 @@ export const PinArt = ({
 				)}
 			</svg>
 		</div>
+	);
+};
+
+export const PinSvg = ({ uid, metal_recipe }: { uid: string; metal_recipe: MetalRecipe }) => {
+	return (
+		<svg
+			viewBox='0 0 100 100'
+			aria-hidden='true'
+			className='pointer-events-none absolute top-[-5%] left-1/2 h-[14%] w-[14%] -translate-x-1/2 overflow-visible'
+		>
+			<title>Tarugador</title>
+			<defs>
+				<radialGradient id={`tack-${uid}`} cx='34%' cy='26%' r='82%'>
+					<stop offset='0%' stopColor={metal_recipe.light} />
+					<stop offset='52%' stopColor={metal_recipe.mid} />
+					<stop offset='100%' stopColor={metal_recipe.dark} />
+				</radialGradient>
+			</defs>
+			<ellipse cx='50' cy='92' rx='24' ry='6' fill='hsl(20 45% 5% / 0.32)' />
+			<circle
+				cx='50'
+				cy='50'
+				r='42'
+				fill={`url(#tack-${uid})`}
+				stroke={metal_recipe.dark}
+				strokeWidth='4'
+			/>
+			<ellipse
+				cx='37'
+				cy='34'
+				rx='12'
+				ry='7'
+				fill='hsl(0 0% 100% / 0.55)'
+				transform='rotate(-28 37 34)'
+			/>
+		</svg>
 	);
 };

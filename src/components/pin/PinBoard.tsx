@@ -1,33 +1,91 @@
 import { PackageOpen } from 'lucide-react';
-import { useRef } from 'react';
-import type { PlacedPin } from '@/lib/board-state';
-import { pinById } from '@/lib/pins';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import {
+	type BoardSize,
+	clampToBoard,
+	type PlacedPin,
+	type PlacementPatch,
+	pinPad,
+} from '@/lib/board-state';
+import { pinAltura, pinById } from '@/lib/pins';
 import { PinItem } from './PinItem';
 
 interface PinBoardProps {
 	placed: PlacedPin[];
 	selectedId: string | null;
-	isMobile: boolean;
 	onMove: (id: string, x: number, y: number) => void;
 	onBringToFront: (id: string) => void;
 	onSelect: (id: string) => void;
 	onRemove: (id: string) => void;
 	onOpenBox: () => void;
 	onDeselect: () => void;
+	onReflow: (patches: PlacementPatch[]) => void;
 }
+
+const PIN_SCALES: Array<{ min: number; scale: number }> = [
+	{ min: 1024, scale: 1.75 },
+	{ min: 640, scale: 1.32 },
+	{ min: 0, scale: 0.86 },
+];
+
+const scaleFor = (width: number) =>
+	(PIN_SCALES.find((step) => width >= step.min) ?? PIN_SCALES[PIN_SCALES.length - 1]).scale;
 
 export const PinBoard = ({
 	placed,
 	selectedId,
-	isMobile,
 	onMove,
 	onBringToFront,
 	onSelect,
 	onRemove,
 	onOpenBox,
 	onDeselect,
+	onReflow,
 }: PinBoardProps) => {
 	const boardRef = useRef<HTMLDivElement>(null);
+	const [board, setBoard] = useState<BoardSize>({ width: 0, height: 0 });
+
+	useLayoutEffect(() => {
+		const el = boardRef.current;
+		if (!el) return;
+
+		const sync = () => {
+			const rect = el.getBoundingClientRect();
+			setBoard((prev) =>
+				Math.abs(prev.width - rect.width) < 1 && Math.abs(prev.height - rect.height) < 1
+					? prev
+					: { width: rect.width, height: rect.height },
+			);
+		};
+
+		sync();
+		const observer = new ResizeObserver(sync);
+		observer.observe(el);
+		return () => observer.disconnect();
+	}, []);
+
+	const scale = scaleFor(board.width);
+
+	useEffect(() => {
+		if (board.width <= 0 || board.height <= 0) return;
+
+		const patches: PlacementPatch[] = [];
+
+		for (const placement of placed) {
+			const pin = pinById(placement.id);
+			if (!pin) continue;
+
+			const size = Math.round(pin.diameter * scale);
+			const pad = pinPad(size, pinAltura(size), placement.rotation, board);
+			const next = clampToBoard(placement.x, placement.y, pad);
+
+			if (Math.abs(next.x - placement.x) > 0.0005 || Math.abs(next.y - placement.y) > 0.0005) {
+				patches.push({ id: placement.id, ...next });
+			}
+		}
+
+		if (patches.length > 0) onReflow(patches);
+	}, [board, scale, placed, onReflow]);
 
 	return (
 		<div
@@ -47,7 +105,7 @@ export const PinBoard = ({
 						pin={pin}
 						placement={placement}
 						boardRef={boardRef}
-						size={Math.round(pin.diameter * (isMobile ? 0.46 : 1.753))}
+						size={Math.round(pin.diameter * scale)}
 						selected={selectedId === placement.id}
 						onMove={onMove}
 						onBringToFront={onBringToFront}

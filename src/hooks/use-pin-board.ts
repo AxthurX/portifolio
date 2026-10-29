@@ -4,8 +4,10 @@ import {
 	BOARD_VERSION,
 	clamp,
 	clamp01,
+	type LayoutMode,
 	loadBoard,
 	type PlacedPin,
+	type PlacementPatch,
 	pinsInBox,
 	saveBoard,
 	seedBoard,
@@ -16,55 +18,60 @@ const randomBetween = (min: number, max: number) => min + Math.random() * (max -
 const randomRotation = () => Math.round(randomBetween(-13, 13));
 
 /** Grade com deslocamento: espalha os pins por igual, sem deixar ninguém na diagonal. */
-const gridSlot = (index: number, total: number) => {
-	const columns = Math.min(6, Math.max(2, Math.ceil(Math.sqrt(total * 1.7))));
-	const rows = Math.ceil(total / columns);
-	const row = Math.floor(index / columns);
-	const column = index % columns;
+const X_MIN = 0.16;
+const X_MAX = 0.84;
+const Y_MIN = 0.24;
+const Y_MAX = 0.76;
+
+const gridSlot = (index: number, total: number, columns?: number) => {
+	const cols = columns ?? Math.min(6, Math.max(2, Math.ceil(Math.sqrt(total * 1.7))));
+	const rows = Math.ceil(total / cols);
+	const row = Math.floor(index / cols);
+	const column = index % cols;
 	const offset = row % 2 === 0 ? 0 : 0.5;
-	const usable = 0.68;
-	const step = usable / Math.max(columns - 1 + offset, 1);
+	const step = (X_MAX - X_MIN) / Math.max(cols - 1 + offset, 1);
 	return {
-		x: clamp(0.17 + (column + offset) * step, 0.1, 0.9),
-		y: rows === 1 ? 0.5 : clamp(0.22 + row * (0.56 / (rows - 1)), 0.14, 0.86),
+		x: clamp(X_MIN + (column + offset) * step, X_MIN, X_MAX),
+		y: rows === 1 ? 0.5 : clamp(Y_MIN + row * ((Y_MAX - Y_MIN) / (rows - 1)), Y_MIN, Y_MAX),
 	};
 };
 
 /** Mesmo grid, mas com um empurrão aleatório — usado para dar variedade. */
-const freeSpot = (index: number, total: number) => {
-	const slot = gridSlot(index, total);
+const freeSpot = (index: number, total: number, columns?: number) => {
+	const slot = gridSlot(index, total, columns);
 	return {
-		x: clamp(slot.x + randomBetween(-0.035, 0.035), 0.1, 0.9),
-		y: clamp(slot.y + randomBetween(-0.035, 0.035), 0.14, 0.86),
+		x: clamp(slot.x + randomBetween(-0.03, 0.03), X_MIN, X_MAX),
+		y: clamp(slot.y + randomBetween(-0.03, 0.03), Y_MIN, Y_MAX),
 	};
 };
 
-const tidyLayout = (count: number): Array<{ x: number; y: number }> =>
-	Array.from({ length: count }, (_, index) => gridSlot(index, count));
+const tidyLayout = (count: number, columns?: number): Array<{ x: number; y: number }> =>
+	Array.from({ length: count }, (_, index) => gridSlot(index, count, columns));
 
-export const usePinBoard = () => {
-	const [placed, setPlaced] = useState<PlacedPin[]>(() => seedBoard().placed);
+export const usePinBoard = (mode: LayoutMode = 'wide') => {
+	const columns = mode === 'compact' ? 2 : undefined;
+	const [placed, setPlaced] = useState<PlacedPin[]>(() => seedBoard(mode).placed);
 	const [pronto, setPronto] = useState(false);
 	const zRef = useRef(placed.reduce((max, pin) => Math.max(max, pin.z), 0));
 
 	useEffect(() => {
-		const guardado = loadBoard();
-		if (guardado && guardado.placed.length > 0) {
-			setPlaced(guardado.placed);
-			zRef.current = guardado.placed.reduce((max, pin) => Math.max(max, pin.z), 0);
-		}
+		const guardado = loadBoard(mode);
+		const inicial =
+			guardado && guardado.placed.length > 0 ? guardado.placed : seedBoard(mode).placed;
+		setPlaced(inicial);
+		zRef.current = inicial.reduce((max, pin) => Math.max(max, pin.z), 0);
 		setPronto(true);
-	}, []);
+	}, [mode]);
 
 	useEffect(() => {
 		if (!pronto) return;
 		zRef.current = placed.reduce((max, pin) => Math.max(max, pin.z), zRef.current);
 
 		const timer = window.setTimeout(() => {
-			saveBoard({ version: BOARD_VERSION, placed });
+			saveBoard(mode, { version: BOARD_VERSION, placed });
 		}, 180);
 		return () => window.clearTimeout(timer);
-	}, [placed, pronto]);
+	}, [placed, pronto, mode]);
 
 	const bringToFront = useCallback((id: string) => {
 		zRef.current += 1;
@@ -84,18 +91,37 @@ export const usePinBoard = () => {
 		});
 	}, []);
 
-	const placePin = useCallback((id: string) => {
-		zRef.current += 1;
-		const z = zRef.current;
-		setPlaced((prev) => {
-			if (prev.some((pin) => pin.id === id)) return prev;
-			const spot = freeSpot(prev.length, prev.length + 1);
-			return [...prev, { id, x: spot.x, y: spot.y, rotation: randomRotation(), z }];
-		});
-	}, []);
+	const placePin = useCallback(
+		(id: string) => {
+			zRef.current += 1;
+			const z = zRef.current;
+			setPlaced((prev) => {
+				if (prev.some((pin) => pin.id === id)) return prev;
+				const spot = freeSpot(prev.length, prev.length + 1, columns);
+				return [...prev, { id, x: spot.x, y: spot.y, rotation: randomRotation(), z }];
+			});
+		},
+		[columns],
+	);
 
 	const removePin = useCallback((id: string) => {
 		setPlaced((prev) => prev.filter((pin) => pin.id !== id));
+	}, []);
+
+	const reflow = useCallback((patches: PlacementPatch[]) => {
+		if (patches.length === 0) return;
+		const byId = new Map(patches.map((patch) => [patch.id, patch]));
+		setPlaced((prev) => {
+			let changed = false;
+			const next = prev.map((pin) => {
+				const patch = byId.get(pin.id);
+				if (!patch) return pin;
+				if (Math.abs(patch.x - pin.x) < 0.0005 && Math.abs(patch.y - pin.y) < 0.0005) return pin;
+				changed = true;
+				return { ...pin, x: patch.x, y: patch.y };
+			});
+			return changed ? next : prev;
+		});
 	}, []);
 
 	const rotatePin = useCallback((id: string, delta: number) => {
@@ -110,20 +136,20 @@ export const usePinBoard = () => {
 
 	const organize = useCallback(() => {
 		setPlaced((prev) => {
-			const slots = tidyLayout(prev.length);
+			const slots = tidyLayout(prev.length, columns);
 			return prev.map((pin, index) => ({
 				...pin,
 				x: slots[index]?.x ?? pin.x,
 				y: slots[index]?.y ?? pin.y,
 			}));
 		});
-	}, []);
+	}, [columns]);
 
 	const shuffle = useCallback(() => {
 		setPlaced((prev) => {
 			const order = [...prev].sort(() => Math.random() - 0.5);
 			return order.map((pin, index) => {
-				const spot = freeSpot(index, prev.length);
+				const spot = freeSpot(index, prev.length, columns);
 				return {
 					...pin,
 					x: spot.x,
@@ -133,13 +159,13 @@ export const usePinBoard = () => {
 				};
 			});
 		});
-	}, []);
+	}, [columns]);
 
 	const reset = useCallback(() => {
-		const seeded = seedBoard();
+		const seeded = seedBoard(mode);
 		zRef.current = seeded.placed.reduce((max, pin) => Math.max(max, pin.z), 0);
 		setPlaced(seeded.placed);
-	}, []);
+	}, [mode]);
 
 	const boxPins = useMemo(() => pinsInBox(placed, PINS), [placed]);
 
@@ -151,6 +177,7 @@ export const usePinBoard = () => {
 		placePin,
 		removePin,
 		movePin,
+		reflow,
 		rotatePin,
 		bringToFront,
 		organize,

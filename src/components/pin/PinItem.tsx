@@ -6,7 +6,7 @@ import {
 	useRef,
 	useState,
 } from 'react';
-import { clamp, type PlacedPin } from '@/lib/board-state';
+import { clamp, clampToBoard, type PinPad, type PlacedPin, pinPad } from '@/lib/board-state';
 import { PinArt } from '@/lib/pin-art';
 import { type PinDefinition, pinAltura } from '@/lib/pins';
 import { cn } from '@/lib/utils';
@@ -52,10 +52,8 @@ const PinItemBase = ({
 
 	const altura = pinAltura(size);
 
-	const paddingFor = (rect: DOMRect) => ({
-		x: clamp(size / 2 / rect.width, 0, 0.45),
-		y: clamp(altura / 2 / rect.height, 0, 0.45),
-	});
+	const paddingFor = (rect: DOMRect, rotation = placement.rotation): PinPad =>
+		pinPad(size, altura, rotation, { width: rect.width, height: rect.height });
 
 	const handlePointerDown = (event: PointerEvent<HTMLButtonElement>) => {
 		if (event.pointerType === 'mouse' && event.button !== 0) return;
@@ -87,13 +85,15 @@ const PinItemBase = ({
 			start.moved = true;
 		}
 
-		const pad = paddingFor(start.rect);
-		onMove(
-			pin.id,
-			clamp(start.x + dx / start.rect.width, pad.x, 1 - pad.x),
-			clamp(start.y + dy / start.rect.height, pad.y, 1 - pad.y),
+		const next_tilt = clamp(dx / 22, -9, 9);
+		const next = clampToBoard(
+			start.x + dx / start.rect.width,
+			start.y + dy / start.rect.height,
+			paddingFor(start.rect, placement.rotation + next_tilt),
 		);
-		setTilt(clamp(dx / 22, -9, 9));
+
+		onMove(pin.id, next.x, next.y);
+		setTilt(next_tilt);
 	};
 
 	const endDrag = (event: PointerEvent<HTMLButtonElement>) => {
@@ -126,11 +126,12 @@ const PinItemBase = ({
 		if (move) {
 			event.preventDefault();
 			onBringToFront(pin.id);
-			onMove(
-				pin.id,
-				clamp(placement.x + move[0] / rect.width, pad.x, 1 - pad.x),
-				clamp(placement.y + move[1] / rect.height, pad.y, 1 - pad.y),
+			const next = clampToBoard(
+				placement.x + move[0] / rect.width,
+				placement.y + move[1] / rect.height,
+				pad,
 			);
+			onMove(pin.id, next.x, next.y);
 			return;
 		}
 

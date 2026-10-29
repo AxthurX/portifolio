@@ -1,5 +1,7 @@
 import { type PinDefinition, pinById, SEED_PLACEMENTS } from './pins';
 
+export type LayoutMode = 'compact' | 'wide';
+
 export interface PlacedPin {
 	id: string;
 	x: number;
@@ -13,18 +15,81 @@ export interface BoardState {
 	placed: PlacedPin[];
 }
 
-export const BOARD_VERSION = 5;
-const STORAGE_KEY = 'quadro-pins:v5';
+export const BOARD_VERSION = 6;
+const STORAGE_KEY = (mode: LayoutMode) => `quadro-pins:v${BOARD_VERSION}:${mode}`;
 
 export const clamp = (value: number, min: number, max: number) =>
 	Math.min(max, Math.max(min, value));
 
 export const clamp01 = (value: number) => clamp(value, 0, 1);
 
-export const seedBoard = (): BoardState => {
-	const placements: PlacedPin[] = [];
+export interface BoardSize {
+	width: number;
+	height: number;
+}
 
-	SEED_PLACEMENTS.forEach((seed) => {
+export interface PinPad {
+	x: number;
+	y: number;
+}
+
+export interface PlacementPatch {
+	id: string;
+	x: number;
+	y: number;
+}
+
+/** meia-extensão visual do pin, já contando a rotação aplicada. */
+const halfExtents = (size: number, altura: number, rotation: number) => {
+	const rad = (rotation * Math.PI) / 180;
+	const cos = Math.abs(Math.cos(rad));
+	const sin = Math.abs(Math.sin(rad));
+	return { x: (size * cos + altura * sin) / 2, y: (size * sin + altura * cos) / 2 };
+};
+
+/** folga normalizada para o centro do pin nunca deixar o pin sair do quadro. */
+export const pinPad = (
+	size: number,
+	altura: number,
+	rotation: number,
+	board: BoardSize,
+): PinPad => {
+	if (board.width <= 0 || board.height <= 0) return { x: 0, y: 0 };
+	const half = halfExtents(size, altura, rotation);
+	return {
+		x: clamp(half.x / board.width, 0, 0.45),
+		y: clamp(half.y / board.height, 0, 0.45),
+	};
+};
+
+export const clampToBoard = (x: number, y: number, pad: PinPad) => ({
+	x: clamp(x, pad.x, 1 - pad.x),
+	y: clamp(y, pad.y, 1 - pad.y),
+});
+
+/** no celular o quadro é estreito: duas colunas cabem, quatro não. */
+const COMPACT_COLUMNS = 2;
+
+const compactSeed = (): typeof SEED_PLACEMENTS => {
+	const rows = Math.ceil(SEED_PLACEMENTS.length / COMPACT_COLUMNS);
+
+	return SEED_PLACEMENTS.map((seed, index) => {
+		const row = Math.floor(index / COMPACT_COLUMNS);
+		const column = index % COMPACT_COLUMNS;
+		return {
+			id: seed.id,
+			x: column === 0 ? 0.26 : 0.74,
+			y: rows === 1 ? 0.5 : 0.14 + row * (0.72 / (rows - 1)),
+			rotation: seed.rotation,
+		};
+	});
+};
+
+export const seedBoard = (mode: LayoutMode = 'wide'): BoardState => {
+	const placements: PlacedPin[] = [];
+	const seeds = mode === 'compact' ? compactSeed() : SEED_PLACEMENTS;
+
+	seeds.forEach((seed) => {
 		if (!pinById(seed.id)) {
 			if (process.env.NODE_ENV !== 'production') {
 				console.warn(`[quadro] pin desconhecido no SEED_PLACEMENTS: "${seed.id}"`);
@@ -46,11 +111,11 @@ export const seedBoard = (): BoardState => {
 const isRecord = (value: unknown): value is Record<string, unknown> =>
 	typeof value === 'object' && value !== null;
 
-export const loadBoard = (): BoardState | null => {
+export const loadBoard = (mode: LayoutMode = 'wide'): BoardState | null => {
 	if (typeof window === 'undefined') return null;
 
 	try {
-		const raw = window.localStorage.getItem(STORAGE_KEY);
+		const raw = window.localStorage.getItem(STORAGE_KEY(mode));
 		if (!raw) return null;
 		const parsed: unknown = JSON.parse(raw);
 		if (!isRecord(parsed) || parsed.version !== BOARD_VERSION || !Array.isArray(parsed.placed)) {
@@ -87,10 +152,10 @@ export const loadBoard = (): BoardState | null => {
 	}
 };
 
-export const saveBoard = (state: BoardState) => {
+export const saveBoard = (mode: LayoutMode, state: BoardState) => {
 	if (typeof window === 'undefined') return;
 	try {
-		window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+		window.localStorage.setItem(STORAGE_KEY(mode), JSON.stringify(state));
 	} catch {}
 };
 

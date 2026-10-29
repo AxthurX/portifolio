@@ -3,7 +3,7 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { useIsMobile } from '@/hooks/use-mobile';
+import { useLayoutMode } from '@/hooks/use-mobile';
 import { usePinBoard } from '@/hooks/use-pin-board';
 import { pinById } from '@/lib/pins';
 import { BoardFrame } from './pin/BoardFrame';
@@ -18,6 +18,8 @@ export default function Certificados() {
 	const sectionRef = useRef<HTMLElement | null>(null);
 	const headingRef = useRef<HTMLHeadingElement | null>(null);
 
+	const mode = useLayoutMode();
+
 	const {
 		placed,
 		count,
@@ -25,14 +27,13 @@ export default function Certificados() {
 		placePin,
 		removePin,
 		movePin,
+		reflow,
 		rotatePin,
 		bringToFront,
 		organize,
 		shuffle,
 		reset,
-	} = usePinBoard();
-
-	const isMobile = useIsMobile();
+	} = usePinBoard(mode);
 
 	const [boxOpen, setBoxOpen] = useState(false);
 	const [gallery, setGallery] = useState(false);
@@ -121,13 +122,13 @@ export default function Certificados() {
 					count={count}
 					total={total}
 					gallery={gallery}
-					className='min-h-120 sm:min-h-200'
+					className='min-h-160 sm:min-h-200'
 				>
 					<PinBoard
 						placed={placed}
 						selectedId={selectedId}
-						isMobile={isMobile}
 						onMove={movePin}
+						onReflow={reflow}
 						onBringToFront={bringToFront}
 						onSelect={handleSelect}
 						onRemove={handleRemove}

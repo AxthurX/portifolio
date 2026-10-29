@@ -65,7 +65,6 @@ export default function Home() {
 					</div>
 				</div>
 
-				{/* Footer */}
 				<footer className='mt-8 w-full border-black border-t-2 py-8 dark:border-white'>
 					<div className='mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 md:flex-row md:px-8 lg:px-12'>
 						<p className='text-muted-foreground text-sm dark:text-primary-content'>
