@@ -85,7 +85,7 @@ export default function Main() {
 
 			<motion.div
 				{...fadeIn(0.2)}
-				className='relative z-10 flex items-center justify-between pt-20 max-sm:flex-wrap max-sm:items-start max-sm:gap-2'
+				className='relative z-10 flex items-center justify-between pt-20 max-sm:flex-wrap max-sm:items-end max-sm:gap-2'
 			>
 				<a
 					href={CURRICULUM_URL}

@@ -26,7 +26,7 @@ const PROJECTS: Projeto[] = [
 		title: 'Menu de acessibilidade para diferentes necessidades de uso',
 		description:
 			'Biblioteca de acessibilidade desenvolvida com React, Next.js e Tailwind com recursos de contraste, tamanho de texto, espaçamento, saturação, leitura e comandos de voz.',
-		image: '/projetos/acessibilidade.png',
+		image: '/projetos/menu-acessibilidade.png',
 		technologies: ['React', 'Next.js', 'Tailwind CSS', 'WCAG'],
 		video: '',
 	},
@@ -37,7 +37,7 @@ const PROJECTS: Projeto[] = [
 		title: 'Editor de conteúdo baseado em TipTap e ProseMirror com extensões personalizadas',
 		description:
 			'Editor rico desenvolvido para publicação de conteúdos e documentação, com galerias, vídeos, tabelas redimensionáveis, upload de arquivos e imagens e integração com armazenamento.',
-		image: '/projetos/tiptap.png',
+		image: '/projetos/editor-tiptap.png',
 		technologies: ['TipTap', 'ProseMirror', 'Next.js', 'TypeScript', 'Fastify', 'MinIO'],
 		video: '',
 	},
@@ -48,7 +48,7 @@ const PROJECTS: Projeto[] = [
 		title: 'Busca inteligente com Typesense e resultados instantâneos em menos de 50 ms',
 		description:
 			'Integração de um mecanismo de busca open-source ao Portal SEDAM, com fuzzy search, autocomplete, stemming em português, cache e ranking de resultados.',
-		image: '/projetos/search.png',
+		image: '/projetos/typesense.png',
 		technologies: ['Typesense', 'Next.js', 'TypeScript', 'Docker'],
 		video: '',
 	},
@@ -92,7 +92,7 @@ const PROJECTS: Projeto[] = [
 		title: 'Plataformas para inscrições, processos seletivos e gerenciamento de documentos',
 		description:
 			'Desenvolvimento e manutenção de sistemas utilizados para inscrições de candidatos a estágio, processos seletivos e gerenciamento de documentos e candidaturas.',
-		image: '/projetos/processos.png',
+		image: '/projetos/estagio.png',
 		technologies: ['React', 'Next.js', 'TypeScript', 'Node.js'],
 		video: '',
 	},

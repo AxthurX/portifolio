@@ -97,7 +97,7 @@ export default function Certificados() {
 		<section
 			ref={sectionRef}
 			id='certificados'
-			className='relative mt-8 w-full overflow-hidden border-black border-t-2 py-16 md:mt-12 md:py-32 dark:border-white'
+			className='relative mt-8 w-full overflow-hidden border-black border-t-2 pt-16 pb-24 md:mt-12 md:py-32 dark:border-white'
 		>
 			<div className='relative z-10 px-4 md:px-0'>
 				<div className='mb-12 md:mb-16'>

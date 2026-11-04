@@ -84,36 +84,26 @@ export default function Experiencias() {
 	useEffect(() => {
 		const ctx = gsap.context(() => {
 			const heading = headingRef.current;
-
 			if (!heading) return;
 
-			const words = heading.innerText.split(' ');
+			const palavras = heading.querySelectorAll<HTMLElement>('.gsap-exp-word');
+			if (palavras.length === 0) return;
 
-			heading.innerHTML = words
-				.map(
-					(word) =>
-						`<span style="display:inline-block;overflow:hidden;vertical-align:bottom;">
-							<span
-								class="gsap-proc-word"
-								style="display:inline-block;transform:translateY(110%);"
-							>
-								${word}&nbsp;
-							</span>
-						</span>`,
-				)
-				.join('');
-
-			gsap.to('.gsap-proc-word', {
-				y: 0,
-				duration: 0.9,
-				stagger: 0.05,
-				ease: 'power3.out',
-				scrollTrigger: {
-					trigger: heading,
-					start: 'top 85%',
-					once: true,
+			gsap.fromTo(
+				palavras,
+				{ yPercent: 110 },
+				{
+					yPercent: 0,
+					duration: 0.9,
+					stagger: 0.05,
+					ease: 'power3.out',
+					scrollTrigger: {
+						trigger: heading,
+						start: 'top 85%',
+						once: true,
+					},
 				},
-			});
+			);
 		}, sectionRef);
 
 		return () => ctx.revert();
@@ -125,7 +115,7 @@ export default function Experiencias() {
 			id='experiencias'
 			className='relative w-full overflow-hidden border-black border-t-2 py-16 md:py-32 dark:border-white'
 		>
-			<div className='relative z-10 mb-16 px-4 text-left max-sm:mb-8 md:mb-12'>
+			<div className='relative z-10 mb-10 px-4 text-left sm:mb-16 md:mb-12'>
 				<span className='mb-4 block font-medium text-primary text-xs uppercase tracking-widest dark:text-base-content/70'>
 					Habilidades
 				</span>
@@ -134,47 +124,59 @@ export default function Experiencias() {
 					ref={headingRef}
 					className='font-bold text-3xl tracking-tight sm:text-4xl md:text-5xl lg:text-6xl'
 				>
-					Minhas{' '}
-					<span className='font-normal font-serif text-primary italic dark:text-base-content/70'>
-						experiencias
+					<span className='inline-block overflow-hidden align-bottom'>
+						<span className='gsap-exp-word inline-block'>Minhas&nbsp;</span>
+					</span>
+
+					<span className='inline-block overflow-hidden align-bottom'>
+						<span className='gsap-exp-word inline-block font-normal font-serif text-primary italic dark:text-base-content/70'>
+							experiencias
+						</span>
 					</span>
 				</h3>
 			</div>
 
 			<div className='relative mx-auto px-4'>
-				<div className='absolute top-0 bottom-0 left-1/2 hidden w-0.5 -translate-x-1/2 bg-black md:block dark:bg-white' />
+				<div className='absolute top-0 bottom-0 left-1/2 hidden w-0.5 -translate-x-1/2 bg-black lg:block dark:bg-white' />
 
-				<div className='relative flex flex-col gap-8'>
+				<div className='relative flex flex-col gap-6 sm:gap-8'>
 					{EXPERIENCIAS.map((exp, index) => {
 						const isEven = index % 2 === 0;
 
 						return (
 							<div
 								key={exp.id}
-								className={`relative flex w-full flex-col items-start md:items-center md:justify-between ${
-									isEven ? 'md:flex-row' : 'md:flex-row-reverse'
+								className={`relative flex w-full flex-col items-start lg:items-center lg:justify-between ${
+									isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'
 								}`}
 							>
 								<motion.div
-									initial={{ scaleX: 0 }}
-									whileInView={{ scaleX: 1 }}
+									initial='hidden'
+									whileInView='visible'
 									viewport={{ once: true, margin: '-20%' }}
-									transition={{
-										duration: 0.8,
-										ease: [0.16, 1, 0.3, 1],
-									}}
-									style={{
-										transformOrigin: isEven ? 'right' : 'left',
-									}}
-									className={`absolute top-1/2 hidden h-0.5 w-[calc(50%-1rem)] -translate-y-1/2 bg-linear-to-r ${
-										isEven
-											? 'left-10 from-transparent to-base-content/70'
-											: 'right-10 from-base-content/70 to-transparent'
-									} md:block`}
-								/>
+									className={`absolute top-1/2 hidden h-0.5 w-[calc(50%-1rem)] -translate-y-1/2 lg:block ${
+										isEven ? 'left-10' : 'right-10'
+									}`}
+								>
+									<motion.div
+										variants={{
+											hidden: { scaleX: 0 },
+											visible: {
+												scaleX: 1,
+												transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+											},
+										}}
+										style={{ transformOrigin: isEven ? 'right' : 'left' }}
+										className={`h-full w-full ${
+											isEven
+												? 'bg-linear-to-r from-transparent to-base-content/70'
+												: 'bg-linear-to-r from-base-content/70 to-transparent'
+										}`}
+									/>
+								</motion.div>
 
 								<motion.div
-									className='absolute top-1/2 left-1/2 z-20 hidden -translate-x-1/2 -translate-y-1/2 flex-col items-center md:flex'
+									className='absolute top-1/2 left-1/2 z-20 hidden -translate-x-1/2 -translate-y-1/2 flex-col items-center lg:flex'
 									style={{ width: '42px' }}
 								>
 									<div
@@ -186,40 +188,32 @@ export default function Experiencias() {
 									</div>
 								</motion.div>
 
-								<div className='z-10 w-full md:w-[calc(50%-3rem)]'>
+								<div className='z-10 w-full lg:w-[calc(50%-3rem)]'>
 									<motion.div
 										key={exp.cargo}
 										variants={itemVariants}
-										className='relative flex flex-col gap-6 md:flex-row md:gap-10'
+										className='relative flex flex-col lg:flex-row lg:gap-10'
 									>
-										<Card
-											className={
-												'mb-10 flex-1 rounded-lg border-2 bg-surface p-6 shadow-light transition-all duration-300 hover:border-primary hover:shadow-[4px_4px_0_0_rgba(32,91,255,0.6)] md:p-8 dark:shadow-dark dark:hover:shadow-[4px_4px_0_0_rgba(32,91,255,0.6)]'
-											}
-										>
-											<div className='mb-5 flex flex-col gap-1 max-lg:gap-2 lg:flex-row lg:items-start lg:justify-between lg:gap-3'>
-												<div>
-													<div className='mb-1 flex items-center gap-2'>
-														<div
-															className={
-																'flex h-8 w-8 items-center justify-center rounded-base border-2 border-black bg-primary font-bold text-[10px] text-primary-content shadow-light md:hidden dark:border-white dark:shadow-dark'
-															}
-														>
+										<Card className='mb-0 flex-1 rounded-lg border-2 bg-surface p-4 shadow-light transition-all duration-300 hover:border-primary hover:shadow-[4px_4px_0_0_rgba(32,91,255,0.6)] sm:p-6 lg:mb-10 lg:p-8 dark:shadow-dark dark:hover:shadow-[4px_4px_0_0_rgba(32,91,255,0.6)]'>
+											<div className='mb-4 flex flex-col gap-2 max-sm:gap-0 sm:mb-5 xl:flex-row xl:items-start xl:justify-between xl:gap-3'>
+												<div className='min-w-0'>
+													<div className='flex items-center gap-2'>
+														<div className='flex h-7 w-7 shrink-0 items-center justify-center rounded-base border-2 border-black bg-primary font-bold text-[10px] text-primary-content shadow-light sm:h-8 sm:w-8 lg:hidden dark:border-white dark:shadow-dark'>
 															{exp.logo}
 														</div>
 
-														<h3 className='font-bold text-foreground text-lg leading-tight max-sm:pl-2 dark:text-primary'>
+														<h3 className='min-w-0 flex-1 font-bold text-base text-foreground leading-tight max-lg:ml-1 sm:text-lg dark:text-primary'>
 															{exp.cargo}
 														</h3>
 
 														{exp.atual && (
-															<span className='rounded-base border-2 border-black bg-primary/10 px-2 py-0.5 font-semibold text-[10px] text-primary uppercase tracking-wider dark:border-white dark:text-primary'>
+															<span className='shrink-0 rounded-base border-2 border-black bg-primary/10 px-1.5 py-0.5 font-semibold text-[9px] text-primary uppercase tracking-wider sm:px-2 sm:text-[10px] dark:border-white dark:text-primary'>
 																Atual
 															</span>
 														)}
 													</div>
 
-													<p className='font-medium text-foreground/80 text-sm max-sm:pt-2 dark:text-primary/90'>
+													<p className='mt-2 font-medium text-[13px] text-foreground/80 max-md:mt-1 sm:mt-4 sm:text-sm dark:text-primary/90'>
 														{exp.empresa}
 														<span className='font-normal text-muted-foreground dark:text-primary/70'>
 															{' '}
@@ -228,28 +222,32 @@ export default function Experiencias() {
 													</p>
 												</div>
 
-												<div className='shrink-0 text-right max-lg:text-left'>
-													<p className='font-medium text-foreground/70 text-xs tabular-nums dark:text-primary'>
+												<div className='shrink-0 space-y-0.5 xl:text-right'>
+													<p className='font-medium text-[11px] text-foreground/70 tabular-nums sm:text-xs dark:text-primary'>
 														{exp.periodo}
 													</p>
-													<p className='text-muted-foreground text-xs'>{exp.duracao}</p>
-													<p className='mt-0.5 text-muted-foreground text-xs'>{exp.local}</p>
+													<p className='text-[11px] text-muted-foreground sm:text-xs'>
+														{exp.duracao}
+													</p>
+													<p className='text-[11px] text-muted-foreground sm:text-xs'>
+														{exp.local}
+													</p>
 												</div>
 											</div>
 
-											<div className='mb-5 h-0.5 bg-black dark:bg-white' />
+											<div className='mb-4 h-0.5 bg-black sm:mb-5 dark:bg-white' />
 
-											<ul className='mb-6 flex flex-col gap-3'>
-												{exp.setor && (
-													<p className='mt-0.5 text-primary-foreground text-sm dark:text-primary'>
-														{exp.setor}
-													</p>
-												)}
+											{exp.setor && (
+												<p className='mb-4 border-primary border-l-2 pl-3 text-[13px] text-foreground/80 leading-snug sm:text-sm dark:text-primary'>
+													{exp.setor}
+												</p>
+											)}
 
+											<ul className='mb-5 flex flex-col gap-2.5 sm:mb-6 sm:gap-3'>
 												{exp.descricao.map((item) => (
 													<li
 														key={item}
-														className='flex gap-3 text-primary-foreground text-sm leading-relaxed dark:text-primary'
+														className='flex gap-2.5 text-[13px] text-primary-foreground leading-relaxed sm:gap-3 sm:text-sm dark:text-primary'
 													>
 														<span className='mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary/60' />
 														{item}
@@ -257,11 +255,11 @@ export default function Experiencias() {
 												))}
 											</ul>
 
-											<div className='flex flex-wrap gap-2'>
+											<div className='flex flex-wrap gap-1.5 sm:gap-2'>
 												{exp.techs.map((tech) => (
 													<span
 														key={tech}
-														className='rounded-base border-2 border-black bg-base-100 px-3 py-1 text-foreground text-xs shadow-light transition-colors hover:bg-primary hover:text-primary-content dark:border-white dark:shadow-dark'
+														className='rounded-base border-2 border-black bg-base-100 px-2.5 py-1 text-[11px] text-foreground shadow-light transition-colors hover:bg-primary hover:text-primary-content sm:px-3 sm:text-xs dark:border-white dark:shadow-dark'
 													>
 														{tech}
 													</span>
@@ -271,7 +269,7 @@ export default function Experiencias() {
 									</motion.div>
 								</div>
 
-								<div className='hidden w-[calc(50%-3rem)] md:block' />
+								<div className='hidden w-[calc(50%-3rem)] lg:block' />
 							</div>
 						);
 					})}
