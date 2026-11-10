@@ -2,6 +2,7 @@
 
 import Lenis from 'lenis';
 import { useEffect, useState } from 'react';
+import { PortfolioPresentation } from '@/components/PortfolioPresentation';
 import Certificados from '../components/Certificados';
 import Contato from '../components/Contato';
 import Experiencias from '../components/Experiencias';
@@ -11,10 +12,11 @@ import Projetos from '../components/Projetos';
 import SobreMim from '../components/SobreMim';
 
 export default function Home() {
+	const [lenis, setLenis] = useState<Lenis | null>(null);
 	const [portfolioOpen, setPortfolioOpen] = useState<boolean>(false);
 
 	useEffect(() => {
-		const lenis = new Lenis({
+		const instance = new Lenis({
 			duration: 1.2,
 			easing: (t: number) => Math.min(1, 1.001 - 2 ** (-10 * t)),
 			smoothWheel: true,
@@ -25,17 +27,18 @@ export default function Home() {
 		let raf_id = 0;
 
 		const animate = (time: number) => {
-			lenis.raf(time);
-
+			instance.raf(time);
 			raf_id = requestAnimationFrame(animate);
 		};
 
 		raf_id = requestAnimationFrame(animate);
 
+		setLenis(instance);
+
 		return () => {
 			if (raf_id) cancelAnimationFrame(raf_id);
 
-			lenis.destroy();
+			instance.destroy();
 		};
 	}, []);
 
@@ -50,6 +53,8 @@ export default function Home() {
 	return (
 		<>
 			<main className='relative flex min-h-screen w-full grow flex-col items-center'>
+				{lenis && <PortfolioPresentation lenis={lenis} />}
+
 				<Header onPortfolioOpen={() => setPortfolioOpen(true)} />
 
 				<div className='w-full flex-col'>

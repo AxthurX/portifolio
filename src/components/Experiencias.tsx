@@ -136,16 +136,18 @@ export default function Experiencias() {
 				</h3>
 			</div>
 
-			<div className='relative mx-auto px-4'>
+			<div data-presentation-track='experiencias' className='relative mx-auto px-4'>
 				<div className='absolute top-0 bottom-0 left-1/2 hidden w-0.5 -translate-x-1/2 bg-black lg:block dark:bg-white' />
 
-				<div className='relative flex flex-col gap-6 sm:gap-8'>
+				<div className='relative flex min-w-full snap-x snap-mandatory flex-col gap-6 sm:gap-8'>
 					{EXPERIENCIAS.map((exp, index) => {
 						const isEven = index % 2 === 0;
 
 						return (
 							<div
 								key={exp.id}
+								data-presentation-item='experiencia'
+								data-presentation-label={exp.empresa}
 								className={`relative flex w-full flex-col items-start lg:items-center lg:justify-between ${
 									isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'
 								}`}

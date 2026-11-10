@@ -67,6 +67,7 @@ export default function Main() {
 
 	return (
 		<motion.section
+			id='home'
 			ref={sectionRef}
 			initial='hidden'
 			animate='visible'
@@ -164,8 +165,8 @@ export default function Main() {
 					</div>
 
 					<motion.p {...fadeIn(0.5)} className='mt-8 max-w-lg text-lg'>
-						Desenvolvedor com ênfase no frontend, com 4+ anos de experiência, profissional em
-						transformar ideias malucas em interfaces funcionais.
+						Desenvolvedor com mais de 4 anos de experiência e profissional em transformar ideias
+						malucas em interfaces funcionais.
 					</motion.p>
 
 					<motion.div

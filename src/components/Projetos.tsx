@@ -111,7 +111,11 @@ const PROJECTS: Projeto[] = [
 
 function ProjectCard({ projeto }: { projeto: Projeto }) {
 	return (
-		<Card className='group relative flex h-[60vh] w-full shrink-0 cursor-pointer flex-col justify-between overflow-hidden rounded-lg border-2 border-black bg-surface shadow-light md:h-[70vh] md:w-[55vw] dark:border-white dark:shadow-dark'>
+		<Card
+			className='group relative flex h-[60vh] w-full shrink-0 cursor-pointer flex-col justify-between overflow-hidden rounded-lg border-2 border-black bg-surface shadow-light md:h-[70vh] md:w-[55vw] dark:border-white dark:shadow-dark'
+			data-presentation-item='projeto'
+			data-presentation-label={projeto.client}
+		>
 			<div
 				className='absolute inset-0 z-0 bg-center bg-cover bg-no-repeat transition-transform duration-700 ease-out group-hover:scale-105'
 				style={{
@@ -147,7 +151,7 @@ function ProjectCard({ projeto }: { projeto: Projeto }) {
 						<Button
 							type='button'
 							variant='outline'
-							className='flex h-12 w-12 shrink-0 items-center justify-center rounded-base border-2 border-black bg-[#fafafa]/60 p-0 shadow-light backdrop-blur-sm transition-all duration-300 hover:bg-primary hover:text-primary-foreground active:translate-x-boxShadowX active:translate-y-boxShadowY active:shadow-none group-hover:border-primary dark:bg-black dark:text-primary-content dark:shadow-dark'
+							className='flex h-12 w-12 shrink-0 items-center justify-center rounded-base border-2 border-black bg-[#fafafa]/60 p-0 shadow-light backdrop-blur-sm transition-all duration-300 hover:bg-primary hover:text-primary-foreground active:translate-x-boxShadowX active:translate-y-boxShadowY active:shadow-none dark:bg-black dark:text-primary-content dark:shadow-dark'
 							aria-label={`Ver apresentação de ${projeto.client}`}
 						>
 							<ArrowUpRight
@@ -235,7 +239,7 @@ export default function Projetos() {
 					</h3>
 				</div>
 
-				<div className='flex flex-col gap-6'>
+				<div data-presentation-track='projetos' className='flex flex-col gap-6'>
 					{PROJECTS.map((projeto) => (
 						<motion.div
 							key={projeto.id}

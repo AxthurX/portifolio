@@ -17,7 +17,7 @@ export const BoardFrame = ({
 	children,
 }: BoardFrameProps) => {
 	return (
-		<section className={cn('relative flex flex-col', className)}>
+		<section id='quadro' className={cn('relative flex flex-col', className)}>
 			<div className='relative flex flex-1 flex-col overflow-hidden rounded-lg border-2 border-black bg-base-100 shadow-light dark:border-white dark:shadow-dark'>
 				<div className='flex items-center justify-between gap-4 border-black border-b-2 bg-base-200/50 px-4 py-3 md:px-6 dark:border-white'>
 					<div className='min-w-0'>

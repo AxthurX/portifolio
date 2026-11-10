@@ -6,6 +6,7 @@ import {
 	useRef,
 	useState,
 } from 'react';
+import { useIsMobile } from '@/hooks/use-mobile';
 import { clamp, clampToBoard, type PinPad, type PlacedPin, pinPad } from '@/lib/board-state';
 import { PinArt } from '@/lib/pin-art';
 import { type PinDefinition, pinAltura } from '@/lib/pins';
@@ -50,6 +51,7 @@ const PinItemBase = ({
 	const [hovered, setHovered] = useState(false);
 	const [tilt, setTilt] = useState(0);
 
+	const is_mobile = useIsMobile();
 	const altura = pinAltura(size);
 
 	const paddingFor = (rect: DOMRect, rotation = placement.rotation): PinPad =>
@@ -85,15 +87,14 @@ const PinItemBase = ({
 			start.moved = true;
 		}
 
-		const next_tilt = clamp(dx / 22, -9, 9);
 		const next = clampToBoard(
 			start.x + dx / start.rect.width,
 			start.y + dy / start.rect.height,
-			paddingFor(start.rect, placement.rotation + next_tilt),
+			paddingFor(start.rect),
 		);
 
 		onMove(pin.id, next.x, next.y);
-		setTilt(next_tilt);
+		setTilt(Math.round(clamp(dx / 22, -9, 9)));
 	};
 
 	const endDrag = (event: PointerEvent<HTMLButtonElement>) => {
@@ -105,6 +106,8 @@ const PinItemBase = ({
 		dragRef.current = null;
 		setDragging(false);
 		setTilt(0);
+		// dedo/caneta não têm hover: sem isso o pin fica crescendo até o próximo toque.
+		if (event.pointerType !== 'mouse') setHovered(false);
 		if (!start.moved) onSelect(pin.id);
 	};
 
@@ -148,6 +151,12 @@ const PinItemBase = ({
 
 	const scale = dragging ? 1.08 : hovered ? 1.04 : 1;
 
+	const sombra = dragging
+		? '0 18px 14px hsl(20 50% 4% / 0.42)'
+		: selected
+			? '0 12px 10px hsl(20 45% 5% / 0.36)'
+			: '0 8px 7px hsl(20 45% 5% / 0.3)';
+
 	return (
 		<div
 			className='absolute select-none'
@@ -172,20 +181,25 @@ const PinItemBase = ({
 				onPointerEnter={() => setHovered(true)}
 				onPointerLeave={() => setHovered(false)}
 				className={cn(
-					'group block touch-none rounded-md outline-none',
+					'group block touch-none rounded-sm outline-none',
 					dragging ? 'cursor-grabbing' : 'cursor-grab',
-					// 'focus-visible:ring-2 focus-visible:ring-primary/5 focus-visible:ring-offset-4 focus-visible:ring-offset-transparent',
 				)}
 				style={{
-					transform: `rotate(${placement.rotation + tilt}deg) scale(${scale})`,
+					transform: `rotate(${placement.rotation + tilt}deg) scale(${scale})${
+						dragging ? ' translateZ(0)' : ''
+					}`,
 					transition: dragging
 						? 'none'
-						: 'transform 280ms var(--ease-settle), filter 280ms var(--ease-settle)',
-					filter: dragging
-						? 'drop-shadow(0 24px 18px hsl(20 50% 4% / 0.6))'
-						: selected
-							? 'drop-shadow(0 14px 12px hsl(20 45% 5% / 0.5))'
-							: 'drop-shadow(0 9px 8px hsl(20 45% 5% / 0.42))',
+						: 'transform 280ms var(--ease-settle), box-shadow 280ms var(--ease-settle)',
+					boxShadow: is_mobile ? sombra : 'none',
+					backfaceVisibility: 'hidden',
+					filter: !is_mobile
+						? dragging
+							? 'drop-shadow(0 24px 18px hsl(20 50% 4% / 0.6))'
+							: selected
+								? 'drop-shadow(0 14px 12px hsl(20 45% 5% / 0.5))'
+								: 'drop-shadow(0 9px 8px hsl(20 45% 5% / 0.42))'
+						: 'none',
 				}}
 			>
 				<PinArt

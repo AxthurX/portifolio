@@ -13,7 +13,7 @@ const LINKS = [
 	{ href: '#projetos', label: 'Projetos' },
 	{ href: '#experiencias', label: 'Experiências' },
 	{ href: '#certificados', label: 'Licenças & Certificados' },
-	{ href: '#stack', label: 'Stack' },
+	{ href: '#contato', label: 'Contato' },
 ] as const;
 
 export const CURRICULUM_URL = '/arthur-martins.pdf';
@@ -69,23 +69,26 @@ export default function Header({ onPortfolioOpen }: { onPortfolioOpen: () => voi
 						</div>
 
 						<span className='font-medium text-sm md:hidden lg:block dark:text-primary'>
-							<p className='font-medium text-foreground'>Arthur Martins</p>
-							<p className='text-muted-foreground text-xs'>Fullstack Developer</p>
+							<p className='font-medium text-foreground dark:text-base-content'>Arthur Martins</p>
+							<p className='text-muted-foreground text-xs dark:text-base-content/70'>
+								Fullstack Developer
+							</p>
 						</span>
 					</Link>
 
 					<a
+						id='curriculo'
 						href={CURRICULUM_URL}
 						download='Arthur-Martins-Curriculo.pdf'
 						title='Baixar Currículo'
-						className='hidden items-center gap-1.5 rounded-base border-2 border-black bg-base-100 px-3 py-1.5 font-medium text-foreground text-xs shadow-light transition-all hover:bg-primary hover:text-primary-foreground active:translate-x-boxShadowX active:translate-y-boxShadowY active:shadow-none min-[1220px]:flex dark:border-white dark:shadow-dark'
+						className='hidden items-center gap-1.5 rounded-base border-2 border-black bg-base-100 px-3 py-1.5 font-medium text-foreground text-xs shadow-light transition-all hover:bg-primary hover:text-primary-foreground active:translate-x-boxShadowX active:translate-y-boxShadowY active:shadow-none min-[1220px]:flex dark:border-white dark:bg-black/40 dark:shadow-dark'
 					>
 						<Download className='h-3 w-3' /> Currículo
 					</a>
 				</div>
 
 				<nav className='absolute inset-x-0 top-4 z-10 hidden h-15 items-center justify-center py-3 md:flex'>
-					<div className='flex items-center gap-1 rounded-base border-2 border-black bg-base-100 p-1 shadow-light dark:border-white dark:shadow-dark'>
+					<div className='flex items-center gap-1 rounded-base border-2 border-black bg-base-100 p-1 shadow-light dark:border-white dark:bg-black/20 dark:shadow-dark'>
 						{LINKS.map((link) => (
 							<a
 								key={link.href}
@@ -111,6 +114,7 @@ export default function Header({ onPortfolioOpen }: { onPortfolioOpen: () => voi
 					</Button> */}
 
 					<Button
+						id='theme'
 						onClick={handleThemeChange}
 						className='px-6 py-4 font-medium transition-all duration-200 max-sm:px-2'
 					>

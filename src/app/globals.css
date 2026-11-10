@@ -198,6 +198,10 @@
 	animation: pin-arrive 420ms var(--ease-settle) both;
 }
 
+html {
+	scroll-behavior: auto;
+}
+
 @keyframes fade-up {
 	from {
 		opacity: 0;
@@ -240,7 +244,7 @@
 	--cream: #f4f4f0;
 	--surface: #eeede9;
 
-	--header-bg: rgba(244, 244, 240, 0.82);
+	--header-bg: rgba(244, 244, 244, 0.395);
 
 	--spacing-scale-2x: 16px;
 	--spacing-scale-3x: 24px;
