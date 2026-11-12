@@ -21,18 +21,21 @@ export default function SobreMim() {
 				const words = heading.innerText.split(' ');
 
 				heading.innerHTML = words
-					.map(
-						(word) => `
+					.map((word) => {
+						const accent = word.replace(/[^\p{L}]/gu, '') === 'ideias';
+						const accentClass = accent ? ' font-serif font-normal italic text-primary' : '';
+
+						return `
 							<span style="display:inline-block;overflow:hidden;vertical-align:bottom;">
 								<span
-									class="gsap-word"
+									class="gsap-word${accentClass}"
 									style="display:inline-block;transform:translateY(110%);"
 								>
 									${word}
 								</span>
 							</span>
-						`,
-					)
+						`;
+					})
 					.join(' ');
 
 				gsap.to(heading.querySelectorAll('.gsap-word'), {
@@ -124,11 +127,11 @@ export default function SobreMim() {
 			id='sobre-mim'
 			className='relative mt-16 flex min-h-[80vh] w-full flex-col border-black border-t-2 md:mt-24 md:flex-row dark:border-white'
 		>
-			<div className='absolute top-0 bottom-0 left-1/2 hidden w-0.5 bg-black md:block dark:bg-white' />
+			<div className='absolute top-0 bottom-0 left-1/2 hidden w-0.5 bg-black md:block dark:bg-white/20' />
 
-			<div className='flex w-full flex-col justify-between border-black border-b-2 p-6 md:w-1/2 md:border-r-2 md:border-b-0 md:p-16 lg:p-20 dark:border-white'>
+			<div className='flex w-full flex-col justify-between border-black border-b-2 p-6 md:w-1/2 md:border-r-2 md:border-b-0 md:p-16 lg:p-20 dark:border-white/15'>
 				<div>
-					<span className='mb-4 block font-medium text-primary text-xs uppercase tracking-widest dark:text-base-content/70'>
+					<span className='mb-4 block font-medium text-primary text-xs uppercase tracking-widest dark:text-primary'>
 						Sobre Mim
 					</span>
 

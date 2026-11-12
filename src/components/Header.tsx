@@ -95,12 +95,19 @@ export default function Header({ onPortfolioOpen }: { onPortfolioOpen: () => voi
 								href={link.href}
 								className={cn(
 									'rounded-base px-4 py-2 font-normal text-base-content text-xs transition-all',
-									hash === link.href && 'border-2 border-black',
+									hash === link.href && 'border-2 border-black dark:border-white',
 								)}
 							>
 								{link.label}
 							</a>
 						))}
+
+						<Link
+							href='/playground'
+							className='rounded-base border-2 border-black border-dashed px-4 py-2 font-normal text-base-content text-xs transition-all hover:border-solid hover:bg-primary hover:text-primary-content dark:border-white'
+						>
+							Playground
+						</Link>
 					</div>
 				</nav>
 
@@ -118,7 +125,7 @@ export default function Header({ onPortfolioOpen }: { onPortfolioOpen: () => voi
 						onClick={handleThemeChange}
 						className='px-6 py-4 font-medium transition-all duration-200 max-sm:px-2'
 					>
-						<Asterisk className='text-secondary-foreground' />
+						<Asterisk className='text-primary-foreground' />
 					</Button>
 
 					<Link href='#contato' className='max-lg:hidden'>
@@ -201,6 +208,21 @@ export default function Header({ onPortfolioOpen }: { onPortfolioOpen: () => voi
 									{link.label}
 								</motion.a>
 							))}
+
+							<motion.a
+								href='/playground'
+								onClick={() => setMenuOpen(false)}
+								initial={{ opacity: 0, x: -30 }}
+								animate={{ opacity: 1, x: 0 }}
+								transition={{
+									duration: 0.4,
+									delay: (LINKS.length + 1) * 0.06,
+									ease: [0.16, 1, 0.3, 1],
+								}}
+								className='border-black border-b-2 py-4 text-left font-bold text-3xl tracking-tight text-primary transition-colors hover:text-accent dark:border-white'
+							>
+								Playground
+							</motion.a>
 						</nav>
 
 						<motion.div

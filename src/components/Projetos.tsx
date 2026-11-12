@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
+import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { Button } from './ui/button';
 import { Card } from './ui/card';
@@ -16,6 +17,7 @@ export interface Projeto {
 	image: string;
 	technologies: string[];
 	video: string;
+	demo?: string;
 }
 
 const PROJECTS: Projeto[] = [
@@ -29,6 +31,7 @@ const PROJECTS: Projeto[] = [
 		image: '/projetos/menu-acessibilidade.png',
 		technologies: ['React', 'Next.js', 'Tailwind CSS', 'WCAG'],
 		video: '',
+		demo: '/playground#acessibilidade',
 	},
 	{
 		id: '04',
@@ -40,6 +43,7 @@ const PROJECTS: Projeto[] = [
 		image: '/projetos/editor-tiptap.png',
 		technologies: ['TipTap', 'ProseMirror', 'Next.js', 'TypeScript', 'Fastify', 'MinIO'],
 		video: '',
+		demo: '/playground#tiptap',
 	},
 	{
 		id: '03',
@@ -123,9 +127,9 @@ function ProjectCard({ projeto }: { projeto: Projeto }) {
 				}}
 			/>
 
-			<div className='absolute inset-0 z-1 bg-[#fafafa]/55 transition-opacity duration-500 group-hover:bg-[#fafafa]/40' />
+			<div className='absolute inset-0 z-1 bg-[#fafafa]/55 transition-opacity duration-500 group-hover:bg-[#fafafa]/40 dark:bg-[#070a10]/65 dark:group-hover:bg-[#070a10]/50' />
 
-			<div className='absolute inset-0 z-2 bg-linear-to-br from-[#fafafa]/60 via-[#fafafa]/25 to-primary/15' />
+			<div className='absolute inset-0 z-2 bg-linear-to-br from-[#fafafa]/60 via-[#fafafa]/25 to-primary/15 dark:from-[#070a10]/85 dark:via-[#070a10]/55 dark:to-primary/25' />
 
 			<div
 				className='pointer-events-none absolute inset-0 z-3 opacity-[0.08]'
@@ -144,6 +148,13 @@ function ProjectCard({ projeto }: { projeto: Projeto }) {
 					</span>
 
 					<span className='text-muted-foreground text-sm dark:text-primary'>{projeto.client}</span>
+
+					{projeto.demo && (
+						<span className='mt-2 flex w-fit items-center gap-1.5 rounded-full border border-primary/40 bg-primary/10 px-2.5 py-0.5 font-medium text-[10px] text-primary uppercase tracking-wider'>
+							<span className='h-1.5 w-1.5 rounded-full bg-primary' />
+							Demo ao vivo
+						</span>
+					)}
 				</div>
 
 				<Dialog>
@@ -151,7 +162,7 @@ function ProjectCard({ projeto }: { projeto: Projeto }) {
 						<Button
 							type='button'
 							variant='outline'
-							className='flex h-12 w-12 shrink-0 items-center justify-center rounded-base border-2 border-black bg-[#fafafa]/60 p-0 shadow-light backdrop-blur-sm transition-all duration-300 hover:bg-primary hover:text-primary-foreground active:translate-x-boxShadowX active:translate-y-boxShadowY active:shadow-none dark:bg-black dark:text-primary-content dark:shadow-dark'
+							className='flex h-12 w-12 shrink-0 items-center justify-center rounded-base border-2 border-black bg-[#fafafa]/60 p-0 shadow-light backdrop-blur-sm transition-all duration-300 hover:bg-primary hover:text-primary-foreground active:translate-x-boxShadowX active:translate-y-boxShadowY active:shadow-none dark:bg-black/55 dark:text-base-content dark:shadow-dark'
 							aria-label={`Ver apresentação de ${projeto.client}`}
 						>
 							<ArrowUpRight
@@ -197,12 +208,28 @@ function ProjectCard({ projeto }: { projeto: Projeto }) {
 								</div>
 							</div>
 						)}
+
+						{projeto.demo && (
+							<div className='flex flex-wrap items-center justify-between gap-3 border-black border-t-2 bg-base-100 px-5 py-3 dark:border-white'>
+								<p className='text-muted-foreground text-xs'>
+									Demonstração interativa — roda no navegador, sem vídeo.
+								</p>
+
+								<Link
+									href={projeto.demo}
+									className='flex items-center gap-1.5 rounded-base border-2 border-black bg-primary px-3 py-1.5 font-medium text-primary-content text-xs shadow-light transition-all hover:bg-accent active:translate-x-boxShadowX active:translate-y-boxShadowY active:shadow-none dark:border-white dark:shadow-dark'
+								>
+									Abrir no playground
+									<ArrowUpRight className='h-3.5 w-3.5' />
+								</Link>
+							</div>
+						)}
 					</DialogContent>
 				</Dialog>
 			</div>
 
 			<div className='relative z-10 flex items-end justify-between p-6 md:p-8'>
-				<h4 className='max-w-[80%] font-light text-2xl text-foreground leading-tight tracking-tight md:text-4xl xl:text-5xl dark:font-semibold dark:text-primary'>
+				<h4 className='max-w-[80%] font-light text-2xl text-foreground leading-tight tracking-tight md:text-4xl xl:text-5xl dark:font-semibold dark:text-base-content'>
 					{projeto.title}
 				</h4>
 			</div>
@@ -228,12 +255,12 @@ export default function Projetos() {
 		return (
 			<section id='projetos' className='w-full px-4 py-16'>
 				<div className='mb-12 max-sm:mb-8'>
-					<span className='mb-4 block font-medium text-primary text-xs uppercase tracking-widest dark:text-base-content/70'>
+					<span className='mb-4 block font-medium text-primary text-xs uppercase tracking-widest dark:text-primary'>
 						Projetos
 					</span>
 					<h3 className='font-bold text-4xl tracking-tight'>
 						Trabalhos{' '}
-						<span className='font-normal font-serif text-primary italic dark:text-base-content/70'>
+						<span className='font-normal font-serif text-primary italic dark:text-primary'>
 							Recentes
 						</span>
 					</h3>
@@ -260,12 +287,12 @@ export default function Projetos() {
 		<section id='projetos' ref={targetRef} className='relative h-[400vh]'>
 			<div className='sticky top-0 flex h-screen items-center overflow-hidden'>
 				<div className='absolute top-24 left-8 z-20 md:left-12'>
-					<span className='mb-4 block font-medium text-primary text-xs uppercase tracking-widest dark:text-base-content/70'>
+					<span className='mb-4 block font-medium text-primary text-xs uppercase tracking-widest dark:text-primary'>
 						Projetos
 					</span>
 					<h3 className='font-bold text-4xl tracking-tight md:text-5xl'>
 						Trabalhos{' '}
-						<span className='font-normal font-serif text-primary italic dark:text-base-content/70'>
+						<span className='font-normal font-serif text-primary italic dark:text-primary'>
 							Recentes
 						</span>
 					</h3>

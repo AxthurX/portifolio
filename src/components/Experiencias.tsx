@@ -116,7 +116,7 @@ export default function Experiencias() {
 			className='relative w-full overflow-hidden border-black border-t-2 py-16 md:py-32 dark:border-white'
 		>
 			<div className='relative z-10 mb-10 px-4 text-left sm:mb-16 md:mb-12'>
-				<span className='mb-4 block font-medium text-primary text-xs uppercase tracking-widest dark:text-base-content/70'>
+				<span className='mb-4 block font-medium text-primary text-xs uppercase tracking-widest dark:text-primary'>
 					Habilidades
 				</span>
 
@@ -129,7 +129,7 @@ export default function Experiencias() {
 					</span>
 
 					<span className='inline-block overflow-hidden align-bottom'>
-						<span className='gsap-exp-word inline-block font-normal font-serif text-primary italic dark:text-base-content/70'>
+						<span className='gsap-exp-word inline-block font-normal font-serif text-primary italic dark:text-primary'>
 							experiencias
 						</span>
 					</span>
@@ -137,7 +137,7 @@ export default function Experiencias() {
 			</div>
 
 			<div data-presentation-track='experiencias' className='relative mx-auto px-4'>
-				<div className='absolute top-0 bottom-0 left-1/2 hidden w-0.5 -translate-x-1/2 bg-black lg:block dark:bg-white' />
+				<div className='absolute top-0 bottom-0 left-1/2 hidden w-0.5 -translate-x-1/2 bg-black lg:block dark:bg-white/20' />
 
 				<div className='relative flex min-w-full snap-x snap-mandatory flex-col gap-6 sm:gap-8'>
 					{EXPERIENCIAS.map((exp, index) => {
@@ -204,7 +204,7 @@ export default function Experiencias() {
 															{exp.logo}
 														</div>
 
-														<h3 className='min-w-0 flex-1 font-bold text-base text-foreground leading-tight max-lg:ml-1 sm:text-lg dark:text-primary'>
+														<h3 className='min-w-0 flex-1 font-bold text-base text-foreground leading-tight max-lg:ml-1 sm:text-lg dark:text-base-content'>
 															{exp.cargo}
 														</h3>
 
@@ -215,9 +215,9 @@ export default function Experiencias() {
 														)}
 													</div>
 
-													<p className='mt-2 font-medium text-[13px] text-foreground/80 max-md:mt-1 sm:mt-4 sm:text-sm dark:text-primary/90'>
+													<p className='mt-2 font-medium text-[13px] text-foreground/80 max-md:mt-1 sm:mt-4 sm:text-sm dark:text-base-content/85'>
 														{exp.empresa}
-														<span className='font-normal text-muted-foreground dark:text-primary/70'>
+														<span className='font-normal text-muted-foreground dark:text-muted-foreground'>
 															{' '}
 															· {exp.tipo}
 														</span>
@@ -225,7 +225,7 @@ export default function Experiencias() {
 												</div>
 
 												<div className='shrink-0 space-y-0.5 xl:text-right'>
-													<p className='font-medium text-[11px] text-foreground/70 tabular-nums sm:text-xs dark:text-primary'>
+													<p className='font-medium text-[11px] text-foreground/70 tabular-nums sm:text-xs dark:text-base-content/70'>
 														{exp.periodo}
 													</p>
 													<p className='text-[11px] text-muted-foreground sm:text-xs'>
@@ -237,10 +237,10 @@ export default function Experiencias() {
 												</div>
 											</div>
 
-											<div className='mb-4 h-0.5 bg-black sm:mb-5 dark:bg-white' />
+											<div className='mb-4 h-0.5 bg-black sm:mb-5 dark:bg-white/20' />
 
 											{exp.setor && (
-												<p className='mb-4 border-primary border-l-2 pl-3 text-[13px] text-foreground/80 leading-snug sm:text-sm dark:text-primary'>
+												<p className='mb-4 border-primary border-l-2 pl-3 text-[13px] text-foreground/80 leading-snug sm:text-sm dark:text-base-content/75'>
 													{exp.setor}
 												</p>
 											)}
@@ -249,7 +249,7 @@ export default function Experiencias() {
 												{exp.descricao.map((item) => (
 													<li
 														key={item}
-														className='flex gap-2.5 text-[13px] text-primary-foreground leading-relaxed sm:gap-3 sm:text-sm dark:text-primary'
+														className='flex gap-2.5 text-[13px] text-foreground/80 leading-relaxed sm:gap-3 sm:text-sm dark:text-base-content/75'
 													>
 														<span className='mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary/60' />
 														{item}

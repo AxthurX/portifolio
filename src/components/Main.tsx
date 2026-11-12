@@ -134,7 +134,7 @@ export default function Main() {
 				<div className='flex flex-col'>
 					<motion.p
 						{...fadeIn(0.1)}
-						className='mb-6 font-medium text-primary text-xs uppercase tracking-[0.3em] dark:text-primary-content'
+						className='mb-6 font-medium text-primary text-xs uppercase tracking-[0.3em] dark:text-primary'
 					>
 						Porto Velho, Rondônia — Brasil
 					</motion.p>

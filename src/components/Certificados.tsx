@@ -101,7 +101,7 @@ export default function Certificados() {
 		>
 			<div className='relative z-10 px-4 md:px-0'>
 				<div className='mb-12 md:mb-16'>
-					<span className='mb-4 block font-medium text-primary text-xs uppercase tracking-widest dark:text-base-content/70'>
+					<span className='mb-4 block font-medium text-primary text-xs uppercase tracking-widest dark:text-primary'>
 						Conquistas
 					</span>
 					<h3
@@ -109,7 +109,7 @@ export default function Certificados() {
 						className='max-w-2xl font-bold text-3xl tracking-tight sm:text-4xl md:text-5xl lg:text-6xl'
 					>
 						Licenças &amp;{' '}
-						<span className='font-normal font-serif text-primary italic dark:text-base-content/70'>
+						<span className='font-normal font-serif text-primary italic dark:text-primary'>
 							Certificados
 						</span>
 					</h3>

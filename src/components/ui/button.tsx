@@ -9,13 +9,13 @@ const buttonVariants = cva(
 		variants: {
 			variant: {
 				default:
-					'border-2 border-black bg-primary text-slate-50 shadow-light hover:bg-calpolygreen-800/90 active:translate-x-boxShadowX active:translate-y-boxShadowY active:shadow-none dark:border-white dark:shadow-dark',
+					'border-2 border-black bg-primary text-primary-foreground shadow-light hover:bg-primary/90 active:translate-x-boxShadowX active:translate-y-boxShadowY active:shadow-none dark:border-white dark:shadow-dark',
 				secondary:
 					'border-2 border-black bg-secondary text-secondary-foreground shadow-light hover:bg-secondary/80 active:translate-x-boxShadowX active:translate-y-boxShadowY active:shadow-none dark:border-white dark:shadow-dark',
 				destructive:
 					'border-2 border-black bg-destructive text-destructive-foreground shadow-light hover:bg-destructive/90 active:translate-x-boxShadowX active:translate-y-boxShadowY active:shadow-none dark:border-white dark:shadow-dark',
 				outline:
-					'border border-2 border-black border-input bg-background shadow-light hover:bg-background/90 hover:text-foreground active:translate-x-boxShadowX active:translate-y-boxShadowY active:shadow-none dark:border-white dark:bg-primary dark:shadow-dark',
+					'border border-2 border-black border-input bg-background shadow-light hover:bg-background/90 hover:text-foreground active:translate-x-boxShadowX active:translate-y-boxShadowY active:shadow-none dark:border-white dark:text-base-content dark:shadow-dark',
 				link: 'border border-2 border-black border-input bg-background shadow-light hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:bg-background/90 hover:text-foreground hover:shadow-none dark:border-white dark:shadow-dark',
 				ghost: 'hover:bg-accent hover:text-accent-foreground',
 				noShadow: 'border-2 border-black bg-main',
