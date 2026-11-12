@@ -605,3 +605,31 @@ html.lenis body {
 [data-theme='black'] .playground-editor .tiptap img {
 	border-color: #fff;
 }
+
+@font-face {
+	font-family: "Open-Dyslexic";
+	src: url("/ext-files/fonts/Dyslexic/OpenDyslexic-Regular.woff2") format("woff2");
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Open-Dyslexic";
+	src: url("/ext-files/fonts/Dyslexic/OpenDyslexic-Bold.woff2") format("woff2");
+	font-weight: 700;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Open-Dyslexic";
+	src: url("/ext-files/fonts/Dyslexic/OpenDyslexic-Italic.woff2") format("woff2");
+	font-weight: 400;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: "Open-Dyslexic";
+	src: url("/ext-files/fonts/Dyslexic/OpenDyslexic-BoldItalic.woff2") format("woff2");
+	font-weight: 700;
+	font-style: italic;
+}

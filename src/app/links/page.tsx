@@ -70,7 +70,7 @@ export default function Links() {
 			<Card className='flex w-120 max-w-lg flex-col px-6 py-4 max-sm:w-full'>
 				<header className='flex items-center justify-between'>
 					<Button className='rounded-full' onClick={handleThemeChange}>
-						<Asterisk className='text-secondary-foreground' />
+						<Asterisk />
 					</Button>
 
 					<div className='flex items-center gap-2'>

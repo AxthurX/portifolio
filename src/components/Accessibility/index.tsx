@@ -1,12 +1,12 @@
 'use client';
 
 import { Settings, X } from 'lucide-react';
-import { AnimatePresence, motion } from 'motion/react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import { useCallback, useEffect, useMemo } from 'react';
 import { BiSolidLeftArrow, BiSolidRightArrow, BiSync } from 'react-icons/bi';
 import { IoAccessibility } from 'react-icons/io5';
-import { useIsMobile } from '@/lib/use-mobile';
+import { useIsMobile } from '@/hooks/use-mobile';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../ui/accordion';
 import { Button } from '../ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';

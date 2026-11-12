@@ -2,11 +2,13 @@
 
 import axios from 'axios';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import { ArrowLeft, Asterisk, Info, Sparkles } from 'lucide-react';
+import { ArrowLeft, Asterisk, Info } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { PLAYGROUND_DEMOS } from './registry';
+import { Accessibility } from '../Accessibility';
+import { AccessibilityProvider } from '../Accessibility/components/accessibility-context';
 
 function readHashId() {
 	if (typeof window === 'undefined') return null;
@@ -51,11 +53,15 @@ export function PlaygroundShell() {
 
 	return (
 		<div className='flex min-h-screen w-full flex-col'>
+			<AccessibilityProvider>
+				<Accessibility />
+			</AccessibilityProvider>
+
 			<header className='sticky top-0 z-50 w-full border-black border-b-2 bg-base-100/85 backdrop-blur-xl dark:border-white'>
 				<div className='mx-auto flex w-full max-w-430 items-center justify-between gap-4 px-4 py-3 md:px-8'>
 					<Link href='/' className='group flex items-center gap-3'>
 						<span className='flex h-9 w-9 items-center justify-center rounded-base border-2 border-black bg-primary font-bold text-primary-content text-xs shadow-light transition-transform group-hover:-translate-y-0.5 dark:border-white dark:shadow-dark'>
-							PG
+							AM
 						</span>
 
 						<span>
@@ -67,11 +73,6 @@ export function PlaygroundShell() {
 					</Link>
 
 					<div className='flex items-center gap-2'>
-						<span className='hidden items-center gap-1.5 rounded-full border border-black/10 px-3 py-1 font-mono text-[10px] text-muted-foreground uppercase tracking-wider sm:flex dark:border-white/15'>
-							<Sparkles className='h-3 w-3' />
-							{PLAYGROUND_DEMOS.length} demos ao vivo
-						</span>
-
 						<button
 							type='button'
 							onClick={toggleTheme}
@@ -166,7 +167,7 @@ export function PlaygroundShell() {
 						})}
 					</nav>
 
-					<div className='rounded-base border border-black/10 bg-base-200/50 p-4 text-muted-foreground text-xs leading-relaxed dark:border-white/15'>
+					<div className='hidden rounded-base border border-black/10 bg-base-200/50 p-4 text-muted-foreground text-xs leading-relaxed dark:border-white/15'>
 						<p className='mb-1 flex items-center gap-1.5 font-medium text-foreground'>
 							<Info className='h-3.5 w-3.5' />
 							Tudo client-side
