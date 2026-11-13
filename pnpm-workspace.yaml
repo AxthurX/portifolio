@@ -1,5 +1,5 @@
 allowBuilds:
-  '@ampproject/toolbox-optimizer': false
+  "@ampproject/toolbox-optimizer": false
   es5-ext: false
   sharp: false
   unrs-resolver: false

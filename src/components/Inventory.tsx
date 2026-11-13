@@ -21,6 +21,8 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select';
+import { createId } from '@/lib/id';
+import { usePersistentState } from '@/lib/use-persistent-state';
 
 type InventoryItem = {
 	id: string;
@@ -30,30 +32,45 @@ type InventoryItem = {
 	location: string;
 };
 
+const CATEGORY_LABELS: Record<string, string> = {
+	supplies: 'Suprimentos',
+	cleaning: 'Limpeza',
+	food: 'Alimentos',
+	maintenance: 'Manutenção',
+	other: 'Outros',
+};
+
+const LOCATION_LABELS: Record<string, string> = {
+	kitchen: 'Cozinha',
+	bathroom: 'Banheiro',
+	bedroom: 'Quarto',
+	garage: 'Garagem',
+	laundry: 'Lavanderia',
+	other: 'Outro',
+};
+
+const LOW_STOCK = 2;
+
+const SEED: InventoryItem[] = [
+	{ id: 'seed-1', name: 'Papel toalha', quantity: 4, category: 'supplies', location: 'kitchen' },
+	{
+		id: 'seed-2',
+		name: 'Sabão em pó',
+		quantity: 1,
+		category: 'cleaning',
+		location: 'laundry',
+	},
+	{
+		id: 'seed-3',
+		name: 'Lâmpadas',
+		quantity: 6,
+		category: 'maintenance',
+		location: 'garage',
+	},
+];
+
 export function Inventory() {
-	const [items, setItems] = useState<InventoryItem[]>([
-		{
-			id: '1',
-			name: 'Paper Towels',
-			quantity: 4,
-			category: 'supplies',
-			location: 'kitchen',
-		},
-		{
-			id: '2',
-			name: 'Laundry Detergent',
-			quantity: 1,
-			category: 'cleaning',
-			location: 'laundry',
-		},
-		{
-			id: '3',
-			name: 'Light Bulbs',
-			quantity: 6,
-			category: 'maintenance',
-			location: 'garage',
-		},
-	]);
+	const [items, setItems] = usePersistentState<InventoryItem[]>('inventory', SEED);
 
 	const [newItem, setNewItem] = useState({
 		name: '',
@@ -66,14 +83,17 @@ export function Inventory() {
 	const [filterCategory, setFilterCategory] = useState('all');
 
 	const handleAddItem = () => {
-		if (newItem.name.trim() === '') return;
+		const name = newItem.name.trim();
+
+		if (name === '') return;
 
 		setItems([
 			...items,
 			{
-				id: crypto.randomUUID(),
+				id: createId(),
 				...newItem,
-				quantity: Number(newItem.quantity),
+				name,
+				quantity: Math.max(1, newItem.quantity),
 			},
 		]);
 
@@ -93,82 +113,50 @@ export function Inventory() {
 		setItems(
 			items.map((item) => {
 				if (item.id === id) {
-					const newQuantity = Math.max(0, item.quantity + change);
-					return { ...item, quantity: newQuantity };
+					return { ...item, quantity: Math.max(0, item.quantity + change) };
 				}
+
 				return item;
 			}),
 		);
 	};
 
 	const filteredItems = items.filter((item) => {
-		const matchesSearch = item.name.toLowerCase().includes(searchTerm.toLowerCase());
+		const matchesSearch = item.name.toLowerCase().includes(searchTerm.trim().toLowerCase());
 		const matchesCategory = filterCategory === 'all' || item.category === filterCategory;
 		return matchesSearch && matchesCategory;
 	});
 
-	const getCategoryLabel = (category: string) => {
-		switch (category) {
-			case 'supplies':
-				return 'Supplies';
-			case 'cleaning':
-				return 'Cleaning';
-			case 'food':
-				return 'Food';
-			case 'maintenance':
-				return 'Maintenance';
-			default:
-				return category.charAt(0).toUpperCase() + category.slice(1);
-		}
-	};
-
-	const getLocationLabel = (location: string) => {
-		switch (location) {
-			case 'kitchen':
-				return 'Kitchen';
-			case 'bathroom':
-				return 'Bathroom';
-			case 'bedroom':
-				return 'Bedroom';
-			case 'garage':
-				return 'Garage';
-			case 'laundry':
-				return 'Laundry Room';
-			default:
-				return location.charAt(0).toUpperCase() + location.slice(1);
-		}
-	};
+	const lowStock = items.filter((item) => item.quantity <= LOW_STOCK).length;
 
 	return (
-		<div className='grid gap-4 md:grid-cols-2'>
-			<Card className='border-0 bg-white/10 text-white backdrop-blur-md'>
+		<div className='grid items-start gap-4 md:grid-cols-2 md:gap-6'>
+			<Card className='bg-surface'>
 				<CardHeader>
-					<div className='flex items-center gap-2'>
-						<div className='flex h-8 w-8 items-center justify-center rounded-full bg-lime-400/20'>
-							<Package className='h-4 w-4 text-lime-400' />
+					<div className='flex items-center gap-3'>
+						<div className='rounded-base bg-primary/10 text-primary flex h-9 w-9 shrink-0 items-center justify-center border-2 border-black dark:border-white'>
+							<Package className='h-4 w-4' />
 						</div>
 						<div>
-							<CardTitle>Home Inventory</CardTitle>
-							<CardDescription className='text-gray-300'>
-								Track household items and supplies
-							</CardDescription>
+							<CardTitle>Inventário da casa</CardTitle>
+							<CardDescription>Acompanhe itens e suprimentos</CardDescription>
 						</div>
 					</div>
 				</CardHeader>
 				<CardContent>
 					<div className='grid gap-4'>
 						<div className='grid gap-2'>
-							<Label htmlFor='item-name'>Item Name</Label>
+							<Label htmlFor='item-name'>Nome do item</Label>
 							<Input
 								id='item-name'
-								placeholder='Enter item name'
+								placeholder='Ex.: Detergente'
 								value={newItem.name}
 								onChange={(e) => setNewItem({ ...newItem, name: e.target.value })}
-								className='border-gray-700 bg-white/10 text-white'
+								className='bg-base-100'
 							/>
 						</div>
 						<div className='grid gap-2'>
-							<Label htmlFor='quantity'>Quantity</Label>
+							<Label htmlFor='quantity'>Quantidade</Label>
 							<Input
 								id='quantity'
 								type='number'
@@ -177,47 +165,46 @@ export function Inventory() {
 								onChange={(e) =>
 									setNewItem({
 										...newItem,
-										quantity: Number.parseInt(e.target.value) || 1,
+										quantity: Math.max(1, Number.parseInt(e.target.value, 10) || 1),
 									})
 								}
-								className='border-gray-700 bg-white/10 text-white'
+								className='bg-base-100'
 							/>
 						</div>
-						<div className='grid grid-cols-2 gap-4'>
+						<div className='grid gap-4 sm:grid-cols-2'>
 							<div className='grid gap-2'>
-								<Label htmlFor='category'>Category</Label>
+								<Label htmlFor='category'>Categoria</Label>
 								<Select
 									value={newItem.category}
 									onValueChange={(value) => setNewItem({ ...newItem, category: value })}
 								>
-									<SelectTrigger id='category' className='border-gray-700 bg-white/10 text-white'>
-										<SelectValue placeholder='Select category' />
+									<SelectTrigger id='category' className='bg-base-100'>
+										<SelectValue placeholder='Selecione a categoria' />
 									</SelectTrigger>
-									<SelectContent className='border-gray-700 bg-gray-800/90 text-white backdrop-blur-md'>
-										<SelectItem value='supplies'>Supplies</SelectItem>
-										<SelectItem value='cleaning'>Cleaning</SelectItem>
-										<SelectItem value='food'>Food</SelectItem>
-										<SelectItem value='maintenance'>Maintenance</SelectItem>
-										<SelectItem value='other'>Other</SelectItem>
+									<SelectContent className='bg-base-100 shadow-light dark:shadow-dark border-2 border-black dark:border-white'>
+										{Object.entries(CATEGORY_LABELS).map(([value, label]) => (
+											<SelectItem key={value} value={value}>
+												{label}
+											</SelectItem>
+										))}
 									</SelectContent>
 								</Select>
 							</div>
 							<div className='grid gap-2'>
-								<Label htmlFor='location'>Location</Label>
+								<Label htmlFor='location'>Local</Label>
 								<Select
 									value={newItem.location}
 									onValueChange={(value) => setNewItem({ ...newItem, location: value })}
 								>
-									<SelectTrigger id='location' className='border-gray-700 bg-white/10 text-white'>
-										<SelectValue placeholder='Select location' />
+									<SelectTrigger id='location' className='bg-base-100'>
+										<SelectValue placeholder='Selecione o local' />
 									</SelectTrigger>
-									<SelectContent className='border-gray-700 bg-gray-800/90 text-white backdrop-blur-md'>
-										<SelectItem value='kitchen'>Kitchen</SelectItem>
-										<SelectItem value='bathroom'>Bathroom</SelectItem>
-										<SelectItem value='bedroom'>Bedroom</SelectItem>
-										<SelectItem value='garage'>Garage</SelectItem>
-										<SelectItem value='laundry'>Laundry Room</SelectItem>
-										<SelectItem value='other'>Other</SelectItem>
+									<SelectContent className='bg-base-100 shadow-light dark:shadow-dark border-2 border-black dark:border-white'>
+										{Object.entries(LOCATION_LABELS).map(([value, label]) => (
+											<SelectItem key={value} value={value}>
+												{label}
+											</SelectItem>
+										))}
 									</SelectContent>
 								</Select>
 							</div>
@@ -225,72 +212,91 @@ export function Inventory() {
 					</div>
 				</CardContent>
 				<CardFooter>
-					<Button
-						onClick={handleAddItem}
-						className='w-full bg-lime-400 text-black hover:bg-lime-500'
-					>
+					<Button onClick={handleAddItem} className='w-full'>
 						<Plus className='mr-2 h-4 w-4' />
-						Add Item
+						Adicionar item
 					</Button>
 				</CardFooter>
 			</Card>
 
-			<Card className='border-0 bg-white/10 text-white backdrop-blur-md'>
+			<Card className='bg-surface'>
 				<CardHeader>
-					<CardTitle>Inventory List</CardTitle>
-					<CardDescription className='text-gray-300'>
-						Manage your household inventory
+					<CardTitle>Itens</CardTitle>
+					<CardDescription>
+						{items.length === 1 ? '1 item' : `${items.length} itens`} ·{' '}
+						{lowStock === 0
+							? 'estoque em dia'
+							: lowStock === 1
+								? '1 com estoque baixo'
+								: `${lowStock} com estoque baixo`}
 					</CardDescription>
 				</CardHeader>
 				<CardContent>
-					<div className='mb-4 flex items-center space-x-2'>
+					<div className='mb-4 flex flex-col gap-2 sm:flex-row'>
 						<div className='relative flex-1'>
-							<Search className='absolute top-2.5 left-2 h-4 w-4 text-gray-400' />
+							<Search className='text-muted-foreground absolute top-3 left-3 h-4 w-4' />
 							<Input
-								placeholder='Search items...'
-								className='border-gray-700 bg-white/10 pl-8 text-white'
+								placeholder='Buscar itens...'
+								className='bg-base-100 pl-9'
 								value={searchTerm}
 								onChange={(e) => setSearchTerm(e.target.value)}
 							/>
 						</div>
 						<Select value={filterCategory} onValueChange={setFilterCategory}>
-							<SelectTrigger className='w-32.5 border-gray-700 bg-white/10 text-white'>
-								<SelectValue placeholder='Category' />
+							<SelectTrigger className='bg-base-100 w-full sm:w-44'>
+								<SelectValue placeholder='Categoria' />
 							</SelectTrigger>
-							<SelectContent className='border-gray-700 bg-gray-800/90 text-white backdrop-blur-md'>
-								<SelectItem value='all'>All Categories</SelectItem>
-								<SelectItem value='supplies'>Supplies</SelectItem>
-								<SelectItem value='cleaning'>Cleaning</SelectItem>
-								<SelectItem value='food'>Food</SelectItem>
-								<SelectItem value='maintenance'>Maintenance</SelectItem>
-								<SelectItem value='other'>Other</SelectItem>
+							<SelectContent className='bg-base-100 shadow-light dark:shadow-dark border-2 border-black dark:border-white'>
+								<SelectItem value='all'>Todas</SelectItem>
+								{Object.entries(CATEGORY_LABELS).map(([value, label]) => (
+									<SelectItem key={value} value={value}>
+										{label}
+									</SelectItem>
+								))}
 							</SelectContent>
 						</Select>
 					</div>
 
-					<div className='space-y-4'>
+					<div className='space-y-3'>
 						{filteredItems.length === 0 ? (
-							<div className='flex h-50 items-center justify-center rounded-md border border-gray-700 border-dashed'>
-								<div className='text-center'>
-									<p className='text-gray-400 text-sm'>No items found</p>
-								</div>
+							<div className='rounded-base flex min-h-40 items-center justify-center border-2 border-dashed border-black p-6 text-center dark:border-white'>
+								<p className='text-muted-foreground text-sm'>Nenhum item encontrado</p>
 							</div>
 						) : (
 							filteredItems.map((item) => (
 								<div
 									key={item.id}
-									className='flex items-center justify-between rounded-lg border border-gray-700 bg-white/5 p-3'
+									className='rounded-base bg-base-100 flex flex-col gap-3 border-2 border-black p-3 dark:border-white'
 								>
-									<div>
-										<div className='font-medium'>{item.name}</div>
-										<div className='mt-1 flex items-center gap-2'>
-											<Badge variant='outline' className='border-gray-600 text-gray-300'>
-												{getCategoryLabel(item.category)}
-											</Badge>
-											<span className='text-gray-400 text-xs'>
-												{getLocationLabel(item.location)}
-											</span>
+									<div className='flex items-start justify-between gap-2'>
+										<div className='min-w-0'>
+											<div className='truncate font-medium'>{item.name}</div>
+											<div className='mt-1 flex flex-wrap items-center gap-2'>
+												<Badge
+													variant='outline'
+													className='text-foreground border-black dark:border-white'
+												>
+													{CATEGORY_LABELS[item.category] ?? item.category}
+												</Badge>
+												<span className='text-muted-foreground text-xs'>
+													{LOCATION_LABELS[item.location] ?? item.location}
+												</span>
+												{item.quantity <= LOW_STOCK ? (
+													<Badge className='bg-primary/15 text-primary border-0 text-xs'>
+														Estoque baixo
+													</Badge>
+												) : null}
+											</div>
 										</div>
+										<Button
+											variant='ghost'
+											size='icon'
+											onClick={() => deleteItem(item.id)}
+											className='h-8 w-8 shrink-0'
+										>
+											<Trash2 className='h-4 w-4' />
+											<span className='sr-only'>Remover item</span>
+										</Button>
 									</div>
 									<div className='flex items-center gap-2'>
 										<Button
@@ -298,26 +304,18 @@ export function Inventory() {
 											size='icon'
 											onClick={() => updateQuantity(item.id, -1)}
 											disabled={item.quantity <= 0}
-											className='h-7 w-7 rounded-full border-gray-700 bg-white/10 text-white'
+											className='bg-background h-8 w-8 border-black dark:border-white'
 										>
-											-
+											-<span className='sr-only'>Diminuir quantidade</span>
 										</Button>
-										<span className='w-8 text-center'>{item.quantity}</span>
+										<span className='w-10 text-center font-semibold'>{item.quantity}</span>
 										<Button
 											variant='outline'
 											size='icon'
 											onClick={() => updateQuantity(item.id, 1)}
-											className='h-7 w-7 rounded-full border-gray-700 bg-white/10 text-white'
+											className='bg-background h-8 w-8 border-black dark:border-white'
 										>
-											+
-										</Button>
-										<Button
-											variant='ghost'
-											size='icon'
-											onClick={() => deleteItem(item.id)}
-											className='text-gray-400 hover:bg-white/10 hover:text-white'
-										>
-											<Trash2 className='h-4 w-4' />
+											+<span className='sr-only'>Aumentar quantidade</span>
 										</Button>
 									</div>
 								</div>

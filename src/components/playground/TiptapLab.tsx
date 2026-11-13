@@ -1,8 +1,7 @@
 'use client';
 
-import type { Editor } from '@tiptap/core';
-import { CharacterCount, Placeholder } from '@tiptap/extensions';
 import ImageExtension from '@tiptap/extension-image';
+import { CharacterCount, Placeholder } from '@tiptap/extensions';
 import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import {
@@ -85,8 +84,9 @@ function ToolbarButton({
 			disabled={disabled}
 			onClick={onClick}
 			className={cn(
-				'flex h-8 w-8 items-center justify-center rounded-base border-2 border-transparent text-foreground transition-colors hover:bg-base-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:pointer-events-none disabled:opacity-30 dark:hover:bg-white/10',
-				active && 'border-black bg-primary text-primary-content shadow-light dark:border-white dark:shadow-dark',
+				'rounded-base text-foreground hover:bg-base-200 focus-visible:ring-primary flex h-8 w-8 items-center justify-center border-2 border-transparent transition-colors focus-visible:ring-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-30 dark:hover:bg-white/10',
+				active &&
+					'bg-primary text-primary-content shadow-light dark:shadow-dark border-black dark:border-white',
 			)}
 		>
 			{children}
@@ -183,11 +183,11 @@ export function TiptapLab() {
 	};
 
 	return (
-		<div className='overflow-hidden rounded-base border-2 border-black bg-base-100 shadow-light dark:border-white dark:shadow-dark'>
+		<div className='rounded-base bg-base-100 shadow-light dark:shadow-dark overflow-hidden border-2 border-black dark:border-white'>
 			<div
 				role='toolbar'
 				aria-label='Formatação de texto'
-				className='flex flex-wrap items-center gap-0.5 border-black border-b-2 bg-base-100 p-2 dark:border-white'
+				className='bg-base-100 flex flex-wrap items-center gap-0.5 border-b-2 border-black p-2 dark:border-white'
 			>
 				<ToolbarButton
 					label='Desfazer'
@@ -352,10 +352,10 @@ export function TiptapLab() {
 			</div>
 
 			{(linkOpen || imageOpen) && (
-				<div className='flex flex-wrap items-center gap-2 border-black border-b-2 bg-base-200/60 px-3 py-2 dark:border-white'>
+				<div className='bg-base-200/60 flex flex-wrap items-center gap-2 border-b-2 border-black px-3 py-2 dark:border-white'>
 					{linkOpen ? (
 						<>
-							<Link2 className='h-3.5 w-3.5 shrink-0 text-muted-foreground' />
+							<Link2 className='text-muted-foreground h-3.5 w-3.5 shrink-0' />
 
 							<label htmlFor='tiptap-link' className='sr-only'>
 								URL do link
@@ -373,7 +373,7 @@ export function TiptapLab() {
 									}
 								}}
 								placeholder='https://exemplo.com'
-								className='h-8 min-w-0 flex-1 rounded border border-black/20 bg-base-100 px-2 font-mono text-xs outline-none focus-visible:ring-2 focus-visible:ring-primary dark:border-white/25'
+								className='bg-base-100 focus-visible:ring-primary h-8 min-w-0 flex-1 rounded border border-black/20 px-2 font-mono text-xs outline-none focus-visible:ring-2 dark:border-white/25'
 							/>
 
 							<Button type='button' size='sm' className='h-8 px-3 text-[11px]' onClick={applyLink}>
@@ -384,14 +384,14 @@ export function TiptapLab() {
 								type='button'
 								aria-label='Fechar campo de link'
 								onClick={() => setLinkOpen(false)}
-								className='flex h-8 w-8 items-center justify-center rounded-base text-muted-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary'
+								className='rounded-base text-muted-foreground hover:text-foreground focus-visible:ring-primary flex h-8 w-8 items-center justify-center focus-visible:ring-2 focus-visible:outline-none'
 							>
 								<X className='h-3.5 w-3.5' />
 							</button>
 						</>
 					) : (
 						<>
-							<ImagePlus className='h-3.5 w-3.5 shrink-0 text-muted-foreground' />
+							<ImagePlus className='text-muted-foreground h-3.5 w-3.5 shrink-0' />
 
 							<label htmlFor='tiptap-image' className='sr-only'>
 								URL da imagem
@@ -409,7 +409,7 @@ export function TiptapLab() {
 									}
 								}}
 								placeholder='https://exemplo.com/imagem.png'
-								className='h-8 min-w-0 flex-1 rounded border border-black/20 bg-base-100 px-2 font-mono text-xs outline-none focus-visible:ring-2 focus-visible:ring-primary dark:border-white/25'
+								className='bg-base-100 focus-visible:ring-primary h-8 min-w-0 flex-1 rounded border border-black/20 px-2 font-mono text-xs outline-none focus-visible:ring-2 dark:border-white/25'
 							/>
 
 							<Button
@@ -426,7 +426,7 @@ export function TiptapLab() {
 								type='button'
 								aria-label='Fechar campo de imagem'
 								onClick={() => setImageOpen(false)}
-								className='flex h-8 w-8 items-center justify-center rounded-base text-muted-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary'
+								className='rounded-base text-muted-foreground hover:text-foreground focus-visible:ring-primary flex h-8 w-8 items-center justify-center focus-visible:ring-2 focus-visible:outline-none'
 							>
 								<X className='h-3.5 w-3.5' />
 							</button>
@@ -440,13 +440,13 @@ export function TiptapLab() {
 			</div>
 
 			{showHtml && (
-				<pre className='max-h-56 overflow-auto border-black border-t-2 bg-[#0b1220] p-4 font-mono text-[11px] text-slate-200 leading-relaxed dark:border-white'>
+				<pre className='max-h-56 overflow-auto border-t-2 border-black bg-[#0b1220] p-4 font-mono text-[11px] leading-relaxed text-slate-200 dark:border-white'>
 					<code>{html}</code>
 				</pre>
 			)}
 
-			<div className='flex flex-wrap items-center justify-between gap-3 border-black border-t-2 bg-base-200/50 px-4 py-2.5 dark:border-white'>
-				<div className='flex flex-wrap items-center gap-3 text-[11px] text-muted-foreground'>
+			<div className='bg-base-200/50 flex flex-wrap items-center justify-between gap-3 border-t-2 border-black px-4 py-2.5 dark:border-white'>
+				<div className='text-muted-foreground flex flex-wrap items-center gap-3 text-[11px]'>
 					<span>
 						<strong className='text-foreground'>{words}</strong> palavras
 					</span>
@@ -456,7 +456,7 @@ export function TiptapLab() {
 					</span>
 
 					<span className='hidden items-center gap-1 sm:flex'>
-						<span className='h-1.5 w-1.5 rounded-full bg-success' />
+						<span className='bg-success h-1.5 w-1.5 rounded-full' />
 						TipTap 3 · ProseMirror
 					</span>
 				</div>

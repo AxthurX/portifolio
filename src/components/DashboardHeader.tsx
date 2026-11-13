@@ -1,50 +1,112 @@
-import { Bell, Search, Settings } from 'lucide-react';
-import Image from 'next/image';
+'use client';
+
+import axios from 'axios';
+import { ArrowLeft, Asterisk, RotateCcw } from 'lucide-react';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 
+const STORAGE_PREFIX = 'homehub:';
+
+function greetingFor(hour: number) {
+	if (hour < 6) return 'Boa madrugada';
+	if (hour < 12) return 'Bom dia';
+	if (hour < 18) return 'Boa tarde';
+	return 'Boa noite';
+}
+
 export function DashboardHeader() {
+	const [now, setNow] = useState<Date | null>(null);
+
+	useEffect(() => {
+		setNow(new Date());
+
+		const interval = window.setInterval(() => setNow(new Date()), 60_000);
+
+		return () => window.clearInterval(interval);
+	}, []);
+
+	const handleThemeChange = async () => {
+		const current = document.documentElement.getAttribute('data-theme') || 'arthur';
+		const theme = current === 'arthur' ? 'black' : 'arthur';
+
+		document.documentElement.setAttribute('data-theme', theme);
+
+		await axios.post('/api/theme', { theme });
+	};
+
+	const handleReset = () => {
+		const confirmed = window.confirm(
+			'Isso apaga tarefas, despesas, eventos, refeições, inventário e dispositivos salvos neste navegador. Continuar?',
+		);
+
+		if (!confirmed) return;
+
+		for (const key of Object.keys(window.localStorage)) {
+			if (key.startsWith(STORAGE_PREFIX)) window.localStorage.removeItem(key);
+		}
+
+		window.location.reload();
+	};
+
 	return (
-		<header className='sticky top-0 z-10 flex h-20 items-center gap-4 border-white/10 border-b bg-white/5 px-4 backdrop-blur-md md:px-6'>
-			<div className='flex items-center gap-3'>
-				<div className='relative h-10 w-10 overflow-hidden rounded-full border border-white/20'>
-					<Image
-						src='/icons/placeholder.svg?height=100&width=100'
-						alt='User avatar'
-						width={40}
-						height={40}
-						className='object-cover'
-					/>
-				</div>
-				<div>
-					<p className='text-lime-400 text-xs'>Good Morning</p>
-					<h1 className='font-semibold text-white text-xl'>HomeHub</h1>
-				</div>
-			</div>
-			<div className='ml-auto flex items-center gap-3'>
-				<div className='relative hidden sm:block'>
-					<Search className='absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-gray-400' />
-					<input
-						type='text'
-						placeholder='Search...'
-						className='h-10 w-full rounded-full bg-white/10 pr-4 pl-10 text-sm text-white backdrop-blur-md focus:outline-none focus:ring-2 focus:ring-lime-400/50 md:w-60'
-					/>
-				</div>
-				<Button
-					variant='ghost'
-					size='icon'
-					className='rounded-full bg-white/10 text-white hover:bg-white/20'
+		<header className='bg-base-100/85 sticky top-0 z-50 w-full border-b-2 border-black backdrop-blur-xl dark:border-white'>
+			<div className='mx-auto flex h-16 w-full max-w-430 items-center gap-3 px-4 md:h-20 md:px-8 lg:px-12'>
+				<Link
+					href='/'
+					className='rounded-base bg-primary text-primary-content shadow-light hover:bg-accent active:translate-x-boxShadowX active:translate-y-boxShadowY dark:shadow-dark flex h-10 w-10 shrink-0 items-center justify-center border-2 border-black text-xs font-bold transition-all active:shadow-none dark:border-white'
+					title='Voltar ao portfólio'
+					aria-label='Voltar ao portfólio'
 				>
-					<Bell className='h-5 w-5' />
-					<span className='sr-only'>Notifications</span>
-				</Button>
-				<Button
-					variant='ghost'
-					size='icon'
-					className='rounded-full bg-white/10 text-white hover:bg-white/20'
-				>
-					<Settings className='h-5 w-5' />
-					<span className='sr-only'>Settings</span>
-				</Button>
+					AM
+				</Link>
+
+				<div className='min-w-0'>
+					<p className='text-primary truncate text-xs font-medium tracking-widest uppercase'>
+						{now ? greetingFor(now.getHours()) : 'Olá'}
+					</p>
+					<h1 className='truncate text-lg font-bold tracking-tight md:text-xl'>Arthur Martins</h1>
+					<p className='text-muted-foreground hidden truncate text-xs capitalize md:block'>
+						{now
+							? now.toLocaleDateString('pt-BR', {
+									weekday: 'long',
+									day: '2-digit',
+									month: 'long',
+								})
+							: 'Home Hub'}
+					</p>
+				</div>
+
+				<div className='ml-auto flex items-center gap-2'>
+					<Button
+						variant='outline'
+						size='icon'
+						onClick={handleReset}
+						title='Limpar dados salvos'
+						aria-label='Limpar dados salvos'
+						className='rounded-base bg-base-100 h-9 w-9 border-black dark:border-white'
+					>
+						<RotateCcw className='h-4 w-4' />
+					</Button>
+
+					<Button
+						variant='outline'
+						size='icon'
+						onClick={handleThemeChange}
+						title='Alternar tema'
+						aria-label='Alternar tema'
+						className='rounded-base bg-base-100 h-9 w-9 border-black dark:border-white'
+					>
+						<Asterisk className='h-4 w-4' />
+					</Button>
+
+					<Button asChild size='sm' className='rounded-base h-9 gap-2 px-3 md:px-4'>
+						<Link href='/'>
+							<ArrowLeft className='h-4 w-4' />
+							<span className='hidden md:inline'>Portfólio</span>
+						</Link>
+					</Button>
+				</div>
 			</div>
 		</header>
 	);

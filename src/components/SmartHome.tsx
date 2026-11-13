@@ -14,324 +14,239 @@ import {
 	Wifi,
 } from 'lucide-react';
 import Image from 'next/image';
-import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Switch } from '@/components/ui/switch';
+import { usePersistentState } from '@/lib/use-persistent-state';
+
+type Devices = {
+	light: boolean;
+	airConditioner: boolean;
+	tv: boolean;
+	router: boolean;
+	speaker: boolean;
+	cctv: boolean;
+	humidifier: boolean;
+};
+
+const SEED_DEVICES: Devices = {
+	light: true,
+	airConditioner: true,
+	tv: false,
+	router: true,
+	speaker: true,
+	cctv: true,
+	humidifier: false,
+};
+
+const DEVICE_LABELS: Record<keyof Devices, string> = {
+	light: 'Luz',
+	airConditioner: 'Ar-condicionado',
+	tv: 'Smart TV',
+	router: 'Roteador',
+	speaker: 'Caixa de som',
+	cctv: 'Câmeras',
+	humidifier: 'Umidificador',
+};
+
+const DEVICE_ICONS = {
+	light: LightbulbIcon,
+	airConditioner: Thermometer,
+	tv: Tv,
+	router: Wifi,
+	speaker: Speaker,
+	cctv: Camera,
+	humidifier: Droplets,
+};
+
+const METRICS = [
+	{ icon: LightbulbIcon, label: 'Consumo atual', value: '1,1 kW' },
+	{ icon: Droplets, label: 'Umidade', value: '50,2%' },
+	{ icon: Thermometer, label: 'Temperatura', value: '16 °C' },
+	{ icon: LightbulbIcon, label: 'Energia', value: '2,2 kWh' },
+] as const;
 
 export function SmartHome() {
-	const [temperature, setTemperature] = useState(22);
-	const [devices, setDevices] = useState({
-		light: true,
-		airConditioner: true,
-		tv: false,
-		router: true,
-		speaker: true,
-		cctv: true,
-		humidifier: false,
-	});
+	const [temperature, setTemperature, { hydrated: tempHydrated }] = usePersistentState<number>(
+		'temperature',
+		22,
+	);
+	const [devices, setDevices, { hydrated: devicesHydrated }] = usePersistentState<Devices>(
+		'devices',
+		SEED_DEVICES,
+	);
 
-	const toggleDevice = (device: keyof typeof devices) => {
-		setDevices({
-			...devices,
-			[device]: !devices[device],
-		});
+	const toggleDevice = (device: keyof Devices) => {
+		setDevices({ ...devices, [device]: !devices[device] });
 	};
 
+	const activeDevices = Object.entries(devices).filter(([, on]) => on).length;
+
 	return (
-		<div className='grid gap-4 md:grid-cols-3'>
-			<div className='grid gap-4 md:col-span-2'>
-				<Card className='overflow-hidden bg-white/10 text-white backdrop-blur-md'>
-					<div className='p-6'>
-						<div className='mb-6 flex items-center justify-between'>
+		<div className='grid gap-4 md:gap-6 lg:grid-cols-3'>
+			<div className='grid content-start gap-4 md:gap-6 lg:col-span-2'>
+				<Card className='bg-surface overflow-hidden'>
+					<div className='p-4 md:p-6'>
+						<div className='flex items-center justify-between gap-3'>
 							<div className='flex items-center gap-3'>
-								<div className='flex h-10 w-10 items-center justify-center rounded-full bg-lime-400/20'>
-									<Thermometer className='h-5 w-5 text-lime-400' />
+								<div className='rounded-base bg-primary/10 text-primary flex h-10 w-10 shrink-0 items-center justify-center border-2 border-black dark:border-white'>
+									<Thermometer className='h-5 w-5' />
 								</div>
 								<div>
-									<h3 className='font-medium text-lg'>Air Conditioning</h3>
+									<span className='text-primary block text-xs font-medium tracking-widest uppercase'>
+										Climatização
+									</span>
+									<h3 className='text-lg font-semibold'>Ar-condicionado</h3>
 								</div>
 							</div>
 							<Switch
 								checked={devices.airConditioner}
 								onCheckedChange={() => toggleDevice('airConditioner')}
-								className='data-[state=checked]:bg-lime-400'
 							/>
 						</div>
 
-						<div className='mb-8 flex items-center justify-center'>
-							<div className='relative flex h-60 w-60 items-center justify-center'>
-								<div className='absolute inset-0 rounded-full border-4 border-gray-700/30' />
+						<div className='flex justify-center py-6 md:py-8'>
+							<div className='relative flex h-52 w-52 items-center justify-center sm:h-60 sm:w-60'>
+								<div className='border-base-300 absolute inset-0 rounded-full border-4' />
 								<div
-									className='absolute inset-0 rounded-full border-4 border-transparent border-t-lime-400'
+									className='border-t-primary absolute inset-0 rounded-full border-4 border-transparent'
 									style={{
 										transform: `rotate(${(temperature - 10) * 9}deg)`,
 										transition: 'transform 0.3s ease-out',
 									}}
 								/>
-								<div className='absolute inset-4 flex flex-col items-center justify-center rounded-full bg-white/5 backdrop-blur-sm'>
-									<p className='font-light text-6xl'>{temperature}</p>
-									<p className='text-gray-300 text-xs'>Temperature</p>
-									<div className='mt-2'>
-										<div className='h-5 w-5 text-lime-400'>
-											{devices.airConditioner ? (
-												<svg
-													xmlns='http://www.w3.org/2000/svg'
-													viewBox='0 0 24 24'
-													fill='currentColor'
-												>
-													<title>air conditioner</title>
-													<path d='M12 1c0 2.761-2.239 5-5 5S2 3.761 2 1h10zm-5 9c-2.761 0-5-2.239-5-5h10c0 2.761-2.239 5-5 5z' />
-													<path d='M17 5c0 2.761-2.239 5-5 5S7 7.761 7 5h10zm-5 9c-2.761 0-5-2.239-5-5h10c0 2.761-2.239 5-5 5z' />
-													<path d='M22 9c0 2.761-2.239 5-5 5s-5-2.239-5-5h10zm-5 9c-2.761 0-5-2.239-5-5h10c0 2.761-2.239 5-5 5z' />
-												</svg>
-											) : null}
-										</div>
-									</div>
+								<div className='bg-base-100 absolute inset-4 flex flex-col items-center justify-center rounded-full border-2 border-black dark:border-white'>
+									<p className='text-5xl font-bold tracking-tight md:text-6xl'>
+										{tempHydrated ? temperature : '--'}
+									</p>
+									<p className='text-muted-foreground mt-1 text-xs tracking-widest uppercase'>
+										Temperatura
+									</p>
+									<p className='text-primary mt-2 text-xs font-medium'>
+										{devices.airConditioner ? 'Ligado' : 'Desligado'}
+									</p>
 								</div>
-								<div className='absolute top-1/2 left-0 -translate-x-4 -translate-y-1/2'>
+								<div className='absolute top-1/2 left-0 -translate-x-3 -translate-y-1/2'>
 									<Button
 										variant='outline'
 										size='icon'
-										className='h-8 w-8 rounded-full border-white/20 bg-white/10 text-white backdrop-blur-md'
+										aria-label='Diminuir temperatura'
+										className='bg-base-100 h-9 w-9 rounded-full border-black dark:border-white'
 										onClick={() => setTemperature(Math.max(10, temperature - 1))}
 									>
 										<Minus className='h-4 w-4' />
 									</Button>
 								</div>
-								<div className='absolute top-1/2 right-0 translate-x-4 -translate-y-1/2'>
+								<div className='absolute top-1/2 right-0 translate-x-3 -translate-y-1/2'>
 									<Button
 										variant='outline'
 										size='icon'
-										className='h-8 w-8 rounded-full border-white/20 bg-white/10 text-white backdrop-blur-md'
+										aria-label='Aumentar temperatura'
+										className='bg-base-100 h-9 w-9 rounded-full border-black dark:border-white'
 										onClick={() => setTemperature(Math.min(30, temperature + 1))}
 									>
 										<Plus className='h-4 w-4' />
 									</Button>
 								</div>
-								<div className='absolute top-0 left-1/2 -translate-x-1/2 -translate-y-4'>
-									<span className='text-gray-400 text-xs'>10°</span>
-								</div>
-								<div className='absolute top-1/4 right-0 translate-x-4 -translate-y-2'>
-									<span className='text-gray-400 text-xs'>20°</span>
-								</div>
-								<div className='absolute right-1/4 bottom-0 translate-y-4'>
-									<span className='text-gray-400 text-xs'>30°</span>
-								</div>
 							</div>
 						</div>
 					</div>
 				</Card>
 
-				<div className='grid grid-cols-2 gap-4 md:grid-cols-4'>
-					<Card className='bg-white/10 p-4 text-white backdrop-blur-md'>
-						<div className='flex flex-col items-center gap-2'>
-							<div className='flex h-10 w-10 items-center justify-center rounded-full bg-lime-400/20'>
-								<LightbulbIcon className='h-5 w-5 text-lime-400' />
+				<div className='grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4'>
+					{METRICS.map(({ icon: Icon, label, value }) => (
+						<Card key={label} className='bg-surface p-4'>
+							<div className='flex flex-col items-center gap-2 text-center'>
+								<div className='rounded-base bg-primary/10 text-primary flex h-9 w-9 items-center justify-center border-2 border-black dark:border-white'>
+									<Icon className='h-4 w-4' />
+								</div>
+								<h3 className='text-muted-foreground text-xs font-medium tracking-wide uppercase'>
+									{label}
+								</h3>
+								<p className='text-xl font-bold tracking-tight'>{value}</p>
 							</div>
-							<h3 className='font-medium text-sm'>Current Consumption</h3>
-							<p className='font-bold text-2xl'>1.1 KW</p>
-						</div>
-					</Card>
-
-					<Card className='bg-white/10 p-4 text-white backdrop-blur-md'>
-						<div className='flex flex-col items-center gap-2'>
-							<div className='flex h-10 w-10 items-center justify-center rounded-full bg-lime-400/20'>
-								<Droplets className='h-5 w-5 text-lime-400' />
-							</div>
-							<h3 className='font-medium text-sm'>Humidity</h3>
-							<p className='font-bold text-2xl'>50.2%</p>
-						</div>
-					</Card>
-
-					<Card className='bg-white/10 p-4 text-white backdrop-blur-md'>
-						<div className='flex flex-col items-center gap-2'>
-							<div className='flex h-10 w-10 items-center justify-center rounded-full bg-lime-400/20'>
-								<Thermometer className='h-5 w-5 text-lime-400' />
-							</div>
-							<h3 className='font-medium text-sm'>Temperature</h3>
-							<p className='font-bold text-2xl'>16 °C</p>
-						</div>
-					</Card>
-
-					<Card className='bg-white/10 p-4 text-white backdrop-blur-md'>
-						<div className='flex flex-col items-center gap-2'>
-							<div className='flex h-10 w-10 items-center justify-center rounded-full bg-lime-400/20'>
-								<LightbulbIcon className='h-5 w-5 text-lime-400' />
-							</div>
-							<h3 className='font-medium text-sm'>Energy Usage</h3>
-							<p className='font-bold text-2xl'>2.2 K</p>
-						</div>
-					</Card>
+						</Card>
+					))}
 				</div>
 			</div>
 
-			<div className='grid content-start gap-4'>
-				<Card className='overflow-hidden bg-white/10 text-white backdrop-blur-md'>
+			<div className='grid content-start gap-4 md:gap-6'>
+				<Card className='bg-surface overflow-hidden'>
 					<div className='p-4'>
-						<div className='mb-2 flex items-center justify-between'>
-							<h3 className='font-medium text-sm'>Camera</h3>
-							<div className='flex items-center'>
-								<div className='mr-2 h-3 w-3 rounded-full bg-lime-400' />
-								<span className='text-xs'>Drawing Room</span>
+						<div className='mb-3 flex items-center justify-between'>
+							<h3 className='text-sm font-semibold'>Câmera</h3>
+							<div className='flex items-center gap-2'>
+								<div className='bg-primary h-2.5 w-2.5 rounded-full' />
+								<span className='text-muted-foreground text-xs'>Sala de estar</span>
 							</div>
 						</div>
-						<div className='relative overflow-hidden rounded-lg'>
+						<div className='rounded-base relative overflow-hidden border-2 border-black dark:border-white'>
 							<Image
-								src='/icons/placeholder.svg?height=200&width=300'
-								alt='Room camera view'
+								src='/icons/placeholder.svg'
+								alt='Visão da câmera da sala'
 								width={300}
 								height={200}
-								className='h-48 w-full rounded-lg object-cover'
+								className='h-44 w-full object-cover'
 							/>
-							<div className='absolute top-2 left-2 rounded-full bg-red-500/80 px-2 py-0.5 text-white text-xs backdrop-blur-sm'>
-								Live
+							<div className='bg-primary text-primary-content absolute top-2 left-2 rounded-full border-2 border-black px-2 py-0.5 text-xs font-medium dark:border-white'>
+								Ao vivo
 							</div>
 						</div>
 					</div>
 				</Card>
 
-				<Card className='bg-white/10 p-4 text-white backdrop-blur-md'>
-					<div className='mb-4 flex items-center justify-between'>
-						<div className='flex items-center gap-2'>
-							<div className='text-yellow-400'>
-								<Sun className='h-8 w-8' />
-							</div>
-							<div className='text-cyan-400'>
-								<Cloud className='h-6 w-6' />
-							</div>
+				<Card className='bg-surface p-4'>
+					<div className='mb-3 flex items-center justify-between'>
+						<div className='flex items-center gap-1'>
+							<Sun className='text-primary h-7 w-7' />
+							<Cloud className='text-muted-foreground h-5 w-5' />
 						</div>
 						<div className='text-right'>
-							<p className='text-gray-300 text-xs'>Indonesia</p>
-							<div className='flex items-end'>
-								<span className='font-light text-5xl'>28</span>
-								<span className='text-xl'>°C</span>
+							<p className='text-primary text-xs font-medium tracking-widest uppercase'>
+								Porto Velho
+							</p>
+							<div className='flex items-end justify-end'>
+								<span className='text-4xl font-bold tracking-tight'>28</span>
+								<span className='mb-1 text-lg'>°C</span>
 							</div>
-							<p className='text-gray-300 text-xs'>Sunny with cold</p>
+							<p className='text-muted-foreground text-xs'>Parcialmente nublado</p>
 						</div>
 					</div>
 				</Card>
 
-				<Card className='bg-white/10 p-4 text-white backdrop-blur-md'>
-					<h3 className='mb-4 font-medium text-lg'>Devices</h3>
-					<div className='grid grid-cols-2 gap-4'>
-						<div className='flex flex-col gap-2'>
-							<div
-								className={`flex items-center justify-between rounded-lg p-3 ${devices.light ? 'bg-lime-400/20' : 'bg-white/5'}`}
-							>
-								<div className='flex items-center gap-2'>
-									<div
-										className={`flex h-8 w-8 items-center justify-center rounded-full ${devices.light ? 'bg-lime-400' : 'bg-white/10'}`}
-									>
-										<LightbulbIcon
-											className={`h-4 w-4 ${devices.light ? 'text-black' : 'text-white'}`}
-										/>
-									</div>
-									<span className='text-xs'>Light</span>
-								</div>
-								<Switch
-									checked={devices.light}
-									onCheckedChange={() => toggleDevice('light')}
-									className='data-[state=checked]:bg-lime-400'
-								/>
-							</div>
+				<Card className='bg-surface p-4'>
+					<div className='mb-4 flex items-center justify-between'>
+						<h3 className='text-lg font-semibold'>Dispositivos</h3>
+						<span className='text-muted-foreground text-xs'>
+							{devicesHydrated ? `${activeDevices} ativo(s)` : '--'}
+						</span>
+					</div>
+					<div className='grid grid-cols-2 gap-3'>
+						{(Object.keys(DEVICE_LABELS) as (keyof Devices)[]).map((key) => {
+							const on = devices[key];
+							const Icon = DEVICE_ICONS[key];
 
-							<div
-								className={`flex items-center justify-between rounded-lg p-3 ${devices.tv ? 'bg-lime-400/20' : 'bg-white/5'}`}
-							>
-								<div className='flex items-center gap-2'>
-									<div
-										className={`flex h-8 w-8 items-center justify-center rounded-full ${devices.tv ? 'bg-lime-400' : 'bg-white/10'}`}
-									>
-										<Tv className={`h-4 w-4 ${devices.tv ? 'text-black' : 'text-white'}`} />
+							return (
+								<div
+									key={key}
+									className={`rounded-base flex flex-col gap-2 border-2 border-black p-3 transition-colors dark:border-white ${
+										on ? 'bg-primary/10' : 'bg-base-100'
+									}`}
+								>
+									<div className='flex items-center gap-2'>
+										<div
+											className={`rounded-base flex h-8 w-8 shrink-0 items-center justify-center border-2 border-black dark:border-white ${
+												on ? 'bg-primary text-primary-content' : 'bg-base-200 text-foreground'
+											}`}
+										>
+											<Icon className='h-4 w-4' />
+										</div>
+										<span className='truncate text-xs'>{DEVICE_LABELS[key]}</span>
 									</div>
-									<span className='text-xs'>Smart TV</span>
+									<Switch checked={on} onCheckedChange={() => toggleDevice(key)} />
 								</div>
-								<Switch
-									checked={devices.tv}
-									onCheckedChange={() => toggleDevice('tv')}
-									className='data-[state=checked]:bg-lime-400'
-								/>
-							</div>
-
-							<div
-								className={`flex items-center justify-between rounded-lg p-3 ${devices.humidifier ? 'bg-lime-400/20' : 'bg-white/5'}`}
-							>
-								<div className='flex items-center gap-2'>
-									<div
-										className={`flex h-8 w-8 items-center justify-center rounded-full ${devices.humidifier ? 'bg-lime-400' : 'bg-white/10'}`}
-									>
-										<Droplets
-											className={`h-4 w-4 ${devices.humidifier ? 'text-black' : 'text-white'}`}
-										/>
-									</div>
-									<span className='text-xs'>Humidifier</span>
-								</div>
-								<Switch
-									checked={devices.humidifier}
-									onCheckedChange={() => toggleDevice('humidifier')}
-									className='data-[state=checked]:bg-lime-400'
-								/>
-							</div>
-						</div>
-
-						<div className='flex flex-col gap-2'>
-							<div
-								className={`flex items-center justify-between rounded-lg p-3 ${devices.router ? 'bg-lime-400/20' : 'bg-white/5'}`}
-							>
-								<div className='flex items-center gap-2'>
-									<div
-										className={`flex h-8 w-8 items-center justify-center rounded-full ${devices.router ? 'bg-lime-400' : 'bg-white/10'}`}
-									>
-										<Wifi className={`h-4 w-4 ${devices.router ? 'text-black' : 'text-white'}`} />
-									</div>
-									<span className='text-xs'>Router</span>
-								</div>
-								<Switch
-									checked={devices.router}
-									onCheckedChange={() => toggleDevice('router')}
-									className='data-[state=checked]:bg-lime-400'
-								/>
-							</div>
-
-							<div
-								className={`flex items-center justify-between rounded-lg p-3 ${devices.speaker ? 'bg-lime-400/20' : 'bg-white/5'}`}
-							>
-								<div className='flex items-center gap-2'>
-									<div
-										className={`flex h-8 w-8 items-center justify-center rounded-full ${devices.speaker ? 'bg-lime-400' : 'bg-white/10'}`}
-									>
-										<Speaker
-											className={`h-4 w-4 ${devices.speaker ? 'text-black' : 'text-white'}`}
-										/>
-									</div>
-									<span className='text-xs'>Speaker</span>
-								</div>
-								<Switch
-									checked={devices.speaker}
-									onCheckedChange={() => toggleDevice('speaker')}
-									className='data-[state=checked]:bg-lime-400'
-								/>
-							</div>
-
-							<div
-								className={`flex items-center justify-between rounded-lg p-3 ${devices.cctv ? 'bg-lime-400/20' : 'bg-white/5'}`}
-							>
-								<div className='flex items-center gap-2'>
-									<div
-										className={`flex h-8 w-8 items-center justify-center rounded-full ${devices.cctv ? 'bg-lime-400' : 'bg-white/10'}`}
-									>
-										<Camera className={`h-4 w-4 ${devices.cctv ? 'text-black' : 'text-white'}`} />
-									</div>
-									<span className='text-xs'>CCTV</span>
-								</div>
-								<Switch
-									checked={devices.cctv}
-									onCheckedChange={() => toggleDevice('cctv')}
-									className='data-[state=checked]:bg-lime-400'
-								/>
-							</div>
-						</div>
+							);
+						})}
 					</div>
 				</Card>
 			</div>

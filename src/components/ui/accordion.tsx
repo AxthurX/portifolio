@@ -2,7 +2,7 @@
 
 import * as AccordionPrimitive from '@radix-ui/react-accordion';
 import { ChevronDown } from 'lucide-react';
-import * as React from 'react';
+import type * as React from 'react';
 
 import { cn } from '@/lib/utils';
 
@@ -38,7 +38,6 @@ function AccordionTrigger({
 		</AccordionPrimitive.Header>
 	);
 }
-
 
 function AccordionContent({
 	className,

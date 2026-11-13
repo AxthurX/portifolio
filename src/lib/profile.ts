@@ -14,5 +14,6 @@ export const LINKS = [
 	{ title: 'Meu portfólio', url: '/' },
 	{ title: 'Últimos projetos', url: '/#projetos' },
 	{ title: 'Fale comigo', url: 'mailto:arthurmartins696@gmail.com' },
+	{ title: 'Playground', url: '/playground' },
 	// { title: 'Agende uma call', url: 'https://cal.com/seunome' },
 ];

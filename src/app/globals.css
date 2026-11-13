@@ -300,7 +300,7 @@ html {
 }
 
 /* ── DARK — grafite frio, azul da marca em destaque ── */
-[data-theme='black'] {
+[data-theme="black"] {
 	--muted: #131923;
 	--muted-foreground: #94a3b8;
 
@@ -416,7 +416,7 @@ html.lenis body {
 }
 
 .a11y-dyslexia {
-	font-family: Verdana, Tahoma, 'Trebuchet MS', sans-serif;
+	font-family: Verdana, Tahoma, "Trebuchet MS", sans-serif;
 	word-spacing: 0.16em;
 }
 
@@ -572,37 +572,37 @@ html.lenis body {
 	color: #94a3b8;
 }
 
-[data-theme='black'] .playground-editor .tiptap {
+[data-theme="black"] .playground-editor .tiptap {
 	color: #e2e8f0;
 }
 
-[data-theme='black'] .playground-editor .tiptap blockquote {
+[data-theme="black"] .playground-editor .tiptap blockquote {
 	color: #cbd5e1;
 }
 
-[data-theme='black'] .playground-editor .tiptap code {
+[data-theme="black"] .playground-editor .tiptap code {
 	background: #1f2937;
 	color: #e2e8f0;
 }
 
-[data-theme='black'] .playground-editor .tiptap pre {
+[data-theme="black"] .playground-editor .tiptap pre {
 	background: #020617;
 }
 
-[data-theme='black'] .playground-editor .tiptap pre code {
+[data-theme="black"] .playground-editor .tiptap pre code {
 	background: transparent;
 	color: inherit;
 }
 
-[data-theme='black'] .playground-editor .tiptap a {
+[data-theme="black"] .playground-editor .tiptap a {
 	color: #8db3ff;
 }
 
-[data-theme='black'] .playground-editor .tiptap hr {
+[data-theme="black"] .playground-editor .tiptap hr {
 	border-color: #334155;
 }
 
-[data-theme='black'] .playground-editor .tiptap img {
+[data-theme="black"] .playground-editor .tiptap img {
 	border-color: #fff;
 }
 

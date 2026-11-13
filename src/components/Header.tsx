@@ -55,22 +55,22 @@ export default function Header({ onPortfolioOpen }: { onPortfolioOpen: () => voi
 				className='fixed top-0 z-50 flex w-full max-w-400 justify-between px-4 pt-4 md:px-8 lg:px-12'
 			>
 				<div
-					className='absolute inset-x-4 top-4 flex h-16 items-center justify-between rounded-base border-2 border-black shadow-light backdrop-blur-xl md:inset-x-8 lg:inset-x-12 dark:border-white dark:shadow-dark'
+					className='rounded-base shadow-light dark:shadow-dark absolute inset-x-4 top-4 flex h-16 items-center justify-between border-2 border-black backdrop-blur-xl md:inset-x-8 lg:inset-x-12 dark:border-white'
 					style={{ background: 'var(--header-bg)' }}
 				/>
 
 				<div className='z-50 flex h-15 items-center gap-6 pl-5'>
 					<Link
 						href='/'
-						className='flex items-center gap-3 text-base-content transition-opacity hover:opacity-80 dark:text-primary'
+						className='text-base-content dark:text-primary flex items-center gap-3 transition-opacity hover:opacity-80'
 					>
-						<div className='flex h-8 w-8 items-center justify-center rounded-base border-2 border-black bg-primary shadow-light dark:border-white dark:shadow-dark'>
-							<span className='font-bold text-primary-content text-xs'>AM</span>
+						<div className='rounded-base bg-primary shadow-light dark:shadow-dark flex h-8 w-8 items-center justify-center border-2 border-black dark:border-white'>
+							<span className='text-primary-content text-xs font-bold'>AM</span>
 						</div>
 
-						<span className='font-medium text-sm md:hidden lg:block dark:text-primary'>
-							<p className='font-medium text-foreground dark:text-base-content'>Arthur Martins</p>
-							<p className='text-muted-foreground text-xs dark:text-base-content/70'>
+						<span className='dark:text-primary text-sm font-medium md:hidden lg:block'>
+							<p className='text-foreground dark:text-base-content font-medium'>Arthur Martins</p>
+							<p className='text-muted-foreground dark:text-base-content/70 text-xs'>
 								Fullstack Developer
 							</p>
 						</span>
@@ -81,20 +81,20 @@ export default function Header({ onPortfolioOpen }: { onPortfolioOpen: () => voi
 						href={CURRICULUM_URL}
 						download='Arthur-Martins-Curriculo.pdf'
 						title='Baixar Currículo'
-						className='hidden items-center gap-1.5 rounded-base border-2 border-black bg-base-100 px-3 py-1.5 font-medium text-foreground text-xs shadow-light transition-all hover:bg-primary hover:text-primary-foreground active:translate-x-boxShadowX active:translate-y-boxShadowY active:shadow-none min-[1220px]:flex dark:border-white dark:bg-black/40 dark:shadow-dark'
+						className='rounded-base bg-base-100 text-foreground shadow-light hover:bg-primary hover:text-primary-foreground active:translate-x-boxShadowX active:translate-y-boxShadowY dark:shadow-dark hidden items-center gap-1.5 border-2 border-black px-3 py-1.5 text-xs font-medium transition-all active:shadow-none min-[1220px]:flex dark:border-white dark:bg-black/40'
 					>
 						<Download className='h-3 w-3' /> Currículo
 					</a>
 				</div>
 
 				<nav className='absolute inset-x-0 top-4 z-10 hidden h-15 items-center justify-center py-3 md:flex'>
-					<div className='flex items-center gap-1 rounded-base border-2 border-black bg-base-100 p-1 shadow-light dark:border-white dark:bg-black/20 dark:shadow-dark'>
+					<div className='rounded-base bg-base-100 shadow-light dark:shadow-dark flex items-center gap-1 border-2 border-black p-1 dark:border-white dark:bg-black/20'>
 						{LINKS.map((link) => (
 							<a
 								key={link.href}
 								href={link.href}
 								className={cn(
-									'rounded-base px-4 py-2 font-normal text-base-content text-xs transition-all',
+									'rounded-base text-base-content px-4 py-2 text-xs font-normal transition-all',
 									hash === link.href && 'border-2 border-black dark:border-white',
 								)}
 							>
@@ -104,7 +104,7 @@ export default function Header({ onPortfolioOpen }: { onPortfolioOpen: () => voi
 
 						<Link
 							href='/playground'
-							className='rounded-base border-2 border-black border-dashed px-4 py-2 font-normal text-base-content text-xs transition-all hover:border-solid hover:bg-primary hover:text-primary-content dark:border-white'
+							className='rounded-base text-base-content hover:bg-primary hover:text-primary-content border-2 border-dashed border-black px-4 py-2 text-xs font-normal transition-all hover:border-solid dark:border-white'
 						>
 							Playground
 						</Link>
@@ -137,7 +137,7 @@ export default function Header({ onPortfolioOpen }: { onPortfolioOpen: () => voi
 					<button
 						type='button'
 						onClick={() => setMenuOpen(true)}
-						className='flex h-10 w-10 items-center justify-center rounded-base border-2 border-black bg-base-100 text-foreground shadow-light transition-colors hover:bg-primary hover:text-primary-foreground active:translate-x-boxShadowX active:translate-y-boxShadowY active:shadow-none md:hidden dark:border-white dark:shadow-dark'
+						className='rounded-base bg-base-100 text-foreground shadow-light hover:bg-primary hover:text-primary-foreground active:translate-x-boxShadowX active:translate-y-boxShadowY dark:shadow-dark flex h-10 w-10 items-center justify-center border-2 border-black transition-colors active:shadow-none md:hidden dark:border-white'
 						aria-label='Abrir menu'
 					>
 						<Menu className='h-4 w-4' />
@@ -153,12 +153,12 @@ export default function Header({ onPortfolioOpen }: { onPortfolioOpen: () => voi
 						animate={{ opacity: 1, y: 0 }}
 						exit={{ opacity: 0, y: -20 }}
 						transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-						className='fixed inset-0 z-100 flex flex-col bg-primary-content px-6 py-8'
+						className='bg-primary-content fixed inset-0 z-100 flex flex-col px-6 py-8'
 					>
 						<div className='flex items-center justify-between pb-8'>
 							<div className='flex items-center gap-3'>
-								<div className='flex h-10 w-10 items-center justify-center rounded-base border-2 border-black bg-primary shadow-light dark:border-white dark:shadow-dark'>
-									<span className='font-bold text-primary-content text-sm'>AM</span>
+								<div className='rounded-base bg-primary shadow-light dark:shadow-dark flex h-10 w-10 items-center justify-center border-2 border-black dark:border-white'>
+									<span className='text-primary-content text-sm font-bold'>AM</span>
 								</div>
 								<span className='font-medium'>Arthur Martins</span>
 							</div>
@@ -166,7 +166,7 @@ export default function Header({ onPortfolioOpen }: { onPortfolioOpen: () => voi
 							<button
 								type='button'
 								onClick={() => setMenuOpen(false)}
-								className='flex h-10 w-10 items-center justify-center rounded-base border-2 border-black bg-base-100 text-foreground shadow-light transition-colors hover:bg-primary hover:text-primary-foreground active:translate-x-boxShadowX active:translate-y-boxShadowY active:shadow-none'
+								className='rounded-base bg-base-100 text-foreground shadow-light hover:bg-primary hover:text-primary-foreground active:translate-x-boxShadowX active:translate-y-boxShadowY flex h-10 w-10 items-center justify-center border-2 border-black transition-colors active:shadow-none'
 								aria-label='Fechar menu'
 							>
 								<X className='h-4 w-4' />
@@ -186,7 +186,7 @@ export default function Header({ onPortfolioOpen }: { onPortfolioOpen: () => voi
 									delay: 0,
 									ease: [0.16, 1, 0.3, 1],
 								}}
-								className='border-black border-b-2 py-4 text-left font-bold text-3xl tracking-tight transition-colors hover:text-primary dark:border-white'
+								className='hover:text-primary border-b-2 border-black py-4 text-left text-3xl font-bold tracking-tight transition-colors dark:border-white'
 							>
 								Portfolio
 							</motion.button>
@@ -203,7 +203,7 @@ export default function Header({ onPortfolioOpen }: { onPortfolioOpen: () => voi
 										delay: (i + 1) * 0.06,
 										ease: [0.16, 1, 0.3, 1],
 									}}
-									className='border-black border-b-2 py-4 text-left font-bold text-3xl tracking-tight transition-colors hover:text-primary dark:border-white'
+									className='hover:text-primary border-b-2 border-black py-4 text-left text-3xl font-bold tracking-tight transition-colors dark:border-white'
 								>
 									{link.label}
 								</motion.a>
@@ -219,7 +219,7 @@ export default function Header({ onPortfolioOpen }: { onPortfolioOpen: () => voi
 									delay: (LINKS.length + 1) * 0.06,
 									ease: [0.16, 1, 0.3, 1],
 								}}
-								className='border-black border-b-2 py-4 text-left font-bold text-3xl tracking-tight text-primary transition-colors hover:text-accent dark:border-white'
+								className='text-primary hover:text-accent border-b-2 border-black py-4 text-left text-3xl font-bold tracking-tight transition-colors dark:border-white'
 							>
 								Playground
 							</motion.a>
@@ -229,7 +229,7 @@ export default function Header({ onPortfolioOpen }: { onPortfolioOpen: () => voi
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.4, delay: 0.4 }}
-							className='border-black border-b-2 py-4 text-left font-bold text-3xl tracking-tight transition-colors hover:text-primary dark:border-white'
+							className='hover:text-primary border-b-2 border-black py-4 text-left text-3xl font-bold tracking-tight transition-colors dark:border-white'
 						>
 							<a
 								href={CURRICULUM_URL}

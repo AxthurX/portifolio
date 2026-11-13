@@ -1,13 +1,14 @@
 'use client';
 
 import axios from 'axios';
-import { Asterisk, MoreVertical, Share2 } from 'lucide-react';
+import { Asterisk, MoreVertical } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { LINKS, PROFILE, SOCIALS } from '@/lib/profile';
+import { ShareButton } from './components/share';
 
 const ICON_SRC: Record<string, string> = {
 	instagram: '/icons/instagram.svg',
@@ -17,45 +18,6 @@ const ICON_SRC: Record<string, string> = {
 };
 
 export default function Links() {
-	async function handleShare() {
-		const url = window.location.href;
-
-		try {
-			if (navigator.share) {
-				await navigator.share({
-					title: PROFILE.username,
-					url,
-				});
-
-				return;
-			}
-
-			if (navigator.clipboard) {
-				await navigator.clipboard.writeText(url);
-
-				console.log('Link copiado!');
-				return;
-			}
-
-			const input = document.createElement('input');
-
-			input.value = url;
-			document.body.appendChild(input);
-			input.select();
-
-			document.execCommand('copy');
-			input.remove();
-
-			console.log('Link copiado!');
-		} catch (error) {
-			if (error instanceof DOMException && error.name === 'AbortError') {
-				return;
-			}
-
-			console.error('Erro ao compartilhar:', error);
-		}
-	}
-
 	const handleThemeChange = async () => {
 		const data_theme = document.documentElement.getAttribute('data-theme') || 'arthur';
 		const theme = data_theme === 'arthur' ? 'black' : 'arthur';
@@ -73,11 +35,7 @@ export default function Links() {
 						<Asterisk />
 					</Button>
 
-					<div className='flex items-center gap-2'>
-						<Button aria-label='Compartilhar' className='rounded-full'>
-							<Share2 className='size-4' onClick={handleShare} />
-						</Button>
-					</div>
+					<ShareButton />
 				</header>
 
 				<CardContent>
@@ -91,7 +49,7 @@ export default function Links() {
 								/>
 							</Avatar>
 
-							<h1 className='font-bold text-xl tracking-tight'>{PROFILE.username}</h1>
+							<h1 className='text-xl font-bold tracking-tight'>{PROFILE.username}</h1>
 
 							<nav aria-label='Redes sociais' className='flex items-center justify-center gap-5'>
 								{SOCIALS.map((social) => (
@@ -108,7 +66,7 @@ export default function Links() {
 											alt={social.label}
 											width={24}
 											height={24}
-											className='size-6 text-foreground/80 brightness-0 dark:invert'
+											className='text-foreground/80 size-6 brightness-0 dark:invert'
 										/>
 									</Link>
 								))}
@@ -120,7 +78,7 @@ export default function Links() {
 						{LINKS.map((link) => (
 							<a key={link.title} href={link.url} target='_blank' rel='noopener noreferrer'>
 								<Button className='h-14 w-full'>
-									<span className='flex-1 text-balance text-center font-medium text-sm'>
+									<span className='flex-1 text-center text-sm font-medium text-balance'>
 										{link.title}
 									</span>
 
@@ -132,7 +90,7 @@ export default function Links() {
 				</CardContent>
 
 				<CardFooter className='sm>mt-10 flex flex-col items-center gap-4'>
-					<p className='text-pretty text-center text-muted-foreground text-xs dark:text-white/60'>
+					<p className='text-muted-foreground text-center text-xs text-pretty dark:text-white/60'>
 						Cookie Preferences • Report • Privacy • Explore
 					</p>
 				</CardFooter>

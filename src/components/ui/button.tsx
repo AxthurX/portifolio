@@ -4,21 +4,21 @@ import type * as React from 'react';
 import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
-	'inline-flex items-center justify-center whitespace-nowrap rounded-base font-base text-black text-sm ring-offset-white transition-all hover:cursor-pointer focus-visible:outline-none focus-visible:ring-black focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+	'rounded-base font-base inline-flex items-center justify-center text-sm whitespace-nowrap text-black ring-offset-white transition-all hover:cursor-pointer focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50',
 	{
 		variants: {
 			variant: {
 				default:
-					'border-2 border-black bg-primary text-primary-foreground shadow-light hover:bg-primary/90 active:translate-x-boxShadowX active:translate-y-boxShadowY active:shadow-none dark:border-white dark:shadow-dark',
+					'bg-primary text-primary-foreground shadow-light hover:bg-primary/90 active:translate-x-boxShadowX active:translate-y-boxShadowY dark:shadow-dark border-2 border-black active:shadow-none dark:border-white',
 				secondary:
-					'border-2 border-black bg-secondary text-secondary-foreground shadow-light hover:bg-secondary/80 active:translate-x-boxShadowX active:translate-y-boxShadowY active:shadow-none dark:border-white dark:shadow-dark',
+					'bg-secondary text-secondary-foreground shadow-light hover:bg-secondary/80 active:translate-x-boxShadowX active:translate-y-boxShadowY dark:shadow-dark border-2 border-black active:shadow-none dark:border-white',
 				destructive:
-					'border-2 border-black bg-destructive text-destructive-foreground shadow-light hover:bg-destructive/90 active:translate-x-boxShadowX active:translate-y-boxShadowY active:shadow-none dark:border-white dark:shadow-dark',
+					'bg-destructive text-destructive-foreground shadow-light hover:bg-destructive/90 active:translate-x-boxShadowX active:translate-y-boxShadowY dark:shadow-dark border-2 border-black active:shadow-none dark:border-white',
 				outline:
-					'border border-2 border-black border-input bg-background shadow-light hover:bg-background/90 hover:text-foreground active:translate-x-boxShadowX active:translate-y-boxShadowY active:shadow-none dark:border-white dark:text-base-content dark:shadow-dark',
-				link: 'border border-2 border-black border-input bg-background shadow-light hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:bg-background/90 hover:text-foreground hover:shadow-none dark:border-white dark:shadow-dark',
+					'border-input bg-background shadow-light hover:bg-background/90 hover:text-foreground active:translate-x-boxShadowX active:translate-y-boxShadowY dark:text-base-content dark:shadow-dark border border-2 border-black active:shadow-none dark:border-white',
+				link: 'border-input bg-background shadow-light hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:bg-background/90 hover:text-foreground dark:shadow-dark border border-2 border-black hover:shadow-none dark:border-white',
 				ghost: 'hover:bg-accent hover:text-accent-foreground',
-				noShadow: 'border-2 border-black bg-main',
+				noShadow: 'bg-main border-2 border-black',
 			},
 			size: {
 				default: 'h-10 px-4 py-2',
@@ -35,7 +35,7 @@ const buttonVariants = cva(
 );
 
 export interface ButtonProps
-	extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+	extends React.ComponentProps<'button'>,
 		VariantProps<typeof buttonVariants> {
 	asChild?: boolean;
 }

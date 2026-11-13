@@ -21,6 +21,8 @@ import {
 	SelectValue,
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
+import { createId } from '@/lib/id';
+import { usePersistentState } from '@/lib/use-persistent-state';
 
 type Meal = {
 	id: string;
@@ -30,49 +32,73 @@ type Meal = {
 	day: string;
 };
 
-export function MealPlanner() {
-	const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+const DAYS = [
+	{ value: 'segunda', label: 'Segunda' },
+	{ value: 'terca', label: 'Terça' },
+	{ value: 'quarta', label: 'Quarta' },
+	{ value: 'quinta', label: 'Quinta' },
+	{ value: 'sexta', label: 'Sexta' },
+	{ value: 'sabado', label: 'Sábado' },
+	{ value: 'domingo', label: 'Domingo' },
+] as const;
 
-	const [meals, setMeals] = useState<Meal[]>([
-		{
-			id: '1',
-			name: 'Spaghetti Bolognese',
-			ingredients: 'Ground beef, tomatoes, pasta, onions, garlic',
-			mealType: 'dinner',
-			day: 'Monday',
-		},
-		{
-			id: '2',
-			name: 'Chicken Salad',
-			ingredients: 'Chicken breast, lettuce, tomatoes, cucumber, olive oil',
-			mealType: 'lunch',
-			day: 'Tuesday',
-		},
-	]);
+const MEAL_TYPES: Record<string, string> = {
+	cafe: 'Café da manhã',
+	almoco: 'Almoço',
+	janta: 'Jantar',
+	lanche: 'Lanche',
+};
+
+const SEED: Meal[] = [
+	{
+		id: 'seed-1',
+		name: 'Macarrão à bolonhesa',
+		ingredients: 'Carne moída, tomate, macarrão, cebola, alho',
+		mealType: 'janta',
+		day: 'segunda',
+	},
+	{
+		id: 'seed-2',
+		name: 'Salada de frango',
+		ingredients: 'Peito de frango, alface, tomate, pepino, azeite',
+		mealType: 'almoco',
+		day: 'terca',
+	},
+];
+
+const selectContentClass =
+	'border-2 border-black bg-base-100 shadow-light dark:border-white dark:shadow-dark';
+
+export function MealPlanner() {
+	const [meals, setMeals] = usePersistentState<Meal[]>('meals', SEED);
 
 	const [newMeal, setNewMeal] = useState({
 		name: '',
 		ingredients: '',
-		mealType: 'dinner',
-		day: 'Monday',
+		mealType: 'janta',
+		day: 'segunda',
 	});
 
 	const handleAddMeal = () => {
-		if (newMeal.name.trim() === '') return;
+		const name = newMeal.name.trim();
+
+		if (name === '') return;
 
 		setMeals([
 			...meals,
 			{
-				id: crypto.randomUUID(),
+				id: createId(),
 				...newMeal,
+				name,
+				ingredients: newMeal.ingredients.trim(),
 			},
 		]);
 
 		setNewMeal({
 			name: '',
 			ingredients: '',
-			mealType: 'dinner',
-			day: 'Monday',
+			mealType: 'janta',
+			day: 'segunda',
 		});
 	};
 
@@ -80,90 +106,74 @@ export function MealPlanner() {
 		setMeals(meals.filter((meal) => meal.id !== id));
 	};
 
-	const getMealsByDay = (day: string) => {
-		return meals.filter((meal) => meal.day === day);
-	};
-
-	const getMealTypeLabel = (type: string) => {
-		switch (type) {
-			case 'breakfast':
-				return 'Breakfast';
-			case 'lunch':
-				return 'Lunch';
-			case 'dinner':
-				return 'Dinner';
-			default:
-				return type.charAt(0).toUpperCase() + type.slice(1);
-		}
-	};
-
 	return (
-		<div className='grid gap-4 md:grid-cols-2'>
-			<Card className='bg-white/10 text-white backdrop-blur-md'>
+		<div className='grid items-start gap-4 md:grid-cols-2 md:gap-6'>
+			<Card className='bg-surface'>
 				<CardHeader>
-					<div className='flex items-center gap-2'>
-						<div className='flex h-8 w-8 items-center justify-center rounded-full bg-lime-400/20'>
-							<UtensilsCrossed className='h-4 w-4 text-lime-400' />
+					<div className='flex items-center gap-3'>
+						<div className='rounded-base bg-primary/10 text-primary flex h-9 w-9 shrink-0 items-center justify-center border-2 border-black dark:border-white'>
+							<UtensilsCrossed className='h-4 w-4' />
 						</div>
 						<div>
-							<CardTitle>Meal Planner</CardTitle>
-							<CardDescription className='text-gray-300'>Plan your weekly meals</CardDescription>
+							<CardTitle>Planejador de refeições</CardTitle>
+							<CardDescription>Planeje a semana</CardDescription>
 						</div>
 					</div>
 				</CardHeader>
 				<CardContent>
 					<div className='grid gap-4'>
 						<div className='grid gap-2'>
-							<Label htmlFor='meal-name'>Meal Name</Label>
+							<Label htmlFor='meal-name'>Nome da refeição</Label>
 							<Input
 								id='meal-name'
-								placeholder='Enter meal name'
+								placeholder='Ex.: Frango grelhado'
 								value={newMeal.name}
 								onChange={(e) => setNewMeal({ ...newMeal, name: e.target.value })}
-								className='border-gray-700 bg-white/10 text-white'
+								className='bg-base-100'
 							/>
 						</div>
 						<div className='grid gap-2'>
-							<Label htmlFor='ingredients'>Ingredients</Label>
+							<Label htmlFor='ingredients'>Ingredientes</Label>
 							<Textarea
 								id='ingredients'
-								placeholder='List ingredients'
+								placeholder='Liste os ingredientes'
 								value={newMeal.ingredients}
 								onChange={(e) => setNewMeal({ ...newMeal, ingredients: e.target.value })}
-								className='border-gray-700 bg-white/10 text-white'
+								className='bg-base-100'
 							/>
 						</div>
-						<div className='grid grid-cols-2 gap-4'>
+						<div className='grid gap-4 sm:grid-cols-2'>
 							<div className='grid gap-2'>
-								<Label htmlFor='meal-type'>Meal Type</Label>
+								<Label htmlFor='meal-type'>Tipo</Label>
 								<Select
 									value={newMeal.mealType}
 									onValueChange={(value) => setNewMeal({ ...newMeal, mealType: value })}
 								>
-									<SelectTrigger id='meal-type' className='border-gray-700 bg-white/10 text-white'>
-										<SelectValue placeholder='Select type' />
+									<SelectTrigger id='meal-type' className='bg-base-100'>
+										<SelectValue placeholder='Selecione o tipo' />
 									</SelectTrigger>
-									<SelectContent className='border-gray-700 bg-gray-800/90 text-white backdrop-blur-md'>
-										<SelectItem value='breakfast'>Breakfast</SelectItem>
-										<SelectItem value='lunch'>Lunch</SelectItem>
-										<SelectItem value='dinner'>Dinner</SelectItem>
-										<SelectItem value='snack'>Snack</SelectItem>
+									<SelectContent className={selectContentClass}>
+										{Object.entries(MEAL_TYPES).map(([value, label]) => (
+											<SelectItem key={value} value={value}>
+												{label}
+											</SelectItem>
+										))}
 									</SelectContent>
 								</Select>
 							</div>
 							<div className='grid gap-2'>
-								<Label htmlFor='day'>Day</Label>
+								<Label htmlFor='day'>Dia</Label>
 								<Select
 									value={newMeal.day}
 									onValueChange={(value) => setNewMeal({ ...newMeal, day: value })}
 								>
-									<SelectTrigger id='day' className='border-gray-700 bg-white/10 text-white'>
-										<SelectValue placeholder='Select day' />
+									<SelectTrigger id='day' className='bg-base-100'>
+										<SelectValue placeholder='Selecione o dia' />
 									</SelectTrigger>
-									<SelectContent className='border-gray-700 bg-gray-800/90 text-white backdrop-blur-md'>
-										{days.map((day) => (
-											<SelectItem key={day} value={day}>
-												{day}
+									<SelectContent className={selectContentClass}>
+										{DAYS.map((day) => (
+											<SelectItem key={day.value} value={day.value}>
+												{day.label}
 											</SelectItem>
 										))}
 									</SelectContent>
@@ -173,52 +183,53 @@ export function MealPlanner() {
 					</div>
 				</CardContent>
 				<CardFooter>
-					<Button
-						onClick={handleAddMeal}
-						className='w-full bg-lime-400 text-black hover:bg-lime-500'
-					>
+					<Button onClick={handleAddMeal} className='w-full'>
 						<Plus className='mr-2 h-4 w-4' />
-						Add Meal
+						Adicionar refeição
 					</Button>
 				</CardFooter>
 			</Card>
 
-			<Card className='bg-white/10 text-white backdrop-blur-md'>
+			<Card className='bg-surface'>
 				<CardHeader>
-					<CardTitle>Weekly Plan</CardTitle>
-					<CardDescription className='text-gray-300'>
-						Your meal schedule for the week
-					</CardDescription>
+					<CardTitle>Semana</CardTitle>
+					<CardDescription>Sua agenda de refeições</CardDescription>
 				</CardHeader>
 				<CardContent>
-					<div className='space-y-4'>
-						{days.map((day) => {
-							const dayMeals = getMealsByDay(day);
+					<div className='space-y-3'>
+						{DAYS.map((day) => {
+							const dayMeals = meals.filter((meal) => meal.day === day.value);
+
 							return (
-								<div key={day} className='rounded-lg border border-gray-700 bg-white/5 p-3'>
-									<h3 className='font-medium'>{day}</h3>
+								<div
+									key={day.value}
+									className='rounded-base bg-base-100 border-2 border-black p-3 dark:border-white'
+								>
+									<h3 className='font-semibold'>{day.label}</h3>
 									{dayMeals.length === 0 ? (
-										<p className='mt-2 text-gray-400 text-sm'>No meals planned</p>
+										<p className='text-muted-foreground mt-1 text-sm'>Nenhuma refeição planejada</p>
 									) : (
 										<div className='mt-2 space-y-2'>
 											{dayMeals.map((meal) => (
 												<div
 													key={meal.id}
-													className='flex items-center justify-between rounded-md bg-white/5 p-2'
+													className='flex items-center justify-between gap-2 border-t-2 border-black pt-2 dark:border-white/20'
 												>
-													<div>
-														<div className='font-medium'>{meal.name}</div>
-														<div className='text-gray-400 text-xs'>
-															{getMealTypeLabel(meal.mealType)}
+													<div className='min-w-0'>
+														<div className='truncate font-medium'>{meal.name}</div>
+														<div className='text-muted-foreground text-xs'>
+															{MEAL_TYPES[meal.mealType] ?? meal.mealType}
+															{meal.ingredients ? ` · ${meal.ingredients}` : ''}
 														</div>
 													</div>
 													<Button
 														variant='ghost'
 														size='icon'
 														onClick={() => deleteMeal(meal.id)}
-														className='text-gray-400 hover:bg-white/10 hover:text-white'
+														className='h-8 w-8 shrink-0'
 													>
 														<Trash2 className='h-4 w-4' />
+														<span className='sr-only'>Remover refeição</span>
 													</Button>
 												</div>
 											))}

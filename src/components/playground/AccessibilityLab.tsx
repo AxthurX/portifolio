@@ -10,7 +10,13 @@ import {
 	Ruler,
 	Volume2,
 } from 'lucide-react';
-import { type PointerEvent as ReactPointerEvent, useCallback, useEffect, useRef, useState } from 'react';
+import {
+	type PointerEvent as ReactPointerEvent,
+	useCallback,
+	useEffect,
+	useRef,
+	useState,
+} from 'react';
 import { Button } from '@/components/ui/button';
 import { Slider } from '@/components/ui/slider';
 import { Switch } from '@/components/ui/switch';
@@ -120,8 +126,8 @@ function SwitchRow({
 	return (
 		<div className='flex items-start justify-between gap-3 py-2'>
 			<label htmlFor={id} className='cursor-pointer select-none'>
-				<span className='block font-medium text-xs'>{label}</span>
-				<span className='mt-0.5 block text-[11px] text-muted-foreground leading-snug'>
+				<span className='block text-xs font-medium'>{label}</span>
+				<span className='text-muted-foreground mt-0.5 block text-[11px] leading-snug'>
 					{description}
 				</span>
 			</label>
@@ -131,7 +137,7 @@ function SwitchRow({
 				checked={checked}
 				onCheckedChange={onCheckedChange}
 				aria-label={label}
-				className='mt-0.5 border-black/20 data-[state=unchecked]:bg-base-300 dark:border-white/30'
+				className='data-[state=unchecked]:bg-base-300 mt-0.5 border-black/20 dark:border-white/30'
 			/>
 		</div>
 	);
@@ -157,8 +163,8 @@ function RangeRow({
 	return (
 		<div className='py-2'>
 			<div className='mb-2 flex items-center justify-between gap-2'>
-				<span className='font-medium text-xs'>{label}</span>
-				<span className='rounded border border-black/10 px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground dark:border-white/20'>
+				<span className='text-xs font-medium'>{label}</span>
+				<span className='text-muted-foreground rounded border border-black/10 px-1.5 py-0.5 font-mono text-[10px] dark:border-white/20'>
 					{display}
 				</span>
 			</div>
@@ -431,16 +437,16 @@ export function AccessibilityLab() {
 
 	return (
 		<div className='grid gap-4 lg:grid-cols-[minmax(0,320px)_minmax(0,1fr)]'>
-			<div className='rounded-base border-2 border-black bg-base-100 p-4 shadow-light lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:self-start lg:overflow-y-auto dark:border-white dark:shadow-dark'>
-				<div className='flex items-center justify-between gap-2 border-black border-b-2 pb-3 dark:border-white'>
+			<div className='rounded-base bg-base-100 shadow-light dark:shadow-dark border-2 border-black p-4 lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:self-start lg:overflow-y-auto dark:border-white'>
+				<div className='flex items-center justify-between gap-2 border-b-2 border-black pb-3 dark:border-white'>
 					<div className='flex items-center gap-2'>
-						<span className='flex h-9 w-9 items-center justify-center rounded-base border-2 border-black bg-primary text-primary-content shadow-light dark:border-white dark:shadow-dark'>
+						<span className='rounded-base bg-primary text-primary-content shadow-light dark:shadow-dark flex h-9 w-9 items-center justify-center border-2 border-black dark:border-white'>
 							<Accessibility className='h-4 w-4' />
 						</span>
 
 						<div>
-							<p className='font-semibold text-sm leading-none'>Menu de acessibilidade</p>
-							<p className='mt-1 font-mono text-[10px] text-muted-foreground uppercase tracking-[0.16em]'>
+							<p className='text-sm leading-none font-semibold'>Menu de acessibilidade</p>
+							<p className='text-muted-foreground mt-1 font-mono text-[10px] tracking-[0.16em] uppercase'>
 								barra de recursos
 							</p>
 						</div>
@@ -451,7 +457,7 @@ export function AccessibilityLab() {
 						onClick={reset}
 						title='Restaurar padrões'
 						aria-label='Restaurar preferências padrão'
-						className='flex h-8 w-8 items-center justify-center rounded-base border-2 border-black/15 text-muted-foreground transition-colors hover:border-black hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary dark:border-white/20 dark:hover:border-white'
+						className='rounded-base text-muted-foreground hover:text-foreground focus-visible:ring-primary flex h-8 w-8 items-center justify-center border-2 border-black/15 transition-colors hover:border-black focus-visible:ring-2 focus-visible:outline-none dark:border-white/20 dark:hover:border-white'
 					>
 						<RotateCcw className='h-3.5 w-3.5' />
 					</button>
@@ -467,14 +473,14 @@ export function AccessibilityLab() {
 							key={preset.id}
 							type='button'
 							onClick={() => applyPreset(preset)}
-							className='rounded-full border border-black/15 px-2.5 py-1 font-medium text-[10px] text-muted-foreground uppercase tracking-wider transition-colors hover:border-black hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary dark:border-white/20 dark:hover:border-white'
+							className='text-muted-foreground hover:text-foreground focus-visible:ring-primary rounded-full border border-black/15 px-2.5 py-1 text-[10px] font-medium tracking-wider uppercase transition-colors hover:border-black focus-visible:ring-2 focus-visible:outline-none dark:border-white/20 dark:hover:border-white'
 						>
 							{preset.label}
 						</button>
 					))}
 				</div>
 
-				<p className='mt-4 mb-1 font-mono text-[10px] text-muted-foreground uppercase tracking-[0.2em]'>
+				<p className='text-muted-foreground mt-4 mb-1 font-mono text-[10px] tracking-[0.2em] uppercase'>
 					Visão
 				</p>
 
@@ -522,7 +528,7 @@ export function AccessibilityLab() {
 					onCheckedChange={() => toggle('grayscale', 'Escala de cinza')}
 				/>
 
-				<p className='mt-4 mb-1 font-mono text-[10px] text-muted-foreground uppercase tracking-[0.2em]'>
+				<p className='text-muted-foreground mt-4 mb-1 font-mono text-[10px] tracking-[0.2em] uppercase'>
 					Leitura
 				</p>
 
@@ -582,12 +588,12 @@ export function AccessibilityLab() {
 					onCheckedChange={() => toggle('reduceMotion', 'Redução de movimento')}
 				/>
 
-				<div className='mt-4 border-black/10 border-t pt-3 dark:border-white/15'>
-					<p className='flex items-center gap-1.5 font-medium text-[11px]'>
+				<div className='mt-4 border-t border-black/10 pt-3 dark:border-white/15'>
+					<p className='flex items-center gap-1.5 text-[11px] font-medium'>
 						<Mic className='h-3.5 w-3.5' />
 						Comandos de voz
 					</p>
-					<p className='mt-1 text-[11px] text-muted-foreground leading-snug'>
+					<p className='text-muted-foreground mt-1 text-[11px] leading-snug'>
 						Diga “aumentar texto”, “contraste”, “dislexia”, “régua”, “ler” ou “resetar”.
 					</p>
 
@@ -606,7 +612,7 @@ export function AccessibilityLab() {
 					</div>
 
 					{transcript && (
-						<p className='mt-2 text-[11px] text-muted-foreground'>
+						<p className='text-muted-foreground mt-2 text-[11px]'>
 							Último comando: <span className='text-foreground'>“{transcript}”</span>
 						</p>
 					)}
@@ -619,7 +625,7 @@ export function AccessibilityLab() {
 
 			<div className='min-w-0'>
 				<div className='mb-2 flex flex-wrap items-center justify-between gap-2'>
-					<p className='flex items-center gap-1.5 font-mono text-[10px] text-muted-foreground uppercase tracking-[0.18em]'>
+					<p className='text-muted-foreground flex items-center gap-1.5 font-mono text-[10px] tracking-[0.18em] uppercase'>
 						<Eye className='h-3.5 w-3.5' />
 						Área de leitura
 					</p>
@@ -658,13 +664,13 @@ export function AccessibilityLab() {
 					ref={previewRef}
 					role='region'
 					aria-label='Conteúdo de exemplo com preferências aplicadas'
-					className='relative overflow-hidden rounded-base border-2 border-black bg-white shadow-light dark:border-white dark:shadow-dark'
+					className='rounded-base shadow-light dark:shadow-dark relative overflow-hidden border-2 border-black bg-white dark:border-white'
 					onPointerMove={handlePointerMove}
 					onPointerLeave={() => setRulerY(null)}
 				>
 					<div
 						className={cn(
-							'a11y-preview p-5 text-[#111827] transition-colors duration-200 md:p-8',
+							'a11y-preview p-5 text-neutral-900 transition-colors duration-200 md:p-8',
 							prefs.contrast && 'a11y-contrast',
 							prefs.dyslexia && 'a11y-dyslexia',
 							prefs.highlightLinks && 'a11y-links',
@@ -678,11 +684,11 @@ export function AccessibilityLab() {
 						}}
 					>
 						<article className='mx-auto max-w-2xl'>
-							<p className='font-mono text-[0.68em] text-[#1445c9] uppercase tracking-[0.22em]'>
+							<p className='font-mono text-[0.68em] tracking-[0.22em] text-[#1445c9] uppercase'>
 								Conteúdo de exemplo
 							</p>
 
-							<h3 className='mt-2 font-bold text-[1.7em] leading-tight tracking-tight'>
+							<h3 className='mt-2 text-[1.7em] leading-tight font-bold tracking-tight'>
 								Acessibilidade não é um recurso extra
 							</h3>
 
@@ -706,12 +712,12 @@ export function AccessibilityLab() {
 								.
 							</p>
 
-							<blockquote className='mt-4 border-[#1445c9] border-l-4 pl-4 text-[0.92em] italic opacity-80'>
+							<blockquote className='mt-4 border-l-4 border-[#1445c9] pl-4 text-[0.92em] italic opacity-80'>
 								“Nada sobre nós, sem nós.” — lema do movimento de direitos das pessoas com
 								deficiência.
 							</blockquote>
 
-							<h4 className='mt-5 font-semibold text-[1.1em]'>Checklist rápida</h4>
+							<h4 className='mt-5 text-[1.1em] font-semibold'>Checklist rápida</h4>
 
 							<ul className='mt-2 list-disc space-y-1 pl-5 text-[0.92em]'>
 								<li>Contraste mínimo de 4.5:1 para texto normal.</li>
@@ -726,7 +732,7 @@ export function AccessibilityLab() {
 									announce('Formulário de demonstração enviado — nada saiu do navegador.');
 								}}
 							>
-								<label htmlFor='a11y-email' className='block font-medium text-[0.85em]'>
+								<label htmlFor='a11y-email' className='block text-[0.85em] font-medium'>
 									Receba o checklist completo
 								</label>
 
@@ -746,7 +752,7 @@ export function AccessibilityLab() {
 
 									<button
 										type='submit'
-										className='h-9 rounded border-2 border-black bg-[#205bff] px-4 font-medium text-[0.8em] text-white transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1445c9] focus-visible:ring-offset-2 active:translate-y-px'
+										className='h-9 rounded border-2 border-black bg-[#205bff] px-4 text-[0.8em] font-medium text-white transition-transform focus-visible:ring-2 focus-visible:ring-[#1445c9] focus-visible:ring-offset-2 focus-visible:outline-none active:translate-y-px'
 									>
 										Inscrever
 									</button>
@@ -762,13 +768,13 @@ export function AccessibilityLab() {
 					{prefs.ruler && rulerY !== null && (
 						<div
 							aria-hidden
-							className='pointer-events-none absolute inset-x-0 border-[#205bff] border-y-2 bg-[#205bff]/12'
+							className='pointer-events-none absolute inset-x-0 border-y-2 border-[#205bff] bg-[#205bff]/12'
 							style={{ top: rulerY, height: rulerHeight }}
 						/>
 					)}
 				</div>
 
-				<p className='mt-2 text-[11px] text-muted-foreground leading-snug'>
+				<p className='text-muted-foreground mt-2 text-[11px] leading-snug'>
 					As preferências são salvas em <code>localStorage</code> e sobrevivem ao reload. A régua
 					responde ao ponteiro; leitura e comandos usam as APIs nativas do navegador.
 				</p>
