@@ -1,7 +1,7 @@
 'use client';
 
-import { Settings, X } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { Settings, X } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { useCallback, useEffect, useMemo } from 'react';
 import { BiSolidLeftArrow, BiSolidRightArrow, BiSync } from 'react-icons/bi';
@@ -127,7 +127,7 @@ export function Accessibility() {
 							stiffness: 300,
 							damping: 30,
 						}}
-						className={`fixed z-50 ${is_mobile ? 'inset-0' : 'top-1/2 -translate-y-1/2'}`}
+						className={`fixed z-99999 ${is_mobile ? 'inset-0' : 'top-1/2 -translate-y-1/2'}`}
 						style={{
 							[position]: is_mobile ? '' : '4rem',
 						}}
