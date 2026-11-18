@@ -5,7 +5,7 @@ import { Markup } from 'interweave';
 import { X } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useCallback, useMemo, useRef } from 'react';
-import { useIsMobile } from '@/lib/use-mobile';
+import { useIsMobile } from '@/hooks/use-mobile';
 import { useAccessibility } from '../accessibility-context';
 import type { Key } from '../items';
 import {

@@ -31,7 +31,7 @@ export const clickElement = {
 
 			if (!element.offsetWidth && !element.offsetHeight) continue;
 
-			const content = clean(element.innerText);
+			const content = clean(element.textContent);
 			const placeholder = clean(element.getAttribute('placeholder'));
 
 			if (

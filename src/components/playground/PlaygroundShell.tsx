@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Accessibility } from '../Accessibility';
 import { AccessibilityProvider } from '../Accessibility/components/accessibility-context';
+import { VoiceCommand } from '../Accessibility/components/VoiceCommand/voice-command';
 import { PLAYGROUND_DEMOS } from './registry';
 
 function readHashId() {
@@ -55,6 +56,7 @@ export function PlaygroundShell() {
 		<div className='flex min-h-screen w-full flex-col'>
 			<AccessibilityProvider>
 				<Accessibility />
+				<VoiceCommand />
 			</AccessibilityProvider>
 
 			<header className='bg-base-100/85 sticky top-0 z-50 w-full border-b-2 border-black backdrop-blur-xl dark:border-white'>
