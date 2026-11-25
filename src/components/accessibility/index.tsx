@@ -100,6 +100,7 @@ export function Accessibility() {
 		<>
 			<Button
 				size='icon'
+				data-a11y-trigger
 				onClick={() => handleMenuToggle(!isMenuOpen)}
 				className='bg-primary text-primary-content hover:bg-primary/90 fixed z-40 size-10 cursor-pointer shadow-lg transition-colors'
 				style={{

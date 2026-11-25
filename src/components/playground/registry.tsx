@@ -1,7 +1,8 @@
-import { Accessibility, PenLine, type LucideIcon } from 'lucide-react';
+import { Accessibility, type LucideIcon, PenLine, SearchIcon } from 'lucide-react';
 import type { ComponentType } from 'react';
 import { AccessibilityLab } from './AccessibilityLab';
 import { TiptapLab } from './TiptapLab';
+import { TypesenseLab } from './TypesenseLab';
 
 export interface PlaygroundDemo {
 	id: string;
@@ -36,5 +37,16 @@ export const PLAYGROUND_DEMOS: PlaygroundDemo[] = [
 		tags: ['TipTap 3', 'ProseMirror', 'TypeScript', 'HTML'],
 		icon: PenLine,
 		Demo: TiptapLab,
+	},
+	{
+		id: 'busca',
+		index: '03',
+		title: 'Busca com Typesense',
+		kicker: 'Instant Search & Relevance',
+		description:
+			'Cliente InstantSearch falando com um cluster Typesense via proxy: tolerância a erro de digitação, facetas por categoria, atalho de teclado e resultados em tempo real.',
+		tags: ['Typesense', 'InstantSearch', 'Next.js', 'Search'],
+		icon: SearchIcon,
+		Demo: TypesenseLab,
 	},
 ];

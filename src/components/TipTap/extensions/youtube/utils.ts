@@ -1,0 +1,132 @@
+export const YOUTUBE_REGEX =
+	/^((?:https?:)?\/\/)?((?:www|m|music)\.)?((?:youtube\.com|youtu\.be|youtube-nocookie\.com))(\/(?:[\w-]+\?v=|embed\/|v\/)?)([\w-]+)(\S+)?$/;
+export const YOUTUBE_REGEX_GLOBAL =
+	/^((?:https?:)?\/\/)?((?:www|m|music)\.)?((?:youtube\.com|youtu\.be|youtube-nocookie\.com))(\/(?:[\w-]+\?v=|embed\/|v\/)?)([\w-]+)(\S+)?$/g;
+
+export const isValidYoutubeUrl = (url: string) => {
+	return url.match(YOUTUBE_REGEX);
+};
+
+export interface GetEmbedUrlOptions {
+	url: string;
+	allowFullscreen?: boolean;
+	autoplay?: boolean;
+	ccLanguage?: string;
+	ccLoadPolicy?: boolean;
+	controls?: boolean;
+	disableKBcontrols?: boolean;
+	enableIFrameApi?: boolean;
+	endTime?: number;
+	interfaceLanguage?: string;
+	ivLoadPolicy?: number;
+	loop?: boolean;
+	modestBranding?: boolean;
+	nocookie?: boolean;
+	origin?: string;
+	playlist?: string;
+	progressBarColor?: string;
+	startAt?: number;
+	rel?: number;
+}
+
+export const extractYoutubeId = (url: string): string | null => {
+	try {
+		const parsed = new URL(url);
+
+		// youtu.be/VIDEO_ID
+		if (parsed.hostname.includes('youtu.be')) {
+			return parsed.pathname.split('/')[1];
+		}
+
+		// youtube.com/watch?v=
+		if (parsed.searchParams.get('v')) {
+			return parsed.searchParams.get('v');
+		}
+
+		// youtube.com/embed/
+		if (parsed.pathname.includes('/embed/')) {
+			return parsed.pathname.split('/embed/')[1];
+		}
+
+		// youtube.com/shorts/
+		if (parsed.pathname.includes('/shorts/')) {
+			return parsed.pathname.split('/shorts/')[1];
+		}
+
+		return null;
+	} catch {
+		return null;
+	}
+};
+
+export const getYoutubeEmbedUrl = (nocookie?: boolean, isPlaylist?: boolean) => {
+	if (isPlaylist) {
+		return 'https://www.youtube-nocookie.com/embed/videoseries?list=';
+	}
+	return nocookie ? 'https://www.youtube-nocookie.com/embed/' : 'https://www.youtube.com/embed/';
+};
+
+export const getEmbedUrlFromYoutubeUrl = (options: GetEmbedUrlOptions) => {
+	const {
+		url,
+		allowFullscreen,
+		autoplay,
+		ccLanguage,
+		ccLoadPolicy,
+		controls,
+		disableKBcontrols,
+		enableIFrameApi,
+		endTime,
+		interfaceLanguage,
+		ivLoadPolicy,
+		loop,
+		modestBranding,
+		nocookie,
+		origin,
+		playlist,
+		progressBarColor,
+		startAt,
+		rel,
+	} = options;
+
+	if (!isValidYoutubeUrl(url)) {
+		return null;
+	}
+
+	const parsed = new URL(url);
+
+	// playlist
+	if (parsed.searchParams.get('list') && !parsed.searchParams.get('v')) {
+		return `${getYoutubeEmbedUrl(nocookie, true)}${parsed.searchParams.get('list')}`;
+	}
+
+	const id = extractYoutubeId(url);
+
+	if (!id) return null;
+
+	let outputUrl = `${getYoutubeEmbedUrl(nocookie)}${id}`;
+
+	const params: string[] = [];
+
+	if (allowFullscreen === false) params.push('fs=0');
+	if (autoplay) params.push('autoplay=1');
+	if (ccLanguage) params.push(`cc_lang_pref=${ccLanguage}`);
+	if (ccLoadPolicy) params.push('cc_load_policy=1');
+	if (!controls) params.push('controls=0');
+	if (disableKBcontrols) params.push('disablekb=1');
+	if (enableIFrameApi) params.push('enablejsapi=1');
+	if (endTime) params.push(`end=${endTime}`);
+	if (interfaceLanguage) params.push(`hl=${interfaceLanguage}`);
+	if (ivLoadPolicy) params.push(`iv_load_policy=${ivLoadPolicy}`);
+	if (loop) params.push('loop=1');
+	if (modestBranding) params.push('modestbranding=1');
+	if (origin) params.push(`origin=${origin}`);
+	if (playlist) params.push(`playlist=${playlist}`);
+	if (startAt) params.push(`start=${startAt}`);
+	if (progressBarColor) params.push(`color=${progressBarColor}`);
+	if (rel !== undefined) params.push(`rel=${rel}`);
+
+	if (params.length) outputUrl += `?${params.join('&')}`;
+
+	return outputUrl;
+};

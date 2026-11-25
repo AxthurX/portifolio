@@ -1,0 +1,17 @@
+.ProseMirror code.inline {
+	@apply rounded border border-(--mt-code-color) bg-(--mt-code-background) px-1 py-0.5 text-sm;
+}
+
+.ProseMirror pre {
+	@apply relative overflow-auto font-mono text-sm;
+	@apply text-(--mt-pre-color);
+	@apply hyphens-none whitespace-pre text-left;
+}
+
+.ProseMirror code {
+	@apply wrap-break-word leading-[1.7em];
+}
+
+.ProseMirror pre code {
+	@apply block overflow-x-auto p-3.5;
+}

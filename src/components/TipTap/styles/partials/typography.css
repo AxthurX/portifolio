@@ -1,0 +1,35 @@
+.ProseMirror .heading-node:first-child {
+	@apply mt-0;
+}
+
+.ProseMirror h1,
+.ProseMirror h2,
+.ProseMirror h3,
+.ProseMirror h4,
+.ProseMirror h5,
+.ProseMirror h6 {
+	line-height: 1.1;
+	text-wrap: pretty;
+}
+
+.ProseMirror h1 {
+	font-size: 1.4rem;
+}
+
+.ProseMirror h2 {
+	font-size: 1.2rem;
+}
+
+.ProseMirror h3 {
+	font-size: 1.1rem;
+}
+
+.ProseMirror h4,
+.ProseMirror h5,
+.ProseMirror h6 {
+	font-size: 1rem;
+}
+
+.ProseMirror a.link {
+	@apply text-blue-600 hover:underline;
+}

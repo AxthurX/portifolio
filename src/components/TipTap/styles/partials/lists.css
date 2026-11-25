@@ -1,0 +1,14 @@
+.ProseMirror ol {
+	@apply list-decimal;
+}
+
+.ProseMirror li p:has(+ .list-node),
+.ProseMirror li > .list-node,
+.ProseMirror li > p,
+.ProseMirror li p {
+	@apply mb-0;
+}
+
+.ProseMirror li {
+	@apply leading-7;
+}

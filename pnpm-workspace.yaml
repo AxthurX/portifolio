@@ -2,4 +2,5 @@ allowBuilds:
   "@ampproject/toolbox-optimizer": false
   es5-ext: false
   sharp: false
+  typesense-instantsearch-adapter: false
   unrs-resolver: false

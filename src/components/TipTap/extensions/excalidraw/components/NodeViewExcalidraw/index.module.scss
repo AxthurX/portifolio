@@ -1,0 +1,59 @@
+.wrap {
+  position: relative;
+  max-width: 400px;
+  overflow: visible;
+  line-height: 0;
+
+  .renderWrap {
+    border: 1px dashed #bfcbb4 !important;
+    border-radius: 6px;
+
+    &::after {
+      background-color: transparent !important;
+    }
+  }
+
+  .title {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 2;
+
+    .icon {
+      display: flex;
+      width: 18px;
+      height: 18px;
+      color: #fff;
+      background-color: #f80;
+      border: 1px solid #bfcbb4;
+      border-radius: 2px;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  .handlerWrap {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    z-index: 2;
+    padding: 2px 4px;
+    border: 1px solid #bfcbb4;
+    border-radius: 6px;
+  }
+
+
+  &.disabled {
+    .renderWrap {
+      border: none !important;
+    }
+
+    .handlerWrap {
+      display: none !important;
+    }
+  }
+}
+
+.disabled {
+  pointer-events: none !important;
+}
