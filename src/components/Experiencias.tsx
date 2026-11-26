@@ -113,23 +113,23 @@ export default function Experiencias() {
 		<section
 			ref={sectionRef}
 			id='experiencias'
-			className='relative w-full overflow-hidden border-black border-t-2 py-16 md:py-32 dark:border-white'
+			className='relative w-full overflow-hidden border-t-2 border-black py-16 md:py-32 dark:border-white'
 		>
 			<div className='relative z-10 mb-10 px-4 text-left sm:mb-16 md:mb-12'>
-				<span className='mb-4 block font-medium text-primary text-xs uppercase tracking-widest dark:text-primary'>
+				<span className='text-primary dark:text-primary mb-4 block text-xs font-medium tracking-widest uppercase'>
 					Habilidades
 				</span>
 
 				<h3
 					ref={headingRef}
-					className='font-bold text-3xl tracking-tight sm:text-4xl md:text-5xl lg:text-6xl'
+					className='text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl'
 				>
 					<span className='inline-block overflow-hidden align-bottom'>
 						<span className='gsap-exp-word inline-block'>Minhas&nbsp;</span>
 					</span>
 
 					<span className='inline-block overflow-hidden align-bottom'>
-						<span className='gsap-exp-word inline-block font-normal font-serif text-primary italic dark:text-primary'>
+						<span className='gsap-exp-word text-primary dark:text-primary inline-block font-serif font-normal italic'>
 							experiencias
 						</span>
 					</span>
@@ -148,17 +148,15 @@ export default function Experiencias() {
 								key={exp.id}
 								data-presentation-item='experiencia'
 								data-presentation-label={exp.empresa}
-								className={`relative flex w-full flex-col items-start lg:items-center lg:justify-between ${
-									isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'
-								}`}
+								className={`relative flex w-full flex-col items-start lg:items-center lg:justify-between ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'
+									}`}
 							>
 								<motion.div
 									initial='hidden'
 									whileInView='visible'
 									viewport={{ once: true, margin: '-20%' }}
-									className={`absolute top-1/2 hidden h-0.5 w-[calc(50%-1rem)] -translate-y-1/2 lg:block ${
-										isEven ? 'left-10' : 'right-10'
-									}`}
+									className={`absolute top-1/2 hidden h-0.5 w-[calc(50%-1rem)] -translate-y-1/2 lg:block ${isEven ? 'left-10' : 'right-10'
+										}`}
 								>
 									<motion.div
 										variants={{
@@ -169,11 +167,10 @@ export default function Experiencias() {
 											},
 										}}
 										style={{ transformOrigin: isEven ? 'right' : 'left' }}
-										className={`h-full w-full ${
-											isEven
-												? 'bg-linear-to-r from-transparent to-base-content/70'
-												: 'bg-linear-to-r from-base-content/70 to-transparent'
-										}`}
+										className={`h-full w-full ${isEven
+												? 'to-base-content/70 bg-linear-to-r from-transparent'
+												: 'from-base-content/70 bg-linear-to-r to-transparent'
+											}`}
 									/>
 								</motion.div>
 
@@ -183,7 +180,7 @@ export default function Experiencias() {
 								>
 									<div
 										className={
-											'relative z-10 mt-1 flex size-12 items-center justify-center rounded-base border-2 border-black bg-primary font-bold text-primary-content text-xs shadow-light dark:border-white dark:shadow-dark'
+											'rounded-base bg-primary text-primary-content shadow-light dark:shadow-dark relative z-10 mt-1 flex size-12 items-center justify-center border-2 border-black text-xs font-bold dark:border-white'
 										}
 									>
 										{exp.atual ? 'Atual' : exp.periodo.split(' ')[1]}
@@ -196,28 +193,28 @@ export default function Experiencias() {
 										variants={itemVariants}
 										className='relative flex flex-col lg:flex-row lg:gap-10'
 									>
-										<Card className='mb-0 flex-1 rounded-lg border-2 bg-surface p-4 shadow-light transition-all duration-300 hover:border-primary hover:shadow-[4px_4px_0_0_rgba(32,91,255,0.6)] sm:p-6 lg:mb-10 lg:p-8 dark:shadow-dark dark:hover:shadow-[4px_4px_0_0_rgba(32,91,255,0.6)]'>
+										<Card className='bg-surface shadow-light hover:border-primary dark:shadow-dark mb-0 flex-1 rounded-lg border-2 p-4 transition-all duration-300 hover:shadow-[4px_4px_0_0_rgba(32,91,255,0.6)] sm:p-6 lg:mb-10 lg:p-8 dark:hover:shadow-[4px_4px_0_0_rgba(32,91,255,0.6)]'>
 											<div className='mb-4 flex flex-col gap-2 max-sm:gap-0 sm:mb-5 xl:flex-row xl:items-start xl:justify-between xl:gap-3'>
 												<div className='min-w-0'>
 													<div className='flex items-center gap-2'>
-														<div className='flex h-7 w-7 shrink-0 items-center justify-center rounded-base border-2 border-black bg-primary font-bold text-[10px] text-primary-content shadow-light sm:h-8 sm:w-8 lg:hidden dark:border-white dark:shadow-dark'>
+														<div className='rounded-base bg-primary text-primary-content shadow-light dark:shadow-dark flex h-7 w-7 shrink-0 items-center justify-center border-2 border-black text-[10px] font-bold sm:h-8 sm:w-8 lg:hidden dark:border-white'>
 															{exp.logo}
 														</div>
 
-														<h3 className='min-w-0 flex-1 font-bold text-base text-foreground leading-tight max-lg:ml-1 sm:text-lg dark:text-base-content'>
+														<h3 className='text-foreground dark:text-base-content min-w-0 flex-1 text-base leading-tight font-bold max-lg:ml-1 sm:text-lg'>
 															{exp.cargo}
 														</h3>
 
 														{exp.atual && (
-															<span className='shrink-0 rounded-base border-2 border-black bg-primary/10 px-1.5 py-0.5 font-semibold text-[9px] text-primary uppercase tracking-wider sm:px-2 sm:text-[10px] dark:border-white dark:text-primary'>
+															<span className='rounded-base bg-primary/10 text-primary dark:text-primary shrink-0 border-2 border-black px-1.5 py-0.5 text-[9px] font-semibold tracking-wider uppercase sm:px-2 sm:text-[10px] dark:border-white'>
 																Atual
 															</span>
 														)}
 													</div>
 
-													<p className='mt-2 font-medium text-[13px] text-foreground/80 max-md:mt-1 sm:mt-4 sm:text-sm dark:text-base-content/85'>
+													<p className='text-foreground/80 dark:text-base-content/85 mt-2 text-[13px] font-medium max-md:mt-1 sm:mt-4 sm:text-sm'>
 														{exp.empresa}
-														<span className='font-normal text-muted-foreground dark:text-muted-foreground'>
+														<span className='text-muted-foreground dark:text-muted-foreground font-normal'>
 															{' '}
 															· {exp.tipo}
 														</span>
@@ -225,13 +222,13 @@ export default function Experiencias() {
 												</div>
 
 												<div className='shrink-0 space-y-0.5 xl:text-right'>
-													<p className='font-medium text-[11px] text-foreground/70 tabular-nums sm:text-xs dark:text-base-content/70'>
+													<p className='text-foreground/70 dark:text-base-content/70 text-[11px] font-medium tabular-nums sm:text-xs'>
 														{exp.periodo}
 													</p>
-													<p className='text-[11px] text-muted-foreground sm:text-xs'>
+													<p className='text-muted-foreground text-[11px] sm:text-xs'>
 														{exp.duracao}
 													</p>
-													<p className='text-[11px] text-muted-foreground sm:text-xs'>
+													<p className='text-muted-foreground text-[11px] sm:text-xs'>
 														{exp.local}
 													</p>
 												</div>
@@ -240,7 +237,7 @@ export default function Experiencias() {
 											<div className='mb-4 h-0.5 bg-black sm:mb-5 dark:bg-white/20' />
 
 											{exp.setor && (
-												<p className='mb-4 border-primary border-l-2 pl-3 text-[13px] text-foreground/80 leading-snug sm:text-sm dark:text-base-content/75'>
+												<p className='border-primary text-foreground/80 dark:text-base-content/75 mb-4 border-l-2 pl-3 text-[13px] leading-snug sm:text-sm'>
 													{exp.setor}
 												</p>
 											)}
@@ -249,9 +246,9 @@ export default function Experiencias() {
 												{exp.descricao.map((item) => (
 													<li
 														key={item}
-														className='flex gap-2.5 text-[13px] text-foreground/80 leading-relaxed sm:gap-3 sm:text-sm dark:text-base-content/75'
+														className='text-foreground/80 dark:text-base-content/75 flex gap-2.5 text-[13px] leading-relaxed sm:gap-3 sm:text-sm'
 													>
-														<span className='mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary/60' />
+														<span className='bg-primary/60 mt-2 h-1.5 w-1.5 shrink-0 rounded-full' />
 														{item}
 													</li>
 												))}
@@ -261,7 +258,7 @@ export default function Experiencias() {
 												{exp.techs.map((tech) => (
 													<span
 														key={tech}
-														className='rounded-base border-2 border-black bg-base-100 px-2.5 py-1 text-[11px] text-foreground shadow-light transition-colors hover:bg-primary hover:text-primary-content sm:px-3 sm:text-xs dark:border-white dark:shadow-dark'
+														className='rounded-base bg-base-100 text-foreground shadow-light hover:bg-primary hover:text-primary-content dark:shadow-dark border-2 border-black px-2.5 py-1 text-[11px] transition-colors sm:px-3 sm:text-xs dark:border-white'
 													>
 														{tech}
 													</span>

@@ -17,7 +17,6 @@ function getSnapshot() {
 	return uploaded;
 }
 
-/** Local stand-in for the portal post context: keeps uploads in memory. */
 export function usePostContext() {
 	const files = useSyncExternalStore(subscribe, getSnapshot, getSnapshot);
 

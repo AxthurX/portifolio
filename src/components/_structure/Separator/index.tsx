@@ -1,9 +1,9 @@
+import { cva, type VariantProps } from 'class-variance-authority';
+import { forwardRef, type HTMLProps } from 'react';
 import { cn } from '@/lib/utils';
-import { type VariantProps, cva } from 'class-variance-authority';
-import { type HTMLProps, forwardRef } from 'react';
 
 const separatorVariants = cva(
-	'mt-2 mb-4 h-3 border-accent/50 border-x-0 border-y bg-base-100 sedam:bg-white/75 dark:border-white dark:border-b-transparent dark:bg-black',
+	'border-accent/50 bg-base-100 sedam:bg-white/75 mt-2 mb-4 h-3 border-x-0 border-y dark:border-white dark:border-b-transparent dark:bg-black',
 	{
 		variants: {
 			sizing: {

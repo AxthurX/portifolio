@@ -69,10 +69,10 @@ export function DashboardHeader() {
 					<p className='text-muted-foreground hidden truncate text-xs capitalize md:block'>
 						{now
 							? now.toLocaleDateString('pt-BR', {
-									weekday: 'long',
-									day: '2-digit',
-									month: 'long',
-								})
+								weekday: 'long',
+								day: '2-digit',
+								month: 'long',
+							})
 							: 'Home Hub'}
 					</p>
 				</div>

@@ -166,12 +166,9 @@ export function VoiceCommand() {
 
 	const commandActions: Record<string, () => void> = useMemo(
 		() => ({
-			NAVIGATION: () => {
-				clickElement.search('Navegação', '[role="tab"]', dispatchFeedback);
-			},
-			ACCESSIBILITY: () => {
-				clickElement.search('acessibilidade', '[role="tab"]', dispatchFeedback);
-			},
+			NAVIGATION: () => clickElement.search('Navegação', '[role="tab"]', dispatchFeedback),
+			ACCESSIBILITY: () =>
+				clickElement.search('acessibilidade', '[role="tab"]', dispatchFeedback),
 			HOME: () => route.push('/'),
 			SCROLL_DOWN: () => window.scrollBy({ top: window.innerHeight / 1.5, behavior: 'smooth' }),
 			SCROLL_UP: () => window.scrollBy({ top: -window.innerHeight / 1.5, behavior: 'smooth' }),

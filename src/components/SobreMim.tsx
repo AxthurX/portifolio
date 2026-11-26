@@ -125,21 +125,21 @@ export default function SobreMim() {
 		<section
 			ref={sectionRef}
 			id='sobre-mim'
-			className='relative mt-16 flex min-h-[80vh] w-full flex-col border-black border-t-2 md:mt-24 md:flex-row dark:border-white'
+			className='relative mt-16 flex min-h-[80vh] w-full flex-col border-t-2 border-black md:mt-24 md:flex-row dark:border-white'
 		>
 			<div className='absolute top-0 bottom-0 left-1/2 hidden w-0.5 bg-black md:block dark:bg-white/20' />
 
-			<div className='flex w-full flex-col justify-between border-black border-b-2 p-6 md:w-1/2 md:border-r-2 md:border-b-0 md:p-16 lg:p-20 dark:border-white/15'>
+			<div className='flex w-full flex-col justify-between border-b-2 border-black p-6 md:w-1/2 md:border-r-2 md:border-b-0 md:p-16 lg:p-20 dark:border-white/15'>
 				<div>
-					<span className='mb-4 block font-medium text-primary text-xs uppercase tracking-widest dark:text-primary'>
+					<span className='text-primary dark:text-primary mb-4 block text-xs font-medium tracking-widest uppercase'>
 						Sobre Mim
 					</span>
 
 					<h3
 						ref={headingRef}
-						className='font-bold text-3xl leading-tight tracking-tight sm:text-4xl md:text-5xl lg:text-6xl'
+						className='text-3xl leading-tight font-bold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl'
 					>
-						Transformando <span className='font-normal font-serif text-primary italic'>ideias</span>{' '}
+						Transformando <span className='text-primary font-serif font-normal italic'>ideias</span>{' '}
 						em interfaces funcionais.
 					</h3>
 				</div>
@@ -168,15 +168,15 @@ export default function SobreMim() {
 						práticas, design patterns e conceitos no desenvolvimento.
 					</p>
 
-					<div className='mt-10 flex gap-8 border-black border-t-2 pt-8 md:mt-16 md:gap-12 md:pt-16 dark:border-white'>
+					<div className='mt-10 flex gap-8 border-t-2 border-black pt-8 md:mt-16 md:gap-12 md:pt-16 dark:border-white'>
 						<div>
 							<div
 								id='counter-exp'
-								className='mb-2 font-bold text-4xl text-gradient tracking-tight md:text-5xl'
+								className='text-gradient mb-2 text-4xl font-bold tracking-tight md:text-5xl'
 							>
 								4+
 							</div>
-							<div className='text-muted-foreground text-xs uppercase tracking-widest'>
+							<div className='text-muted-foreground text-xs tracking-widest uppercase'>
 								Anos de XP
 							</div>
 						</div>
@@ -184,11 +184,11 @@ export default function SobreMim() {
 						<div>
 							<div
 								id='counter-proj'
-								className='mb-2 font-bold text-4xl text-gradient tracking-tight md:text-5xl'
+								className='text-gradient mb-2 text-4xl font-bold tracking-tight md:text-5xl'
 							>
 								20+
 							</div>
-							<div className='text-muted-foreground text-xs uppercase tracking-widest'>
+							<div className='text-muted-foreground text-xs tracking-widest uppercase'>
 								Projetos
 							</div>
 						</div>

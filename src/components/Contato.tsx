@@ -65,10 +65,10 @@ export default function Contato() {
 	return (
 		<section
 			id='contato'
-			className='relative mt-8 w-full overflow-hidden rounded-lg border-2 border-black bg-surface shadow-light dark:border-white dark:shadow-dark'
+			className='bg-surface shadow-light dark:shadow-dark relative mt-8 w-full overflow-hidden rounded-lg border-2 border-black dark:border-white'
 		>
 			<div className='px-6 pt-8 md:px-12'>
-				<span className='font-medium text-muted-foreground text-xs uppercase tracking-widest'>
+				<span className='text-muted-foreground text-xs font-medium tracking-widest uppercase'>
 					Contato
 				</span>
 			</div>
@@ -95,9 +95,9 @@ export default function Contato() {
 						}}
 						className='mb-8'
 					>
-						<h2 className='font-bold text-4xl tracking-tight md:text-6xl lg:text-7xl'>
+						<h2 className='text-4xl font-bold tracking-tight md:text-6xl lg:text-7xl'>
 							<span className='text-primary'>Vamos </span>
-							<span className='font-normal font-serif text-primary italic'>conversar</span>
+							<span className='text-primary font-serif font-normal italic'>conversar</span>
 						</h2>
 					</motion.div>
 				</AnimatePresence>
@@ -112,14 +112,14 @@ export default function Contato() {
 					>
 						<motion.p
 							{...slideUp(0.05)}
-							className='mb-10 max-w-xs text-muted-foreground text-sm md:mb-12'
+							className='text-muted-foreground mb-10 max-w-xs text-sm md:mb-12'
 						>
 							Como posso te ajudar.
 						</motion.p>
 
-						<nav className='flex flex-col border-black border-t-2 pt-2 dark:border-white'>
+						<nav className='flex flex-col border-t-2 border-black pt-2 dark:border-white'>
 							<Link
-								className='w-full border-black border-b-2 pb-2 dark:border-white'
+								className='w-full border-b-2 border-black pb-2 dark:border-white'
 								href='mailto:arthurmartins696@gmail.com'
 							>
 								<motion.button
@@ -128,24 +128,24 @@ export default function Contato() {
 									className='group flex w-full items-center justify-between py-5 text-left transition-all duration-500 hover:pl-4 md:py-6'
 								>
 									<div className='flex items-baseline gap-4 md:gap-6'>
-										<span className='shrink-0 font-mono text-muted-foreground text-xs tabular-nums dark:text-primary/80'>
+										<span className='text-muted-foreground dark:text-primary/80 shrink-0 font-mono text-xs tabular-nums'>
 											01
 										</span>
 
 										<div className='flex flex-col sm:flex-row sm:items-baseline sm:gap-5'>
-											<span className='font-bold text-2xl tracking-tight transition-colors duration-300 group-hover:text-primary md:text-3xl dark:text-primary'>
+											<span className='group-hover:text-primary dark:text-primary text-2xl font-bold tracking-tight transition-colors duration-300 md:text-3xl'>
 												Entre em contato comigo
 											</span>
 										</div>
 
-										<span className='hidden text-muted-foreground text-xs uppercase tracking-widest sm:inline'>
+										<span className='text-muted-foreground hidden text-xs tracking-widest uppercase sm:inline'>
 											Email
 										</span>
 									</div>
 
-									<div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-base border-2 border-black bg-base-100 shadow-light transition-all duration-300 group-hover:bg-primary group-hover:text-primary-foreground dark:border-white dark:shadow-dark'>
+									<div className='rounded-base bg-base-100 shadow-light group-hover:bg-primary group-hover:text-primary-foreground dark:shadow-dark flex h-10 w-10 shrink-0 items-center justify-center border-2 border-black transition-all duration-300 dark:border-white'>
 										<ArrowRight
-											className='h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:text-primary-foreground dark:text-base-content'
+											className='group-hover:text-primary-foreground dark:text-base-content h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5'
 											strokeWidth={1.5}
 										/>
 									</div>
@@ -154,13 +154,13 @@ export default function Contato() {
 						</nav>
 
 						<motion.div {...slideUp(0.3)} className='mt-8 flex items-center gap-4'>
-							<span className='text-muted-foreground text-xs uppercase tracking-widest'>Redes</span>
+							<span className='text-muted-foreground text-xs tracking-widest uppercase'>Redes</span>
 							<div className='flex gap-3'>
 								<Link
 									href='https://github.com/AxthurX'
 									target='_blank'
 									rel='noopener noreferrer'
-									className='flex h-10 w-10 items-center justify-center rounded-base border-2 border-black bg-base-100 shadow-light transition-all hover:bg-primary hover:text-primary-foreground dark:border-white dark:shadow-dark'
+									className='rounded-base bg-base-100 shadow-light hover:bg-primary hover:text-primary-foreground dark:shadow-dark flex h-10 w-10 items-center justify-center border-2 border-black transition-all dark:border-white'
 									aria-label='GitHub'
 								>
 									<GithubIcon className='h-4 w-4' />
@@ -170,7 +170,7 @@ export default function Contato() {
 									href='https://linkedin.com/in/arthurxmartins'
 									target='_blank'
 									rel='noopener noreferrer'
-									className='flex h-10 w-10 items-center justify-center rounded-base border-2 border-black bg-base-100 shadow-light transition-all hover:bg-primary hover:text-primary-foreground dark:border-white dark:shadow-dark'
+									className='rounded-base bg-base-100 shadow-light hover:bg-primary hover:text-primary-foreground dark:shadow-dark flex h-10 w-10 items-center justify-center border-2 border-black transition-all dark:border-white'
 									aria-label='LinkedIn'
 								>
 									<LinkedinIcon className='h-4 w-4' />
@@ -178,7 +178,7 @@ export default function Contato() {
 
 								<Link
 									href='mailto:arthurmartins696@gmail.com'
-									className='flex h-10 w-10 items-center justify-center rounded-base border-2 border-black bg-base-100 shadow-light transition-all hover:bg-primary hover:text-primary-foreground dark:border-white dark:shadow-dark'
+									className='rounded-base bg-base-100 shadow-light hover:bg-primary hover:text-primary-foreground dark:shadow-dark flex h-10 w-10 items-center justify-center border-2 border-black transition-all dark:border-white'
 									aria-label='Email'
 								>
 									<Mail className='h-4 w-4' />
@@ -189,7 +189,7 @@ export default function Contato() {
 				</AnimatePresence>
 			</div>
 
-			<div className='border-black border-t-2 p-6 md:px-12 dark:border-white'>
+			<div className='border-t-2 border-black p-6 md:px-12 dark:border-white'>
 				<p className='text-muted-foreground text-xs'>Arthur LTA © 2026</p>
 			</div>
 		</section>

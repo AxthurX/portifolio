@@ -40,9 +40,9 @@ export function CardToggle({
 			className={cn(
 				'border-accent from-base-200 to-base-300/90 hover:border-primary/40 hover:shadow-primary/60 relative flex h-24 w-full cursor-pointer flex-col items-center justify-center border bg-linear-to-b px-3 py-2 leading-normal! shadow-md/5 transition-all duration-150 ease-out select-none hover:border-2 hover:opacity-75 hover:shadow-sm',
 				step > 0 &&
-					'border-primary/60 text-primary/60 shadow-primary/60 border-4! shadow-sm transition-colors',
+				'border-primary/60 text-primary/60 shadow-primary/60 border-4! shadow-sm transition-colors',
 				disabled &&
-					'hover:border-accent cursor-not-allowed opacity-50 shadow-sm hover:border hover:opacity-50 hover:shadow-md hover:shadow-black/10',
+				'hover:border-accent cursor-not-allowed opacity-50 shadow-sm hover:border hover:opacity-50 hover:shadow-md hover:shadow-black/10',
 			)}
 			onClick={disabled ? undefined : handleClick}
 			aria-pressed={value !== options[0]}
@@ -64,9 +64,8 @@ export function CardToggle({
 						{options.slice(1).map((item, index) => (
 							<div
 								key={item}
-								className={`h-1 flex-1 rounded-full transition-colors ${
-									index < step ? 'bg-primary/80' : 'bg-primary-content'
-								}`}
+								className={`h-1 flex-1 rounded-full transition-colors ${index < step ? 'bg-primary/80' : 'bg-primary-content'
+									}`}
 							/>
 						))}
 					</div>

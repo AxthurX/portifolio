@@ -97,23 +97,23 @@ export default function Certificados() {
 		<section
 			ref={sectionRef}
 			id='certificados'
-			className='relative mt-8 w-full overflow-hidden border-black border-t-2 pt-16 pb-24 md:mt-12 md:py-32 dark:border-white'
+			className='relative mt-8 w-full overflow-hidden border-t-2 border-black pt-16 pb-24 md:mt-12 md:py-32 dark:border-white'
 		>
 			<div className='relative z-10 px-4 md:px-0'>
 				<div className='mb-12 md:mb-16'>
-					<span className='mb-4 block font-medium text-primary text-xs uppercase tracking-widest dark:text-primary'>
+					<span className='text-primary dark:text-primary mb-4 block text-xs font-medium tracking-widest uppercase'>
 						Conquistas
 					</span>
 					<h3
 						ref={headingRef}
-						className='max-w-2xl font-bold text-3xl tracking-tight sm:text-4xl md:text-5xl lg:text-6xl'
+						className='max-w-2xl text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl'
 					>
 						Licenças &amp;{' '}
-						<span className='font-normal font-serif text-primary italic dark:text-primary'>
+						<span className='text-primary dark:text-primary font-serif font-normal italic'>
 							Certificados
 						</span>
 					</h3>
-					<p className='mt-4 max-w-xl text-muted-foreground text-sm leading-relaxed md:text-base'>
+					<p className='text-muted-foreground mt-4 max-w-xl text-sm leading-relaxed md:text-base'>
 						Uma foto emoldurada de cada curso concluído — arraste, gire e monte a sua coleção.
 					</p>
 				</div>

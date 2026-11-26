@@ -116,12 +116,12 @@ const PROJECTS: Projeto[] = [
 function ProjectCard({ projeto }: { projeto: Projeto }) {
 	return (
 		<Card
-			className='group relative flex h-[60vh] w-full shrink-0 cursor-pointer flex-col justify-between overflow-hidden rounded-lg border-2 border-black bg-surface shadow-light md:h-[70vh] md:w-[55vw] dark:border-white dark:shadow-dark'
+			className='group bg-surface shadow-light dark:shadow-dark relative flex h-[60vh] w-full shrink-0 cursor-pointer flex-col justify-between overflow-hidden rounded-lg border-2 border-black md:h-[70vh] md:w-[55vw] dark:border-white'
 			data-presentation-item='projeto'
 			data-presentation-label={projeto.client}
 		>
 			<div
-				className='absolute inset-0 z-0 bg-center bg-cover bg-no-repeat transition-transform duration-700 ease-out group-hover:scale-105'
+				className='absolute inset-0 z-0 bg-cover bg-center bg-no-repeat transition-transform duration-700 ease-out group-hover:scale-105'
 				style={{
 					backgroundImage: `url(${projeto.image})`,
 				}}
@@ -129,7 +129,7 @@ function ProjectCard({ projeto }: { projeto: Projeto }) {
 
 			<div className='absolute inset-0 z-1 bg-[#fafafa]/55 transition-opacity duration-500 group-hover:bg-[#fafafa]/40 dark:bg-[#070a10]/65 dark:group-hover:bg-[#070a10]/50' />
 
-			<div className='absolute inset-0 z-2 bg-linear-to-br from-[#fafafa]/60 via-[#fafafa]/25 to-primary/15 dark:from-[#070a10]/85 dark:via-[#070a10]/55 dark:to-primary/25' />
+			<div className='to-primary/15 dark:to-primary/25 absolute inset-0 z-2 bg-linear-to-br from-[#fafafa]/60 via-[#fafafa]/25 dark:from-[#070a10]/85 dark:via-[#070a10]/55' />
 
 			<div
 				className='pointer-events-none absolute inset-0 z-3 opacity-[0.08]'
@@ -139,19 +139,19 @@ function ProjectCard({ projeto }: { projeto: Projeto }) {
 				}}
 			/>
 
-			<div className='pointer-events-none absolute inset-0 z-4 bg-linear-to-br from-primary/10 via-transparent to-accent/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100' />
+			<div className='from-primary/10 to-accent/10 pointer-events-none absolute inset-0 z-4 bg-linear-to-br via-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100' />
 
 			<div className='relative z-10 flex items-start justify-between p-6 md:p-8'>
 				<div>
-					<span className='block font-medium text-primary text-sm uppercase tracking-widest'>
+					<span className='text-primary block text-sm font-medium tracking-widest uppercase'>
 						{projeto.category}
 					</span>
 
-					<span className='text-muted-foreground text-sm dark:text-primary'>{projeto.client}</span>
+					<span className='text-muted-foreground dark:text-primary text-sm'>{projeto.client}</span>
 
 					{projeto.demo && (
-						<span className='mt-2 flex w-fit items-center gap-1.5 rounded-full border border-primary/40 bg-primary/10 px-2.5 py-0.5 font-medium text-[10px] text-primary uppercase tracking-wider'>
-							<span className='h-1.5 w-1.5 rounded-full bg-primary' />
+						<span className='border-primary/40 bg-primary/10 text-primary mt-2 flex w-fit items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-[10px] font-medium tracking-wider uppercase'>
+							<span className='bg-primary h-1.5 w-1.5 rounded-full' />
 							Demo ao vivo
 						</span>
 					)}
@@ -162,7 +162,7 @@ function ProjectCard({ projeto }: { projeto: Projeto }) {
 						<Button
 							type='button'
 							variant='outline'
-							className='flex h-12 w-12 shrink-0 items-center justify-center rounded-base border-2 border-black bg-[#fafafa]/60 p-0 shadow-light backdrop-blur-sm transition-all duration-300 hover:bg-primary hover:text-primary-foreground active:translate-x-boxShadowX active:translate-y-boxShadowY active:shadow-none dark:bg-black/55 dark:text-base-content dark:shadow-dark'
+							className='rounded-base shadow-light hover:bg-primary hover:text-primary-foreground active:translate-x-boxShadowX active:translate-y-boxShadowY dark:text-base-content dark:shadow-dark flex h-12 w-12 shrink-0 items-center justify-center border-2 border-black bg-[#fafafa]/60 p-0 backdrop-blur-sm transition-all duration-300 active:shadow-none dark:bg-black/55'
 							aria-label={`Ver apresentação de ${projeto.client}`}
 						>
 							<ArrowUpRight
@@ -172,7 +172,7 @@ function ProjectCard({ projeto }: { projeto: Projeto }) {
 						</Button>
 					</DialogTrigger>
 
-					<DialogContent className='w-full max-w-5xl overflow-hidden border-2 border-black bg-surface p-0 shadow-light dark:border-white dark:shadow-dark'>
+					<DialogContent className='bg-surface shadow-light dark:shadow-dark w-full max-w-5xl overflow-hidden border-2 border-black p-0 dark:border-white'>
 						<DialogTitle className='hidden text-xl'>{projeto.client}</DialogTitle>
 
 						{projeto.video ? (
@@ -191,7 +191,7 @@ function ProjectCard({ projeto }: { projeto: Projeto }) {
 							</div>
 						) : (
 							<div
-								className='flex aspect-video items-center justify-center bg-center bg-cover'
+								className='flex aspect-video items-center justify-center bg-cover bg-center'
 								style={{
 									backgroundImage: `linear-gradient(
 										rgba(0, 0, 0, 0.55),
@@ -210,14 +210,14 @@ function ProjectCard({ projeto }: { projeto: Projeto }) {
 						)}
 
 						{projeto.demo && (
-							<div className='flex flex-wrap items-center justify-between gap-3 border-black border-t-2 bg-base-100 px-5 py-3 dark:border-white'>
+							<div className='bg-base-100 flex flex-wrap items-center justify-between gap-3 border-t-2 border-black px-5 py-3 dark:border-white'>
 								<p className='text-muted-foreground text-xs'>
 									Demonstração interativa — roda no navegador, sem vídeo.
 								</p>
 
 								<Link
 									href={projeto.demo}
-									className='flex items-center gap-1.5 rounded-base border-2 border-black bg-primary px-3 py-1.5 font-medium text-primary-content text-xs shadow-light transition-all hover:bg-accent active:translate-x-boxShadowX active:translate-y-boxShadowY active:shadow-none dark:border-white dark:shadow-dark'
+									className='rounded-base bg-primary text-primary-content shadow-light hover:bg-accent active:translate-x-boxShadowX active:translate-y-boxShadowY dark:shadow-dark flex items-center gap-1.5 border-2 border-black px-3 py-1.5 text-xs font-medium transition-all active:shadow-none dark:border-white'
 								>
 									Abrir no playground
 									<ArrowUpRight className='h-3.5 w-3.5' />
@@ -229,7 +229,7 @@ function ProjectCard({ projeto }: { projeto: Projeto }) {
 			</div>
 
 			<div className='relative z-10 flex items-end justify-between p-6 md:p-8'>
-				<h4 className='max-w-[80%] font-light text-2xl text-foreground leading-tight tracking-tight md:text-4xl xl:text-5xl dark:font-semibold dark:text-base-content'>
+				<h4 className='text-foreground dark:text-base-content max-w-[80%] text-2xl leading-tight font-light tracking-tight md:text-4xl xl:text-5xl dark:font-semibold'>
 					{projeto.title}
 				</h4>
 			</div>
@@ -255,12 +255,12 @@ export default function Projetos() {
 		return (
 			<section id='projetos' className='w-full px-4 py-16'>
 				<div className='mb-12 max-sm:mb-8'>
-					<span className='mb-4 block font-medium text-primary text-xs uppercase tracking-widest dark:text-primary'>
+					<span className='text-primary dark:text-primary mb-4 block text-xs font-medium tracking-widest uppercase'>
 						Projetos
 					</span>
-					<h3 className='font-bold text-4xl tracking-tight'>
+					<h3 className='text-4xl font-bold tracking-tight'>
 						Trabalhos{' '}
-						<span className='font-normal font-serif text-primary italic dark:text-primary'>
+						<span className='text-primary dark:text-primary font-serif font-normal italic'>
 							Recentes
 						</span>
 					</h3>
@@ -287,12 +287,12 @@ export default function Projetos() {
 		<section id='projetos' ref={targetRef} className='relative h-[400vh]'>
 			<div className='sticky top-0 flex h-screen items-center overflow-hidden'>
 				<div className='absolute top-24 left-8 z-20 md:left-12'>
-					<span className='mb-4 block font-medium text-primary text-xs uppercase tracking-widest dark:text-primary'>
+					<span className='text-primary dark:text-primary mb-4 block text-xs font-medium tracking-widest uppercase'>
 						Projetos
 					</span>
-					<h3 className='font-bold text-4xl tracking-tight md:text-5xl'>
+					<h3 className='text-4xl font-bold tracking-tight md:text-5xl'>
 						Trabalhos{' '}
-						<span className='font-normal font-serif text-primary italic dark:text-primary'>
+						<span className='text-primary dark:text-primary font-serif font-normal italic'>
 							Recentes
 						</span>
 					</h3>

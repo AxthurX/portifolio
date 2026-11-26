@@ -40,19 +40,19 @@ export const PinBoxSheet = ({
 			<SheetContent
 				side={isMobile ? 'bottom' : 'right'}
 				className={cn(
-					'flex flex-col gap-0 border-2 border-black bg-base-100 p-0 text-foreground shadow-light dark:border-white dark:shadow-dark',
+					'bg-base-100 text-foreground shadow-light dark:shadow-dark flex flex-col gap-0 border-2 border-black p-0 dark:border-white',
 					isMobile ? 'max-h-[86vh] rounded-t-[26px]' : 'w-full sm:max-w-105',
 				)}
 			>
-				<SheetHeader className='space-y-1.5 border-black border-b-2 p-5 pb-4 text-left dark:border-white'>
-					<p className='font-medium text-[10px] text-primary uppercase tracking-[0.2em]'>A caixa</p>
-					<SheetTitle className='font-normal font-serif text-2xl text-foreground'>
-						Todos os pins
+				<SheetHeader className='space-y-1.5 border-b-2 border-black p-5 pb-4 text-left dark:border-white'>
+					<p className='text-primary text-[10px] font-medium tracking-[0.2em] uppercase'>A caixa</p>
+					<SheetTitle className='text-foreground font-serif text-2xl font-normal'>
+						Todas licenças e certificados
 					</SheetTitle>
-					<SheetDescription className='text-[13px] text-muted-foreground leading-snug'>
-						Toque em um pin para pendurar no quadro ou devolver para a caixa.
+					<SheetDescription className='text-muted-foreground text-[13px] leading-snug'>
+						Toque em um certificado para pendurar no quadro ou devolver para a caixa.
 					</SheetDescription>
-					<p className='pt-1 text-[11px] text-muted-foreground uppercase tracking-[0.18em]'>
+					<p className='text-muted-foreground pt-1 text-[11px] tracking-[0.18em] uppercase'>
 						{count} no quadro · {total - count} guardados
 					</p>
 				</SheetHeader>
@@ -68,11 +68,11 @@ export const PinBoxSheet = ({
 									onClick={() => onToggle(pin.id)}
 									aria-pressed={onBoard}
 									className={cn(
-										'group flex flex-col items-center gap-2 rounded-base border-2 p-2.5 text-center transition-colors',
-										'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary',
+										'group rounded-base flex flex-col items-center gap-2 border-2 p-2.5 text-center transition-colors',
+										'focus-visible:ring-primary focus-visible:ring-2 focus-visible:outline-none',
 										onBoard
 											? 'border-primary bg-primary/5'
-											: 'border-black bg-base-100 shadow-light hover:border-primary hover:bg-base-200 dark:border-white dark:shadow-dark',
+											: 'bg-base-100 shadow-light hover:border-primary hover:bg-base-200 dark:shadow-dark border-black dark:border-white',
 									)}
 								>
 									<div className='relative'>
@@ -87,15 +87,15 @@ export const PinBoxSheet = ({
 											className='transition-transform duration-300 group-hover:-translate-y-0.5'
 										/>
 										{onBoard && (
-											<span className='absolute -top-1.5 -right-1.5 grid h-5 w-5 place-items-center rounded-base border-2 border-black bg-primary text-primary-foreground dark:border-white'>
+											<span className='rounded-base bg-primary text-primary-foreground absolute -top-1.5 -right-1.5 grid h-5 w-5 place-items-center border-2 border-black dark:border-white'>
 												<Check className='h-3 w-3' strokeWidth={3} />
 											</span>
 										)}
 									</div>
-									<span className='font-medium text-[12px] text-foreground leading-tight'>
+									<span className='text-foreground text-[12px] leading-tight font-medium'>
 										{pin.name}
 									</span>
-									<span className='text-[9px] text-muted-foreground uppercase tracking-[0.16em]'>
+									<span className='text-muted-foreground text-[9px] tracking-[0.16em] uppercase'>
 										{pin.series} · {pin.year}
 									</span>
 								</button>
@@ -104,20 +104,20 @@ export const PinBoxSheet = ({
 					</div>
 				</div>
 
-				<div className='flex items-center justify-between gap-2 border-black border-t-2 p-4 pb-[max(1rem,env(safe-area-inset-bottom))] dark:border-white'>
+				<div className='flex items-center justify-between gap-2 border-t-2 border-black p-4 pb-[max(1rem,env(safe-area-inset-bottom))] dark:border-white'>
 					{confirming ? (
 						<div className='flex items-center gap-2'>
 							<button
 								type='button'
 								onClick={handleReset}
-								className='rounded-base border-2 border-black bg-destructive px-3 py-1.5 font-semibold text-destructive-content text-xs shadow-light transition hover:brightness-110 dark:border-white dark:shadow-dark'
+								className='rounded-base bg-destructive text-destructive-content shadow-light dark:shadow-dark border-2 border-black px-3 py-1.5 text-xs font-semibold transition hover:brightness-110 dark:border-white'
 							>
 								Confirmar
 							</button>
 							<button
 								type='button'
 								onClick={() => setConfirming(false)}
-								className='rounded-base border-2 border-black bg-base-100 px-3 py-1.5 font-medium text-muted-foreground text-xs shadow-light transition hover:text-foreground dark:border-white dark:shadow-dark'
+								className='rounded-base bg-base-100 text-muted-foreground shadow-light hover:text-foreground dark:shadow-dark border-2 border-black px-3 py-1.5 text-xs font-medium transition dark:border-white'
 							>
 								Cancelar
 							</button>
@@ -126,7 +126,7 @@ export const PinBoxSheet = ({
 						<button
 							type='button'
 							onClick={() => setConfirming(true)}
-							className='flex items-center gap-1.5 rounded-base px-2 py-1.5 font-medium text-muted-foreground text-xs transition-colors hover:text-foreground'
+							className='rounded-base text-muted-foreground hover:text-foreground flex items-center gap-1.5 px-2 py-1.5 text-xs font-medium transition-colors'
 						>
 							<RotateCcw className='h-3.5 w-3.5' />
 							Restaurar coleção inicial
@@ -137,7 +137,7 @@ export const PinBoxSheet = ({
 						type='button'
 						onClick={() => onOpenChange(false)}
 						aria-label='Fechar a caixa'
-						className='flex items-center gap-1.5 rounded-base border-2 border-black bg-base-100 px-3 py-1.5 font-semibold text-foreground text-xs shadow-light transition-colors hover:bg-muted dark:border-white dark:shadow-dark'
+						className='rounded-base bg-base-100 text-foreground shadow-light hover:bg-muted dark:shadow-dark flex items-center gap-1.5 border-2 border-black px-3 py-1.5 text-xs font-semibold transition-colors dark:border-white'
 					>
 						<X className='h-3.5 w-3.5' />
 						Fechar

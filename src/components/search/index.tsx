@@ -101,7 +101,7 @@ function SearchContent({
                 </div>
             </header>
             <Configure query={query ?? ''} hitsPerPage={250} distinct />
-            <PortalSedamHits tab={tab} setTab={setTab} items={items} />
+            <Hits tab={tab} setTab={setTab} items={items} />
         </>
     );
 }
@@ -157,7 +157,7 @@ export default function SearchPage() {
     );
 }
 
-const PortalSedamHits = ({
+const Hits = ({
     tab,
     setTab,
     items,

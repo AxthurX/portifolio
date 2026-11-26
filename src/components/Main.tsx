@@ -73,7 +73,7 @@ export default function Main() {
 			animate='visible'
 			className='relative flex min-h-screen w-full flex-col justify-between overflow-hidden px-6 py-8 md:px-12 lg:px-50'
 		>
-			<div className='pointer-events-none absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-accent/5' />
+			<div className='from-primary/5 to-accent/5 pointer-events-none absolute inset-0 bg-linear-to-br via-transparent' />
 
 			<div
 				className='pointer-events-none absolute inset-0 opacity-[0.02]'
@@ -92,7 +92,7 @@ export default function Main() {
 					href={CURRICULUM_URL}
 					download='Arthur-Martins-Curriculo.pdf'
 					title='Baixar Currículo'
-					className='flex items-center gap-1.5 rounded-base border-2 border-black bg-base-100 px-3 py-1.5 font-medium text-foreground text-xs shadow-light transition-all hover:bg-primary hover:text-primary-foreground active:translate-x-boxShadowX active:translate-y-boxShadowY active:shadow-none lg:hidden dark:border-white dark:shadow-dark'
+					className='rounded-base bg-base-100 text-foreground shadow-light hover:bg-primary hover:text-primary-foreground active:translate-x-boxShadowX active:translate-y-boxShadowY dark:shadow-dark flex items-center gap-1.5 border-2 border-black px-3 py-1.5 text-xs font-medium transition-all active:shadow-none lg:hidden dark:border-white'
 				>
 					<Download className='h-3 w-3' /> Currículo
 				</a>
@@ -134,7 +134,7 @@ export default function Main() {
 				<div className='flex flex-col'>
 					<motion.p
 						{...fadeIn(0.1)}
-						className='mb-6 font-medium text-primary text-xs uppercase tracking-[0.3em] dark:text-primary'
+						className='text-primary dark:text-primary mb-6 text-xs font-medium tracking-[0.3em] uppercase'
 					>
 						Porto Velho, Rondônia — Brasil
 					</motion.p>
@@ -142,7 +142,7 @@ export default function Main() {
 					<div className='overflow-hidden'>
 						<motion.h1
 							{...wordReveal(0.15)}
-							className='font-bold text-[7vw] uppercase leading-[0.9] tracking-tight max-md:text-[10vw] max-md:leading-[0.9] max-md:tracking-tight xl:text-[6.5vw]'
+							className='text-[7vw] leading-[0.9] font-bold tracking-tight uppercase max-md:text-[10vw] max-md:leading-[0.9] max-md:tracking-tight xl:text-[6.5vw]'
 						>
 							Engenheiro de
 						</motion.h1>
@@ -151,14 +151,14 @@ export default function Main() {
 					<div className='flex items-end gap-6 overflow-hidden max-sm:gap-3'>
 						<motion.h1
 							{...wordReveal(0.25)}
-							className='font-bold text-[7vw] uppercase leading-[0.9] tracking-tight max-md:text-[10vw] max-md:leading-[0.9] max-md:tracking-tight xl:text-[6.5vw]'
+							className='text-[7vw] leading-[0.9] font-bold tracking-tight uppercase max-md:text-[10vw] max-md:leading-[0.9] max-md:tracking-tight xl:text-[6.5vw]'
 						>
 							software
 						</motion.h1>
 
 						<motion.span
 							{...wordReveal(0.35)}
-							className='mb-2 font-serif text-[5vw] text-primary italic leading-none max-sm:mb-1 max-sm:text-[7vw] xl:text-[4.5vw]'
+							className='text-primary mb-2 font-serif text-[5vw] leading-none italic max-sm:mb-1 max-sm:text-[7vw] xl:text-[4.5vw]'
 						>
 							fullstack
 						</motion.span>
@@ -173,20 +173,20 @@ export default function Main() {
 						{...fadeIn(0.7)}
 						className='mt-10 flex items-center gap-6 max-sm:flex-wrap max-sm:gap-4'
 					>
-						<Button className='h-14 w-40 rounded-base'>
+						<Button className='rounded-base h-14 w-40'>
 							<Link
 								href='#projetos'
-								className='group flex items-center gap-3 rounded-base px-8 py-4 font-medium text-primary-foreground transition-all hover:scale-105'
+								className='group rounded-base text-primary-foreground flex items-center gap-3 px-8 py-4 font-medium transition-all hover:scale-105'
 							>
 								Ver projetos
 								<ArrowDownRight className='h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5' />
 							</Link>
 						</Button>
 
-						<Button variant='outline' className='h-14 w-40 rounded-base border-black'>
+						<Button variant='outline' className='rounded-base h-14 w-40 border-black'>
 							<Link
 								href='#contato'
-								className='rounded-base px-8 py-4 font-medium text-base-content transition-all'
+								className='rounded-base text-base-content px-8 py-4 font-medium transition-all'
 							>
 								Entre em contato
 							</Link>
@@ -196,7 +196,7 @@ export default function Main() {
 			</div>
 
 			<motion.div {...fadeIn(1)} className='relative z-10 flex items-center justify-between'>
-				<p className='text-muted-foreground text-xs uppercase tracking-widest'>
+				<p className='text-muted-foreground text-xs tracking-widest uppercase'>
 					{mobile ? 'Role para explorar' : 'Scroll para explorar'}
 				</p>
 			</motion.div>

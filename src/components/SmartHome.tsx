@@ -229,15 +229,13 @@ export function SmartHome() {
 							return (
 								<div
 									key={key}
-									className={`rounded-base flex flex-col gap-2 border-2 border-black p-3 transition-colors dark:border-white ${
-										on ? 'bg-primary/10' : 'bg-base-100'
-									}`}
+									className={`rounded-base flex flex-col gap-2 border-2 border-black p-3 transition-colors dark:border-white ${on ? 'bg-primary/10' : 'bg-base-100'
+										}`}
 								>
 									<div className='flex items-center gap-2'>
 										<div
-											className={`rounded-base flex h-8 w-8 shrink-0 items-center justify-center border-2 border-black dark:border-white ${
-												on ? 'bg-primary text-primary-content' : 'bg-base-200 text-foreground'
-											}`}
+											className={`rounded-base flex h-8 w-8 shrink-0 items-center justify-center border-2 border-black dark:border-white ${on ? 'bg-primary text-primary-content' : 'bg-base-200 text-foreground'
+												}`}
 										>
 											<Icon className='h-4 w-4' />
 										</div>

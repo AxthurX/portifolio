@@ -1,5 +1,5 @@
+import { forwardRef, type HTMLProps } from 'react';
 import { cn } from '@/lib/utils';
-import { type HTMLProps, forwardRef } from 'react';
 
 const Fieldset = forwardRef<HTMLFieldSetElement, HTMLProps<HTMLFieldSetElement>>(
 	({ className, ...props }, ref) => {

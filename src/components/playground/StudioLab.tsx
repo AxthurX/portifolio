@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, useReducedMotion } from 'framer-motion';
-import { Accessibility, ArrowUpRight, PenLine, SearchIcon, Sparkles } from 'lucide-react';
+import { Accessibility, PenLine, SearchIcon } from 'lucide-react';
 import {
 	type ReactNode,
 	Suspense,
@@ -314,7 +314,7 @@ export function StudioLab() {
 						<StageLabel icon={<PenLine className='h-3 w-3' />} label='editor' />
 
 						<div className='rounded-base bg-base-100 shadow-light dark:shadow-dark overflow-hidden border-2 border-black dark:border-white'>
-							<div className='flex items-center justify-between gap-3 border-b-2 border-black bg-white/[0.04] px-3 py-1.5 dark:border-white'>
+							<div className='flex items-center justify-between gap-3 border-b-2 border-black bg-white/4 px-3 py-1.5 dark:border-white'>
 								<span className='font-mono text-[10px] tracking-[0.18em] uppercase opacity-60'>
 									content.rich
 								</span>
@@ -331,15 +331,9 @@ export function StudioLab() {
 								className='h-[520px] max-h-[62vh] rounded-none border-0'
 							/>
 
-							<div className='flex flex-wrap items-center justify-between gap-2 border-t-2 border-black bg-white/[0.04] px-3 py-2 dark:border-white'>
+							<div className='flex flex-wrap items-center justify-between gap-2 border-t-2 border-black bg-white/4 px-3 py-2 dark:border-white'>
 								<span className='flex items-center gap-1.5 font-mono text-[10px] tracking-wider uppercase opacity-70'>
-									<Sparkles className='h-3 w-3' />
-									onChange → {html.length} caracteres
-								</span>
-
-								<span className='inline-flex items-center gap-1 font-mono text-[10px] tracking-wider uppercase opacity-50'>
-									html
-									<ArrowUpRight className='h-3 w-3' />
+									{html.length} caracteres
 								</span>
 							</div>
 						</div>
@@ -363,13 +357,13 @@ export function StudioLab() {
 function SearchSkeleton() {
 	return (
 		<div className='mx-auto w-full max-w-3xl py-3' aria-hidden>
-			<div className='mx-6 mb-4 h-14 rounded-md border-2 border-black/15 bg-black/[0.04] dark:border-white/20 dark:bg-white/[0.06]' />
+			<div className='mx-6 mb-4 h-14 rounded-md border-2 border-black/15 bg-black/4 dark:border-white/20 dark:bg-white/6' />
 
 			<div className='flex flex-wrap justify-center gap-3'>
 				{['a', 'b', 'c', 'd'].map((key) => (
 					<div
 						key={key}
-						className='h-9 w-28 rounded-lg border-2 border-black/10 bg-black/[0.03] dark:border-white/15 dark:bg-white/[0.05]'
+						className='h-9 w-28 rounded-lg border-2 border-black/10 bg-black/3 dark:border-white/15 dark:bg-white/5'
 					/>
 				))}
 			</div>

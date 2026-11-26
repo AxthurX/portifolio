@@ -1,5 +1,5 @@
+import { forwardRef, type HTMLProps } from 'react';
 import { cn } from '@/lib/utils';
-import { type HTMLProps, forwardRef } from 'react';
 
 const Header = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
 	({ className, ...props }, ref) => {
@@ -9,7 +9,7 @@ const Header = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
 			<div
 				ref={ref}
 				className={cn(
-					'flex min-h-[400px] flex-col items-center justify-center border-y not-dark:border-y-base-100 dark:border-b-transparent',
+					'not-dark:border-y-base-100 flex min-h-[400px] flex-col items-center justify-center border-y dark:border-b-transparent',
 					className,
 				)}
 				{...props}
@@ -26,7 +26,7 @@ const HeaderTitle = forwardRef<HTMLHeadingElement, HTMLProps<HTMLHeadingElement>
 			<span
 				ref={ref}
 				className={cn(
-					'my-12 text-center font-bold text-4xl tracking-tighter md:px-4 md:text-7xl dark:bg-black',
+					'my-12 text-center text-4xl font-bold tracking-tighter md:px-4 md:text-7xl dark:bg-black',
 					className,
 				)}
 				{...props}
