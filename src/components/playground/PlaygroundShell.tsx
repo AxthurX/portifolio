@@ -64,10 +64,6 @@ export function PlaygroundShell() {
 			<main className='mx-auto flex w-full max-w-430 flex-1 flex-col gap-6 px-4 py-8 md:px-8 lg:py-8'>
 				<div className='flex flex-wrap items-end justify-between gap-4'>
 					<div className='min-w-0'>
-						<p className='text-primary mb-2 text-xs font-medium tracking-[0.24em] uppercase'>
-							Estúdio — Sandbox
-						</p>
-
 						<h1 className='text-4xl leading-[1.05] font-bold tracking-tight md:text-5xl'>
 							Coisas que{' '}
 							<span className='text-primary dark:text-primary font-serif font-normal italic'>
