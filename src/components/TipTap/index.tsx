@@ -56,7 +56,9 @@ export const Tiptap = ({
 				{!hideToolbar && (
 					<>
 						<Menubar editor={editor} onOpenDialog={setActiveDialog} />
+
 						<Toolbar editor={editor} />
+
 						<BubbleMenu editor={editor} />
 
 						<File

@@ -120,7 +120,7 @@ const Menubar = ({ editor, className, onOpenDialog }: MenubarProps) => {
 					<DropdownMenuTrigger asChild>
 						<Button
 							variant='ghost'
-							className='hover:bg-sage-500/30 border-0 bg-transparent px-2 font-normal shadow-none transition duration-150 focus-visible:ring-0 focus-visible:ring-offset-0'
+							className='hover:bg-sage-500/30 hover:text-base-content/60 border-0 bg-transparent px-2 font-normal shadow-none transition duration-150 focus-visible:ring-0 focus-visible:ring-offset-0'
 						>
 							{item.label}
 						</Button>

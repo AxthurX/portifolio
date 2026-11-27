@@ -76,7 +76,7 @@ export default function Home() {
 							© Todos os Direitos Reservados - 2026
 						</p>
 						<p className='text-muted-foreground dark:text-base-content/70 text-xs'>
-							Arthur Martins LTDA. Feito com Next.js e muito cafe
+							Arthur Martins LTDA. Feito com Next.js e muito café
 						</p>
 					</div>
 				</footer>

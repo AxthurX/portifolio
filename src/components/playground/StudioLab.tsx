@@ -14,17 +14,7 @@ import {
 import SearchComponent from '@/components/search/SearchComponent';
 import Tiptap from '@/components/TipTap';
 import { cn } from '@/lib/utils';
-
-const INITIAL_DOC = `<h2>Estúdio de conteúdo</h2>
-<p>Este documento é editado pelo <strong>mesmo componente TipTap</strong> que roda no portal — menubar, toolbar, bubble menu e diálogos de mídia incluídos. Nada aqui é um print.</p>
-<h3>O que está em jogo</h3>
-<ul>
-  <li><strong>Busca acima</strong> — o campo herda o SearchComponent do portal, com atalho e modal real.</li>
-  <li><strong>Acessibilidade à direita</strong> — o menu flutuante continua ativo e afeta a leitura.</li>
-  <li><strong>Setas</strong> — cada anotação aponta para a peça que descreve.</li>
-</ul>
-<blockquote><p>“Um playground honesto deixa você quebrar as coisas e recarregar.”</p></blockquote>
-<p>Escreva à vontade: o HTML é capturado por <code>onChange</code> e contado logo abaixo.</p>`;
+import { INITIAL_DOC } from './content';
 
 type Side = 'left' | 'right';
 type TargetKind = 'search' | 'editor-toolbar' | 'editor-content' | 'a11y';

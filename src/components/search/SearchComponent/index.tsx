@@ -13,7 +13,7 @@ const SearchComponent = () => {
 	const default_options: HitType[] = [
 		'Projetos',
 		'Sandbox',
-		'Formulários',
+		'Currículo',
 		'Contatos',
 	];
 

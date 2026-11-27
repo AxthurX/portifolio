@@ -64,18 +64,16 @@ export function PlaygroundShell() {
 			<main className='mx-auto flex w-full max-w-430 flex-1 flex-col gap-6 px-4 py-8 md:px-8 lg:py-8'>
 				<div className='flex flex-wrap items-end justify-between gap-4'>
 					<div className='min-w-0'>
+						<p className='text-primary mb-2 text-xs font-medium tracking-[0.24em] uppercase'>
+							Arthur — Sandbox
+						</p>
+
 						<h1 className='text-4xl leading-[1.05] font-bold tracking-tight md:text-5xl'>
 							Coisas que{' '}
 							<span className='text-primary dark:text-primary font-serif font-normal italic'>
-								desenvolvi
+								desenvolvi.
 							</span>
-							.
 						</h1>
-
-						<p className='text-muted-foreground mt-3 text-sm leading-relaxed'>
-							Editor Tiptap, motor de busca (Typesense), menu de acessibilidade. As anotações
-							apontam para cada peça — mexa em tudo, quebre, recarregue. Nada aqui é mock travado.
-						</p>
 					</div>
 				</div>
 

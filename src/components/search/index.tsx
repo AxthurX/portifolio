@@ -239,7 +239,7 @@ const HitComponent = ({ hit }: { hit: Hit<BaseHit> }) => {
     return (
         <div className='flex max-w-full px-2 py-1'>
             {' '}
-            <div className='w-full rounded-lg border border-gray-200 bg-white p-4 shadow-xs dark:border-neutral-700 dark:bg-neutral-800'>
+            <div className='w-full rounded-lg border border-gray-600 bg-white p-4 shadow-xs dark:border-neutral-700 dark:bg-neutral-800'>
                 <h2 className='text-base-content mb-2 text-xl font-semibold dark:text-neutral-300'>
                     {' '}
                     {hit.title}

@@ -55,7 +55,7 @@ export const Image = ({ editor, toolbar, open: controlledOpen, onOpenChange }: I
 				</DialogTrigger>
 			)}
 
-			<DialogContent className='bg-base-100 max-w-4xl p-0'>
+			<DialogContent className='bg-base-100 w-full! max-w-6xl p-0'>
 				<DialogHeader className='bg-primary rounded-md p-6 text-white'>
 					<div className='flex items-center justify-between'>
 						<div className='flex items-center space-x-2'>
